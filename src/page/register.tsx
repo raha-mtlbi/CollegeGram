@@ -1,16 +1,17 @@
+import React from "react";
 import { Link, useLocation } from "react-router-dom";
 
 import Button from "../component/button";
 import Input from "../component/input";
 
-import gmail from "../assets/icons/gmail.svg";
-import key from "../assets/icons/key.svg";
+import gmail from "../assets/icons/gmail1.svg";
+import key from "../assets/icons/key1.svg";
+import person from "../assets/icons/person.svg";
 
-export default function LoginPage() {
+const Register = () => {
   const location = useLocation();
-
   return (
-    <div className="flex column mt-6 justify-center ">
+    <div className=" ">
       <form>
         <p className="my-3 text-center">
           <Link
@@ -35,22 +36,34 @@ export default function LoginPage() {
             ثبت نام در کالج گرام
           </Link>
         </p>
-        <div className="mt-12 mb-8">
-          <Input
-            placeholder="ایمیل"
-            imageSrc={gmail}
-            imageAlt="gmail"
-            className=""
-          />
-        </div>
+        <Input
+          placeholder="نام کاربری"
+          imageSrc={person}
+          imageAlt="UserName"
+          className=""
+        />
+        <Input
+          placeholder="ایمیل"
+          imageSrc={gmail}
+          imageAlt="gmail"
+          className=""
+        />
         <Input
           placeholder="رمز عبور"
           imageSrc={key}
           imageAlt="key"
-          className="mb-4"
+          className=""
         />
-        <Button title={"ورود"} width="100px" />
+        <Input
+          placeholder="تکرار رمز عبور"
+          imageSrc={key}
+          imageAlt="repeat key"
+          className=""
+        />
+        <Button title={"ثبت نام"} width="100px" />
       </form>
     </div>
   );
-}
+};
+
+export default Register;
