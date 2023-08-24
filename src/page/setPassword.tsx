@@ -22,7 +22,7 @@ const ForgetPass2 = () => {
         imageAlt="repeat key"
         className="items-center"
       />
-      <Button title={"ثبت رمز عبور جدید"} width="100px" />
+      <Button title={"ثبت رمز عبور جدید"} width="100px" onClick={() => {}} />
     </div>
   );
 };

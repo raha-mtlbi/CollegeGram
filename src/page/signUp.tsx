@@ -1,5 +1,4 @@
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
 
 import Button from "../component/button";
 import Input from "../component/input";
@@ -9,33 +8,14 @@ import key from "../assets/icons/key1.svg";
 import person from "../assets/icons/person.svg";
 
 const Register = () => {
-  const location = useLocation();
   return (
     <div className=" ">
       <form>
-        <p className="my-3 text-center">
-          <Link
-            className={
-              location.pathname === "/login"
-                ? "text-gray-700"
-                : "text-gray-400 "
-            }
-            to={"/login"}
-          >
-            ورود به کالج گرام
-          </Link>
+        <div className="flex my-3 text-center">
+          <p className={"mx-2 text-gray-700"}>ورود به کالج گرام</p>
           <span className="mx-4 text-gray-400 "> |</span>
-          <Link
-            className={
-              location.pathname === "/register"
-                ? "text-gray-700"
-                : "text-gray-400 "
-            }
-            to={"/register"}
-          >
-            ثبت نام در کالج گرام
-          </Link>
-        </p>
+          <p className={" mx-2 text-gray-400 "}>ثبت نام در کالج گرام</p>
+        </div>
         <Input
           placeholder="نام کاربری"
           imageSrc={person}
@@ -60,7 +40,7 @@ const Register = () => {
           imageAlt="repeat key"
           className=""
         />
-        <Button title={"ثبت نام"} width="100px" />
+        <Button title={"ثبت نام"} width="100px" onClick={() => {}} />
       </form>
     </div>
   );

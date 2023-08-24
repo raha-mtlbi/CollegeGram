@@ -1,14 +1,17 @@
 export default function Button({
   title,
   width,
+  onClick,
 }: {
   title: string;
   width: number | string;
+  onClick: () => void;
 }) {
   return (
     <button
-      className="text-white bg-yellow-600 rounded-3xl px-3 pt-1 pb-2 items-center text-centesr"
-      style={{ width: width, height: "36px" }}
+      className="text-white bg-[#C19008] rounded-3xl px-3 pt-1 pb-2 items-center text-centesr h-[36px]"
+      style={{ width: width }}
+      onClick={onClick}
     >
       {title}
     </button>
