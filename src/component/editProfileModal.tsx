@@ -1,12 +1,17 @@
 import React from "react";
-import Input from "../component/input";
+import Input from "./input";
 import gmail from "../assets/icons/gmail1.svg";
 import key from "../assets/icons/key1.svg";
 import person from "../assets/icons/person.svg";
-import Button from "../component/button";
 import Textarea from "@material-tailwind/react/components/Textarea";
 
-const EditProfile = () => {
+const EditProfile = ({
+  open,
+  onClose,
+}: {
+  open: boolean;
+  onClose: () => void;
+}) => {
   return (
     <div className="w-[375px] h-[889px] bg-[#ded3cc] rounded-[24px] ">
       <p className="text-center text-[20px] font-bold not-italic text-[#17494D] leading-normal">

@@ -1,17 +1,17 @@
 import React from "react";
 import { Suspense } from "react";
-import { Route, Routes, Navigate } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 
-import AuthenticationLayout from "../layout";
+import AuthenticationLayout from "../layout/auth";
 import LoadingPage from "../page/loading";
 import LoginPage from "../page/login";
-import NotFound from "../page/errorPage";
 import ErrorPage from "../page/errorPage";
 import RecoveryPassword from "../page/recoveryPassword";
 import SetPassword from "../page/setPassword";
-import SignUp from "../page/signup";
+import SignUp from "../page/signUp";
 import MyCollegeGram from "../page/myCollegeGram";
 import Collegians from "../page/collegians";
+import PanelLayout from "../layout/panel";
 
 const Home = React.lazy(() => import("../page/Home"));
 
@@ -19,19 +19,11 @@ export default function Router() {
   return (
     <Suspense fallback={<LoadingPage />}>
       <Routes>
-        <Route index element={<Navigate to="/" />} />
-
-        <Route path="404" element={<NotFound />} />
-        {/* <Route path="forgetPassword" element={<ForgetPassword />} />
-        <Route path="sendEmail" element={<SendEmail />} />
-        <Route path="resendLink" element={<ResendLink />} /> */}
-
-        <Route path="/login" element={<AuthenticationLayout />} />
-        <Route path="" element={<LoginPage />} />
-        <Route path="404" element={<ErrorPage />} />
-        <Route path="/" element={<Home />} />
-        <Route path="/myCollegeGram" element={<MyCollegeGram />} />
-        <Route path="/collegians" element={<Collegians />} />
+        <Route path="" element={<PanelLayout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/myCollegeGram" element={<MyCollegeGram />} />
+          <Route path="/collegians" element={<Collegians />} />
+        </Route>
 
         <Route path="" element={<AuthenticationLayout />}>
           <Route path="/login" element={<LoginPage />} />
@@ -39,6 +31,8 @@ export default function Router() {
           <Route path="/recoveryPassword" element={<RecoveryPassword />} />
           <Route path="/setPassword" element={<SetPassword />} />
         </Route>
+
+        <Route path="404" element={<ErrorPage />} />
       </Routes>
     </Suspense>
   );

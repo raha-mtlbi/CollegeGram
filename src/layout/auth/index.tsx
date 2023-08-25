@@ -1,5 +1,5 @@
-import logo from "../assets/images/logo.svg";
-import loginTree from "../assets/images/loginTree.svg";
+import logo from "../../assets/images/logo.svg";
+import loginTree from "../../assets/images/loginTree.svg";
 import { Outlet } from "react-router-dom";
 
 export default function AuthenticationLayout() {
