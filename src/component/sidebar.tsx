@@ -20,7 +20,7 @@ export default function SideBar() {
   return (
     <div className="w-[105px] h-[360px] bg-[#F1EBE3] border-[#CDCDCD] border flex flex-col justify-center items-center text-center">
       {icons?.map((i, idx) => (
-        <Link to={i.link}>
+        <Link to={i.link} key={idx}>
           {location?.pathname === i?.link ? (
             <img alt="icons" src={i?.image} className="my-5" />
           ) : (

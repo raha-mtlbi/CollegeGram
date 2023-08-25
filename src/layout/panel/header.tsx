@@ -6,7 +6,7 @@ import search from "../../assets/icons/search.svg";
 
 export default function Header() {
   return (
-    <div className="w-[900px] h-[40px] flex justify-between items-center mb-[30px] ">
+    <div className="w-[950px] h-[40px] flex justify-between items-center mb-[30px] mr-12">
       <Input placeholder={"جستجو"} imageSrc={search} imageAlt={"search"} />
       <div className="flex justify-around items-center ">
         <Button title={"افزودن عکس"} width={"100px"} onClick={() => {}} />

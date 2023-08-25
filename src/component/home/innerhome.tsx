@@ -20,7 +20,7 @@ export default function InnerHome() {
         <div className="mt-[20px]">
           <Button
             title=" رفتن به صفحه کالج‌گرامی‌ها "
-            onClick={() => navigate("/myCollegeGram")}
+            onClick={() => navigate("/collegians")}
             width={250}
           />
         </div>

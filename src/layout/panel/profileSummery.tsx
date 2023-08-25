@@ -8,7 +8,7 @@ const ProfileSummery = () => {
 
   return (
     <div>
-      {/* <EditProfile open={open} onClose={() => setOpen(false)} /> */}
+      <EditProfile open={open} onClose={() => setOpen(false)} />
 
       <div className="w-[253px] h-[403px] bg-[#F1EBE3] border-[#CDCDCD] border flex flex-col justify-center items-center text-center">
         <div className="relative w-[120px] h-[120px] overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
