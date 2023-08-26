@@ -46,7 +46,10 @@ const Caption = () => {
           و نصب آن،انتخاب پرده،پنجره‌ها و اکسسوری‌ها می شود.
         </span>
       </div>
-      <div className=" flex text-center">
+      <div
+        className=" flex text-center
+      "
+      >
         <div className="w-[36px] h-[24px] bg-[#0074E8] rounded-[4px] text-[#FFF] text-[14px]">
           سفر
         </div>
