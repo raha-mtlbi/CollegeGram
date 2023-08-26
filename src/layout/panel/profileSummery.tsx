@@ -13,7 +13,7 @@ const ProfileSummery = () => {
       <div className="w-[253px] h-[403px] bg-[#F1EBE3] border-[#CDCDCD] border flex flex-col justify-center items-center text-center">
         <div className="relative w-[120px] h-[120px] overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
           <svg
-            className="absolute w-[125px] h-[120px] text-gray-400 -left-1"
+            className="absolute w-[100px] h-[100px] text-center text-gray-400 -left-[-5px]"
             fill="currentColor"
             viewBox="0 0 20 20"
             xmlns="http://www.w3.org/2000/svg"
@@ -25,12 +25,12 @@ const ProfileSummery = () => {
             ></path>
           </svg>
         </div>
-        <p className="flex text-[#C19008] text-[20px] not-italic font-bold mt-[15px] justify-center">
-          مهشید منزه
-          <img src={arrow} className="mt-[9px] mx-[10px]" alt="arrow" />
-        </p>
-        <p className="text-[#17494D] text-center text-[14px] font-normal mt-1">
+        <p className="flex text-[#C19008] text-[14px] not-italic mt-[15px] justify-center">
+          <img src={arrow} className="my-auto mx-[10px]" alt="arrow" />
           mahmz@
+        </p>
+        <p className="text-[#17494D] text-center text-[20px] font-bold  mt-1">
+          مهشید منزه
         </p>
         <div className="flex justify-center mt-[16px] text-[14px]">
           <p className="ml-1">13</p>

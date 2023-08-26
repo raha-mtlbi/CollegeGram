@@ -7,6 +7,7 @@ import gmail from "../assets/icons/gmail1.svg";
 import key from "../assets/icons/key1.svg";
 import person from "../assets/icons/person.svg";
 import camera from "../assets/icons/camera.svg";
+import close from "../assets/icons/close.svg";
 
 const EditProfile = ({
   open,
@@ -29,10 +30,20 @@ const EditProfile = ({
         </p>
         <label htmlFor={"x"} className="flex justify-center p-2">
           <input type="file" id={"x"} className="hidden" />
-          <div className="w-[90px] h-[90px] rounded-lg border-2 border-[#C19008] flex justify-center items-center ">
-            <img alt="camera" src={camera} className="w-[36px] h-[36px]" />
+          <div className="w-[90px] h-[90px] rounded-[50%] border-2 border-[#C19008] flex justify-center items-center ">
+            <img
+              alt="camera"
+              src={camera}
+              className="w-[36px] h-[36px] cursor-pointer"
+            />
           </div>
         </label>
+        <p className="text-center">عکس پروفایل</p>
+        {/* {image && <button className="flex justify-center mx-auto mb-7 mt-2  items-center">
+          <img alt="close" src={close} className="w-[12px] h-[12px] mt-1" />
+          <p className="text-[#C19008] mr-2 font-bold">حذف تصویر</p>
+        </button>} */}
+
         <div className="my-4">
           <Input placeholder="ایمیل" imageSrc={gmail} imageAlt="gmail" />
         </div>
@@ -56,7 +67,7 @@ const EditProfile = ({
             imageAlt="repeat key"
           />
         </div>
-        <label className="relative inline-flex items-center cursor-pointer mb-6 mt-3" >
+        <label className="relative inline-flex items-center cursor-pointer mb-6 mt-3">
           <span className="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">
             پیچ خصوصی باشد
           </span>
