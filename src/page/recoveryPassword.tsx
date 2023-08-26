@@ -9,7 +9,7 @@ export default function RecoveryPassword() {
   const navigate = useNavigate();
 
   return (
-    <div className="flex column mt-6 justify-center text-center min-h-[310px]">
+    <div className="flex column mt-6 justify-center text-center">
       <form>
         <p className={"mx-2 text-gray-700"}>بازیابی رمز عبور </p>
 

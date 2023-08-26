@@ -1,4 +1,4 @@
-import React from "react";
+import { Link } from "react-router-dom";
 
 import Button from "../component/button";
 import Input from "../component/input";
@@ -11,10 +11,14 @@ const Register = () => {
   return (
     <div>
       <form>
-        <div className="flex my-3 text-center">
-          <p className={"mx-2 text-gray-400"}>ورود به کالج گرام</p>
+        <div className="flex mt-8 mb-2 text-center justify-center ">
+          <Link to="/login" className={"mx-2 text-gray-400"}>
+            ورود به کالج گرام
+          </Link>
           <span className="mx-4 text-gray-400 "> |</span>
-          <p className={" mx-2 text-gray-700 "}>ثبت نام در کالج گرام</p>
+          <Link to="/signup" className={" mx-2 text-gray-700 "}>
+            ثبت نام در کالج گرام
+          </Link>
         </div>
         <div className="mt-[49px]">
           <Input
@@ -36,7 +40,7 @@ const Register = () => {
             imageAlt="repeat key"
           />
         </div>
-        <div className="mt-[40px] mr-[220px]">
+        <div className="flex justify-end my-10">
           <Button title={"ثبت نام"} width="100px" onClick={() => {}} />
         </div>
       </form>

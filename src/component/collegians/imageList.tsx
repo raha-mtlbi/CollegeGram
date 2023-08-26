@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import image from "../../assets/images/imageListSampel.svg";
 
 const images = [
@@ -12,11 +13,18 @@ const images = [
 ];
 
 export default function ImageList() {
+  const navigate = useNavigate();
+
   return (
     <div className="w-full grid grid-cols-4 gap-4 mr-12 ml-5">
       {images.map((i) => (
-        <div key={i.id} className="w-[230px] h-[230px]">
-          <img className=" max-w-full " src={i.image} alt="" />
+        <div key={i.id} className="w-[230px] h-[230px] cursor-pointer">
+          <img
+            className=" max-w-full "
+            src={i.image}
+            alt=""
+            onClick={() => navigate("/innerPost")}
+          />
         </div>
       ))}
     </div>
