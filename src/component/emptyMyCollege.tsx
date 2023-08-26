@@ -1,13 +1,12 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Button from "../component/button";
-import { useNavigate } from "react-router-dom";
 import CreatePostModal from "./createPost";
 
 const EmptyMyCollage = () => {
   const [open, setOpen] = useState<boolean>(false);
 
   return (
-    <div className="flex flex-col justify-center items-center text-center">
+    <div className="w-full flex flex-col justify-center items-center text-center">
       <CreatePostModal open={open} onClose={() => setOpen(false)} />
       <p className="text-[#17494D] font-bold text-[20px] not-italic w-[359px] h-[50px]">
         سلام به کالج‌گرام من خوش اومدی!

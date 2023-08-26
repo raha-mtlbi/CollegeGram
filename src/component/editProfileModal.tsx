@@ -24,7 +24,7 @@ const EditProfile = ({
       style={{ direction: "rtl" }}
     >
       <div className="fixed inset-0 bg-black/30" aria-hidden="true" />
-      <div className="bg-[#F3F0EE] rounded-[24px] absolute top-[50px] bottom-[50px] overflow-y-auto p-5">
+      <div className=" max-h-[800px] bg-[#F3F0EE] rounded-[24px] absolute top-[50px] bottom-[50px] overflow-y-auto py-5 px-10">
         <p className="text-center text-[20px] font-bold not-italic text-[#17494D] leading-normal my-2 ">
           ویرایش حساب
         </p>

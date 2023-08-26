@@ -19,7 +19,7 @@ const CreatePostModal = ({
       style={{ direction: "rtl" }}
     >
       <div className="fixed inset-0 bg-black/30" aria-hidden="true" />
-      <div className="bg-[#F3F0EE] rounded-[24px] absolute top-[30px] bottom-[30px] overflow-y-auto max-h-[650px] p-5">
+      <div className="bg-[#F3F0EE] rounded-[24px] absolute top-[80px] bottom-[30px] overflow-y-auto max-h-[650px] py-5 px-10">
         <p className="text-center text-[20px] font-bold not-italic leading-normal my-2 ">
           افزودن پست
         </p>

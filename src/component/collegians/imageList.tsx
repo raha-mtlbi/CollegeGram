@@ -13,9 +13,9 @@ const images = [
 
 export default function ImageList() {
   return (
-    <div className="grid grid-cols-4 gap-4 mr-12 ml-5">
+    <div className="w-full grid grid-cols-4 gap-4 mr-12 ml-5">
       {images.map((i) => (
-        <div key={i.id} className="w-[200px] h-[200px]">
+        <div key={i.id} className="w-[230px] h-[230px]">
           <img className=" max-w-full " src={i.image} alt="" />
         </div>
       ))}
