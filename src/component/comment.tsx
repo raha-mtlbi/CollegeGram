@@ -43,7 +43,7 @@ const Comment = () => {
   return (
     <div>
       <div className="flex rounded-full w-[40px] h-[40px]">
-        <img src={profile} />
+        <img src={profile} alt="profile" />
         <input
           className="shadow appearance-none w-[345px] border rounded-3xl py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline pr-8 "
           placeholder="نظر خود را بنویسید..."

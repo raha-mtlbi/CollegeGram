@@ -14,13 +14,14 @@ const Caption = () => {
     setIsSike((isLike) => !isLike);
   };
   return (
-    <div className="mr-[20px]">
+    <div className="mr-[20px] mb-6">
       <div className="flex">
         <button onClick={handleLike}>
           <img
             src={isLike ? Like : disLike}
             className="w-[24px] h-[24px]"
-          ></img>
+            alt="like"
+          />
         </button>
         <p className="mr-[8px] text-[14px] font-medium text-[#C38F00] my-auto">
           ۱۳۸
@@ -29,7 +30,8 @@ const Caption = () => {
           <img
             src={isSave ? Save : disSave}
             className="w-[24px] h-[24px]"
-          ></img>
+            alt="save"
+          />
         </button>
         <p className="mr-[8px] text-[14px] font-medium text-[#C38F00] my-auto">
           15
@@ -38,7 +40,7 @@ const Caption = () => {
       <p className="mt-[25px] text-[#17494D] font-normal text-[11px]">
         2 ماه پیش
       </p>
-      <div className="w-[462px] h-[135px] text-[14px] text-[#17494D] font-normal mt-[8px]">
+      <div className="w-[400px] h-[135px] text-[14px] text-[#17494D] font-normal mt-[8px]">
         <span>
           دکوراسیون داخلی به طور کلی به تزیینات و تجهیزات فضای داخلی در خانه‌ها،
           محل کار، مدارس و فضاهای عمومی گفته می شود.دکوراسیون داخلی مربوط به
@@ -46,7 +48,7 @@ const Caption = () => {
           و نصب آن،انتخاب پرده،پنجره‌ها و اکسسوری‌ها می شود.
         </span>
       </div>
-      <div className=" flex text-center">
+      <div className=" flex text-center items-center">
         <div className="w-[36px] h-[24px] bg-[#0074E8] rounded-[4px] text-[#FFF] text-[14px]">
           سفر
         </div>
