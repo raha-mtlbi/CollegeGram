@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import Button from "../component/button";
 import Input from "../component/input";
@@ -13,10 +13,14 @@ export default function LoginPage() {
   return (
     <div className="flex column mt-6 justify-center text-center">
       <form>
-        <div className="flex my-3 text-center">
-          <p className={"mx-2 text-gray-700"}>ورود به کالج گرام</p>
+        <div className="flex my-3 text-center justify-center">
+          <Link to="/login" className={"mx-2 text-gray-700"}>
+            ورود به کالج گرام
+          </Link>
           <span className="mx-4 text-gray-400 "> |</span>
-          <p className={" mx-2 text-gray-400 "}>ثبت نام در کالج گرام</p>
+          <Link className={" mx-2 text-gray-400 "} to={"/signup"}>
+            ثبت نام در کالج گرام
+          </Link>
         </div>
         <div className="mt-12 mb-8">
           <Input
@@ -53,7 +57,7 @@ export default function LoginPage() {
           <p className="text-[#C19008]">رمز عبورم رو فراموش کردم</p>
         </button>
         <button
-          className="flex items-center"
+          className="flex items-start"
           onClick={() => navigate("/signup")}
         >
           <img src={back} alt="back" className="mt-2 ml-2" />

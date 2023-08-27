@@ -1,10 +1,11 @@
-import React from "react";
+import { useNavigate } from "react-router-dom";
 import Button from "../component/button";
 import Input from "../component/input";
 
 import key from "../assets/icons/key1.svg";
 
 const ForgetPass2 = () => {
+  const navigate = useNavigate();
   return (
     <div>
       <p className="text-[2B2B2B] text-[16px] not-italic font-normal text-center justify-center">
@@ -20,8 +21,12 @@ const ForgetPass2 = () => {
           imageAlt="repeat key"
         />
       </div>
-      <div className="mt-[40px] mr-[178px]">
-        <Button title={"ثبت رمز عبور جدید"} width="139px" onClick={() => {}} />
+      <div className="flex justify-end my-10">
+        <Button
+          title={"ثبت رمز عبور جدید"}
+          width="139px"
+          onClick={() => navigate("/login")}
+        />
       </div>
     </div>
   );

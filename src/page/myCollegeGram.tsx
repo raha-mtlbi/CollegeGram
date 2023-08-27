@@ -1,19 +1,13 @@
-import Caption from "../component/caption";
-import Comment from "../component/comment";
+import ImageList from "../component/collegians/imageList";
+import EmptyMyCollage from "../component/emptyMyCollege";
 import SideBar from "../component/sidebar";
 
-import image from "../assets/images/imageListSampel.svg";
-
 export default function MyCollegeGram() {
+  const empty = false;
+
   return (
-    <div className="flex mt-32 p-3 ">
-      <div className="w-full grid grid-cols-2 gap-4 ">
-        <img alt="" src={image} />
-        <div className="flex flex-col p-2 ">
-          <Caption />
-          <Comment />
-        </div>
-      </div>
+    <div className="flex mt-32">
+      {empty ? <EmptyMyCollage /> : <ImageList />}
       <SideBar />
     </div>
   );

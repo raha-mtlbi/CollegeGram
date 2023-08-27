@@ -40,25 +40,23 @@ const Caption = () => {
       <p className="mt-[25px] text-[#17494D] font-normal text-[11px]">
         2 ماه پیش
       </p>
-      <div className="w-[400px] h-[135px] text-[14px] text-[#17494D] font-normal mt-[8px]">
-        <span>
-          دکوراسیون داخلی به طور کلی به تزیینات و تجهیزات فضای داخلی در خانه‌ها،
-          محل کار، مدارس و فضاهای عمومی گفته می شود.دکوراسیون داخلی مربوط به
-          تمام جنبه‌های نورپردازی،رنگ،بافت،نگارگری،مبلمان و چیدمان،انتخاب کف‌پوش
-          و نصب آن،انتخاب پرده،پنجره‌ها و اکسسوری‌ها می شود.
-        </span>
-      </div>
+      <p className="w-[450px] h-[135px] text-[14px] text-[#17494D] font-normal mt-[8px]">
+        دکوراسیون داخلی به طور کلی به تزیینات و تجهیزات فضای داخلی در خانه‌ها،
+        محل کار، مدارس و فضاهای عمومی گفته می شود.دکوراسیون داخلی مربوط به تمام
+        جنبه‌های نورپردازی،رنگ،بافت،نگارگری،مبلمان و چیدمان،انتخاب کف‌پوش و نصب
+        آن،انتخاب پرده،پنجره‌ها و اکسسوری‌ها می شود.
+      </p>
       <div className=" flex text-center items-center">
-        <div className="w-[36px] h-[24px] bg-[#0074E8] rounded-[4px] text-[#FFF] text-[14px]">
+        <div className="p-2 bg-[#0074E8] rounded-[4px] text-[#FFF] text-[14px]">
           سفر
         </div>
-        <div className="w-[60px] h-[24px] bg-[#767676] rounded-[4px] text-[#FFF] text-[14px] mr-[8px]">
+        <div className="p-2 bg-[#767676] rounded-[4px] text-[#FFF] text-[14px] mr-[8px]">
           بومگردی
         </div>
-        <div className="w-[33px] h-[24px] bg-[#008753] rounded-[4px] text-[#FFF] text-[14px] mr-[8px]">
+        <div className="p-2 bg-[#008753] rounded-[4px] text-[#FFF] text-[14px] mr-[8px]">
           دریا
         </div>
-        <div className="w-[34px] h-[24px] bg-[#00857C] rounded-[4px] text-[#FFF] text-[14px] mr-[8px]">
+        <div className="p-2 bg-[#00857C] rounded-[4px] text-[#FFF] text-[14px] mr-[8px]">
           ساحل
         </div>
       </div>
