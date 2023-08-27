@@ -6,13 +6,27 @@ import Input from "../component/input";
 import gmail from "../assets/icons/gmail.svg";
 import key from "../assets/icons/key.svg";
 import back from "../assets/icons/arrow-back.svg";
+import { useFormik } from "formik";
+
+const schema = "";
 
 export default function LoginPage() {
   const navigate = useNavigate();
 
+  const { handleBlur, values, errors, touched, handleSubmit } = useFormik({
+    initialValues: { email: "", password: "" },
+    validationSchema: {},
+    onSubmit: async () => {
+      try {
+      } catch (error) {
+        console.log(error);
+      }
+    },
+  });
+
   return (
     <div className="flex column mt-6 justify-center text-center">
-      <form>
+      <form onSubmit={handleSubmit}>
         <div className="flex my-3 text-center justify-center">
           <Link to="/login" className={"mx-2 text-gray-700"}>
             ورود به کالج گرام
