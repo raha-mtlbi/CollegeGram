@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
+import * as Yup from "yup";
 
 import Button from "../component/button";
 import Input from "../component/input";
@@ -9,6 +10,22 @@ import Input from "../component/input";
 import gmail from "../assets/icons/gmail1.svg";
 import key from "../assets/icons/key1.svg";
 import person from "../assets/icons/person.svg";
+
+// const schema = Yup.object().shape({
+//   email: Yup.string()
+//     .required("لطفا ایمیل معتبری وارد کنید")
+//     .email("لطفا ایمیل معتبری وارد کنید"),
+//   password: Yup.string()
+//     .trim()
+//     .matches(      
+//       /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/,
+//       "رمز عبور شما مناسب نیست"
+//     )
+//     .required("ورود رمز عبور الزامی است."),
+//   repassword: Yup.string()
+//     .oneOf([Yup.ref("password")], "رمز عبور شما منطبق نیست")
+//     .required("لطفا رمز عبور خود را تایید کنید"),
+// });
 
 const Register = () => {
   const [username, setUsername] = useState("");
@@ -60,10 +77,7 @@ const Register = () => {
           }
         })
         .catch((ex) => {
-          toast.error("مشکلی پیش آمده", {
-            position: "top-right",
-            closeOnClick: true,
-          });
+          toast.error("مشکلی پیش آمده");
           console.log("user2", ex);
         });
     }

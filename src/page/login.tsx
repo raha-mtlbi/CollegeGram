@@ -22,7 +22,7 @@ export default function LoginPage() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  const { setFieldValue, handleSubmit, values, errors } = useFormik({
+  const { setFieldValue, handleSubmit, values, errors, touched } = useFormik({
     initialValues: { usernameOrEmail: "", password: "" },
     enableReinitialize: true,
     validationSchema: schema,
@@ -39,7 +39,7 @@ export default function LoginPage() {
             password: data.password,
           })
         ).unwrap();
-        toast.success("کاربر با موفقیت ساخته شد.");
+        toast.success("با موفقیت وارد شدید");
         navigate("/myCollegeGrama");
       } catch (error) {
         console.log(error);
@@ -64,7 +64,7 @@ export default function LoginPage() {
         </div>
         <div className="mt-12 mb-8">
           <Input
-            placeholder="ایمیل"
+            placeholder="نام کاربری یا ایمیل "
             imageSrc={gmail}
             imageAlt="gmail"
             value={values.usernameOrEmail}
@@ -72,7 +72,8 @@ export default function LoginPage() {
               setFieldValue("usernameOrEmail", e.target.value)
             }
             type="email"
-            error
+            error={Boolean(values.usernameOrEmail && errors?.usernameOrEmail)}
+            errorText=" نام کاربری یا ایمیل اشتباه است."
           />
         </div>
         <Input
@@ -82,6 +83,8 @@ export default function LoginPage() {
           value={values.password}
           onChange={(e: any) => setFieldValue("password", e.target.value)}
           type="password"
+          error={Boolean(values.password && errors?.password)}
+          errorText="رمز عبور اشتباه است."
         />
         <div className="flex items-center my-5 mr-2">
           <input

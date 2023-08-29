@@ -23,25 +23,26 @@ export default function Input({
   errorText,
 }: IInput) {
   return (
-    <div className={"flex "}>
-      <img src={imageSrc} alt={imageAlt} className="absolute mt-3 mr-2 " />
+    <div>
+      <div className={"flex "}>
+        <img src={imageSrc} alt={imageAlt} className="absolute mt-3 mr-2 " />
 
-      <input
-        className={
-          error
-            ? "shadow appearance-none border border-red-600 w-[380px] rounded-3xl py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline pr-8 "
-            : "shadow appearance-none border w-[380px] rounded-3xl py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline pr-8 "
-        }
-        placeholder={placeholder}
-        type={type}
-        value={value}
-        onChange={onChange}
-      />
-
-      {errorText && (
-        <div className="flex items-center">
+        <input
+          className={
+            error
+              ? "shadow appearance-none border border-red-600 w-[380px] rounded-3xl py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline pr-8 "
+              : "shadow appearance-none border w-[380px] rounded-3xl py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline pr-8 "
+          }
+          placeholder={placeholder}
+          type={type}
+          value={value}
+          onChange={onChange}
+        />
+      </div>
+      {error && errorText && (
+        <div className="flex items-center my-3">
           <img alt="error" src={Form_Error} />
-          <p className="color-red">{errorText}</p>
+          <p className=" text-red-600 mx-2">{errorText}</p>
         </div>
       )}
     </div>

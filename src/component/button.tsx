@@ -2,6 +2,7 @@ export default function Button({
   title,
   width,
   onClick,
+  type,
 }: {
   title: string;
   width: number | string;
