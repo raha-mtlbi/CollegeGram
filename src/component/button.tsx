@@ -1,6 +1,5 @@
 export default function Button({
   title,
-  type,
   width,
   onClick,
   onSubmit,
@@ -8,7 +7,6 @@ export default function Button({
 }: {
   title: string;
   width: number | string;
-  type?: string;
   onClick?: () => void;
   onSubmit?: () => void;
   type?: "button" | "submit" | "reset" | undefined;

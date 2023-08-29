@@ -3,6 +3,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 
 import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { loginThunk } from "../features/userSlice";
 import { useAppDispatch } from "../store";
 
