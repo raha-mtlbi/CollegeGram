@@ -22,6 +22,8 @@ export default function Input({
       <input
         className="shadow appearance-none border w-[380px] rounded-3xl py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline pr-8 "
         placeholder={placeholder}
+        onChange={onChange}
+        value={value}
       />
     </div>
   );

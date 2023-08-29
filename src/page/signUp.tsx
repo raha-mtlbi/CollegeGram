@@ -12,12 +12,12 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 const Register = () => {
-  const [fullname, setFullname] = useState("");
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const reset = () => {
-    setFullname("");
+    setUsername("");
     setEmail("");
     setPassword("");
   };
@@ -26,16 +26,15 @@ const Register = () => {
     event.preventDefault();
 
     const user = {
-      fullname,
-      email,
-      password,
+      username: username,
+      email: email,
+      password: password,
     };
 
     axios
-      .post("https://user/signup", JSON.stringify(user), {
-        headers: {
-          "Content-Type": "application/json",
-        },
+      .post("https://murphyteam.iruser/signup", {
+        headers: {},
+        data: user,
       })
       .then(({ data, status }) => {
         console.log(data);
@@ -53,14 +52,13 @@ const Register = () => {
           position: "top-right",
           closeOnClick: true,
         });
-        console.log(ex);
+        console.log("user2", ex);
       });
-    console.log(user);
   };
 
   return (
     <div>
-      <form>
+      <form onSubmit={handleSubmit}>
         <div className="flex mt-8 mb-2 text-center justify-center ">
           <Link to="/login" className={"mx-2 text-gray-400"}>
             ورود به کالج گرام
@@ -75,8 +73,8 @@ const Register = () => {
             placeholder="نام کاربری"
             imageSrc={person}
             imageAlt="UserName"
-            value={fullname}
-            onChange={(e: any) => setFullname(e.target.value)}
+            value={username}
+            onChange={(e: any) => setUsername(e.target.value)}
           />
         </div>
         <div className="mt-[32px]">
@@ -107,13 +105,7 @@ const Register = () => {
           />
         </div>
         <div className="flex justify-end my-10">
-          <Button
-            title={"ثبت نام"}
-            width="100px"
-            onSubmit={() => {
-              handleSubmit;
-            }}
-          />
+          <Button title={"ثبت نام"} width="100px" type="submit" />
         </div>
       </form>
     </div>

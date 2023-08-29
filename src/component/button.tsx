@@ -1,11 +1,13 @@
 export default function Button({
   title,
+  type,
   width,
   onClick,
   onSubmit,
 }: {
   title: string;
   width: number | string;
+  type?: string;
   onClick?: () => void;
   onSubmit?: () => void;
 }) {
