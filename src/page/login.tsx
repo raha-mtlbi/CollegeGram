@@ -16,6 +16,12 @@ import back from "../assets/icons/arrow-back.svg";
 
 const schema = Yup.object().shape({
   usernameOrEmail: Yup.string().required("Please enter your email").email(),
+  password: Yup.string()
+    .trim()
+    .matches(      
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/,
+      "رمز عبور شما مناسب نیست"
+    )
 });
 
 export default function LoginPage() {
