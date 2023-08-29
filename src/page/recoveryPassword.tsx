@@ -18,7 +18,6 @@ export default function RecoveryPassword() {
             placeholder="ایمیل"
             imageSrc={gmail}
             imageAlt="gmail"
-            className=""
           />
         </div>
 

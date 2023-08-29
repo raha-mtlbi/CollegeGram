@@ -1,4 +1,10 @@
 import { Link, useNavigate } from "react-router-dom";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+
+import { toast } from "react-toastify";
+import { loginThunk } from "../features/userSlice";
+import { useAppDispatch } from "../store";
 
 import Button from "../component/button";
 import Input from "../component/input";
@@ -6,20 +12,39 @@ import Input from "../component/input";
 import gmail from "../assets/icons/gmail.svg";
 import key from "../assets/icons/key.svg";
 import back from "../assets/icons/arrow-back.svg";
-import { useFormik } from "formik";
 
-const schema = "";
+const schema = Yup.object().shape({
+  usernameOrEmail: Yup.string().required("Please enter your email").email(),
+});
 
 export default function LoginPage() {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
-  const { handleBlur, values, errors, touched, handleSubmit } = useFormik({
-    initialValues: { email: "", password: "" },
-    validationSchema: {},
-    onSubmit: async () => {
+  const { setFieldValue, handleSubmit, values } = useFormik({
+    initialValues: { usernameOrEmail: "", password: "" },
+    enableReinitialize: true,
+    validationSchema: schema,
+    async onSubmit(
+      data: { usernameOrEmail: string; password: string },
+      { setSubmitting }: any
+    ) {
       try {
+        setSubmitting(true);
+
+        await dispatch(
+          loginThunk({
+            usernameOrEmail: data.usernameOrEmail.toLowerCase(),
+            password: data.password,
+          })
+        ).unwrap();
+        toast.success("کاربر با موفقیت ساخته شد.");
+        navigate("/myCollegeGrama");
       } catch (error) {
         console.log(error);
+        toast.error("مشکلی پیش آمده");
+      } finally {
+        setSubmitting(false);
       }
     },
   });
@@ -41,19 +66,24 @@ export default function LoginPage() {
             placeholder="ایمیل"
             imageSrc={gmail}
             imageAlt="gmail"
-            className=""
+            value={values.usernameOrEmail}
+            onChange={(e: any) =>
+              setFieldValue("usernameOrEmail", e.target.value)
+            }
+            type="email"
           />
         </div>
         <Input
           placeholder="رمز عبور"
           imageSrc={key}
           imageAlt="key"
-          className="mb-4"
+          value={values.password}
+          onChange={(e: any) => setFieldValue("password", e.target.value)}
+          type="password"
         />
         <div className="flex items-center my-5 mr-2">
           <input
             type="checkbox"
-            value=""
             className="w-4 h-4 text-[#587052] bg-gray-100 border-gray-300 rounded dark:bg-gray-700 "
           />
           <label className="mr-2 text-sm font-medium text-gray-700 dark:text-gray-500">
@@ -61,7 +91,7 @@ export default function LoginPage() {
           </label>
         </div>
         <div className="flex justify-end my-3">
-          <Button title={"ورود"} width="100px" onClick={() => {}} />
+          <Button type="submit" title={"ورود"} width="100px" />
         </div>
         <button
           className="flex items-center mt-10 mb-2"

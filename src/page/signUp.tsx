@@ -1,5 +1,7 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import React, { useState } from "react";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 import Button from "../component/button";
 import Input from "../component/input";
@@ -7,9 +9,6 @@ import Input from "../component/input";
 import gmail from "../assets/icons/gmail1.svg";
 import key from "../assets/icons/key1.svg";
 import person from "../assets/icons/person.svg";
-
-import axios from "axios";
-import { toast } from "react-toastify";
 
 const Register = () => {
   const [fullname, setFullname] = useState("");
@@ -38,29 +37,20 @@ const Register = () => {
         },
       })
       .then(({ data, status }) => {
-        console.log(data);
         if (status === 201) {
-          toast.success("کاربر با موفقیت ساخته شد.", {
-            position: "top-right",
-            closeOnClick: true,
-          });
-          console.log(data);
+          toast.success("کاربر با موفقیت ساخته شد.");
           reset();
         }
       })
       .catch((ex) => {
-        toast.error("مشکلی پیش آمده", {
-          position: "top-right",
-          closeOnClick: true,
-        });
         console.log(ex);
+        toast.error("مشکلی پیش آمده");
       });
-    console.log(user);
   };
 
   return (
     <div>
-      <form>
+      <form onSubmit={handleSubmit}>
         <div className="flex mt-8 mb-2 text-center justify-center ">
           <Link to="/login" className={"mx-2 text-gray-400"}>
             ورود به کالج گرام
@@ -107,13 +97,7 @@ const Register = () => {
           />
         </div>
         <div className="flex justify-end my-10">
-          <Button
-            title={"ثبت نام"}
-            width="100px"
-            onSubmit={() => {
-              handleSubmit;
-            }}
-          />
+          <Button title={"ثبت نام"} width="100px" type="submit" />
         </div>
       </form>
     </div>
