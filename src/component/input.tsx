@@ -4,16 +4,16 @@ export default function Input({
   placeholder,
   imageSrc,
   imageAlt,
-  className,
   value,
   onChange,
+  type,
 }: {
   placeholder: string;
   imageSrc: string;
   imageAlt: string;
-  className?: any;
   value?: string;
   onChange?: any;
+  type?: string;
 }) {
   return (
     <div className={"flex "}>
@@ -24,6 +24,7 @@ export default function Input({
         placeholder={placeholder}
         onChange={onChange}
         value={value}
+        type={type}
       />
     </div>
   );

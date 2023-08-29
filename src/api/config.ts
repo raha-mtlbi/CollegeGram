@@ -1,6 +1,5 @@
 import Axios from "axios";
 import { getToken, removeToken } from "./token";
-import { error } from "console";
 
 export const BaseUrl = "https://murphyteam.ir";
 export const apiAgent = Axios.create({ baseURL: BaseUrl });
