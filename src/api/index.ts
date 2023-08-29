@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { AxiosRequestConfig } from "axios";
 import { apiAgent } from "./config";
 import { onSuccess, onError } from "./utils";
@@ -46,3 +47,6 @@ export async function patch<T>(path: string, data: any, params?: any) {
     return onError(error);
   }
 }
+=======
+import * as React from "react";
+>>>>>>> 3fddd6cdd21bae5e72336cc078b4e97398575f4a
