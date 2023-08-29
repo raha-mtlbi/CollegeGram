@@ -2,10 +2,12 @@ export default function Button({
   title,
   width,
   onClick,
+  onSubmit,
 }: {
   title: string;
   width: number | string;
-  onClick: () => void;
+  onClick?: () => void;
+  onSubmit?: () => void;
 }) {
   return (
     <button
