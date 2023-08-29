@@ -2,8 +2,6 @@ export default function Button({
   title,
   width,
   onClick,
-  onSubmit,
-  type,
 }: {
   title: string;
   width: number | string;

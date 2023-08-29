@@ -11,7 +11,11 @@ export async function get<T>(path: string, config?: AxiosRequestConfig) {
   }
 }
 
-export async function delete_<T>(path: string, params: AxiosRequestConfig["params"] = null, data?: any) {
+export async function delete_<T>(
+  path: string,
+  params: AxiosRequestConfig["params"] = null,
+  data?: any
+) {
   try {
     const response = await apiAgent.delete<T>(path, { params, data });
     return onSuccess(response);

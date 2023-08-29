@@ -14,6 +14,8 @@ const Register = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [repeatPassword, setRepeatPassword] = useState("");
+  const [isError, setIsError] = useState({ error: false, message: "" });
 
   const reset = () => {
     setUsername("");
@@ -24,20 +26,47 @@ const Register = () => {
   const handleSubmit = (event: any) => {
     event.preventDefault();
 
-    axios
-      .post("https://murphyteam.ir/user/signup", {
-        data: { email, password },
+    if (
+      username === "" ||
+      email === "" ||
+      password === "" ||
+      repeatPassword === ""
+    ) {
+      setIsError({ error: true, message: "erroe 1" });
+    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
+      setIsError({ error: true, message: "erroe 2" });
+    } else if (password.length < 6) {
+      setIsError({ error: true, message: "erroe 3" });
+    } else if (!/^[a-z]+/.test(password) && !/^[A-Z]+/.test(password)) {
+      setIsError({ error: true, message: "erroe 4" });
+    } else if (password !== repeatPassword) {
+      setIsError({ error: true, message: "erroe 5" });
+    } else {
+      const user = {
+        username: username,
+        email: email,
+        password: password,
+      };
+
+      axios({
+        method: "post",
+        url: "https://murphyteam.ir/user/signup",
+        data: { user },
       })
-      .then(({ data, status }) => {
-        if (data && status === 201) {
-          toast.success("کاربر با موفقیت ساخته شد.");
-          reset();
-        }
-      })
-      .catch((ex) => {
-        console.log(ex);
-        toast.error("مشکلی پیش آمده");
-      });
+        .then(({ data, status }) => {
+          if (status === 201) {
+            toast.success("کاربر با موفقیت ساخته شد.");
+            reset();
+          }
+        })
+        .catch((ex) => {
+          toast.error("مشکلی پیش آمده", {
+            position: "top-right",
+            closeOnClick: true,
+          });
+          console.log("user2", ex);
+        });
+    }
   };
 
   return (
@@ -84,13 +113,14 @@ const Register = () => {
             placeholder="تکرار رمز عبور"
             imageSrc={key}
             imageAlt="repeat key"
-            value={password}
-            onChange={(e: any) => setPassword(e.target.value)}
+            value={repeatPassword}
+            onChange={(e: any) => setRepeatPassword(e.target.value)}
           />
         </div>
         <div className="flex justify-end my-10">
           <Button title={"ثبت نام"} width="100px" type="submit" />
         </div>
+        <span>{isError.error && isError.message}</span>
       </form>
     </div>
   );
