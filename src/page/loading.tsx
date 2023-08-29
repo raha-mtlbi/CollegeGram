@@ -1,6 +1,6 @@
 export default function LoadingPage() {
   return (
-    <div className="text-center">
+    <div className="text-center items-center">
       <div role="status">
         <svg
           aria-hidden="true"

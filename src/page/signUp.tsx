@@ -24,19 +24,12 @@ const Register = () => {
   const handleSubmit = (event: any) => {
     event.preventDefault();
 
-    const user = {
-      username: username,
-      email: email,
-      password: password,
-    };
-
     axios
-      .post("https://murphyteam.iruser/signup", {
-        headers: {},
-        data: user,
+      .post("https://murphyteam.ir/user/signup", {
+        data: { email, password },
       })
       .then(({ data, status }) => {
-        if (status === 201) {
+        if (data && status === 201) {
           toast.success("کاربر با موفقیت ساخته شد.");
           reset();
         }

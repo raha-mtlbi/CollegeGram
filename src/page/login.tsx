@@ -22,7 +22,7 @@ export default function LoginPage() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  const { setFieldValue, handleSubmit, values } = useFormik({
+  const { setFieldValue, handleSubmit, values, errors } = useFormik({
     initialValues: { usernameOrEmail: "", password: "" },
     enableReinitialize: true,
     validationSchema: schema,
@@ -72,6 +72,7 @@ export default function LoginPage() {
               setFieldValue("usernameOrEmail", e.target.value)
             }
             type="email"
+            error
           />
         </div>
         <Input

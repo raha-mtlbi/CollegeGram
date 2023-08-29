@@ -30,16 +30,9 @@ export const registerThunk = createAsyncThunk(
   }
 );
 
-export const getMeThunk = createAsyncThunk(
-  "user/me",
-  async ({ token }: { token?: string }, { rejectWithValue }) => {
-    try {
-      return await getMe();
-    } catch (error) {
-      return rejectWithValue(error);
-    }
-  }
-);
+export const getCurrentUser = createAsyncThunk("user/me", async () => {
+  return await getMe();
+});
 
 export type userSliceType = {
   status: "idle" | "authorized" | "unauthorized" | "loading";
@@ -96,16 +89,16 @@ const userSlice = createSlice({
       });
 
     builder
-      .addCase(getMeThunk.pending, (state) => {
+      .addCase(getCurrentUser.pending, (state) => {
         state.status = "loading";
       })
-      .addCase(getMeThunk.fulfilled, (state, action) => {
+      .addCase(getCurrentUser.fulfilled, (state, action) => {
         if (action.payload?._id) {
           state.user = action.payload;
           state.status = "authorized";
         }
       })
-      .addCase(getMeThunk.rejected, (state, action) => {
+      .addCase(getCurrentUser.rejected, (state, action) => {
         state.status = "unauthorized";
       });
   },
