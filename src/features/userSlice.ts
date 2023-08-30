@@ -5,7 +5,10 @@ import { IUser, getMe, login, register } from "../api/user";
 export const loginThunk = createAsyncThunk(
   "user/loginThunk",
   async (
-    { usernameOrEmail, password }: { usernameOrEmail: string; password: string },
+    {
+      usernameOrEmail,
+      password,
+    }: { usernameOrEmail: string; password: string },
     { rejectWithValue }
   ) => {
     try {
@@ -19,19 +22,32 @@ export const loginThunk = createAsyncThunk(
 export const registerThunk = createAsyncThunk(
   "user/registerThunk",
   async (
-    { email, password }: { email: string; password: string },
+    {
+      username,
+      email,
+      password,
+    }: { username: string; email: string; password: string },
     { rejectWithValue }
   ) => {
     try {
-      return await register(email, password);
+      return await register(username, email, password);
     } catch (error) {
       return rejectWithValue(error);
     }
   }
 );
 
-export const getCurrentUser = createAsyncThunk("user/me", async () => {
-  return await getMe();
+// export const getCurrentUser = createAsyncThunk("user/me", async ({ token }: { token?: string }, { rejectWithValue }) => {
+//   try {
+//     return await getMe();
+//   } catch (error) {
+//     return rejectWithValue(error);
+//   }
+// });
+
+export const getCurrentUser = createAsyncThunk("user/getMeThunk", () => {
+  const resp = getMe();
+  return resp;
 });
 
 export type userSliceType = {
@@ -93,7 +109,7 @@ const userSlice = createSlice({
         state.status = "loading";
       })
       .addCase(getCurrentUser.fulfilled, (state, action) => {
-        if (action.payload?._id) {
+        if (action.payload?.id) {
           state.user = action.payload;
           state.status = "authorized";
         }

@@ -1,13 +1,17 @@
 import { get, post } from ".";
 
 export interface IUser {
-  _id: string;
-  avatar: string;
+  bio: string;
+  id: string;
+  photo: string;
   username: string;
-  usernameOrEmail: string;
-  createdAt: number;
-  updatedAt: number;
-  __v: number;
+  email: string;
+  followers: number;
+  following: number;
+  lastname: string;
+  name: string;
+  postsCount: number;
+  private: boolean;
 }
 
 export const login = (usernameOrEmail: string, password: string) => {
@@ -17,9 +21,15 @@ export const login = (usernameOrEmail: string, password: string) => {
   });
 };
 
-export const register = (usernameOrEmail: string, password: string, token?: string) => {
+export const register = (
+  username: string,
+  email: string,
+  password: string,
+  token?: string
+) => {
   return post<{ token: string; user: IUser }>("/user/signup", {
-    usernameOrEmail,
+    username,
+    email,
     password,
     token,
   });

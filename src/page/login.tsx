@@ -4,7 +4,7 @@ import * as Yup from "yup";
 
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { loginThunk } from "../features/userSlice";
+import { getCurrentUser, loginThunk } from "../features/userSlice";
 import { useAppDispatch } from "../store";
 
 import Button from "../component/button";
@@ -15,13 +15,13 @@ import key from "../assets/icons/key.svg";
 import back from "../assets/icons/arrow-back.svg";
 
 const schema = Yup.object().shape({
-  usernameOrEmail: Yup.string().required("Please enter your email").email(),
+  usernameOrEmail: Yup.string().required("Please enter your email"),
   password: Yup.string()
     .trim()
-    .matches(      
+    .matches(
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/,
       "رمز عبور شما مناسب نیست"
-    )
+    ),
 });
 
 export default function LoginPage() {
@@ -41,12 +41,13 @@ export default function LoginPage() {
 
         await dispatch(
           loginThunk({
-            usernameOrEmail: data.usernameOrEmail.toLowerCase(),
+            usernameOrEmail: data.usernameOrEmail,
             password: data.password,
           })
         ).unwrap();
+
         toast.success("با موفقیت وارد شدید");
-        navigate("/myCollegeGrama");
+        navigate("/myCollegeGram");
       } catch (error) {
         console.log(error);
         toast.error("مشکلی پیش آمده");
@@ -77,7 +78,6 @@ export default function LoginPage() {
             onChange={(e: any) =>
               setFieldValue("usernameOrEmail", e.target.value)
             }
-            type="email"
             error={Boolean(values.usernameOrEmail && errors?.usernameOrEmail)}
             errorText=" نام کاربری یا ایمیل اشتباه است."
           />

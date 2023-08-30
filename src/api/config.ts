@@ -1,14 +1,14 @@
 import Axios from "axios";
 import { getToken, removeToken } from "./token";
 
-export const BaseUrl = "https://murphyteam.ir";
+export const BaseUrl = "https://murphyteam.ir/";
 export const apiAgent = Axios.create({ baseURL: BaseUrl });
 
 apiAgent.interceptors.request.use(
   (config) => {
     const token = getToken();
-    if (token && config.headers && !config.headers.Authorization) {
-      config.headers.Authorization = `Bearer ${token}`;
+    if (!config.headers.Authorization) {
+      config.headers.Authorization = `Bearer ${getToken()}`;
     }
 
     return config;

@@ -1,9 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Suspense } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { useUserStatus } from "../features/hooks";
-import { getCurrentUser } from "../features/userSlice";
-import { useAppDispatch } from "../store";
 
 import AuthenticationLayout from "../layout/auth";
 import LoadingPage from "../page/loading";
@@ -20,12 +18,7 @@ import InnerPost from "../page/innerPost";
 const Home = React.lazy(() => import("../page/Home"));
 
 export default function Router() {
-  const dispatch = useAppDispatch();
   const status = useUserStatus();
-
-  useEffect(() => {
-    dispatch(getCurrentUser());
-  }, [dispatch]);
 
   if (status === "loading" || status === "idle") {
     return <LoadingPage />;
