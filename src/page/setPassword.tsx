@@ -4,7 +4,7 @@ import Input from "../component/input";
 
 import key from "../assets/icons/key1.svg";
 
-const ForgetPass2 = () => {
+const ForgetPassword = () => {
   const navigate = useNavigate();
   return (
     <div>
@@ -32,4 +32,4 @@ const ForgetPass2 = () => {
   );
 };
 
-export default ForgetPass2;
+export default ForgetPassword;

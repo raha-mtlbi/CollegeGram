@@ -4,7 +4,7 @@ import * as Yup from "yup";
 
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { getCurrentUser, loginThunk } from "../features/userSlice";
+import { loginThunk } from "../features/userSlice";
 import { useAppDispatch } from "../store";
 
 import Button from "../component/button";
@@ -28,7 +28,7 @@ export default function LoginPage() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  const { setFieldValue, handleSubmit, values, errors, touched } = useFormik({
+  const { setFieldValue, handleSubmit, values, errors } = useFormik({
     initialValues: { usernameOrEmail: "", password: "" },
     enableReinitialize: true,
     validationSchema: schema,

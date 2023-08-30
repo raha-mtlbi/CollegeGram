@@ -38,3 +38,7 @@ export const register = (
 export const getMe = () => {
   return get<IUser>("/user/me");
 };
+
+export const recoveryPassword = (data: { email: string }) => {
+  return post<{ email: string }>("/user/", data);
+};
