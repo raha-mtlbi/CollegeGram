@@ -5,6 +5,10 @@ export interface IImage {
   src: string;
 }
 
-export const createPost = (data: { description: string; tag: string }) => {
+export const createPost = (data: {
+  description: string;
+  tag: string;
+  photo?: File;
+}) => {
   return post("/", data);
 };

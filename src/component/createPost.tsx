@@ -49,7 +49,7 @@ const CreatePostModal = ({
               <p className="text-center text-[20px] font-bold not-italic leading-normal my-2 ">
                 افزودن پست
               </p>
-              <UploadButton />
+              <UploadButton values={values} />
               <div className="mb-5">
                 <p className="my-2 text-[#17494D] text-start">توضیحات</p>
                 <textarea

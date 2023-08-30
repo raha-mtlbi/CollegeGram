@@ -27,26 +27,26 @@ export default function Router() {
     dispatch(getCurrentUser());
   }, [dispatch]);
 
-  // if (status === "loading" || status === "idle") {
-  //   return <LoadingPage />;
-  // }
+  if (status === "loading" || status === "idle") {
+    return <LoadingPage />;
+  }
 
-  // if (status === "unauthorized") {
-  //   return (
-  //     <Suspense fallback={<LoadingPage />}>
-  //       <Routes>
-  //         <Route index element={<Navigate to="/login" />} />
-  //         <Route path="" element={<AuthenticationLayout />}>
-  //           <Route path="/login" element={<LoginPage />} />
-  //           <Route path="/signup" element={<SignUp />} />
-  //           <Route path="/recoveryPassword" element={<RecoveryPassword />} />
-  //           <Route path="/setPassword" element={<SetPassword />} />
-  //           {/* <Route path="/*" element={<LoginPage />} /> */}
-  //         </Route>
-  //       </Routes>
-  //     </Suspense>
-  //   );
-  // }
+  if (status === "unauthorized") {
+    return (
+      <Suspense fallback={<LoadingPage />}>
+        <Routes>
+          <Route index element={<Navigate to="/login" />} />
+          <Route path="" element={<AuthenticationLayout />}>
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/recoveryPassword" element={<RecoveryPassword />} />
+            <Route path="/setPassword" element={<SetPassword />} />
+            {/* <Route path="/*" element={<LoginPage />} /> */}
+          </Route>
+        </Routes>
+      </Suspense>
+    );
+  }
 
   return (
     <Suspense fallback={<LoadingPage />}>
