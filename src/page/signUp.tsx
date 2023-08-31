@@ -17,7 +17,7 @@ import person from "../assets/icons/person.svg";
 //     .email("لطفا ایمیل معتبری وارد کنید"),
 //   password: Yup.string()
 //     .trim()
-//     .matches(      
+//     .matches(
 //       /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/,
 //       "رمز عبور شما مناسب نیست"
 //     )
@@ -49,15 +49,15 @@ const Register = () => {
       password === "" ||
       repeatPassword === ""
     ) {
-      setIsError({ error: true, message: "erroe 1" });
-    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
-      setIsError({ error: true, message: "erroe 2" });
-    } else if (password.length < 6) {
-      setIsError({ error: true, message: "erroe 3" });
-    } else if (!/^[a-z]+/.test(password) && !/^[A-Z]+/.test(password)) {
-      setIsError({ error: true, message: "erroe 4" });
+      setIsError({ error: true, message: "فیلد ها را کامل کنید" });
+    } else if (/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)) {
+      setIsError({ error: true, message: "لطفا ایمیل معتبری وارد کنید" });
+    } else if (/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,32}$/.test(password)) {
+      setIsError({ error: true, message: "رمز عبور شما مناسب نیست" });
     } else if (password !== repeatPassword) {
-      setIsError({ error: true, message: "erroe 5" });
+      setIsError({ error: true, message: "تکرار رمز عبور صحیح نمیباشد" });
+    } else if (username.length <= 4 || !username.startsWith("_")) {
+      setIsError({ error: true, message: "رمز عبور شما مناسب نیست" });
     } else {
       const user = {
         username: username,
