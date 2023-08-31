@@ -15,7 +15,7 @@ import SignUp from "../page/signUp";
 import MyCollegeGram from "../page/myCollegeGram";
 import Collegians from "../page/collegians";
 import PanelLayout from "../layout/panel";
-import InnerPost from "../page/innerPost";
+import InnerPost from "../page/myCollegeGram/[id]";
 
 const Home = React.lazy(() => import("../page/Home"));
 
@@ -41,7 +41,7 @@ export default function Router() {
             <Route path="/signup" element={<SignUp />} />
             <Route path="/recoveryPassword" element={<RecoveryPassword />} />
             <Route path="/setPassword" element={<SetPassword />} />
-            <Route path="/*" element={<LoginPage />} />
+            {/* <Route path="/*" element={<LoginPage />} /> */}
           </Route>
         </Routes>
       </Suspense>
@@ -55,7 +55,7 @@ export default function Router() {
           <Route path="/" element={<Home />} />
           <Route path="/myCollegeGram" element={<MyCollegeGram />} />
           <Route path="/collegians" element={<Collegians />} />
-          <Route path="/innerPost" element={<InnerPost />} />
+          <Route path="/myCollegeGram/:id" element={<InnerPost />} />
         </Route>
 
         <Route path="/*" element={<ErrorPage />} />
