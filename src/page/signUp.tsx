@@ -14,7 +14,6 @@ import { getCurrentUser, registerThunk } from "../features/userSlice";
 import { useFormik } from "formik";
 import { useAppDispatch } from "../store";
 
-<<<<<<< HEAD
 // const schema = Yup.object().shape({
 //   email: Yup.string()
 //     .required("لطفا ایمیل معتبری وارد کنید")
@@ -30,23 +29,6 @@ import { useAppDispatch } from "../store";
 //     .oneOf([Yup.ref("password")], "رمز عبور شما منطبق نیست")
 //     .required("لطفا رمز عبور خود را تایید کنید"),
 // });
-=======
-const schema = Yup.object().shape({
-  email: Yup.string()
-    .required("لطفا ایمیل معتبری وارد کنید")
-    .email("لطفا ایمیل معتبری وارد کنید"),
-  password: Yup.string()
-    .trim()
-    .matches(
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/,
-      "رمز عبور شما مناسب نیست"
-    )
-    .required("ورود رمز عبور الزامی است."),
-  repassword: Yup.string()
-    .oneOf([Yup.ref("password")], "رمز عبور شما منطبق نیست")
-    .required("لطفا رمز عبور خود را تایید کنید"),
-});
->>>>>>> b982cc4467dcc1735acfc83afe266bb0a8c49bd1
 
 const Register = () => {
   const navigate = useNavigate();
@@ -64,24 +46,71 @@ const Register = () => {
     setPassword("");
   };
 
-  // const handleSubmit = (event: any) => {
-  //   event.preventDefault();
+  const handleSubmit = (event: any) => {
+    event.preventDefault();
 
-  //   if (
-  //     username === "" ||
-  //     email === "" ||
-  //     password === "" ||
-  //     repeatPassword === ""
+    if (
+      username === "" ||
+      email === "" ||
+      password === "" ||
+      repeatPassword === ""
+    ) {
+      setIsError({ error: true, message: "erroe 1" });
+    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
+      setIsError({ error: true, message: "erroe 2" });
+    } else if (password.length < 6) {
+      setIsError({ error: true, message: "erroe 3" });
+    } else if (!/^[a-z]+/.test(password) && !/^[A-Z]+/.test(password)) {
+      setIsError({ error: true, message: "erroe 4" });
+    } else if (password !== repeatPassword) {
+      setIsError({ error: true, message: "erroe 5" });
+    } else {
+      const user = {
+        username: username,
+        email: email,
+        password: password,
+      };
+
+      axios({
+        method: "post",
+        url: "https://murphyteam.ir/user/signup",
+        data: { user },
+      })
+        .then(({ data, status }) => {
+          if (status === 201) {
+            toast.success("کاربر با موفقیت ساخته شد.");
+            reset();
+          }
+        })
+        .catch((ex) => {
+          toast.error("مشکلی پیش آمده");
+          console.log("user2", ex);
+        });
+    }
+  };
+
+  // const { setFieldValue, handleSubmit, values, errors, touched } = useFormik({
+  //   initialValues: { username: "", email: "", password: "", repassword: "" },
+  //   enableReinitialize: true,
+  //   validationSchema: schema,
+  //   async onSubmit(
+  //     data: {
+  //       username: string;
+  //       email: string;
+  //       password: string;
+  //       repassword: string;
+  //     },
+  //     { setSubmitting }: any
   //   ) {
-  //     setIsError({ error: true, message: "erroe 1" });
-  //   } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
-  //     setIsError({ error: true, message: "erroe 2" });
-  //   } else if (password.length < 6) {
-  //     setIsError({ error: true, message: "erroe 3" });
-  //   } else if (!/^[a-z]+/.test(password) && !/^[A-Z]+/.test(password)) {
-  //     setIsError({ error: true, message: "erroe 4" });
+  //     setIsError({ error: true, message: "فیلد ها را کامل کنید" });
+  //   } else if (/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)) {
+  //     setIsError({ error: true, message: "لطفا ایمیل معتبری وارد کنید" });
+  //   } else if (/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,32}$/.test(password)) {
+  //     setIsError({ error: true, message: "رمز عبور شما مناسب نیست" });
   //   } else if (password !== repeatPassword) {
-  //     setIsError({ error: true, message: "erroe 5" });
+  //     setIsError({ error: true, message: "تکرار رمز عبور صحیح نمیباشد" });
+  //   } else if (username.length <= 4 || !username.startsWith("_")) {
+  //     setIsError({ error: true, message: "رمز عبور شما مناسب نیست" });
   //   } else {
   //     const user = {
   //       username: username,
@@ -89,77 +118,25 @@ const Register = () => {
   //       password: password,
   //     };
 
-  //     axios({
-  //       method: "post",
-  //       url: "https://murphyteam.ir/user/signup",
-  //       data: { user },
-  //     })
-  //       .then(({ data, status }) => {
-  //         if (status === 201) {
-  //           toast.success("کاربر با موفقیت ساخته شد.");
-  //           reset();
-  //         }
-  //       })
-  //       .catch((ex) => {
-  //         toast.error("مشکلی پیش آمده");
-  //         console.log("user2", ex);
-  //       });
-  //   }
-  // };
+  //       await dispatch(
+  //         registerThunk({
+  //           username: data.username,
+  //           email: data.email.toLowerCase(),
+  //           password: data.password,
+  //         })
+  //       ).unwrap();
+  //       dispatch(getCurrentUser());
 
-  const { setFieldValue, handleSubmit, values, errors, touched } = useFormik({
-    initialValues: { username: "", email: "", password: "", repassword: "" },
-    enableReinitialize: true,
-    validationSchema: schema,
-    async onSubmit(
-      data: {
-        username: string;
-        email: string;
-        password: string;
-        repassword: string;
-      },
-      { setSubmitting }: any
-    ) {
-<<<<<<< HEAD
-      setIsError({ error: true, message: "فیلد ها را کامل کنید" });
-    } else if (/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)) {
-      setIsError({ error: true, message: "لطفا ایمیل معتبری وارد کنید" });
-    } else if (/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,32}$/.test(password)) {
-      setIsError({ error: true, message: "رمز عبور شما مناسب نیست" });
-    } else if (password !== repeatPassword) {
-      setIsError({ error: true, message: "تکرار رمز عبور صحیح نمیباشد" });
-    } else if (username.length <= 4 || !username.startsWith("_")) {
-      setIsError({ error: true, message: "رمز عبور شما مناسب نیست" });
-    } else {
-      const user = {
-        username: username,
-        email: email,
-        password: password,
-      };
-=======
-      try {
-        setSubmitting(true);
->>>>>>> b982cc4467dcc1735acfc83afe266bb0a8c49bd1
-
-        await dispatch(
-          registerThunk({
-            username: data.username,
-            email: data.email.toLowerCase(),
-            password: data.password,
-          })
-        ).unwrap();
-        dispatch(getCurrentUser());
-
-        toast.success("با موفقیت وارد شدید");
-        navigate("/myCollegeGrama");
-      } catch (error) {
-        console.log(error);
-        toast.error("مشکلی پیش آمده");
-      } finally {
-        setSubmitting(false);
-      }
-    },
-  });
+  //       toast.success("با موفقیت وارد شدید");
+  //       navigate("/myCollegeGrama");
+  //     } catch (error) {
+  //       console.log(error);
+  //       toast.error("مشکلی پیش آمده");
+  //     } finally {
+  //       setSubmitting(false);
+  //     }
+  //   },
+  // });
 
   return (
     <div>
@@ -178,8 +155,8 @@ const Register = () => {
             placeholder="نام کاربری"
             imageSrc={person}
             imageAlt="UserName"
-            value={values.username}
-            onChange={(e: any) => setFieldValue("username", e.target.value)}
+            value={username}
+            onChange={(e: any) => setUsername(e.target.value)}
           />
         </div>
         <div className="mt-[32px]">
@@ -187,8 +164,8 @@ const Register = () => {
             placeholder="ایمیل"
             imageSrc={gmail}
             imageAlt="gmail"
-            value={values?.email}
-            onChange={(e: any) => setFieldValue("email", e.target.value)}
+            value={email}
+            onChange={(e: any) => setEmail(e.target.value)}
           />
         </div>
         <div className="mt-[32px]">
@@ -196,8 +173,8 @@ const Register = () => {
             placeholder="رمز عبور"
             imageSrc={key}
             imageAlt="key"
-            value={values.password}
-            onChange={(e: any) => setFieldValue("password", e.target.value)}
+            value={password}
+            onChange={(e: any) => setPassword(e.target.value)}
           />
         </div>
         <div className="mt-[32px]">
@@ -205,8 +182,8 @@ const Register = () => {
             placeholder="تکرار رمز عبور"
             imageSrc={key}
             imageAlt="repeat key"
-            value={values.repassword}
-            onChange={(e: any) => setFieldValue("repassword", e.target.value)}
+            value={repeatPassword}
+            onChange={(e: any) => setRepeatPassword(e.target.value)}
           />
         </div>
         <div className="flex justify-end my-10">
