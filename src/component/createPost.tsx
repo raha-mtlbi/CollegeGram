@@ -1,37 +1,24 @@
 import { Dialog } from "@headlessui/react";
 import Button from "./button";
 import { useFormik } from "formik";
-import { toast } from "react-toastify";
 
-import { createPost } from "../api/type/images";
 import UploadButton from "./uploadButton";
+import { AddPostValidation } from "../utils/validations";
+import { AddNewPost } from "../logic/addNewPost";
 
 const CreatePostModal = ({
   open,
   onClose,
 }: {
   open: boolean;
-  onClose: () => void;
+  onClose: any;
 }) => {
-  const { values, handleSubmit, setFieldValue } = useFormik({
+  
+  const formik = useFormik({
     initialValues: { description: "", tag: "" },
     enableReinitialize: true,
-    async onSubmit(
-      data: { description: string; tag: string },
-      { setSubmitting }: any
-    ) {
-      try {
-        setSubmitting(true);
-        await createPost(data);
-        toast.success("با موفقیت وارد شدید");
-        onClose();
-      } catch (error) {
-        console.log(error);
-        toast.error("مشکلی پیش آمده");
-      } finally {
-        setSubmitting(false);
-      }
-    },
+    validationSchema: AddPostValidation,
+    onSubmit: AddNewPost(onClose),
   });
 
   return (
@@ -42,27 +29,33 @@ const CreatePostModal = ({
       style={{ direction: "rtl" }}
     >
       <div className="fixed inset-0 bg-black/30" aria-hidden="true" />
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={formik.handleSubmit}>
         <div className="fixed inset-0 overflow-y-auto">
           <div className="flex min-h-full items-center justify-center p-4 text-center ">
             <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-[#F3F0EE] p-6 text-left align-middle shadow-xl transition-all">
               <p className="text-center text-[20px] font-bold not-italic leading-normal my-2 ">
                 افزودن پست
               </p>
-              <UploadButton values={values} />
+              <UploadButton values={formik.values} />
               <div className="mb-5">
                 <p className="my-2 text-[#17494D] text-start">توضیحات</p>
                 <textarea
-                  value={values?.description}
+                  value={formik.values?.description}
                   onChange={(e: any) =>
-                    setFieldValue("description", e?.target?.value)
+                    formik.setFieldValue("description", e?.target?.value)
                   }
                   className=" w-full p-2 h-[164px] rounded-[10px] bg-[#F3F0EE]	border border-[#17494d80] resize-none"
                 />
               </div>
               <div className="my-5">
                 <p className="mb-2 text-[#17494D] text-start">تگ‌ها</p>
-                <input className="w-full px-2 h-[40px] rounded-[10px] bg-[#F3F0EE]	border border-[#17494d80] resize-none" />
+                <input
+                  className="w-full px-2 h-[40px] rounded-[10px] bg-[#F3F0EE]	border border-[#17494d80] resize-none"
+                  value={formik.values?.tag}
+                  onChange={(e: any) =>
+                    formik.setFieldValue("tag", e.targt.value)
+                  }
+                />
               </div>
               <div className="flex justify-start">
                 <label className="relative inline-flex items-center cursor-pointer mb-6 mt-3">

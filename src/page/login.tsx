@@ -1,11 +1,8 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
-import * as Yup from "yup";
 
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { loginThunk } from "../features/userSlice";
-import { useAppDispatch } from "../store";
+import login from "../logic/login";
+import { loginValidation } from "../utils/validations";
 
 import Button from "../component/button";
 import Input from "../component/input";
@@ -14,52 +11,19 @@ import gmail from "../assets/icons/gmail.svg";
 import key from "../assets/icons/key.svg";
 import back from "../assets/icons/arrow-back.svg";
 
-const schema = Yup.object().shape({
-  usernameOrEmail: Yup.string().required("Please enter your email"),
-  password: Yup.string()
-    .trim()
-    .matches(
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/,
-      "رمز عبور شما مناسب نیست"
-    ),
-});
-
 export default function LoginPage() {
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
 
-  const { setFieldValue, handleSubmit, values, errors } = useFormik({
+  const formik = useFormik({
     initialValues: { usernameOrEmail: "", password: "" },
     enableReinitialize: true,
-    validationSchema: schema,
-    async onSubmit(
-      data: { usernameOrEmail: string; password: string },
-      { setSubmitting }: any
-    ) {
-      try {
-        setSubmitting(true);
-
-        await dispatch(
-          loginThunk({
-            usernameOrEmail: data.usernameOrEmail,
-            password: data.password,
-          })
-        ).unwrap();
-
-        toast.success("با موفقیت وارد شدید");
-        navigate("/myCollegeGram");
-      } catch (error) {
-        console.log(error);
-        toast.error("مشکلی پیش آمده");
-      } finally {
-        setSubmitting(false);
-      }
-    },
+    validationSchema: loginValidation,
+    onSubmit: login(),
   });
 
   return (
     <div className="flex column mt-6 justify-center text-center">
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={formik.handleSubmit}>
         <div className="flex my-3 text-center justify-center">
           <Link to="/login" className={"mx-2 text-gray-700"}>
             ورود به کالج گرام
@@ -74,11 +38,13 @@ export default function LoginPage() {
             placeholder="نام کاربری یا ایمیل "
             imageSrc={gmail}
             imageAlt="gmail"
-            value={values.usernameOrEmail}
+            value={formik.values.usernameOrEmail}
             onChange={(e: any) =>
-              setFieldValue("usernameOrEmail", e.target.value)
+              formik.setFieldValue("usernameOrEmail", e.target.value)
             }
-            error={Boolean(values.usernameOrEmail && errors?.usernameOrEmail)}
+            error={Boolean(
+              formik.values.usernameOrEmail && formik.errors?.usernameOrEmail
+            )}
             errorText=" نام کاربری یا ایمیل اشتباه است."
           />
         </div>
@@ -86,10 +52,12 @@ export default function LoginPage() {
           placeholder="رمز عبور"
           imageSrc={key}
           imageAlt="key"
-          value={values.password}
-          onChange={(e: any) => setFieldValue("password", e.target.value)}
+          value={formik.values.password}
+          onChange={(e: any) =>
+            formik.setFieldValue("password", e.target.value)
+          }
           type="password"
-          error={Boolean(values.password && errors?.password)}
+          error={Boolean(formik.values.password && formik.errors?.password)}
           errorText="رمز عبور اشتباه است."
         />
         <div className="flex items-center my-5 mr-2">

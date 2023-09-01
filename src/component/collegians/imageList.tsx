@@ -16,13 +16,13 @@ export default function ImageList() {
 
   return (
     <div className="w-full grid grid-cols-4 gap-4 mr-12 ml-5">
-      {photoList.map((i) => (
-        <div key={i.id} className="w-[230px] h-[230px] cursor-pointer">
+      {photoList.map((photo) => (
+        <div key={photo.id} className="w-[230px] h-[230px] cursor-pointer">
           <img
             className=" max-w-full "
-            src={i?.src}
+            src={photo?.src}
             alt=""
-            onClick={() => navigate(`/myCollegeGram/${i?.id}`)}
+            onClick={() => navigate(`/myCollegeGram/${photo?.id}`)}
           />
         </div>
       ))}

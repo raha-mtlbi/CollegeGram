@@ -23,9 +23,8 @@ const Caption = ({
   captionText,
   tag,
 }: ICaption) => {
-  
   const [isLike, setIsLike] = useState<boolean>(false);
-  const [isSave, setIsSike] = useState<boolean>(false);
+  const [isSave, setIsSave] = useState<boolean>(false);
 
   return (
     <div className="mr-[20px] mb-6">
@@ -41,7 +40,7 @@ const Caption = ({
           {likeCount}
         </p>
         <button
-          onClick={() => setIsSike((isLike) => !isLike)}
+          onClick={() => setIsSave((isSave) => !isSave)}
           className="mr-[16px]"
         >
           <img

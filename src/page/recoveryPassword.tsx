@@ -1,44 +1,27 @@
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
-import { toast } from "react-toastify";
-import * as Yup from "yup";
 
-import { recoveryPassword } from "../api/user";
+import { sendEmailValidation } from "../utils/validations";
+import SendEmail from "../logic/sendEmail";
 
 import Button from "../component/button";
 import Input from "../component/input";
 
 import gmail from "../assets/icons/gmail.svg";
 
-const schema = Yup.object().shape({
-  usernameOrEmail: Yup.string().required("لطفا ایمیل خود را وارد کنید").email(),
-});
 export default function RecoveryPassword() {
   const navigate = useNavigate();
 
-  const { setFieldValue, handleSubmit, values, errors } = useFormik({
-    initialValues: { email: "" },
+  const formik = useFormik({
+    initialValues: { usernameOrEmail: "" },
     enableReinitialize: true,
-    validationSchema: schema,
-    async onSubmit(data: { email: string }, { setSubmitting }: any) {
-      try {
-        setSubmitting(true);
-
-        await recoveryPassword({ email: data?.email });
-        toast.success("با موفقیت وارد شدید");
-        navigate("/setPassword");
-      } catch (error) {
-        console.log(error);
-        toast.error("مشکلی پیش آمده");
-      } finally {
-        setSubmitting(false);
-      }
-    },
+    validationSchema: sendEmailValidation,
+    onSubmit: SendEmail(),
   });
 
   return (
     <div className="flex column mt-6 justify-center text-center">
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={formik.handleSubmit}>
         <p className={"mx-2 text-gray-700"}>بازیابی رمز عبور </p>
 
         <div className="mt-12 mb-8">
@@ -46,9 +29,9 @@ export default function RecoveryPassword() {
             placeholder="ایمیل"
             imageSrc={gmail}
             imageAlt="gmail"
-            value={values?.email}
-            onChange={(e: any) => setFieldValue("email", e.target.value)}
-            error={Boolean(errors.email)}
+            value={formik.values?.usernameOrEmail}
+            onChange={(e: any) => formik.setFieldValue("usernameOrEmail", e.target.value)}
+            error={Boolean(formik.errors.usernameOrEmail)}
             errorText="لطفا ایمیل معتبری وارد کنید"
           />
         </div>

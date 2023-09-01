@@ -41,7 +41,7 @@ export default function Router() {
             <Route path="/signup" element={<SignUp />} />
             <Route path="/recoveryPassword" element={<RecoveryPassword />} />
             <Route path="/setPassword" element={<SetPassword />} />
-            {/* <Route path="/*" element={<LoginPage />} /> */}
+            <Route path="/*" element={<LoginPage />} />
           </Route>
         </Routes>
       </Suspense>
@@ -58,7 +58,8 @@ export default function Router() {
           <Route path="/myCollegeGram/:id" element={<InnerPost />} />
         </Route>
 
-        <Route path="/*" element={<ErrorPage />} />
+        <Route path="404" element={<ErrorPage />} />
+        <Route path="*" element={<Navigate to="/404" />} />
       </Routes>
     </Suspense>
   );

@@ -1,18 +1,5 @@
 import { get, post } from ".";
-
-export interface IUser {
-  bio: string;
-  id: string;
-  photo: string;
-  username: string;
-  email: string;
-  followers: number;
-  following: number;
-  lastname: string;
-  name: string;
-  postsCount: number;
-  private: boolean;
-}
+import { IUser } from "./type/user";
 
 export const login = (usernameOrEmail: string, password: string) => {
   return post<{ token: string; user: IUser }>("/user/login", {
@@ -39,6 +26,6 @@ export const getMe = () => {
   return get<IUser>("/user/me");
 };
 
-export const recoveryPassword = (data: { email: string }) => {
-  return post<{ email: string }>("/user/", data);
+export const recoveryPassword = (data: { usernameOrEmail: string }) => {
+  return post<{ usernameOrEmail: string }>("/user/forgetpassword", data);
 };
