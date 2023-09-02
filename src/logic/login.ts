@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAppDispatch } from "../store";
-import { loginThunk } from "../features/userSlice";
+import { getCurrentUser, loginThunk } from "../features/userSlice";
 
 export default function Login() {
   const dispatch = useAppDispatch();
@@ -18,6 +18,7 @@ export default function Login() {
           usernameOrEmail: data.usernameOrEmail,
         })
       ).unwrap();
+      dispatch(getCurrentUser());
 
       toast.success("با موفقیت وارد شدید");
       navigate("/myCollegeGram");

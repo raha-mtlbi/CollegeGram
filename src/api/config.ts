@@ -6,8 +6,10 @@ export const apiAgent = Axios.create({ baseURL: BaseUrl });
 
 apiAgent.interceptors.request.use(
   (config) => {
-    if (!config.headers.Authorization) {
-      config.headers.Authorization = `Bearer ${getToken()}`;
+    const token = getToken();
+
+    if (token && config.headers && !config.headers.Authorization) {
+      config.headers.Authorization = `Bearer ${token}`;
     }
 
     return config;

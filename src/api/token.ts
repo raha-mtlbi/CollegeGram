@@ -1,18 +1,22 @@
-import Cookies from "js-cookie";
-
-export const tokenKey = "token";
+export const tokenKey = "accessToken";
+export const refreshTokenKey = "refreshToken";
 
 export function getToken() {
-  const token = Cookies.get(tokenKey);
+  const token = localStorage.getItem(tokenKey);
   console.log(token);
-  
+
   return token;
 }
 
 export function setToken(token: string) {
-  Cookies.set(tokenKey, token, { expires: 7 });
+  localStorage.setItem(tokenKey, token);
+}
+
+export function setRefreshToken(token: string) {
+  localStorage.setItem(refreshTokenKey, token);
 }
 
 export function removeToken() {
-  Cookies.remove(tokenKey);
+  localStorage.removeItem(tokenKey);
+  localStorage.removeItem(refreshTokenKey);
 }

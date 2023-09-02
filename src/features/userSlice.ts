@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { removeToken, setToken } from "../api/token";
+import { removeToken, setRefreshToken, setToken } from "../api/token";
 import { getMe, login, register } from "../api/user";
 import { IUser } from "../api/type/user";
 
@@ -86,6 +86,7 @@ const userSlice = createSlice({
         if (action.payload.accessToken) {
           state.status = "authorized";
           setToken(action.payload.accessToken);
+          setRefreshToken(action.payload.refreshToken as string);
           state.user = action.payload.user;
         }
       })
@@ -99,10 +100,9 @@ const userSlice = createSlice({
       .addCase(registerThunk.fulfilled, (state, action) => {
         if (action.payload) {
           state.status = "authorized";
-          setToken(
-            action.payload.accessToken ||
-              (action.payload.refreshToken as string)
-          );
+          setToken(action.payload.accessToken);
+          setRefreshToken(action.payload.refreshToken as string);
+
           state.user = action.payload.user;
           state.token = action.payload.accessToken;
         } else {

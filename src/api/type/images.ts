@@ -1,5 +1,11 @@
 export interface IImage {
+  caption: string;
+  closeFriend: boolean;
+  commentsCount: number;
   id: string;
-  src: string;
-  userId: string;
+  photos: string[];
+  likesCount: number;
+  photosCount: number;
+  tags: string[];
+  createdAt: Date;
 }

@@ -9,7 +9,7 @@ export default function MyCollegeGram() {
 
   return (
     <div className="flex mt-32">
-      {(user?.postsCount as number) === 0 ? <EmptyMyCollage /> : <ImageList />}
+      {(user?.postsCount as number) === 1? <EmptyMyCollage /> : <ImageList />}
       <SideBar />
     </div>
   );
