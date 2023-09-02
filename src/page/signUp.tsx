@@ -2,7 +2,10 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
-import * as Yup from "yup";
+// import * as Yup from "yup";
+// import { getCurrentUser, registerThunk } from "../features/userSlice";
+// import { useFormik } from "formik";
+// import { error } from "console";
 
 import Button from "../component/button";
 import Input from "../component/input";
@@ -10,9 +13,9 @@ import Input from "../component/input";
 import gmail from "../assets/icons/gmail1.svg";
 import key from "../assets/icons/key1.svg";
 import person from "../assets/icons/person.svg";
-import { getCurrentUser, registerThunk } from "../features/userSlice";
-import { useFormik } from "formik";
+
 import { useAppDispatch } from "../store";
+import React from "react";
 
 // const schema = Yup.object().shape({
 //   email: Yup.string()
@@ -31,8 +34,8 @@ import { useAppDispatch } from "../store";
 // });
 
 const Register = () => {
-  const navigate = useNavigate();
-  const dispatch = useAppDispatch();
+  // const navigate = useNavigate();
+  // const dispatch = useAppDispatch();
 
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -45,6 +48,13 @@ const Register = () => {
     setEmail("");
     setPassword("");
   };
+  const messages: any = {
+    error1: "فیلدها را کامل کنید",
+    error2: "نام کابری اشتباه است",
+    error3: "لطفا ایمیل معتبری وارد کنید",
+    error4: "رمز عبور شما مناسب نیست",
+    error5: "تکرار رمز عبور صحیح نمیباشد",
+  };
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
@@ -55,26 +65,26 @@ const Register = () => {
       password === "" ||
       repeatPassword === ""
     ) {
-      setIsError({ error: true, message: "erroe 1" });
+      setIsError({ error: true, message: messages.error1 });
+    } else if (
+      username.length <= 4 &&
+      username.length >= 64 &&
+      username.startsWith("_")
+    ) {
+      setIsError({ error: true, message: messages.error2 });
     } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
-      setIsError({ error: true, message: "erroe 2" });
-    } else if (password.length < 6) {
-      setIsError({ error: true, message: "erroe 3" });
-    } else if (!/^[a-z]+/.test(password) && !/^[A-Z]+/.test(password)) {
-      setIsError({ error: true, message: "erroe 4" });
+      setIsError({ error: true, message: messages.error3 });
+    } else if (password.length <= 8 && password.length >= 32) {
+      setIsError({ error: true, message: messages.error4 });
+    } else if (!/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/.test(password)) {
+      setIsError({ error: true, message: messages.error4 });
     } else if (password !== repeatPassword) {
-      setIsError({ error: true, message: "erroe 5" });
+      setIsError({ error: true, message: messages.error5 });
     } else {
-      const user = {
-        username: username,
-        email: email,
-        password: password,
-      };
-
       axios({
         method: "post",
         url: "https://murphyteam.ir/user/signup",
-        data: { user },
+        data: { email: email, password: password, username: username },
       })
         .then(({ data, status }) => {
           if (status === 201) {
@@ -158,6 +168,7 @@ const Register = () => {
             value={username}
             onChange={(e: any) => setUsername(e.target.value)}
           />
+          {/* <span className="text-[#]">{username && messages.error2}</span> */}
         </div>
         <div className="mt-[32px]">
           <Input
@@ -167,6 +178,11 @@ const Register = () => {
             value={email}
             onChange={(e: any) => setEmail(e.target.value)}
           />
+          <span>
+            {email && isError.message
+              ? messages.error3
+              : (isError.message = "")}
+          </span>
         </div>
         <div className="mt-[32px]">
           <Input
@@ -175,7 +191,9 @@ const Register = () => {
             imageAlt="key"
             value={password}
             onChange={(e: any) => setPassword(e.target.value)}
+            type="password"
           />
+          <span>{password && messages.error4}</span>
         </div>
         <div className="mt-[32px]">
           <Input
@@ -184,12 +202,14 @@ const Register = () => {
             imageAlt="repeat key"
             value={repeatPassword}
             onChange={(e: any) => setRepeatPassword(e.target.value)}
+            type="password"
           />
+          <span>{repeatPassword && messages.error5}</span>
         </div>
         <div className="flex justify-end my-10">
           <Button title={"ثبت نام"} width="100px" type="submit" />
         </div>
-        <span>{isError.error && isError.message}</span>
+        <span>{messages.error1}</span>
       </form>
     </div>
   );
