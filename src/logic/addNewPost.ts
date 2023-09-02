@@ -7,8 +7,6 @@ export const AddNewPost = () => {
     { setSubmitting }: any
   ) => {
     try {
-      console.log("12")
-      setSubmitting(true);
       await createPost({
         description: data.description,
         tag: data.tag.split(" "),
@@ -20,8 +18,6 @@ export const AddNewPost = () => {
       console.log(error);
       toast.error("مشکلی پیش آمده");
       // onClose();
-    } finally {
-      setSubmitting(false);
     }
   };
 

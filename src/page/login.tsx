@@ -18,8 +18,6 @@ export default function LoginPage() {
     initialValues: {
       usernameOrEmail: "",
       password: "",
-      // file: ,
-      arrey: [{ id: 1 }],
     },
     enableReinitialize: true,
     validationSchema: loginValidation,

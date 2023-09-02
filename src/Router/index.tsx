@@ -27,9 +27,9 @@ export default function Router() {
     dispatch(getCurrentUser());
   }, [dispatch]);
 
-  if (status === "loading" || status === "idle") {
-    return <LoadingPage />;
-  }
+  // if (status === "loading" || status === "idle") {
+  //   return <LoadingPage />;
+  // }
 
   if (status === "unauthorized") {
     return (
@@ -40,7 +40,7 @@ export default function Router() {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/recoveryPassword" element={<RecoveryPassword />} />
-            <Route path="/setPassword" element={<SetPassword />} />
+            <Route path="/reset-password" element={<SetPassword />} />
             <Route path="/*" element={<LoginPage />} />
           </Route>
         </Routes>

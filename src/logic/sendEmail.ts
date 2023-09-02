@@ -14,7 +14,7 @@ export default function SendEmail() {
       setSubmitting(true);
 
       await recoveryPassword({ usernameOrEmail: data?.usernameOrEmail });
-      toast.success("با موفقیت وارد شدید");
+      toast.success("ایمیل با موفقیت ارسال شد.");
       navigate("/setPassword");
     } catch (error) {
       console.log(error);

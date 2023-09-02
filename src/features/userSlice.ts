@@ -12,8 +12,6 @@ export const loginThunk = createAsyncThunk(
     }: {
       usernameOrEmail: string;
       password: string;
-      // file: File;
-      arrey: [{ id: 1 }];
     },
     { rejectWithValue }
   ) => {
@@ -84,7 +82,7 @@ const userSlice = createSlice({
       })
       .addCase(loginThunk.fulfilled, (state, action) => {
         console.log(action.payload.accessToken);
-        
+
         if (action.payload.accessToken) {
           state.status = "authorized";
           setToken(action.payload.accessToken);
@@ -101,7 +99,10 @@ const userSlice = createSlice({
       .addCase(registerThunk.fulfilled, (state, action) => {
         if (action.payload) {
           state.status = "authorized";
-          setToken(action.payload.accessToken);
+          setToken(
+            action.payload.accessToken ||
+              (action.payload.refreshToken as string)
+          );
           state.user = action.payload.user;
           state.token = action.payload.accessToken;
         } else {

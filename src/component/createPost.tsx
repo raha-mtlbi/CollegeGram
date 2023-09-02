@@ -70,7 +70,7 @@ const CreatePostModal = ({
                 <button className="mx-6" onClick={onClose}>
                   پشیمون شدم
                 </button>
-                <Button title={"ثبت تغییرات"} width={"110px"} type="submit" onClick={()=>console.log("12")} />
+                <Button title={"ثبت تغییرات"} width={"110px"} type="submit" />
               </div>
             </Dialog.Panel>
           </div>

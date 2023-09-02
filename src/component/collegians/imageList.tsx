@@ -22,7 +22,7 @@ export default function ImageList() {
             className=" max-w-full "
             src={photo?.src}
             alt=""
-            onClick={() => navigate(`/myCollegeGram/${photo?.id}`)}
+            onClick={() => navigate(`/myCollegeGram/${photo?.userId}`)}
           />
         </div>
       ))}
