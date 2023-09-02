@@ -4,6 +4,8 @@ export const tokenKey = "token";
 
 export function getToken() {
   const token = Cookies.get(tokenKey);
+  console.log(token);
+  
   return token;
 }
 

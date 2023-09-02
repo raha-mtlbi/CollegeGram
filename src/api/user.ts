@@ -2,7 +2,7 @@ import { get, post } from ".";
 import { IUser } from "./type/user";
 
 export const login = (usernameOrEmail: string, password: string) => {
-  return post<{ token: string; user: IUser }>("/user/login", {
+  return post<{ accessToken: string; user: IUser }>("/user/login", {
     usernameOrEmail,
     password,
   });
@@ -14,7 +14,7 @@ export const register = (
   password: string,
   token?: string
 ) => {
-  return post<{ token: string; user: IUser }>("/user/signup", {
+  return post<{ accessToken: string; user: IUser }>("/user/signup", {
     username,
     email,
     password,

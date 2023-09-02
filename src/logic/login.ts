@@ -10,12 +10,16 @@ export default function Login() {
   const handleSubmit = async (data: {
     usernameOrEmail: string;
     password: string;
+    // file: File;
+    arrey: [{ id: 1 }];
   }) => {
     try {
       await dispatch(
         loginThunk({
           password: data.password,
           usernameOrEmail: data.usernameOrEmail,
+          // file: data.file,
+          arrey: [{ id: 1 }],
         })
       ).unwrap();
 

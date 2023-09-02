@@ -9,7 +9,12 @@ export const loginThunk = createAsyncThunk(
     {
       usernameOrEmail,
       password,
-    }: { usernameOrEmail: string; password: string },
+    }: {
+      usernameOrEmail: string;
+      password: string;
+      // file: File;
+      arrey: [{ id: 1 }];
+    },
     { rejectWithValue }
   ) => {
     try {
@@ -78,9 +83,11 @@ const userSlice = createSlice({
         state.status = "loading";
       })
       .addCase(loginThunk.fulfilled, (state, action) => {
-        if (action.payload.token) {
+        console.log(action.payload.accessToken);
+        
+        if (action.payload.accessToken) {
           state.status = "authorized";
-          setToken(action.payload.token);
+          setToken(action.payload.accessToken);
           state.user = action.payload.user;
         }
       })
@@ -94,9 +101,9 @@ const userSlice = createSlice({
       .addCase(registerThunk.fulfilled, (state, action) => {
         if (action.payload) {
           state.status = "authorized";
-          setToken(action.payload.token);
+          setToken(action.payload.accessToken);
           state.user = action.payload.user;
-          state.token = action.payload.token;
+          state.token = action.payload.accessToken;
         } else {
           state.status = "unauthorized";
         }
