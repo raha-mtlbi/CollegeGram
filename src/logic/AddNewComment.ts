@@ -2,7 +2,7 @@ import { toast } from "react-toastify";
 import { AddComment } from "../api/comment";
 
 export const AddNewComment = () => {
-  const handleSubmit = async (data: { content: ""; postId: "" }) => {
+  const handleSubmit = async (data: { content: ""; postId: number }) => {
     try {
       await AddComment({
         content: data.content,

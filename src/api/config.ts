@@ -2,6 +2,7 @@ import Axios from "axios";
 import { getToken, removeToken } from "./token";
 
 export const BaseUrl = "https://murphyteam.ir/api/";
+export const imageUrl = "https://murphyteam.ir";
 export const apiAgent = Axios.create({ baseURL: BaseUrl });
 
 apiAgent.interceptors.request.use(
