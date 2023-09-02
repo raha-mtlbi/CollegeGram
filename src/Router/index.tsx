@@ -10,7 +10,7 @@ import LoadingPage from "../page/loading";
 import LoginPage from "../page/login";
 import ErrorPage from "../page/errorPage";
 import RecoveryPassword from "../page/recoveryPassword";
-import SetPassword from "../page/setPassword";
+import SetPassword from "../page/reset-password";
 import SignUp from "../page/signUp";
 import MyCollegeGram from "../page/myCollegeGram";
 import Collegians from "../page/collegians";

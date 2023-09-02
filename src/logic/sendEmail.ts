@@ -15,7 +15,7 @@ export default function SendEmail() {
 
       await recoveryPassword({ usernameOrEmail: data?.usernameOrEmail });
       toast.success("ایمیل با موفقیت ارسال شد.");
-      navigate("/setPassword");
+      navigate(`/reset-password`);
     } catch (error) {
       console.log(error);
       toast.error("مشکلی پیش آمده");

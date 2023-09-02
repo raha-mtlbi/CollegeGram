@@ -16,10 +16,10 @@ export const AddPostValidation = Yup.object().shape({
 });
 
 export const sendEmailValidation = Yup.object().shape({
-  usernameOrEmail: Yup.string()
-    .required("لطفا ایمیل خود را وارد کنید.")
-    // .trim()
-    // .matches(usernameOremailRegEx, ""),
+  usernameOrEmail:
+    Yup.string().required("لطفا ایمیل خود را وارد کنید.").trim() ||
+    // .matches(usernameOremailRegEx, "")
+    Yup.string().required("لطفا ایمیل خود را وارد کنید.").email(),
 });
 
 export const setPasswordValidation = Yup.object().shape({

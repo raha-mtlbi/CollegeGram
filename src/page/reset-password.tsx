@@ -1,18 +1,22 @@
-import Button from "../component/button";
-import Input from "../component/input";
-
-import key from "../assets/icons/key1.svg";
 import { useFormik } from "formik";
 import SetPassword from "../logic/setPassword";
 import { setPasswordValidation } from "../utils/validations";
 
+import Button from "../component/button";
+import Input from "../component/input";
+
+import key from "../assets/icons/key1.svg";
+import { useParams } from "react-router-dom";
+
 const ForgetPassword = () => {
+  const { token } = useParams();
+  console.log(token)
 
   const formik = useFormik({
     initialValues: { newPassword: "", token: "" },
     enableReinitialize: true,
     validationSchema: setPasswordValidation,
-    onSubmit: SetPassword(),
+    onSubmit: SetPassword({ token: token as string }),
   });
 
   return (
