@@ -5,9 +5,9 @@ import { AddNewComment } from "../../logic/AddNewComment";
 import send from "../../assets/icons/send.svg";
 import profile from "../../assets/images/picture frame.svg";
 
-export default function AddComment({ postId }: { postId: number }) {
+export default function AddComment({ postId }: { postId: string }) {
   const formik = useFormik({
-    initialValues: { content: "", postId: postId as number },
+    initialValues: { content: "", postId: "" },
     enableReinitialize: true,
     onSubmit: AddNewComment(),
   });

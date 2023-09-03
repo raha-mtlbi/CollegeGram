@@ -8,7 +8,7 @@ import disLike from "../assets/icons/heart-outline.svg";
 import arrow from "../assets/icons/arrow-left-curved.svg";
 import AddComment from "./comment/addComment";
 
-const Comment = ({ postId }: { postId: number }) => {
+const Comment = ({ postId }: { postId: string }) => {
   const [isLike, setIsLike] = useState<boolean>(false);
   const [comment, setComment] = useState<{ result: IComment[] }>();
   const user = useUser();
