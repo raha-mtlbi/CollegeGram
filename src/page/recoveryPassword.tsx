@@ -20,7 +20,7 @@ export default function RecoveryPassword() {
   });
 
   return (
-    <div className="flex column mt-6 justify-center text-center">
+    <div className="flex min-h-[330px] column mt-6 justify-center text-center">
       <form onSubmit={formik.handleSubmit}>
         <p className={"mx-2 text-gray-700"}>بازیابی رمز عبور </p>
 

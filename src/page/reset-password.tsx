@@ -20,7 +20,7 @@ const ForgetPassword = () => {
   });
 
   return (
-    <div>
+    <div className="min-h-[350px]">
       <p className="text-[2B2B2B] text-[16px] not-italic font-normal text-center justify-center">
         تنظیم رمز عبور جدید
       </p>
