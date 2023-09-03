@@ -16,7 +16,10 @@ export default function LoginPage() {
   const navigate = useNavigate();
 
   const formik = useFormik({
-    initialValues: { usernameOrEmail: "", password: "" },
+    initialValues: {
+      usernameOrEmail: "",
+      password: "",
+    },
     enableReinitialize: true,
     validationSchema: loginValidation,
     onSubmit: login(),

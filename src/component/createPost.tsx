@@ -5,6 +5,7 @@ import { useFormik } from "formik";
 import UploadButton from "./uploadButton";
 import { AddPostValidation } from "../utils/validations";
 import { AddNewPost } from "../logic/addNewPost";
+import Input from "./input";
 
 const CreatePostModal = ({
   open,
@@ -13,12 +14,11 @@ const CreatePostModal = ({
   open: boolean;
   onClose: any;
 }) => {
-  
   const formik = useFormik({
-    initialValues: { description: "", tag: "" },
+    initialValues: { description: "", tag: "", photo: undefined },
     enableReinitialize: true,
     validationSchema: AddPostValidation,
-    onSubmit: AddNewPost(onClose),
+    onSubmit: AddNewPost(),
   });
 
   return (
@@ -36,13 +36,13 @@ const CreatePostModal = ({
               <p className="text-center text-[20px] font-bold not-italic leading-normal my-2 ">
                 افزودن پست
               </p>
-              <UploadButton values={formik.values} />
+              {/* <UploadButton values={formik.values} /> */}
               <div className="mb-5">
                 <p className="my-2 text-[#17494D] text-start">توضیحات</p>
                 <textarea
                   value={formik.values?.description}
                   onChange={(e: any) =>
-                    formik.setFieldValue("description", e?.target?.value)
+                    formik.setFieldValue("description", e.target.values)
                   }
                   className=" w-full p-2 h-[164px] rounded-[10px] bg-[#F3F0EE]	border border-[#17494d80] resize-none"
                 />
@@ -53,7 +53,7 @@ const CreatePostModal = ({
                   className="w-full px-2 h-[40px] rounded-[10px] bg-[#F3F0EE]	border border-[#17494d80] resize-none"
                   value={formik.values?.tag}
                   onChange={(e: any) =>
-                    formik.setFieldValue("tag", e.targt.value)
+                    formik.setFieldValue("tag", e.target.values)
                   }
                 />
               </div>

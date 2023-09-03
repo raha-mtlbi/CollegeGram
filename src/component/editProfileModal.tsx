@@ -76,10 +76,13 @@ const EditProfile = ({
                   className="hidden"
                   onChange={(e: any) => setProfile(e.target.files[0])}
                 />
-                <div className="w-[90px] h-[90px] rounded-[50%] border-2 border-[#C19008] flex justify-center items-center ">
+                <div
+                  className="w-[90px] h-[90px] rounded-[50%] border-2 border-[#C19008] flex justify-center items-center "
+                  style={{ backgroundImage: profile && profile }}
+                >
                   <img
                     alt="camera"
-                    src={camera}
+                    src={profile ? "" : camera}
                     className="w-[36px] h-[36px] cursor-pointer"
                   />
                 </div>
