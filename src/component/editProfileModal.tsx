@@ -49,6 +49,7 @@ const EditProfile = ({
     })
     .catch((ex) => {
       toast.error("مشکلی پیش آمده");
+
       console.log("user2", ex);
     });
 

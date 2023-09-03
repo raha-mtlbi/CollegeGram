@@ -6,6 +6,7 @@ import store from "../src/store";
 
 import Router from "./Router";
 import "./App.css";
+import React from "react";
 
 function App() {
   return (

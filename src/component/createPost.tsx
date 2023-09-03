@@ -6,6 +6,7 @@ import UploadButton from "./uploadButton";
 import { AddPostValidation } from "../utils/validations";
 import { AddNewPost } from "../logic/addNewPost";
 import Input from "./input";
+import React from "react";
 
 const CreatePostModal = ({
   open,
