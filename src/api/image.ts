@@ -1,9 +1,9 @@
-import { post } from ".";
+import { post } from "."
 
 export const createPost = (data: {
-  description: string;
-  tag: string[];
-  photo?: File;
+  caption: string
+  tags: string[]
+  photos?: File
 }) => {
-  return post("/createPost", data);
-};
+  return post("/createPost", data)
+}
