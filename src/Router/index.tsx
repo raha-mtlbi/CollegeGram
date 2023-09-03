@@ -10,7 +10,7 @@ import LoadingPage from "../page/loading";
 import LoginPage from "../page/login";
 import ErrorPage from "../page/errorPage";
 import RecoveryPassword from "../page/recoveryPassword";
-import SetPassword from "../page/setPassword";
+import SetPassword from "../page/reset-password";
 import SignUp from "../page/signUp";
 import MyCollegeGram from "../page/myCollegeGram";
 import Collegians from "../page/collegians";
@@ -27,9 +27,9 @@ export default function Router() {
     dispatch(getCurrentUser());
   }, [dispatch]);
 
-  if (status === "loading" || status === "idle") {
-    return <LoadingPage />;
-  }
+  // if (status === "loading" || status === "idle") {
+  //   return <LoadingPage />;
+  // }
 
   if (status === "unauthorized") {
     return (
@@ -40,7 +40,7 @@ export default function Router() {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/recoveryPassword" element={<RecoveryPassword />} />
-            <Route path="/setPassword" element={<SetPassword />} />
+            <Route path="/reset-password" element={<SetPassword />} />
             <Route path="/*" element={<LoginPage />} />
           </Route>
         </Routes>

@@ -1,8 +1,10 @@
 import { useState } from "react";
-import arrow from "../../assets/icons/arrow-down.svg";
-import pen from "../../assets/icons/edit.svg";
 import EditProfile from "../../component/editProfileModal";
 import { useUser } from "../../features/hooks";
+import { imageUrl } from "../../api/config";
+
+import arrow from "../../assets/icons/arrow-down.svg";
+import pen from "../../assets/icons/edit.svg";
 
 const ProfileSummery = () => {
   const [open, setOpen] = useState<boolean>(false);
@@ -15,7 +17,7 @@ const ProfileSummery = () => {
       <div className="w-[253px] h-[403px] bg-[#F1EBE3] border-[#CDCDCD] border flex flex-col justify-center items-center text-center">
         <div className="relative w-[120px] h-[120px] overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
           {user?.photo ? (
-            <img alt="profile" src={user?.photo} />
+            <img alt="profile" src={imageUrl + user?.photo} />
           ) : (
             <svg
               className="absolute w-[110px] h-[100px] text-center text-gray-400 -left-[-5px]"

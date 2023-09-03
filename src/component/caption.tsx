@@ -1,26 +1,25 @@
 import { useState } from "react";
 
-import { formatDateToDay } from "../utils/date";
-import { ITag } from "../api/type/tag";
-
 import Like from "../assets/icons/heart.svg";
 import disLike from "../assets/icons/heart-outline.svg";
 import Save from "../assets/icons/saved.svg";
 import disSave from "../assets/icons/save-outline.svg";
 
 interface ICaption {
+  commentsCount: number;
   likeCount: number;
   bookmarkCount: number;
-  date: number;
-  captionText: string;
-  tag: ITag[];
+  date: any;
+  caption: string;
+  tag: string[];
 }
 
 const Caption = ({
+  commentsCount,
   likeCount,
   bookmarkCount,
   date,
-  captionText,
+  caption,
   tag,
 }: ICaption) => {
   const [isLike, setIsLike] = useState<boolean>(false);
@@ -53,18 +52,16 @@ const Caption = ({
           {bookmarkCount}
         </p>
       </div>
-      <p className="mt-[25px] text-[#17494D] font-normal text-[11px]">
-        {formatDateToDay(date)}
-      </p>
+      <p className="mt-[25px] text-[#17494D] font-normal text-[11px]">{date}</p>
       <p className="w-[450px] h-[135px] text-[14px] text-[#17494D] font-normal mt-[8px]">
-        {captionText}
+        {caption}
       </p>
       <div className=" flex text-center items-center">
-        {tag?.map((i: any, idx) => (
+        {tag?.map((tag) => (
           <div
-            className={"p-2 bg-[#0074E8] rounded-[4px] text-[#FFF] text-[14px]"}
+            className={"p-2 bg-[#0074E8] rounded-[4px] text-[#FFF] text-[14px] m-2"}
           >
-            {i?.text}
+            {tag}
           </div>
         ))}
         {/* <div className="p-2 bg-[#767676] rounded-[4px] text-[#FFF] text-[14px] mr-[8px]">

@@ -1,22 +1,23 @@
 import { toast } from "react-toastify";
 import { createPost } from "../api/image";
 
-export const AddNewPost = ({ onClose }: { onClose: any }) => {
+export const AddNewPost = () => {
   const handleSubmit = async (
-    data: { description: string; tag: string },
+    data: { description: string; tag: string; photo?: File },
     { setSubmitting }: any
   ) => {
     try {
-      setSubmitting(true);
-      await createPost(data);
+      await createPost({
+        description: data.description,
+        tag: data.tag.split(" "),
+        photo: data.photo,
+      });
       toast.success("با موفقیت وارد شدید");
-      onClose();
+      // onClose();
     } catch (error) {
       console.log(error);
       toast.error("مشکلی پیش آمده");
-      onClose();
-    } finally {
-      setSubmitting(false);
+      // onClose();
     }
   };
 
