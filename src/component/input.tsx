@@ -25,7 +25,7 @@ export default function Input({
   return (
     <div>
       <div className={"flex "}>
-        <img src={imageSrc} alt={imageAlt} className="absolute mt-3 mr-2 " />
+        <img src={imageSrc} alt={imageAlt} className="absolute mt-3 px-2" />
 
         <input
           className={

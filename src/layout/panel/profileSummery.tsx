@@ -17,7 +17,11 @@ const ProfileSummery = () => {
       <div className="w-[253px] h-[403px] bg-[#F1EBE3] border-[#CDCDCD] border flex flex-col justify-center items-center text-center">
         <div className="relative w-[120px] h-[120px] overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
           {user?.photo ? (
-            <img alt="profile" src={imageUrl + user?.photo} />
+            <img
+              alt="profile"
+              src={imageUrl + user?.photo}
+              className=" w-full h-[85%]"
+            />
           ) : (
             <svg
               className="absolute w-[110px] h-[100px] text-center text-gray-400 -left-[-5px]"
