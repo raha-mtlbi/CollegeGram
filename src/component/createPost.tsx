@@ -1,33 +1,41 @@
-import { Dialog } from "@headlessui/react";
-import Button from "./button";
-import { useFormik } from "formik";
+import { Dialog } from "@headlessui/react"
+import Button from "./button"
+import { useFormik } from "formik"
 
-import UploadButton from "./uploadButton";
-import { AddPostValidation } from "../utils/validations";
-import { AddNewPost } from "../logic/addNewPost";
-import Input from "./input";
+import UploadButton from "./uploadButton"
+import { AddPostValidation } from "../utils/validations"
+import { AddNewPost } from "../logic/addNewPost"
+import Input from "./input"
+import { useState } from "react"
+import axios from "axios"
+import { BaseUrl } from "../api/config"
 
 const CreatePostModal = ({
   open,
   onClose,
 }: {
-  open: boolean;
-  onClose: any;
+  open: boolean
+  onClose: any
 }) => {
+  const [uploadedImages, setUploadedImages] = useState<File[]>([])
+
+  const handleImagesUpload = (images: File[]) => {
+    setUploadedImages(images)
+  }
+
   const formik = useFormik({
-    initialValues: { description: "", tag: "", photo: undefined },
+    initialValues: { caption: "", tags: "", photos: undefined },
     enableReinitialize: true,
     validationSchema: AddPostValidation,
     onSubmit: AddNewPost(),
-  });
+  })
 
   return (
     <Dialog
       open={open}
       onClose={onClose}
       className="flex justify-center items-center "
-      style={{ direction: "rtl" }}
-    >
+      style={{ direction: "rtl" }}>
       <div className="fixed inset-0 bg-black/30" aria-hidden="true" />
       <form onSubmit={formik.handleSubmit}>
         <div className="fixed inset-0 overflow-y-auto">
@@ -36,11 +44,11 @@ const CreatePostModal = ({
               <p className="text-center text-[20px] font-bold not-italic leading-normal my-2 ">
                 افزودن پست
               </p>
-              {/* <UploadButton values={formik.values} /> */}
+              <UploadButton imagesUpload={handleImagesUpload} />
               <div className="mb-5">
                 <p className="my-2 text-[#17494D] text-start">توضیحات</p>
                 <textarea
-                  value={formik.values?.description}
+                  value={formik.values?.caption}
                   onChange={(e: any) =>
                     formik.setFieldValue("description", e.target.values)
                   }
@@ -51,7 +59,7 @@ const CreatePostModal = ({
                 <p className="mb-2 text-[#17494D] text-start">تگ‌ها</p>
                 <input
                   className="w-full px-2 h-[40px] rounded-[10px] bg-[#F3F0EE]	border border-[#17494d80] resize-none"
-                  value={formik.values?.tag}
+                  value={formik.values?.tags}
                   onChange={(e: any) =>
                     formik.setFieldValue("tag", e.target.values)
                   }
@@ -77,7 +85,7 @@ const CreatePostModal = ({
         </div>
       </form>
     </Dialog>
-  );
-};
+  )
+}
 
-export default CreatePostModal;
+export default CreatePostModal
