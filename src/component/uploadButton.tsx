@@ -1,5 +1,4 @@
-import { useRef, useState } from "react"
-import { FieldArray } from "formik"
+import { useState } from "react"
 
 import plus from "../assets/icons/plus.svg"
 import close from "../assets/icons/close.svg"
@@ -7,19 +6,23 @@ import close from "../assets/icons/close.svg"
 export default function UploadButton({
   imagesUpload,
 }: {
-  imagesUpload: (images: File[]) => void
+  imagesUpload: (images: any) => void
 }) {
-  // const fileUploader = useRef<HTMLInputElement | null>(null)
-
   const [images, setImages] = useState<File[]>([])
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedImages = e.target.files
+    const selectedImages: FileList | null = e.currentTarget.files
+    const arr = Array.from(selectedImages || [])
+
+    for (let i = 0; i < arr.length; i++) {
+      const blobImage = window.URL.createObjectURL(arr[i])
+      imagesUpload(blobImage)
+      console.log(blobImage)
+    }
 
     if (selectedImages && images.length < 5) {
-      const newImages = Array.from(selectedImages)
+      const newImages: File[] = Array.from(selectedImages || [])
       setImages((prevImage) => [...prevImage, ...newImages])
-      imagesUpload([...images, ...newImages])
     }
   }
 
@@ -63,56 +66,6 @@ export default function UploadButton({
           ))}
         </div>
       </div>
-      {/* <FieldArray
-        name="photos"
-        render={(arrayHelpers) => (
-          <div>
-            <input
-              type="file"
-              name="custom-file-input"
-              id="custom-file-input"
-              className="hidden"
-              ref={(e) => (fileUploader.current = e)}
-              onChange={(e) => {
-                if (e.target?.files?.[0]) {
-                  arrayHelpers.insert(values.photos?.length, e.target.files[0])
-                }
-              }}
-              accept="/image*"
-              multiple
-            />
-            <label htmlFor={"custom-file-input"} className=" p-2">
-              <button
-                className=" flex items-center cursor-pointer"
-                onClick={() => fileUploader.current?.click()}
-                type="button">
-                <img alt="camera" src={plus} className="w-[16px] h-[16px] " />
-                <p className="text-[#C19008] mr-3 font-bold">بارگذاری عکس‌ها</p>
-              </button>
-            </label>
-
-            <div className=" grid grid-cols-4 gap-4  ">
-              {values?.photos?.map((photo: any, index: any) => (
-                <div>
-                  <button className=" absolute">
-                    <img
-                      alt="close"
-                      src={close}
-                      className=" bg-white rounded-[50%] p-2"
-                      onClick={() => arrayHelpers.remove(index)}
-                    />
-                  </button>
-                  <img
-                    src={photo?.image}
-                    alt=""
-                    className="w-[110px] h-[110px] rounded-[24px]"
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-      /> */}
     </div>
   )
 }

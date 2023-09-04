@@ -5,10 +5,7 @@ import { useFormik } from "formik"
 import UploadButton from "./uploadButton"
 import { AddPostValidation } from "../utils/validations"
 import { AddNewPost } from "../logic/addNewPost"
-import Input from "./input"
 import { useState } from "react"
-import axios from "axios"
-import { BaseUrl } from "../api/config"
 
 const CreatePostModal = ({
   open,
@@ -17,17 +14,18 @@ const CreatePostModal = ({
   open: boolean
   onClose: any
 }) => {
-  const [uploadedImages, setUploadedImages] = useState<File[]>([])
+  const [closeFriend, setCLoseFriend] = useState<boolean>(false)
+  const [uploadedImages, setUploadedImages] = useState<FileList[]>([])
 
-  const handleImagesUpload = (images: File[]) => {
+  const handleImagesUpload = (images: FileList[]) => {
     setUploadedImages(images)
   }
 
   const formik = useFormik({
-    initialValues: { caption: "", tags: "", photos: undefined },
+    initialValues: { caption: "", closeFriend: false, tags: "", photos: [] },
     enableReinitialize: true,
     validationSchema: AddPostValidation,
-    onSubmit: AddNewPost(),
+    onSubmit: AddNewPost(uploadedImages),
   })
 
   return (
@@ -50,7 +48,7 @@ const CreatePostModal = ({
                 <textarea
                   value={formik.values?.caption}
                   onChange={(e: any) =>
-                    formik.setFieldValue("description", e.target.values)
+                    formik.setFieldValue("caption", e.target.value)
                   }
                   className=" w-full p-2 h-[164px] rounded-[10px] bg-[#F3F0EE]	border border-[#17494d80] resize-none"
                 />
@@ -60,17 +58,25 @@ const CreatePostModal = ({
                 <input
                   className="w-full px-2 h-[40px] rounded-[10px] bg-[#F3F0EE]	border border-[#17494d80] resize-none"
                   value={formik.values?.tags}
+                  type="text"
                   onChange={(e: any) =>
-                    formik.setFieldValue("tag", e.target.values)
+                    formik.setFieldValue("tags", e.target.value)
                   }
                 />
               </div>
-              <div className="flex justify-start">
+              <div className="flex justify-center">
                 <label className="relative inline-flex items-center cursor-pointer mb-6 mt-3">
-                  <span className="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">
+                  <span className="ml-3 text-sm font-medium text-[#17494D] ">
                     فقط نمایش به دوستان نزدیک
                   </span>
-                  <input type="checkbox" value="" className="sr-only peer" />
+                  <input
+                    type="checkbox"
+                    checked={closeFriend}
+                    onChange={() => {
+                      setCLoseFriend(!closeFriend)
+                    }}
+                    className="sr-only peer"
+                  />
                   <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none  dark:peer-focus: rounded-full peer  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white  after:rounded-full after:h-5 after:w-5 after:transition-all  peer-checked:bg-gray-800"></div>
                 </label>
               </div>

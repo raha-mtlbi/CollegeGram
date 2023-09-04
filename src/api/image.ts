@@ -2,8 +2,9 @@ import { post } from "."
 
 export const createPost = (data: {
   caption: string
+  closeFriend: boolean
   tags: string[]
-  photos?: File
+  photos: FileList[]
 }) => {
-  return post("/createPost", data)
+  return post("/post", data)
 }
