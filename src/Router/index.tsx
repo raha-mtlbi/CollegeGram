@@ -17,7 +17,7 @@ import Collegians from "../page/collegians"
 import PanelLayout from "../layout/panel"
 import InnerPost from "../page/myCollegeGram/[id]"
 import MySavePage from "../page/MySavePage"
-import NotificationPage from "../component/NotificationPage"
+import NotificationPage from "../page/NotificationPage"
 
 const Home = React.lazy(() => import("../page/Home"))
 
