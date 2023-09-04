@@ -1,23 +1,26 @@
 import { toast } from "react-toastify"
 import { createPost } from "../api/image"
 
-export const AddNewPost = () => {
+export const AddNewPost = (uploadedImages: FileList[]) => {
   const handleSubmit = async (
-    data: { caption: string; tags: string; photos?: File },
+    data: {
+      caption: string
+      closeFriend: boolean
+      tags: string
+      photos: FileList[]
+    },
     { setSubmitting }: any
   ) => {
     try {
       await createPost({
         caption: data.caption,
+        closeFriend: data.closeFriend,
         tags: data.tags.split(" "),
-        photos: data.photos,
+        photos: [...data.photos, ...uploadedImages],
       })
-      toast.success("با موفقیت وارد شدید")
-      // onClose();
+      toast.success("پست با موفقیت اضافه شد")
     } catch (error) {
-      console.log(error)
       toast.error("مشکلی پیش آمده")
-      // onClose();
     }
   }
 
