@@ -1,14 +1,15 @@
-import { Link } from "react-router-dom"
-import * as Yup from "yup"
+import { Link } from "react-router-dom";
+import * as Yup from "yup";
 
-import Button from "../component/button"
-import Input from "../component/input"
+import Button from "../component/button";
+import Input from "../component/input";
 
-import gmail from "../assets/icons/gmail1.svg"
-import key from "../assets/icons/key1.svg"
-import person from "../assets/icons/person.svg"
-import { useFormik } from "formik"
-import Signup from "../logic/signup"
+import gmail from "../assets/icons/gmail1.svg";
+import key from "../assets/icons/key1.svg";
+import person from "../assets/icons/person.svg";
+import { useFormik } from "formik";
+import Signup from "../logic/signup";
+import React from "react";
 
 const schema = Yup.object().shape({
   email: Yup.string()
@@ -24,7 +25,7 @@ const schema = Yup.object().shape({
   repassword: Yup.string()
     .oneOf([Yup.ref("password")], "رمز عبور شما منطبق نیست")
     .required("لطفا رمز عبور خود را تایید کنید"),
-})
+});
 
 const Register = () => {
   const formik = useFormik({
@@ -32,7 +33,7 @@ const Register = () => {
     enableReinitialize: true,
     validationSchema: schema,
     onSubmit: Signup(),
-  })
+  });
 
   return (
     <div>
@@ -60,6 +61,7 @@ const Register = () => {
             )}
             errorText="نام کاربری باید بیشتر از ۴ کارکتر باشد"
           />
+          {/* <span className="text-[#]">{username && messages.error2}</span> */}
         </div>
         <div className="mt-[32px]">
           <Input
@@ -71,6 +73,11 @@ const Register = () => {
             error={Boolean(formik.values.email && formik.errors?.email)}
             errorText="لطفا ایمیل را به صورت صحیح وارد کنید"
           />
+          <span>
+            {email && isError.message
+              ? messages.error3
+              : (isError.message = "")}
+          </span>
         </div>
         <div className="mt-[32px]">
           <Input
@@ -85,6 +92,7 @@ const Register = () => {
             error={Boolean(formik.values.password && formik.errors?.password)}
             errorText="رمز عبور اشتباه است."
           />
+          <span>{password && messages.error4}</span>
         </div>
         <div className="mt-[32px]">
           <Input
@@ -102,13 +110,14 @@ const Register = () => {
             )}
             errorText="رمز عبور یکسان نیست"
           />
+          <span>{repeatPassword && messages.error5}</span>
         </div>
         <div className="flex justify-end my-10">
           <Button title={"ثبت نام"} width="100px" type="submit" />
         </div>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default Register
+export default Register;
