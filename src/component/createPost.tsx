@@ -2,21 +2,10 @@ import { Dialog } from "@headlessui/react";
 import Button from "./button";
 import { useFormik } from "formik";
 
-<<<<<<< HEAD
 import UploadButton from "./uploadButton";
 import { AddPostValidation } from "../utils/validations";
 import { AddNewPost } from "../logic/addNewPost";
-import Input from "./input";
 import { useState } from "react";
-import axios from "axios";
-import { BaseUrl } from "../api/config";
-import React from "react";
-=======
-import UploadButton from "./uploadButton"
-import { AddPostValidation } from "../utils/validations"
-import { AddNewPost } from "../logic/addNewPost"
-import { useState } from "react"
->>>>>>> 758102528c043acd53389fe9d0dfbb36955557c7
 
 const CreatePostModal = ({
   open,
@@ -25,32 +14,19 @@ const CreatePostModal = ({
   open: boolean;
   onClose: any;
 }) => {
-<<<<<<< HEAD
-  const [uploadedImages, setUploadedImages] = useState<File[]>([]);
-
-  const handleImagesUpload = (images: File[]) => {
-    setUploadedImages(images);
-  };
-=======
-  const [closeFriend, setCLoseFriend] = useState<boolean>(false)
-  const [uploadedImages, setUploadedImages] = useState<FileList[]>([])
+  const [closeFriend, setCLoseFriend] = useState<boolean>(false);
+  const [uploadedImages, setUploadedImages] = useState<FileList[]>([]);
 
   const handleImagesUpload = (images: FileList[]) => {
-    setUploadedImages(images)
-  }
->>>>>>> 758102528c043acd53389fe9d0dfbb36955557c7
+    setUploadedImages(images);
+  };
 
   const formik = useFormik({
     initialValues: { caption: "", closeFriend: false, tags: "", photos: [] },
     enableReinitialize: true,
     validationSchema: AddPostValidation,
-<<<<<<< HEAD
-    onSubmit: AddNewPost(),
-  });
-=======
     onSubmit: AddNewPost(uploadedImages),
-  })
->>>>>>> 758102528c043acd53389fe9d0dfbb36955557c7
+  });
 
   return (
     <Dialog
@@ -98,7 +74,7 @@ const CreatePostModal = ({
                     type="checkbox"
                     checked={closeFriend}
                     onChange={() => {
-                      setCLoseFriend(!closeFriend)
+                      setCLoseFriend(!closeFriend);
                     }}
                     className="sr-only peer"
                   />
