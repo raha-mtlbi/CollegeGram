@@ -73,11 +73,11 @@ const Register = () => {
             error={Boolean(formik.values.email && formik.errors?.email)}
             errorText="لطفا ایمیل را به صورت صحیح وارد کنید"
           />
-          <span>
+          {/* <span>
             {email && isError.message
               ? messages.error3
               : (isError.message = "")}
-          </span>
+          </span> */}
         </div>
         <div className="mt-[32px]">
           <Input
@@ -92,7 +92,7 @@ const Register = () => {
             error={Boolean(formik.values.password && formik.errors?.password)}
             errorText="رمز عبور اشتباه است."
           />
-          <span>{password && messages.error4}</span>
+          {/* <span>{password && messages.error4}</span> */}
         </div>
         <div className="mt-[32px]">
           <Input
@@ -110,7 +110,7 @@ const Register = () => {
             )}
             errorText="رمز عبور یکسان نیست"
           />
-          <span>{repeatPassword && messages.error5}</span>
+          {/* <span>{repeatPassword && messages.error5}</span> */}
         </div>
         <div className="flex justify-end my-10">
           <Button title={"ثبت نام"} width="100px" type="submit" />

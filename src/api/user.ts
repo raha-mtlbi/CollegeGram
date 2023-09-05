@@ -1,4 +1,4 @@
-import { get, post } from ".";
+import { get, patch, post } from ".";
 import { IUser } from "./type/user";
 
 export const login = (usernameOrEmail: string, password: string) => {
@@ -36,4 +36,14 @@ export const changePassword = (data: {
   token: string;
 }) => {
   return post<{ newPassword: string }>("/user/setnewpassword", data);
+};
+
+export const EditProfile = (data: {
+  email: string;
+  name: string;
+  lastName: string;
+  password: string;
+  repeatPassword: string;
+}) => {
+  return patch("/user", data);
 };
