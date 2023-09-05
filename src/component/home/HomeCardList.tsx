@@ -1,10 +1,13 @@
 import React, { useState } from "react"
+
 import image from "../../assets/images/sampleHomeCard.svg"
 import likeicon from "../../assets/icons/heart.svg"
 import dislike from "../../assets/icons/heart-outline.svg"
 import saveIcon from "../../assets/icons/saved.svg"
 import unsaved from "../../assets/icons/save-outline.svg"
 import commnet from "../../assets/icons/commentIcon.svg"
+import multiImageIcon from "../../assets/icons/multyimages.svg"
+
 import Tag from "../Tag"
 
 const HomeCardList = () => {
@@ -49,6 +52,9 @@ const HomeCardList = () => {
               <img className="w-6" src={commnet} alt="comment" />
             </button>
             <div className="font-medium text-sm">۷۹</div>
+          </div>
+          <div className="w-[30%] flex flex-row-reverse">
+            <img src={multiImageIcon} alt="multiImages" />
           </div>
         </div>
         <div>ناصر حسین زاده</div>

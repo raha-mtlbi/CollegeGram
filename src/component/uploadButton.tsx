@@ -53,7 +53,7 @@ export default function UploadButton({
           {images.map((image, index) => (
             <div key={index} className="aspect-square object-cover w-full">
               <button
-                className="translate-y-2/3 bg-white rounded-full p-2"
+                className="translate-y-2/3 bg-white rounded-full p-2 bg-[#fff]"
                 onClick={() => handleImageDelete(index)}>
                 <img src={close} alt="Delete" />
               </button>
