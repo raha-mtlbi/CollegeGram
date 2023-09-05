@@ -12,12 +12,16 @@ export default function UploadButton({
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedImages: FileList | null = e.currentTarget.files
-    const arr = Array.from(selectedImages || [])
+    const formData = new FormData()
 
-    for (let i = 0; i < arr.length; i++) {
-      const blobImage = window.URL.createObjectURL(arr[i])
-      imagesUpload(blobImage)
-      console.log(blobImage)
+    if (selectedImages) {
+      for (let i = 0; i < selectedImages?.length; i++) {
+        const image = selectedImages[i]
+
+        formData.append("image", URL.createObjectURL(image))
+        console.log("iamfafsfajfnakj", URL.createObjectURL(image))
+      }
+      imagesUpload(formData)
     }
 
     if (selectedImages && images.length < 5) {
@@ -30,7 +34,6 @@ export default function UploadButton({
     const newImages = [...images]
     newImages.splice(index, 1)
     setImages(newImages)
-    imagesUpload(newImages)
   }
 
   return (
