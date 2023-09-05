@@ -1,31 +1,33 @@
-import React, { useEffect } from "react";
-import { Suspense } from "react";
-import { Navigate, Route, Routes } from "react-router-dom";
-import { useUserStatus } from "../features/hooks";
-import { getCurrentUser } from "../features/userSlice";
-import { useAppDispatch } from "../store";
+import React, { useEffect } from "react"
+import { Suspense } from "react"
+import { Navigate, Route, Routes } from "react-router-dom"
+import { useUserStatus } from "../features/hooks"
+import { getCurrentUser } from "../features/userSlice"
+import { useAppDispatch } from "../store"
 
-import AuthenticationLayout from "../layout/auth";
-import LoadingPage from "../page/loading";
-import LoginPage from "../page/login";
-import ErrorPage from "../page/errorPage";
-import RecoveryPassword from "../page/recoveryPassword";
-import SetPassword from "../page/reset-password";
-import SignUp from "../page/signUp";
-import MyCollegeGram from "../page/myCollegeGram";
-import Collegians from "../page/collegians";
-import PanelLayout from "../layout/panel";
-import InnerPost from "../page/myCollegeGram/[id]";
+import AuthenticationLayout from "../layout/auth"
+import LoadingPage from "../page/loading"
+import LoginPage from "../page/login"
+import ErrorPage from "../page/errorPage"
+import RecoveryPassword from "../page/recoveryPassword"
+import SetPassword from "../page/reset-password"
+import SignUp from "../page/signUp"
+import MyCollegeGram from "../page/myCollegeGram"
+import Collegians from "../page/collegians"
+import PanelLayout from "../layout/panel"
+import InnerPost from "../page/myCollegeGram/[id]"
+import MySavePage from "../page/MySavePage"
+import NotificationPage from "../page/NotificationPage"
 
-const Home = React.lazy(() => import("../page/Home"));
+const Home = React.lazy(() => import("../page/Home"))
 
 export default function Router() {
-  const dispatch = useAppDispatch();
-  const status = useUserStatus();
+  const dispatch = useAppDispatch()
+  const status = useUserStatus()
 
   useEffect(() => {
-    dispatch(getCurrentUser());
-  }, [dispatch]);
+    dispatch(getCurrentUser())
+  }, [dispatch])
 
   // if (status === "loading" || status === "idle") {
   //   return <LoadingPage />;
@@ -45,7 +47,7 @@ export default function Router() {
           </Route>
         </Routes>
       </Suspense>
-    );
+    )
   }
 
   return (
@@ -56,11 +58,13 @@ export default function Router() {
           <Route path="/myCollegeGram" element={<MyCollegeGram />} />
           <Route path="/collegians" element={<Collegians />} />
           <Route path="/myCollegeGram/:id" element={<InnerPost />} />
+          <Route path="/saves" element={<MySavePage />} />
+          <Route path="/notification" element={<NotificationPage />} />
         </Route>
 
         <Route path="404" element={<ErrorPage />} />
-        <Route path="*" element={<Navigate to="/404" />} />
+        <Route path="*" element={<Navigate to="/404" replace />} />
       </Routes>
     </Suspense>
-  );
+  )
 }
