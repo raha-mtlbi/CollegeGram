@@ -3,8 +3,7 @@ import Textarea from "@material-tailwind/react/components/Textarea";
 import { Dialog } from "@headlessui/react";
 import Input from "./input";
 import Button from "./button";
-import axios from "axios";
-import { toast } from "react-toastify";
+
 import { useFormik } from "formik";
 import { loginValidation } from "../utils/validations";
 import EditProfileSubmit from "../logic/editProfileSubmit";
@@ -189,7 +188,7 @@ const EditProfile = ({
                 <div className="my-5">
                   <Textarea
                     className="w-[311px] h-[88px] rounded-[10px] bg-[#F3F0EE] border border-[#17494d80] resize-none"
-                    onChange={(e: any) => setBio(e.target.value)}
+                    onChange={(e: any) => formik.setFieldValue("bio", e.target.value)}
                   />
                 </div>
               </div>
