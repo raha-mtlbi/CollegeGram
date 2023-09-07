@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Dialog } from "@headlessui/react";
 import Button from "./button";
 import { useFormik } from "formik";
@@ -5,7 +6,6 @@ import { useFormik } from "formik";
 import UploadButton from "./uploadButton";
 import { AddPostValidation } from "../utils/validations";
 import { AddNewPost } from "../logic/addNewPost";
-import { useState } from "react";
 
 const CreatePostModal = ({
   open,

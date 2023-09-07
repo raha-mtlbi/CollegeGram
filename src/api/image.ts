@@ -8,6 +8,6 @@ export const createPost = (data: {
 }) => {
   const formData = new FormData();
   data.photos && formData.append("photo", data.photos);
-  
+
   return post("/post", data);
 };

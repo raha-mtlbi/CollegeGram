@@ -5,6 +5,11 @@ import { imageUrl } from "../../api/config";
 
 import arrow from "../../assets/icons/arrow-down.svg";
 import pen from "../../assets/icons/edit.svg";
+<<<<<<< HEAD
+=======
+import EditProfile from "../../component/editProfileModal";
+import { useUser } from "../../features/hooks";
+>>>>>>> 1f4efaac0ea49b5605cd303b597285d80d62c146
 
 const ProfileSummery = () => {
   const [open, setOpen] = useState<boolean>(false);
@@ -17,11 +22,15 @@ const ProfileSummery = () => {
       <div className="w-[253px] h-[403px] bg-[#F1EBE3] border-[#CDCDCD] border flex flex-col justify-center items-center text-center">
         <div className="relative w-[120px] h-[120px] overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
           {user?.photo ? (
+<<<<<<< HEAD
             <img
               alt="profile"
               src={imageUrl + user?.photo}
               className=" w-full h-[85%]"
             />
+=======
+            <img alt="profile" src={user?.photo} />
+>>>>>>> 1f4efaac0ea49b5605cd303b597285d80d62c146
           ) : (
             <svg
               className="absolute w-[110px] h-[100px] text-center text-gray-400 -left-[-5px]"
@@ -44,7 +53,11 @@ const ProfileSummery = () => {
           {user?.username}
         </p>
         <p className="text-[#17494D] text-center text-[20px] font-bold  mt-1">
+<<<<<<< HEAD
           {user?.name + "" + user?.lastname}
+=======
+          {user?.name} {user?.lastname}
+>>>>>>> 1f4efaac0ea49b5605cd303b597285d80d62c146
         </p>
         <div className="flex justify-center mt-[16px] text-[14px]">
           <p className="ml-1">{user?.followers}</p>

@@ -1,18 +1,18 @@
-import { useState } from "react"
+import { useState } from "react";
 
-import Like from "../assets/icons/heart.svg"
-import disLike from "../assets/icons/heart-outline.svg"
-import Save from "../assets/icons/saved.svg"
-import disSave from "../assets/icons/save-outline.svg"
-import Tag from "./Tag"
+import Like from "../assets/icons/heart.svg";
+import disLike from "../assets/icons/heart-outline.svg";
+import Save from "../assets/icons/saved.svg";
+import disSave from "../assets/icons/save-outline.svg";
+import Tag from "./Tag";
 
 interface ICaption {
-  commentsCount: number
-  likeCount: number
-  bookmarkCount: number
-  date: any
-  caption: string
-  tag: string[]
+  commentsCount: number;
+  likeCount: number;
+  bookmarkCount: number;
+  date: any;
+  caption: string;
+  tag: string[];
 }
 
 const Caption = ({
@@ -23,8 +23,8 @@ const Caption = ({
   caption,
   tag,
 }: ICaption) => {
-  const [isLike, setIsLike] = useState<boolean>(false)
-  const [isSave, setIsSave] = useState<boolean>(false)
+  const [isLike, setIsLike] = useState<boolean>(false);
+  const [isSave, setIsSave] = useState<boolean>(false);
 
   return (
     <div className="mr-[20px] mb-6">
@@ -41,7 +41,8 @@ const Caption = ({
         </p>
         <button
           onClick={() => setIsSave((isSave) => !isSave)}
-          className="mr-[16px]">
+          className="mr-[16px]"
+        >
           <img
             src={isSave ? Save : disSave}
             className="w-[24px] h-[24px]"
@@ -71,7 +72,7 @@ const Caption = ({
         </div> */}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Caption
+export default Caption;
