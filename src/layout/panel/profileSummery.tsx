@@ -44,7 +44,7 @@ const ProfileSummery = () => {
           {user?.username}
         </p>
         <p className="text-[#17494D] text-center text-[20px] font-bold  mt-1">
-          {user?.name} {user?.lastname}
+          {user?.name + "" + user?.lastname}
         </p>
         <div className="flex justify-center mt-[16px] text-[14px]">
           <p className="ml-1">{user?.followers}</p>

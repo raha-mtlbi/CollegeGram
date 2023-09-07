@@ -1,48 +1,55 @@
-import { Dialog } from "@headlessui/react"
-import Button from "./button"
-import { useFormik } from "formik"
+import { Dialog } from "@headlessui/react";
+import Button from "./button";
+import { useFormik } from "formik";
 
-import UploadButton from "./uploadButton"
-import { AddPostValidation } from "../utils/validations"
-import { AddNewPost } from "../logic/addNewPost"
-import { useState } from "react"
+import UploadButton from "./uploadButton";
+import { AddPostValidation } from "../utils/validations";
+import { AddNewPost } from "../logic/addNewPost";
+import { useState } from "react";
 
 const CreatePostModal = ({
   open,
   onClose,
 }: {
-  open: boolean
-  onClose: any
+  open: boolean;
+  onClose: any;
 }) => {
-  const [closeFriend, setCLoseFriend] = useState<boolean>(false)
-  const [uploadedImages, setUploadedImages] = useState<FileList[]>([])
+  const [closeFriend, setCLoseFriend] = useState<boolean>(false);
+  const [uploadedImages, setUploadedImages] = useState<File>();
 
-  const handleImagesUpload = (images: FileList[]) => {
-    setUploadedImages(images)
-  }
+  const handleImagesUpload = (images: File) => {
+    setUploadedImages(images);
+  };
 
   const formik = useFormik({
-    initialValues: { caption: "", closeFriend: false, tags: "", photos: [] },
+    initialValues: {
+      caption: "",
+      closeFriend: false,
+      tags: "",
+      photos: undefined,
+    },
     enableReinitialize: true,
     validationSchema: AddPostValidation,
-    onSubmit: AddNewPost(uploadedImages),
-  })
+    onSubmit: AddNewPost(),
+  });
 
   return (
     <Dialog
       open={open}
       onClose={onClose}
       className="flex justify-center items-center "
-      style={{ direction: "rtl" }}>
-      <div className="fixed inset-0 bg-black/30" aria-hidden="true" />
+      style={{ direction: "rtl" }}
+    >
       <form onSubmit={formik.handleSubmit}>
+        <div className="fixed inset-0 bg-black/30" aria-hidden="true" />
+
         <div className="fixed inset-0 overflow-y-auto">
           <div className="flex min-h-full items-center justify-center p-4 text-center ">
             <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-[#F3F0EE] p-6 text-left align-middle shadow-xl transition-all">
               <p className="text-center text-[20px] font-bold not-italic leading-normal my-2 ">
                 افزودن پست
               </p>
-              <UploadButton imagesUpload={handleImagesUpload} />
+              <UploadButton values={formik.values} />
               <div className="mb-5">
                 <p className="my-2 text-[#17494D] text-start">توضیحات</p>
                 <textarea
@@ -73,7 +80,7 @@ const CreatePostModal = ({
                     type="checkbox"
                     checked={closeFriend}
                     onChange={() => {
-                      setCLoseFriend(!closeFriend)
+                      setCLoseFriend(!closeFriend);
                     }}
                     className="sr-only peer"
                   />
@@ -91,7 +98,7 @@ const CreatePostModal = ({
         </div>
       </form>
     </Dialog>
-  )
-}
+  );
+};
 
-export default CreatePostModal
+export default CreatePostModal;

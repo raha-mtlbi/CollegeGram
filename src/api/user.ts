@@ -41,9 +41,11 @@ export const changePassword = (data: {
 export const EditProfile = (data: {
   email: string;
   name: string;
-  lastName: string;
+  lastname: string;
   password: string;
   repeatPassword: string;
+  bio: string;
+  private: boolean;
 }) => {
-  return patch("/user", data);
+  return patch("/user/me", data);
 };

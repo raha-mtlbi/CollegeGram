@@ -8,4 +8,5 @@ export interface IImage {
   photosCount: number;
   tags: string[];
   createdAt: Date;
+  photo: File;
 }
