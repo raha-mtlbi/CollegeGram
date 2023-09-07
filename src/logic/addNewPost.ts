@@ -1,5 +1,5 @@
-import { toast } from "react-toastify";
-import { createPost } from "../api/image";
+import { toast } from "react-toastify"
+import { createPost } from "../api/image"
 
 export const AddNewPost = () => {
   const handleSubmit = async (data: {
@@ -19,7 +19,7 @@ export const AddNewPost = () => {
     } catch (error) {
       toast.error("مشکلی پیش آمده");
     }
-  };
+  }
 
-  return handleSubmit;
-};
+  return handleSubmit
+}

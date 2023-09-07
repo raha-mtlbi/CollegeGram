@@ -1,21 +1,13 @@
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../component/button";
 import Input from "../component/input";
 
 import key from "../assets/icons/key1.svg";
-import { useState } from "react";
-import React from "react";
 
 const ForgetPassword = () => {
   const navigate = useNavigate();
 
-  const [password, setPassword] = useState("");
-  const [repeatPassword, setRepeatPassword] = useState("");
-  const [isError, setIsError] = useState({ error: false, message: "" });
-
-  const reset = () => {
-    setPassword("");
-  };
   return (
     <div>
       <p className="text-[2B2B2B] text-[16px] not-italic font-normal text-center justify-center">

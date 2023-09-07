@@ -1,9 +1,9 @@
 import { useRef, useState } from "react";
 
-import plus from "../assets/icons/plus.svg";
-import close from "../assets/icons/close.svg";
 import { FieldArray } from "formik";
 import { imageUrl } from "../api/config";
+import plus from "../assets/icons/plus.svg";
+import close from "../assets/icons/close.svg";
 
 export default function UploadButton({
   values,
@@ -101,7 +101,10 @@ export default function UploadButton({
               ref={(e) => (fileUploader.current = e)}
               onChange={(e) => {
                 if (e.target?.files?.[0]) {
-                  arrayHelpers?.insert(values?.photos?.length, e.target.files[0]);
+                  arrayHelpers?.insert(
+                    values?.photos?.length,
+                    e.target.files[0]
+                  );
                 }
               }}
               multiple
