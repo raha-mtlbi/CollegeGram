@@ -11,9 +11,7 @@ import Button from "./button";
 import gmail from "../assets/icons/gmail1.svg";
 import key from "../assets/icons/key1.svg";
 import person from "../assets/icons/person.svg";
-import camera from "../assets/icons/camera.svg";
-import close from "../assets/icons/close.svg";
-import { imageUrl } from "../api/config";
+import Avatar from "./EditAvatar";
 
 const EditProfile = ({
   open,
@@ -39,10 +37,6 @@ const EditProfile = ({
     onSubmit: EditProfileSubmit({ onClose }),
   });
 
-  const handleDelete =async () => {
-    
-  }
-
   return (
     <Dialog
       as="div"
@@ -58,45 +52,10 @@ const EditProfile = ({
             <p className="text-center text-[20px] font-bold not-italic text-[#17494D] leading-normal my-2 ">
               ویرایش حساب
             </p>
+            <Avatar  />
+
             <form onSubmit={formik.handleSubmit}>
               <div className="mt-2">
-                <label htmlFor={"x"} className="flex justify-center p-2">
-                  <input
-                    type="file"
-                    id={"x"}
-                    className="hidden"
-                    // value={formik.values.photo}
-                    onChange={(e: any) =>
-                      formik.setFieldValue("photo", e.target.files[0])
-                    }
-                  />
-                  <div className="w-[90px] h-[90px] rounded-[50%] border-2 border-[#C19008] flex justify-center items-center ">
-                    <img
-                      alt="camera"
-                      src={user ? imageUrl + user?.photo : camera}
-                      className={
-                        user
-                          ? "w-[90px] h-[90px] rounded-[50%] object-fill"
-                          : "w-[36px] h-[36px] cursor-pointer"
-                      }
-                    />
-                  </div>
-                </label>
-                <p className="text-center">عکس پروفایل</p>
-                {user?.photo && (
-                  <button
-                    className="flex justify-center mx-auto mb-7 mt-2  items-center"
-                    onClick={() => handleDelete()}
-                  >
-                    <img
-                      alt="close"
-                      src={close}
-                      className="w-[12px] h-[12px] mt-1"
-                    />
-                    <p className="text-[#C19008] mr-2 font-bold">حذف تصویر</p>
-                  </button>
-                )}
-
                 <div className="my-4">
                   <Input
                     placeholder={user ? user?.email : "ایمیل"}
@@ -160,9 +119,13 @@ const EditProfile = ({
                       پیچ خصوصی باشد
                     </span>
                     <input
-                      // type="checkbox"
-                      // checked={user ? user?.private : (formik.values.private)}
-                      value={formik.values.private as unknown as string}
+                      type="checkbox"
+                      role="switch"
+                      defaultChecked={
+                        user
+                          ? user?.private
+                          : (formik.values.private as boolean)
+                      }
                       className="sr-only peer"
                       onChange={(e: any) =>
                         formik.setFieldValue("private", e.target.value)
@@ -171,10 +134,12 @@ const EditProfile = ({
                     <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4  dark:peer-focus: rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white  after:rounded-full after:h-5 after:w-5 after:transition-all  peer-checked:bg-gray-800"></div>
                   </label>
                 </div>
-                <div className="my-5">
+                <div className="my-4">
+                  <p className="mb-3 flex text-start">بایو</p>
                   <Textarea
+                    placeholder={user ? user?.bio : ""}
                     value={formik.values.bio}
-                    className="w-[311px] h-[88px] rounded-[10px] bg-[#F3F0EE] border border-[#17494d80] resize-none"
+                    className="w-[311px] h-[88px] p-2 rounded-[10px] bg-[#F3F0EE] border border-[#17494d80] resize-none"
                     onChange={(e: any) =>
                       formik.setFieldValue("bio", e.target.value)
                     }
