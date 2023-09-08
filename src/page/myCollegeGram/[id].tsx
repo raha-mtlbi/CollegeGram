@@ -13,7 +13,7 @@ export default function InnerPost() {
   const [photoDetail, setPhotoDetail] = useState<IImage>();
 
   useEffect(() => {
-    get(`//${id}`)
+    get(`/post/${id}`)
       .then((d: any) => setPhotoDetail(d))
       .catch((e) => console.log(e));
   }, [id]);
@@ -24,12 +24,19 @@ export default function InnerPost() {
         <div className="w-full grid grid-cols-2 gap-4 ">
           <img
             alt="postImage"
-            src={photoDetail?.src}
+            src={photoDetail?.photos.toLocaleString()}
             className="w-[488px] h-[488px]"
           />
           <div className="flex flex-col p-2 ">
-            <Caption likeCount={0} bookmarkCount={0} date={0} captionText={""} tag={[]} />
-            <Comment />
+            <Caption
+              likeCount={photoDetail?.likesCount as number}
+              bookmarkCount={0}
+              date={photoDetail?.createdAt}
+              caption={photoDetail?.caption as string}
+              tag={photoDetail?.tags as string[]}
+              commentsCount={photoDetail?.commentsCount as number}
+            />
+            <Comment postId={id as string} />
           </div>
         </div>
         <SideBar />

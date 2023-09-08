@@ -10,12 +10,14 @@ import LoadingPage from "../page/loading";
 import LoginPage from "../page/login";
 import ErrorPage from "../page/errorPage";
 import RecoveryPassword from "../page/recoveryPassword";
-import SetPassword from "../page/setPassword";
+import SetPassword from "../page/reset-password";
 import SignUp from "../page/signUp";
 import MyCollegeGram from "../page/myCollegeGram";
 import Collegians from "../page/collegians";
 import PanelLayout from "../layout/panel";
 import InnerPost from "../page/myCollegeGram/[id]";
+import MySavePage from "../page/MySavePage";
+import NotificationPage from "../page/NotificationPage";
 
 const Home = React.lazy(() => import("../page/Home"));
 
@@ -27,9 +29,9 @@ export default function Router() {
     dispatch(getCurrentUser());
   }, [dispatch]);
 
-  if (status === "loading" || status === "idle") {
-    return <LoadingPage />;
-  }
+  // if (status === "loading" || status === "idle") {
+  //   return <LoadingPage />;
+  // }
 
   if (status === "unauthorized") {
     return (
@@ -40,7 +42,7 @@ export default function Router() {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/recoveryPassword" element={<RecoveryPassword />} />
-            <Route path="/setPassword" element={<SetPassword />} />
+            <Route path="/reset-password" element={<SetPassword />} />
             <Route path="/*" element={<LoginPage />} />
           </Route>
         </Routes>
@@ -56,10 +58,12 @@ export default function Router() {
           <Route path="/myCollegeGram" element={<MyCollegeGram />} />
           <Route path="/collegians" element={<Collegians />} />
           <Route path="/myCollegeGram/:id" element={<InnerPost />} />
+          <Route path="/saves" element={<MySavePage />} />
+          <Route path="/notification" element={<NotificationPage />} />
         </Route>
 
         <Route path="404" element={<ErrorPage />} />
-        <Route path="*" element={<Navigate to="/404" />} />
+        <Route path="*" element={<Navigate to="/404" replace />} />
       </Routes>
     </Suspense>
   );

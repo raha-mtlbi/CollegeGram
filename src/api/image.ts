@@ -1,9 +1,10 @@
 import { post } from ".";
 
 export const createPost = (data: {
-  description: string;
-  tag: string;
-  photo?: File;
+  caption: string;
+  closeFriend: boolean;
+  tags: string[];
+  photos: FileList[];
 }) => {
-  return post("/", data);
+  return post("/post", data);
 };

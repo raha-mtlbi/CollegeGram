@@ -1,65 +1,76 @@
-import { useRef } from "react";
-import { FieldArray } from "formik";
+import { useState } from "react";
 
 import plus from "../assets/icons/plus.svg";
 import close from "../assets/icons/close.svg";
 
-export default function UploadButton({ values }: { values?: any }) {
-  const fileUploader = useRef<HTMLInputElement | null>(null);
+export default function UploadButton({
+  imagesUpload,
+}: {
+  imagesUpload: (images: any) => void;
+}) {
+  const [images, setImages] = useState<File[]>([]);
+
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedImages: FileList | null = e.currentTarget.files;
+    const formData = new FormData();
+
+    if (selectedImages) {
+      for (let i = 0; i < selectedImages?.length; i++) {
+        const image = selectedImages[i];
+
+        formData.append("image", URL.createObjectURL(image));
+        console.log("iamfafsfajfnakj", URL.createObjectURL(image));
+      }
+      imagesUpload(formData);
+    }
+
+    if (selectedImages && images.length < 5) {
+      const newImages: File[] = Array.from(selectedImages || []);
+      setImages((prevImage) => [...prevImage, ...newImages]);
+    }
+  };
+
+  const handleImageDelete = (index: number) => {
+    const newImages = [...images];
+    newImages.splice(index, 1);
+    setImages(newImages);
+  };
 
   return (
     <div>
-      <FieldArray
-        name="photos"
-        render={(arrayHelpers) => (
-          <div>
-            <input
-              type="file"
-              name="custom-file-input"
-              id="custom-file-input"
-              className="hidden"
-              ref={(e) => (fileUploader.current = e)}
-              onChange={(e) => {
-                if (e.target?.files?.[0]) {
-                  arrayHelpers.insert(values.photos?.length, e.target.files[0]);
-                }
-              }}
-              accept="/image*"
-              multiple
-            />
-            <label htmlFor={"custom-file-input"} className=" p-2">
+      <div className="text-right">
+        <label
+          htmlFor="fileInput"
+          className="flex flex-row gap-8 cursor-pointer text-base	font-bold text-[#C19008] px-4 py-2 leading-4 "
+        >
+          <img src={plus} alt="icon" />
+          بارگذاری عکس‌ها
+        </label>
+        <input
+          id="fileInput"
+          type="file"
+          className="sr-only"
+          multiple
+          onChange={handleImageChange}
+        />
+        <div className="grid grid-cols-4 gap-4 mt-6">
+          {images.map((image, index) => (
+            <div key={index} className="aspect-square object-cover w-full">
               <button
-                className=" flex items-center cursor-pointer"
-                onClick={() => fileUploader.current?.click()}
-                type="button"
+                className="translate-y-2/3 bg-white rounded-full p-2 bg-[#fff]"
+                onClick={() => handleImageDelete(index)}
               >
-                <img alt="camera" src={plus} className="w-[16px] h-[16px] " />
-                <p className="text-[#C19008] mr-3 font-bold">بارگذاری عکس‌ها</p>
+                <img src={close} alt="Delete" />
               </button>
-            </label>
-
-            <div className=" grid grid-cols-4 gap-4  ">
-              {values?.photos?.map((photo: any, index: any) => (
-                <div>
-                  <button className=" absolute">
-                    <img
-                      alt="close"
-                      src={close}
-                      className=" bg-white rounded-[50%] p-2"
-                      onClick={() => arrayHelpers.remove(index)}
-                    />
-                  </button>
-                  <img
-                    src={photo?.image}
-                    alt=""
-                    className="w-[110px] h-[110px] rounded-[24px]"
-                  />
-                </div>
-              ))}
+              <img
+                className="aspect-square object-cover inline rounded-2xl"
+                src={URL.createObjectURL(image)}
+                alt={`Uploaded ${index + 1}`}
+              />
             </div>
-          </div>
-        )}
-      />
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
