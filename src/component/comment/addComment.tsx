@@ -7,7 +7,7 @@ import { AddNewComment } from "../../logic/AddNewComment";
 
 import send from "../../assets/icons/send.svg";
 
-export default function AddComment({ postId }: { postId: number }) {
+export default function AddComment({ postId }: { postId: string }) {
   const user = useUser();
 
   const formik = useFormik({

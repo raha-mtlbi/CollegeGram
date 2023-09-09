@@ -37,7 +37,7 @@ export default function InnerPost() {
               tag={photoDetail?.tags as string[]}
               commentsCount={photoDetail?.commentsCount || 0}
             />
-            <Comment postId={parseInt(id as string)} />
+            <Comment postId={id as string} />
           </div>
         </div>
         <SideBar />
