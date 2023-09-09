@@ -1,5 +1,5 @@
-import Axios from "axios"
-import { getToken, removeToken } from "./token"
+import Axios from "axios";
+import { getToken, removeToken } from "./token";
 
 export const BaseUrl = "https://murphyteam.ir/api/";
 export const imageUrl = "https://murphyteam.ir";
@@ -13,21 +13,21 @@ apiAgent.interceptors.request.use(
       config.headers.Authorization = `Bearer ${token}`;
     }
 
-    return config
+    return config;
   },
   (error) => {
-    return Promise.reject(error)
+    return Promise.reject(error);
   }
-)
+);
 
 apiAgent.interceptors.response.use(
   (config) => config,
 
   (error) => {
     if (error.response.status === 401) {
-      removeToken()
+      removeToken();
     }
 
-    return Promise.reject(error)
+    return Promise.reject(error);
   }
-)
+);

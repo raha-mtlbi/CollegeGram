@@ -1,4 +1,4 @@
-import { post } from "."
+import { post } from ".";
 
 export const createPost = (data: {
   caption: string;
