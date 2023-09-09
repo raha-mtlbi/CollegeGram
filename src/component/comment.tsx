@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { get } from "../api";
 import { IComment } from "../api/type/comment";
-import { useUser } from "../features/hooks";
 import AddComment from "./comment/addComment";
 import { imageUrl } from "../api/config";
+import { useUser } from "../features/hooks";
 
 import Like from "../assets/icons/heart.svg";
 import disLike from "../assets/icons/heart-outline.svg";
