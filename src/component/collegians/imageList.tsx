@@ -13,7 +13,7 @@ export default function ImageList({ photoList }: { photoList: IImage[] }) {
         <div key={photo.id} className="w-[230px] h-[230px] cursor-pointer">
           <img
             className="w-[230px] h-[230px]"
-            src={imageUrl + photo.photos}
+            src={imageUrl + photo.photos[0]}
             alt="postImage"
             onClick={() => navigate(`/myCollegeGram/${photo.id}`)}
           />
