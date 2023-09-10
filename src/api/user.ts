@@ -37,7 +37,6 @@ export const changePassword = (data: {
 }) => {
   return post<{ newPassword: string }>("/user/setnewpassword", data);
 };
-<<<<<<< HEAD
 
 export const EditProfile = (data: {
   email: string;
@@ -50,5 +49,3 @@ export const EditProfile = (data: {
 }) => {
   return patch("/user/me", data);
 };
-=======
->>>>>>> 1670c02db9279f5b4ccd1a8fabcf1d3b1b1a7dcc

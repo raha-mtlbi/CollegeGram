@@ -59,15 +59,7 @@ const Caption = ({
       </p>
       <div className=" flex text-center items-center">
         {tag?.map((tag) => (
-<<<<<<< HEAD
           <Tag tag={tag} color="#812AE7" />
-=======
-          <div
-            className={"p-2 bg-[#0074E8] rounded-[4px] text-[#FFF] text-[14px] m-2"}
-          >
-            {tag}
-          </div>
->>>>>>> 1670c02db9279f5b4ccd1a8fabcf1d3b1b1a7dcc
         ))}
         {/* <div className="p-2 bg-[#767676] rounded-[4px] text-[#FFF] text-[14px] mr-[8px]">
           بومگردی

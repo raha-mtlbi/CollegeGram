@@ -7,14 +7,9 @@ import Like from "../assets/icons/heart.svg";
 import disLike from "../assets/icons/heart-outline.svg";
 import arrow from "../assets/icons/arrow-left-curved.svg";
 import AddComment from "./comment/addComment";
-<<<<<<< HEAD
 import { imageUrl } from "../api/config";
 
-const Comment = ({ postId }: { postId: number }) => {
-=======
-
 const Comment = ({ postId }: { postId: string }) => {
->>>>>>> 1670c02db9279f5b4ccd1a8fabcf1d3b1b1a7dcc
   const [isLike, setIsLike] = useState<boolean>(false);
   const [comment, setComment] = useState<{ result: IComment[] }>();
   const user = useUser();
@@ -41,11 +36,7 @@ const Comment = ({ postId }: { postId: string }) => {
                         {user?.name + "" + user?.lastname}
                       </p>
                       <p className="mr-[8px] text-[#A5A5A5] text-[10px]">
-<<<<<<< HEAD
                         {imageUrl + user?.photo}
-=======
-                        {/* {user.} */}
->>>>>>> 1670c02db9279f5b4ccd1a8fabcf1d3b1b1a7dcc
                       </p>
                     </div>
                     <div className="flex items-center">
