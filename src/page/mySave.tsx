@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import SideBar from "../component/sidebar";
 import { imageUrl } from "../api/config";
+import { ISave } from "../api/type/save";
 
 import sample from "../assets/images/sampleHomeCard.svg";
 
@@ -13,6 +14,7 @@ const images = [
 ];
 
 const MySavePage = () => {
+  const [imageList, setImageList] = useState<{ result: ISave }>();
   const navigate = useNavigate();
 
   return (
@@ -32,9 +34,8 @@ const MySavePage = () => {
           ))}
         </div>
       </div>
-      <div>
-        <SideBar />
-      </div>
+
+      <SideBar />
     </div>
   );
 };
