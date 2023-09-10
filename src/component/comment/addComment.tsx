@@ -17,13 +17,16 @@ export default function AddComment({ postId }: { postId: string }) {
   });
 
   return (
-    <div className="flex w-full ">
-      <div className="flex rounded-full h-[40px] ml-2">
-        <img src={imageUrl + user?.photo} alt="profile" />
-      </div>
+    <div className="flex w-full items-center ">
+      <img
+        src={imageUrl + user?.photo}
+        alt="profile"
+        className="rounded-full w-[40px] h-[40px] ml-2"
+      />
 
       <form onSubmit={formik.handleSubmit}>
-        <div className="flex">
+        <div className="flex w-[90%]">
+          {/* <input /> */}
           <Input
             placeholder={"نظر خود را بنویسید..."}
             imageSrc={""}
@@ -33,8 +36,8 @@ export default function AddComment({ postId }: { postId: string }) {
               formik.setFieldValue("content", e.target.value)
             }
           />
-          <button className="mx-2" type="submit">
-            <img alt="send" src={send} width={20} height={20} />
+          <button className="mx-2 w-[150px]" type="submit" >
+            <img alt="send" src={send} className="w-5 h-4" />
           </button>
         </div>
       </form>

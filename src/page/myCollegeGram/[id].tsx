@@ -26,7 +26,7 @@ export default function InnerPost() {
           <img
             alt="postImage"
             src={imageUrl + photoDetail?.photos}
-            className="w-[488px] h-[488px]"
+            className="w-[475px] h-[488px]"
           />
           <div className="flex flex-col p-2 ">
             <Caption

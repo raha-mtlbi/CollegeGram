@@ -17,7 +17,7 @@ function App() {
           <ToastContainer
             limit={1}
             theme="colored"
-            position="bottom-left"
+            position="bottom-center"
             autoClose={5000}
             hideProgressBar={false}
             newestOnTop={false}

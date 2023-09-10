@@ -61,15 +61,6 @@ const Caption = ({
         {tag?.map((tag) => (
           <Tag tag={tag} color="#812AE7" />
         ))}
-        {/* <div className="p-2 bg-[#767676] rounded-[4px] text-[#FFF] text-[14px] mr-[8px]">
-          بومگردی
-        </div>
-        <div className="p-2 bg-[#008753] rounded-[4px] text-[#FFF] text-[14px] mr-[8px]">
-          دریا
-        </div>
-        <div className="p-2 bg-[#00857C] rounded-[4px] text-[#FFF] text-[14px] mr-[8px]">
-          ساحل
-        </div> */}
       </div>
     </div>
   );

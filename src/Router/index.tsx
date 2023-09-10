@@ -19,6 +19,8 @@ import InnerPost from "../page/myCollegeGram/[id]";
 import MySavePage from "../page/mySave";
 import NotificationPage from "../page/myNotification";
 import OtherNotification from "../page/otherNotification";
+import Message from "../page/messages";
+import OtherUsers from "../page/Home/otherUserPage/[id]";
 
 const Home = React.lazy(() => import("../page/Home"));
 
@@ -62,6 +64,8 @@ export default function Router() {
           <Route path="/saves" element={<MySavePage />} />
           <Route path="/notification" element={<NotificationPage />} />
           <Route path="/otherNotification" element={<OtherNotification />} />
+          <Route path="/messages" element={<Message />} />
+          <Route path="/usersProfile/:id" element={<OtherUsers />} />
         </Route>
 
         <Route path="404" element={<ErrorPage />} />
