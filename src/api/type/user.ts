@@ -1,7 +1,7 @@
 export interface IUser {
   bio: string;
   id: string;
-  photo: string;
+  photo: File;
   username: string;
   email: string;
   followers: number;

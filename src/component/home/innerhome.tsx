@@ -7,7 +7,7 @@ export default function InnerHome() {
   const navigate = useNavigate();
 
   return (
-    <div >
+    <div>
       <div className="text-center justify-center flex-col flex ">
         <p className="text-[20px] not-italic font-bold text-center text-[#17494D] mt-[8%]">
           سلام به کالج‌گرام خوش اومدی!

@@ -1,11 +1,15 @@
 import Input from "../input";
 import { useFormik } from "formik";
+
+import { imageUrl } from "../../api/config";
+import { useUser } from "../../features/hooks";
 import { AddNewComment } from "../../logic/AddNewComment";
 
 import send from "../../assets/icons/send.svg";
-import profile from "../../assets/images/picture frame.svg";
 
 export default function AddComment({ postId }: { postId: string }) {
+  const user = useUser();
+
   const formik = useFormik({
     initialValues: { content: "", postId: "" },
     enableReinitialize: true,
@@ -15,7 +19,7 @@ export default function AddComment({ postId }: { postId: string }) {
   return (
     <div className="flex w-full ">
       <div className="flex rounded-full h-[40px] ml-2">
-        <img src={profile} alt="profile" />
+        <img src={imageUrl + user?.photo} alt="profile" />
       </div>
 
       <form onSubmit={formik.handleSubmit}>

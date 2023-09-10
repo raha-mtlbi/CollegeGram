@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { get } from "../api";
 import { IComment } from "../api/type/comment";
+import AddComment from "./comment/addComment";
+import { imageUrl } from "../api/config";
 import { useUser } from "../features/hooks";
 
 import Like from "../assets/icons/heart.svg";
 import disLike from "../assets/icons/heart-outline.svg";
 import arrow from "../assets/icons/arrow-left-curved.svg";
-import AddComment from "./comment/addComment";
-import { imageUrl } from "../api/config";
 
 const Comment = ({ postId }: { postId: string }) => {
   const [isLike, setIsLike] = useState<boolean>(false);

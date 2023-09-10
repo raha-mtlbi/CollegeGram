@@ -1,3 +1,4 @@
+import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 
@@ -10,7 +11,6 @@ import Input from "../component/input";
 import gmail from "../assets/icons/gmail.svg";
 import key from "../assets/icons/key.svg";
 import back from "../assets/icons/arrow-back.svg";
-import React from "react";
 
 export default function LoginPage() {
   const navigate = useNavigate();

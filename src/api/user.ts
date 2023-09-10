@@ -38,14 +38,6 @@ export const changePassword = (data: {
   return post<{ newPassword: string }>("/user/setnewpassword", data);
 };
 
-export const EditProfile = (data: {
-  email: string;
-  name: string;
-  lastname: string;
-  password: string;
-  repeatPassword: string;
-  bio: string;
-  private: boolean;
-}) => {
+export const EditProfile = (data: any) => {
   return patch("/user/me", data);
 };

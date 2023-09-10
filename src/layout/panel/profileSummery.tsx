@@ -1,7 +1,7 @@
 import { useState } from "react";
 import EditProfile from "../../component/editProfileModal";
-import { useUser } from "../../features/hooks";
 import { imageUrl } from "../../api/config";
+import { useUser } from "../../features/hooks";
 
 import arrow from "../../assets/icons/arrow-down.svg";
 import pen from "../../assets/icons/edit.svg";

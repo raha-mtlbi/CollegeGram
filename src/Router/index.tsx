@@ -16,8 +16,9 @@ import MyCollegeGram from "../page/myCollegeGram";
 import Collegians from "../page/collegians";
 import PanelLayout from "../layout/panel";
 import InnerPost from "../page/myCollegeGram/[id]";
-import MySavePage from "../page/MySavePage";
-import NotificationPage from "../page/NotificationPage";
+import MySavePage from "../page/mySave";
+import NotificationPage from "../page/myNotification";
+import OtherNotification from "../page/otherNotification";
 
 const Home = React.lazy(() => import("../page/Home"));
 
@@ -60,6 +61,7 @@ export default function Router() {
           <Route path="/myCollegeGram/:id" element={<InnerPost />} />
           <Route path="/saves" element={<MySavePage />} />
           <Route path="/notification" element={<NotificationPage />} />
+          <Route path="/otherNotification" element={<OtherNotification />} />
         </Route>
 
         <Route path="404" element={<ErrorPage />} />
