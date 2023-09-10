@@ -1,29 +1,31 @@
 import SideBar from "../component/sidebar";
-import arrow from "../assets/icons/arrow-back.svg";
+import arrow from "../assets/icons/arrow-back1.svg";
 import user from "../assets/icons/person.svg";
 import dot from "../assets/icons/ellipsis.svg";
+import photo from "../assets/images/sampleHomeCard.svg";
+
+const data = [
+  {
+    name: "یاسین اروسخانی",
+    followers: "10 هزار دنبال‌کننده",
+    profile: "",
+    photoList: [photo, photo, photo, photo],
+  },
+  {
+    name: "متین دهقان",
+    followers: "1۷0 هزار دنبال‌کننده",
+    profile: "",
+    photoList: [photo, photo, photo, photo],
+  },
+  {
+    name: "یاسین",
+    followers: "دقیقه پیش",
+    profile: "",
+    photoList: [photo, photo, photo, photo],
+  },
+];
 
 export default function Collegians() {
-  const data = [
-    {
-      name: "یاسین",
-      followers: "دقیقه پیش",
-      profile: "",
-      photoList: [arrow, arrow, arrow, arrow],
-    },
-    {
-      name: "یاسین",
-      followers: "دقیقه پیش",
-      profile: "",
-      photoList: [arrow, arrow, arrow, arrow],
-    },
-    {
-      name: "یاسین",
-      followers: "دقیقه پیش",
-      profile: "",
-      photoList: [arrow, arrow, arrow, arrow],
-    },
-  ];
   return (
     <div className="flex flex-col justify-end mt-32">
       <p></p>
@@ -33,16 +35,19 @@ export default function Collegians() {
             <div className="flex">
               {item.photoList.map((photo) => {
                 return (
-                  <div className="">
-                    <img src={photo}></img>
+                  <div className="w-[232px] h-[232px] ml-[24px] ">
+                    <img src={photo} className="rounded-[24px]"></img>
                   </div>
                 );
               })}
-              <img src={arrow} />
+              <img
+                src={arrow}
+                className="w-[24px] h-[24px] mr-[65px] mt-[105px]"
+              />
             </div>
             {/* paeen */}
-            <div className="flex">
-              <div className="rounded-full w-[20px] h-[20px]">
+            <div className="flex mt-[24px]">
+              <div className="rounded-full w-[64px] h-[64px] ml-[20px]">
                 <img
                   alt="profile"
                   src={item.profile ? item.profile : user}
@@ -50,10 +55,16 @@ export default function Collegians() {
                 ></img>
               </div>
               <div>
-                <p>{item.name}</p>
-                <p>{item.followers}</p>
+                <p className="text-[16px] text-[#C38F00] font-bold">
+                  {item.name}
+                </p>
+                <p className="text-[#17494D] text-[11px] mt-[9px]">
+                  {item.followers}
+                </p>
               </div>
-              <img src={dot} />
+              <button onClick={() => {}}>
+                <img src={dot} className="w-[24px] h-[24px] mr-[30px]" />
+              </button>
             </div>
           </div>
         );
