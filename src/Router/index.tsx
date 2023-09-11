@@ -20,7 +20,7 @@ import MySavePage from "../page/mySave";
 import NotificationPage from "../page/myNotification";
 import OtherNotification from "../page/otherNotification";
 import Message from "../page/messages";
-import OtherUsers from "../page/Home/otherUserPage/[id]";
+import OtherUsers from "../page/otherUserPage/[id]";
 
 const Home = React.lazy(() => import("../page/Home"));
 

@@ -1,8 +1,13 @@
 import React from "react";
 import { imageUrl } from "../../api/config";
 import { IUser } from "../../api/type/user";
+import Button from "../button";
 
 import arrow from "../../assets/icons/arrow-down.svg";
+import pin from "../../assets/icons/angled-pin.svg";
+import block from "../../assets/icons/report.svg";
+import comment from "../../assets/icons/speech.svg";
+import star from "../../assets/icons/sparkle.svg";
 
 const OtherProfile = ({ user }: { user?: IUser }) => {
   return (
@@ -45,6 +50,17 @@ const OtherProfile = ({ user }: { user?: IUser }) => {
           <p>|</p>
           <p className="mr-2">{user?.following}</p>
           <p className="mr-1"> دنبال‌شونده</p>
+        </div>
+        <Button title={"دنبال کردن"} width={"100px"} />
+        <div>
+          <img alt="pin" src={pin} />
+          {/* <p>{imageCount}</p> */}
+          <p>عکس</p>
+        </div>
+        <div className="grid grid-cols-3">
+          <img alt="block" src={block} />
+          <img alt="comment" src={comment} />
+          <img alt="satr" src={star} />
         </div>
       </div>
     </div>

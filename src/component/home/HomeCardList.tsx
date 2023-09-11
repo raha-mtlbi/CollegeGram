@@ -9,6 +9,8 @@ import saveIcon from "../../assets/icons/saved.svg";
 import unsaved from "../../assets/icons/save-outline.svg";
 import commnet from "../../assets/icons/commentIcon.svg";
 import multiImageIcon from "../../assets/icons/multyimages.svg";
+import { useNavigate } from "react-router-dom";
+import { IImage } from "../../api/type/images";
 
 const data = [
   {
@@ -37,7 +39,8 @@ const data = [
   },
 ];
 
-const HomeCardList = () => {
+const HomeCardList = ({ imageList }: { imageList: IImage[] }) => {
+  const navigate = useNavigate();
   const [like, setLike] = useState(false);
   const [saved, setsaved] = useState(false);
 
@@ -52,6 +55,7 @@ const HomeCardList = () => {
             className="rounded-t-3xl aspect-square w-[24rem] cursor-pointer"
             src={data?.image}
             alt="test"
+            onClick={() => navigate("/mycollegegram/1")}
           />
 
           <div className="px-2 space-y-5">

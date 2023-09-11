@@ -16,8 +16,11 @@ export default function Home() {
   return (
     <div className=" px-12">
       <p className=" font-bold text-[18px]">خانه</p>
-      {/* {imageList?.result.length === 0 ? <InnerHome /> : <HomeCardList />} */}
-      <HomeCardList />
+      {imageList?.result.length === 0 ? (
+        <InnerHome />
+      ) : (
+        <HomeCardList imageList={imageList?.result || []} />
+      )}
     </div>
   );
 }

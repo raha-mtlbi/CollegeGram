@@ -1,10 +1,10 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { IUser } from "../../../api/type/user";
-import { get } from "../../../api";
+import { IUser } from "../../api/type/user";
+import { get } from "../../api";
 
-import OtherProfile from "../../../component/otherUsers/otherProfile";
-import UserImageList from "../../../component/otherUsers/otherUserImageList";
+import OtherProfile from "../../component/otherUsers/otherProfile";
+import UserImageList from "../../component/otherUsers/otherUserImageList";
 
 export default function OtherUsers() {
   const { id } = useParams();

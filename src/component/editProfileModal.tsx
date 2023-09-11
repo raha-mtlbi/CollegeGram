@@ -48,11 +48,11 @@ const EditProfile = ({
       <div className="fixed inset-0 bg-black/30" aria-hidden="true" />
       <div className="fixed inset-0 overflow-y-auto">
         <div className="flex min-h-full items-center justify-center p-4 text-center ">
-          <Dialog.Panel className="w-full  max-w-md transform overflow-hidden rounded-2xl bg-[#F3F0EE] p-6 text-left align-middle shadow-xl transition-all">
+          <Dialog.Panel className="  max-w-md transform overflow-hidden rounded-2xl bg-[#F3F0EE] p-6 text-left align-middle shadow-xl transition-all">
             <p className="text-center text-[20px] font-bold not-italic text-[#17494D] leading-normal my-2 ">
               ویرایش حساب
             </p>
-            <Avatar  />
+            <Avatar />
 
             <form onSubmit={formik.handleSubmit}>
               <div className="mt-2">
@@ -134,12 +134,12 @@ const EditProfile = ({
                     <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4  dark:peer-focus: rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white  after:rounded-full after:h-5 after:w-5 after:transition-all  peer-checked:bg-gray-800"></div>
                   </label>
                 </div>
-                <div className="my-4">
+                <div className=" my-4">
                   <p className="mb-3 flex text-start">بایو</p>
                   <Textarea
                     placeholder={user ? user?.bio : ""}
                     value={formik.values.bio}
-                    className="w-[311px] h-[88px] p-2 rounded-[10px] bg-[#F3F0EE] border border-[#17494d80] resize-none"
+                    className="h-[88px] p-2 rounded-[10px] bg-[#F3F0EE] border border-[#17494d80] resize-none"
                     onChange={(e: any) =>
                       formik.setFieldValue("bio", e.target.value)
                     }
