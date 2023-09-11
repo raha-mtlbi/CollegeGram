@@ -1,6 +1,6 @@
 import React from "react";
 import SideBar from "../component/sidebar";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Button from "../component/button";
 import user from "../assets/icons/person.svg";
 

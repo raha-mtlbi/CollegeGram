@@ -2,7 +2,7 @@ import React from "react";
 
 const BlockPage = () => {
   return (
-    <div className="text-center	justify-center">
+    <div className="w-full flex flex-col text-center">
       <p className="text-[20px] font-bold text-[#17494D]">
         مثل اینکه بلاک شدی!
       </p>

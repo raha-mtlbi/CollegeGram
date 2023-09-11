@@ -5,6 +5,7 @@ import { get } from "../../api";
 
 import OtherProfile from "../../component/otherUsers/otherProfile";
 import UserImageList from "../../component/otherUsers/otherUserImageList";
+import BlockPage from "../blockPage";
 
 export default function OtherUsers() {
   const { id } = useParams();
@@ -17,9 +18,13 @@ export default function OtherUsers() {
   }, [id]);
 
   return (
-    <div className="flex  mt-32">
-      {user?.result?.private ? <img /> : <UserImageList photoList={[]} />}
-      <OtherProfile user={user as unknown as IUser} />
+    <div className="flex justify-between mt-32">
+      {user?.result?.block ? (
+        <BlockPage />
+      ) : (
+        <UserImageList photoList={[]} user={user?.result as IUser} />
+      )}
+      <OtherProfile user={user?.result as IUser} />
     </div>
   );
 }

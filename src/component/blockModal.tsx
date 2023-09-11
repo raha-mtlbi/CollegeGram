@@ -1,11 +1,9 @@
 import React from "react";
 import { Dialog } from "@headlessui/react";
 import Button from "./button";
-import { useUser } from "../features/hooks";
 
-import blockIcon from "../assets/icons/report.svg";
-import profile from "../assets/icons/Ellipse.svg";
-import tik from "../assets/icons/check-circle.svg";
+import blockIcon from "../assets/icons/reportGray.svg";
+import tik from "../assets/icons/Verified.svg";
 
 const BlockModal = ({
   open,
@@ -14,7 +12,6 @@ const BlockModal = ({
   open: boolean;
   onClose: () => void;
 }) => {
-  const user = useUser();
   return (
     <Dialog as="div" open={open} onClose={onClose} style={{ direction: "rtl" }}>
       <div
@@ -25,7 +22,7 @@ const BlockModal = ({
         <div className="flex min-h-full items-center justify-center text-center ">
           <Dialog.Panel className=" transform overflow-hidden rounded-3xl bg-[#FFF] shadow-xl transition-all w-[375px] h-[439px] text-[#17494D]">
             <div className="items-center justify-center text-center">
-              <img src={blockIcon} className="mx-auto mt-[25px]" />
+              <img alt="iamge" src={blockIcon} className="mx-auto mt-[25px]" />
               <p className="text-[22px] font-normal mt-[3px]">بلاک</p>
             </div>
 
@@ -35,8 +32,21 @@ const BlockModal = ({
                 <p className="text-[11px] mt-[5px]">170 هزار دنبال‌کننده</p>
               </div>
               <div className="rounded-full w-[80px] h-[80px] mr-[116px] mt-[30px]">
-                <img src={profile} />
-                <img src={tik} className="-mt-5" />
+                <div className="relative w-[80px] h-[80px] overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
+                  <svg
+                    className="absolute w-[70px] h-[60px] text-center text-gray-400 -left-[-5px]"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                      clip-rule="evenodd"
+                    ></path>
+                  </svg>
+                </div>
+                <img alt="iamge" src={tik} className=" absolute -mt-5" />
               </div>
             </div>
 
@@ -45,16 +55,19 @@ const BlockModal = ({
               <p className="mt-[8px]">
                 اگه بلاکش کنی دیگه نمیتونه بهت پیام بده و
               </p>
-              <p className="mt-[8px]">
+              <p className="mt-2">
                 پست هات رو ببینه.قابلیت لایک کردن و کامنت
               </p>
-              <p className="mt-[8px]">
+              <p className="mt-2">
                 گذاشتن زیر پست های توهم براش مسدود میشه.
               </p>
             </div>
 
-            <div className="mt-[25px]">
-              <button type="submit" className="w-[104px] ml-[8px] mr-[100px]">
+            <div className="mt-7">
+              <button
+                onClick={onClose}
+                className="w-[104px] ml-[8px] mr-[100px]"
+              >
                 نه پشیمونم
               </button>
               <Button title={"آره، حتما"} width="100px" type="submit" />

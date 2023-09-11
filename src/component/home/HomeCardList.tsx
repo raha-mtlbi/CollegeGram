@@ -55,7 +55,7 @@ const HomeCardList = ({ imageList }: { imageList: IImage[] }) => {
             className="rounded-t-3xl aspect-square w-[24rem] cursor-pointer"
             src={data?.image}
             alt="test"
-            onClick={() => navigate("/mycollegegram/1")}
+            onClick={() => navigate("/friendPost/1")}
           />
 
           <div className="px-2 space-y-5">

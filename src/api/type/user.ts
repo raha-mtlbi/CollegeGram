@@ -11,4 +11,5 @@ export interface IUser {
   postsCount: number;
   private: boolean;
   usernameOrEmail: string;
+  block: boolean;
 }

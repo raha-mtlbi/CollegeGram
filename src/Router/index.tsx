@@ -21,6 +21,7 @@ import NotificationPage from "../page/myNotification";
 import OtherNotification from "../page/otherNotification";
 import Message from "../page/messages";
 import OtherUsers from "../page/otherUserPage/[id]";
+import InnerFriendsPost from "../page/friendPost/[id]";
 
 const Home = React.lazy(() => import("../page/Home"));
 
@@ -66,6 +67,7 @@ export default function Router() {
           <Route path="/otherNotification" element={<OtherNotification />} />
           <Route path="/messages" element={<Message />} />
           <Route path="/usersProfile/:id" element={<OtherUsers />} />
+          <Route path="/friendPost/:id" element={<InnerFriendsPost />} />
         </Route>
 
         <Route path="404" element={<ErrorPage />} />
