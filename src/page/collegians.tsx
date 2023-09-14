@@ -31,7 +31,7 @@ export default function Collegians() {
 
   return (
     <div className="flex flex-col pr-12 ">
-      <p className="font-bold text-md mb-7"> کالج‌گرامی‌‌ها</p>
+      <p className="font-bold text-[22px] mb-10 mt-3"> کالج‌گرامی‌‌ها</p>
       {data.map((item, index) => {
         return (
           <div key={index}>
@@ -57,12 +57,12 @@ export default function Collegians() {
               />
             </div>
             {/* paeen */}
-            <div className="flex mt-6 mb-8 items-center">
+            <div className="flex mt-6 mb-9 items-center">
               <div className="bg-white rounded-full w-12 h-12  ml-6">
                 <img
                   alt="profile"
                   src={item.profile ? item.profile : user}
-                  className="w-10 h-10 mx-auto"
+                  className="w-8 h-8 mx-auto mt-1"
                 />
               </div>
               <div>

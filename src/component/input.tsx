@@ -12,6 +12,7 @@ interface IInput {
   type?: string;
   error?: boolean;
   errorText?: string;
+  width?: number | string;
 }
 
 export default function Input({
@@ -24,6 +25,7 @@ export default function Input({
   type,
   error,
   errorText,
+  width,
 }: IInput) {
   return (
     <div>
@@ -41,6 +43,7 @@ export default function Input({
           type={type}
           value={value}
           onChange={onChange}
+          style={{ width: width }}
         />
       </div>
       {error && errorText && (
