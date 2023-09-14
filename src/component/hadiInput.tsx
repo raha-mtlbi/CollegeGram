@@ -24,6 +24,6 @@ export default function HadiInput({ prefix, placeholder, type, name }: IInput) {
       onChange={(e: any) => setValue(e.target.value)}
       error={touched && Boolean(error)}
       errorText={error}
-    ></Input>
+    />
   );
 }

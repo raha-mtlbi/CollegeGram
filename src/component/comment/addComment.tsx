@@ -6,6 +6,7 @@ import { useUser } from "../../features/hooks";
 import { AddNewComment } from "../../logic/AddNewComment";
 
 import send from "../../assets/icons/send.svg";
+import profile from "../../assets/icons/picture frame.svg";
 
 export default function AddComment({ postId }: { postId: string }) {
   const user = useUser();
@@ -18,12 +19,28 @@ export default function AddComment({ postId }: { postId: string }) {
 
   return (
     <div className="flex w-full items-center ">
-      <img
-        src={imageUrl + user?.photo}
-        alt="profile"
-        className="rounded-full w-[40px] h-[40px] ml-2"
-      />
-
+      <div className="relative w-[40px] h-[40px] overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
+        {user?.photo ? (
+          <img
+            alt="profile"
+            src={imageUrl + user?.photo}
+            className=" w-full h-[85%]"
+          />
+        ) : (
+          <svg
+            className="absolute w-[30px] h-[30px] text-center text-gray-400 -left-[-5px]"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+              clip-rule="evenodd"
+            ></path>
+          </svg>
+        )}
+      </div>
       <form onSubmit={formik.handleSubmit}>
         <div className="flex w-[90%]">
           {/* <input /> */}
@@ -36,7 +53,7 @@ export default function AddComment({ postId }: { postId: string }) {
               formik.setFieldValue("content", e.target.value)
             }
           />
-          <button className="mx-2 w-[150px]" type="submit" >
+          <button className="mx-2 w-[150px]" type="submit">
             <img alt="send" src={send} className="w-5 h-4" />
           </button>
         </div>

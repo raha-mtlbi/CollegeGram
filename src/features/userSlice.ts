@@ -96,8 +96,6 @@ const userSlice = createSlice({
         };
       })
       .addCase(loginThunk.fulfilled, (state, action) => {
-        console.log(action.payload.accessToken);
-
         if (action.payload.accessToken) {
           setToken(action.payload.accessToken);
           setRefreshToken(action.payload.refreshToken as string);
@@ -150,14 +148,14 @@ const userSlice = createSlice({
           return {
             status: "authorized",
             user: action.payload,
-            token: state.token
+            token: state.token,
           };
         }
       })
       .addCase(getCurrentUser.rejected, (state, action) => {
         return {
-          status: "unauthorized"
-        }
+          status: "unauthorized",
+        };
       });
   },
 });

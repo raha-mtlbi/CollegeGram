@@ -9,6 +9,7 @@ import pen from "../../assets/icons/edit.svg";
 const ProfileSummery = () => {
   const [open, setOpen] = useState<boolean>(false);
   const user = useUser();
+  console.log("user", user);
 
   return (
     <div>
@@ -41,10 +42,10 @@ const ProfileSummery = () => {
           {user?.username && (
             <img src={arrow} className="my-auto mx-[10px]" alt="arrow" />
           )}
-          {user?.username}
+          {user?.username || ""}
         </p>
         <p className="text-[#17494D] text-center text-[20px] font-bold  mt-1">
-          {user?.name + "" + user?.lastname}
+          {user?.name + "" + user?.lastname || ""}
         </p>
         <div className="flex justify-center mt-[16px] text-[14px]">
           <p className="ml-1">{user?.followers}</p>

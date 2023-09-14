@@ -1,8 +1,9 @@
+import { useNavigate } from "react-router-dom";
+
 import arrow from "../assets/icons/arrow-back1.svg";
 import user from "../assets/icons/person.svg";
 import dot from "../assets/icons/ellipsis.svg";
 import photo from "../assets/images/sampleHomeCard.svg";
-import { useNavigate } from "react-router-dom";
 
 const data = [
   {

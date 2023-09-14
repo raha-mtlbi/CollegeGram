@@ -59,7 +59,7 @@ const Comment = ({ postId }: { postId: string }) => {
                   </div>
                   <p>{comment.content}</p>
                 </div>
-                {/* reply */}
+
                 {/* {item.reply && (
                   <div className="my-5 mr-[32px]">
                     <div className="flex justify-between">
