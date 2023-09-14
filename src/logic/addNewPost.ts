@@ -17,7 +17,7 @@ export const AddNewPost = () => {
       });
       toast.success("پست با موفقیت اضافه شد");
     } catch (error) {
-      toast.error("مشکلی پیش آمده");
+      console.log(error);
     }
   };
 

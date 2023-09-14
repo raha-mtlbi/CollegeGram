@@ -14,17 +14,11 @@ const CreatePostModal = ({
   open: boolean;
   onClose: any;
 }) => {
-  const [closeFriend, setCLoseFriend] = useState<boolean>(false);
-  const [uploadedImages, setUploadedImages] = useState<File>();
-
-  const handleImagesUpload = (images: File) => {
-    setUploadedImages(images);
-  };
 
   const formik = useFormik({
     initialValues: {
       caption: "",
-      closeFriend: false,
+      closeFriend: Boolean(false),
       tags: "",
       photos: undefined,
     },
@@ -49,7 +43,7 @@ const CreatePostModal = ({
               <p className="text-center text-[20px] font-bold not-italic leading-normal my-2 ">
                 افزودن پست
               </p>
-              <UploadButton values={formik.values.photos} />
+              {/* <UploadButton values={formik.values.photos} /> */}
               <div className="mb-5">
                 <p className="my-2 text-[#17494D] text-start">توضیحات</p>
                 <textarea
@@ -71,16 +65,16 @@ const CreatePostModal = ({
                   }
                 />
               </div>
-              <div className="flex justify-center">
+              <div className="flex ">
                 <label className="relative inline-flex items-center cursor-pointer mb-6 mt-3">
                   <span className="ml-3 text-sm font-medium text-[#17494D] ">
                     فقط نمایش به دوستان نزدیک
                   </span>
                   <input
                     type="checkbox"
-                    checked={closeFriend}
-                    onChange={() => {
-                      setCLoseFriend(!closeFriend);
+                    checked={formik.values.closeFriend || true}
+                    onChange={(e: any) => {
+                      formik.setFieldValue("closeFriend", e.target.values);
                     }}
                     className="sr-only peer"
                   />
