@@ -67,9 +67,9 @@ const NotificationPage = () => {
                     className="w-[40px] h-[40px]"
                   ></img>
                 </div>
-                <div className="mx-[25px]">
-                  <p className="text">{item.text}</p>
-                  <p className="time">{item.time}</p>
+                <div className="mx-[25px] w-[300px]">
+                  <p className="text text-sm">{item.text}</p>
+                  <p className="time text-[#17494D] text-xs mt-1">{item.time}</p>
                 </div>
                 {(item.type === "2" ||
                   item.type === "3" ||
@@ -83,7 +83,7 @@ const NotificationPage = () => {
                     )}
 
                     {(item.type === "3" || item.type === "6") && (
-                      <button className="text-white border-[#C19008] border rounded-3xl px-3 py-2 items-center text-centesr text-[14px] mx-[14px]">
+                      <button className="text-[#C19008] border-[#C19008] border rounded-3xl px-3 py-2 items-center text-centesr text-[14px] mx-[14px]">
                         {item.type === "3"
                           ? "لغو درخواست"
                           : "نه خوشم نمیاد ازش"}

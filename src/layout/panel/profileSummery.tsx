@@ -1,4 +1,11 @@
 import { useState } from "react";
+import {
+  Popover,
+  PopoverHandler,
+  PopoverContent,
+  Button,
+} from "@material-tailwind/react";
+
 import EditProfile from "../../component/editProfileModal";
 import { imageUrl } from "../../api/config";
 import { useUser } from "../../features/hooks";
@@ -40,7 +47,21 @@ const ProfileSummery = () => {
         </div>
         <p className="flex text-[#C19008] text-[14px] not-italic mt-[15px] justify-center">
           {user?.username && (
-            <img src={arrow} className="my-auto mx-[10px]" alt="arrow" />
+            <Popover placement="bottom">
+              <PopoverHandler>
+                <Button>
+                  <img src={arrow} className="my-auto mx-[10px]" alt="arrow" />
+                </Button>
+              </PopoverHandler>
+              <PopoverContent className="w-[150px] text-right m-3 border-gray-400">
+                <ul>
+                  <li className=" cursor-pointer mr-2">{user.username}</li>
+                  <li className="  cursor-pointer mr-2 my-2">
+                    {user.username}
+                  </li>
+                </ul>
+              </PopoverContent>
+            </Popover>
           )}
           {user?.username || ""}
         </p>
