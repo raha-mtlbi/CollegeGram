@@ -13,8 +13,7 @@ const EditPostModal = ({ open, onClose }: { open: boolean; onClose: any }) => {
     initialValues: {
       caption: "",
       closeFriend: false,
-      tags: "",
-      photos: undefined,
+      tags: [""],
     },
     enableReinitialize: true,
     validationSchema: AddPostValidation,
@@ -58,7 +57,7 @@ const EditPostModal = ({ open, onClose }: { open: boolean; onClose: any }) => {
                   }
                 />
               </div>
-              <div className="flex justify-center">
+              <div className="flex justify-start">
                 <label className="relative inline-flex items-center cursor-pointer mb-6 mt-3">
                   <span className="ml-3 text-sm font-medium text-[#17494D] ">
                     فقط نمایش به دوستان نزدیک

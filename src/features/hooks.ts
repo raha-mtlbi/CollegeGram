@@ -1,9 +1,7 @@
 import { useAppSelector } from "../store";
 
 export function useUser() {
-  return useAppSelector((s) =>
-    s.user.status === "authorized" ? s.user.user : null
-  );
+  return useAppSelector((s) => s.user.user);
 }
 
 export function useUserStatus() {

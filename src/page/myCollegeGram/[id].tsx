@@ -12,7 +12,7 @@ import SideBar from "../../component/sidebar";
 export default function InnerPost() {
   const { id } = useParams<{ id: string }>();
   const [photoDetail, setPhotoDetail] = useState<IImage>();
-
+  console.log("p", imageUrl + photoDetail?.photos);
   useEffect(() => {
     get(`/post/${id}`)
       .then((d: any) => setPhotoDetail(d))
@@ -25,7 +25,7 @@ export default function InnerPost() {
         <div className="w-full grid grid-cols-2 gap-4 ">
           <img
             alt="postImage"
-            src={imageUrl + photoDetail?.photos}
+            src={photoDetail?.photos[0]}
             className="w-[475px] h-[488px]"
           />
           <div className="flex flex-col p-2 ">

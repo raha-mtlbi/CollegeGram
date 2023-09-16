@@ -41,37 +41,35 @@ export const registerThunk = createAsyncThunk(
   }
 );
 
-// export const getCurrentUser = createAsyncThunk("user/me", async ({ token }: { token?: string }, { rejectWithValue }) => {
-//   try {
-//     return await getMe();
-//   } catch (error) {
-//     return rejectWithValue(error);
-//   }
-// });
-
 export const getCurrentUser = createAsyncThunk("user/getMeThunk", () => {
   const resp = getMe();
   return resp;
 });
 
-interface Idle {
-  status: "idle";
-}
+export type userSliceType = {
+  status: "idle" | "authorized" | "unauthorized" | "loading";
+  user: IUser | null;
+  token: string | null;
+};
 
-interface Authorized {
-  status: "authorized";
-  user: IUser;
-  token: string;
-}
+// interface Idle {
+//   status: "idle";
+// }
 
-interface UnAuthorized {
-  status: "unauthorized";
-}
+// interface Authorized {
+//   status: "authorized";
+//   user: IUser;
+//   token: string;
+// }
 
-interface Loading {
-  status: "loading";
-}
-export type userSliceType = Idle | Authorized | UnAuthorized | Loading;
+// interface UnAuthorized {
+//   status: "unauthorized";
+// }
+
+// interface Loading {
+//   status: "loading";
+// }
+// export type userSliceType = Idle | Authorized | UnAuthorized | Loading;
 
 const userSlice = createSlice({
   name: "user",
@@ -82,80 +80,102 @@ const userSlice = createSlice({
   } as userSliceType,
   reducers: {
     logout(state) {
+      state.status = "unauthorized";
+      state.token = null;
+      state.user = null;
+
       removeToken();
-      return {
-        status: "unauthorized",
-      };
+      // return {
+      //   status: "unauthorized",
+      // };
     },
   },
   extraReducers(builder) {
     builder
       .addCase(loginThunk.pending, (state, action) => {
-        return {
-          status: "loading",
-        };
+        state.status = "loading";
+
+        // return {
+        //   status: "loading",
+        // };
       })
       .addCase(loginThunk.fulfilled, (state, action) => {
         if (action.payload.accessToken) {
+          state.status = "authorized";
           setToken(action.payload.accessToken);
           setRefreshToken(action.payload.refreshToken as string);
+          state.user = action.payload.user;
 
-          return {
-            status: "authorized",
-            user: action.payload.user,
-            token: action.payload.accessToken,
-          };
+          // return {
+          //   status: "authorized",
+          //   user: action.payload.user,
+          //   token: action.payload.accessToken,
+          // };
         }
       })
       .addCase(loginThunk.rejected, (state) => {
-        return {
-          status: "unauthorized",
-        };
+        state.status = "unauthorized";
+
+        // return {
+        //   status: "unauthorized",
+        // };
       });
     builder
       .addCase(registerThunk.pending, (state, action) => {
-        return {
-          status: "loading",
-        };
+        state.status = "loading";
+        // return {
+        //   status: "loading",
+        // };
       })
       .addCase(registerThunk.fulfilled, (state, action) => {
         if (action.payload) {
           state.status = "authorized";
           setToken(action.payload.accessToken);
           setRefreshToken(action.payload.refreshToken as string);
+          state.user = action.payload.user;
+          state.token = action.payload.accessToken;
 
-          return {
-            status: "authorized",
-            user: action.payload.user,
-            token: action.payload.accessToken,
-          };
+          // return {
+          //   status: "authorized",
+          //   user: action.payload.user,
+          //   token: action.payload.accessToken,
+          // };
         } else {
-          return {
-            status: "unauthorized",
-          };
+          state.status = "unauthorized";
+          // return {
+          //   status: "unauthorized",
+          // };
         }
       })
       .addCase(registerThunk.rejected, (state) => {
-        return { status: "unauthorized" };
+        state.status = "unauthorized";
+        // return { status: "unauthorized" };
       });
 
     builder
       .addCase(getCurrentUser.pending, (state) => {
-        return { status: "loading" };
+        state.status = "loading";
+        // return { status: "loading" };
       })
       .addCase(getCurrentUser.fulfilled, (state, action) => {
-        if (action.payload?.id && state.status === "authorized") {
-          return {
-            status: "authorized",
-            user: action.payload,
-            token: state.token,
-          };
+        if (action.payload?.id) {
+          state.user = action.payload;
+          state.status = "authorized";
+
+          // if (action.payload?.id && state.status === "authorized") {
+          //   return {
+          //     status: "authorized",
+          //     user: action.payload,
+          //     token: state.token,
+          //   };
+          // }
         }
       })
       .addCase(getCurrentUser.rejected, (state, action) => {
-        return {
-          status: "unauthorized",
-        };
+        state.status = "unauthorized";
+        // return {
+        //   status: "unauthorized",
+        // };
       });
   },
 });

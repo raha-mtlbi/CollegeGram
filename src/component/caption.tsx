@@ -72,7 +72,7 @@ const Caption = ({
             </p>
           </div>
 
-          {!user ? (
+          {user ? (
             <Button
               onClick={() => setOpen(true)}
               className="flex px-4 py-2 m-2 bg-[#C38F00] rounded-2xl"
@@ -120,7 +120,7 @@ const Caption = ({
 
         <div className=" flex text-center items-center">
           {tag?.map((tag) => (
-            <Tag tag={tag} color="#812AE7" />
+            <Tag tag={tag} color="#812AE7" width="80px" />
           ))}
         </div>
       </div>

@@ -14,12 +14,11 @@ const CreatePostModal = ({
   open: boolean;
   onClose: any;
 }) => {
-
   const formik = useFormik({
     initialValues: {
       caption: "",
       closeFriend: Boolean(false),
-      tags: "",
+      tags: [""],
       photos: undefined,
     },
     enableReinitialize: true,

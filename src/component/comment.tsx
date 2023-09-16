@@ -36,7 +36,7 @@ const Comment = ({ postId }: { postId: string }) => {
                         {user?.name + "" + user?.lastname}
                       </p>
                       <p className="mr-[8px] text-[#A5A5A5] text-[10px]">
-                        {imageUrl + user?.photo}
+                        {/* {user.createdAt} */}
                       </p>
                     </div>
                     <div className="flex items-center">
