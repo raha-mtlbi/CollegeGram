@@ -6,6 +6,7 @@ import { useUser } from "../features/hooks";
 import blockIcon from "../assets/icons/report.svg";
 import profile from "../assets/icons/Ellipse.svg";
 import tik from "../assets/icons/check-circle.svg";
+import { useNavigate } from "react-router-dom";
 
 const BlockModal = ({
   open,
@@ -15,6 +16,7 @@ const BlockModal = ({
   onClose: () => void;
 }) => {
   const user = useUser();
+  const navigate = useNavigate();
   return (
     <Dialog as="div" open={open} onClose={onClose} style={{ direction: "rtl" }}>
       <div
@@ -57,7 +59,12 @@ const BlockModal = ({
               <button type="submit" className="w-[104px] ml-[8px] mr-[100px]">
                 نه پشیمونم
               </button>
-              <Button title={"آره، حتما"} width="100px" type="submit" />
+              <Button
+                title={"آره، حتما"}
+                width="100px"
+                type="submit"
+                onClick={() => navigate(`/user/${user?.id}/block`)}
+              />
             </div>
           </Dialog.Panel>
         </div>

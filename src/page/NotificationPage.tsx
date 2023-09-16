@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import SideBar from "../component/sidebar";
 import { Link } from "react-router-dom";
 import Button from "../component/button";
 import user from "../assets/icons/person.svg";
+import { IImage } from "../api/type/images";
+import { useUser } from "../features/hooks";
+import { get } from "../api";
 
 const NotificationPage = () => {
+  const [notification, setNotification] = useState();
   const data = [
     {
       text: "یاسین اروسخانی درخواست دوستی ات را قبول کرد",
@@ -43,6 +47,7 @@ const NotificationPage = () => {
       type: "6",
     },
   ];
+
   return (
     <div className="flex justify-between mt-[176px] w-full">
       <div className="mr-[78px]">
@@ -62,7 +67,7 @@ const NotificationPage = () => {
                 <div className="rounded-full w-[64px] h-[64px]">
                   <img
                     alt="profile"
-                    src={item.profile ? item.profile : user}
+                    // src={item.profile ? item.profile : user}
                     className="w-[40px] h-[40px]"
                   ></img>
                 </div>
