@@ -12,7 +12,7 @@ import SideBar from "../../component/sidebar";
 export default function InnerPost() {
   const { id } = useParams<{ id: string }>();
   const [photoDetail, setPhotoDetail] = useState<IImage>();
-  console.log("p", imageUrl + photoDetail?.photos);
+  
   useEffect(() => {
     get(`/post/${id}`)
       .then((d: any) => setPhotoDetail(d))

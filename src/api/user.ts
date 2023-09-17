@@ -39,5 +39,15 @@ export const changePassword = (data: {
 };
 
 export const EditProfile = (data: any) => {
-  return patch("/user/me", data);
+  const formData = new FormData();
+  data.photo && formData.append("photo", data.photo);
+  data.email && formData.append("email", data.email);
+  data.name && formData.append("name", data.name);
+  data.lastname && formData.append("lastname", data.lastname);
+  data.username && formData.append("username", data.username);
+  data.password && formData.append("password", data.password);
+  data.private && formData.append("private", data.private);
+  data.bio && formData.append("bio", data.bio);
+
+  return patch("/user/me", formData);
 };

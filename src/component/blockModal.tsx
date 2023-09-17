@@ -6,7 +6,7 @@ import { useUser } from "../features/hooks";
 
 import blockIcon from "../assets/icons/report.svg";
 import profile from "../assets/icons/Ellipse.svg";
-import tik from "../assets/icons/check-circle.svg";
+import tik from "../assets/icons/Verified.svg"
 
 const BlockModal = ({
   open,

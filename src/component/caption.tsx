@@ -120,7 +120,7 @@ const Caption = ({
 
         <div className=" flex text-center items-center">
           {tag?.map((tag) => (
-            <Tag tag={tag} color="#812AE7" width="80px" />
+            <Tag tag={tag} color="#812AE7" />
           ))}
         </div>
       </div>

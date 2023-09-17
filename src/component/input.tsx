@@ -11,6 +11,7 @@ interface IInput {
   error?: boolean;
   errorText?: string;
   width?: number | string;
+  getFieldprops?: any;
 }
 
 export default function Input({
@@ -24,6 +25,7 @@ export default function Input({
   error,
   errorText,
   width,
+  getFieldprops,
 }: IInput) {
   return (
     <div>
@@ -42,6 +44,7 @@ export default function Input({
           value={value}
           onChange={onChange}
           style={{ width: width }}
+          {...getFieldprops}
         />
       </div>
       {error && errorText && (

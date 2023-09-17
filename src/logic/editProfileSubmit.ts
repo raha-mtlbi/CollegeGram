@@ -28,7 +28,7 @@ export default function EditProfileSubmit({
         photo: data.photo,
       });
 
-      toast.success("با موفقیت وارد شدید");
+      toast.success("اطلاعات شما با موفقیت به روززسانی شد.");
       onClose();
     } catch (error) {
       console.log(error);

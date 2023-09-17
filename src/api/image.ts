@@ -6,8 +6,5 @@ export const createPost = (data: {
   tags: string[];
   photos?: File;
 }) => {
-  const formData = new FormData();
-  data.photos && formData.append("photo", data.photos);
-
-  return post("/post", data );
+  return post("/post", data);
 };

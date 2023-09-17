@@ -1,5 +1,4 @@
 import React from "react";
-import Textarea from "@material-tailwind/react/components/Textarea";
 import { Dialog } from "@headlessui/react";
 
 import { useFormik } from "formik";
@@ -7,11 +6,11 @@ import EditProfileSubmit from "../logic/editProfileSubmit";
 import { useUser } from "../features/hooks";
 import Input from "./input";
 import Button from "./button";
+import Avatar from "./EditAvatar";
 
 import gmail from "../assets/icons/gmail1.svg";
 import key from "../assets/icons/key1.svg";
 import person from "../assets/icons/person.svg";
-import Avatar from "./EditAvatar";
 
 const EditProfile = ({
   open,
@@ -55,12 +54,8 @@ const EditProfile = ({
             </p>
 
             <form onSubmit={formik.handleSubmit}>
-              <Avatar
-                // value={formik.values.photo}
-                onChange={(e: any) =>
-                  formik.setFieldValue("photo", e.target.value)
-                }
-              />
+              <Avatar onChange={(f: any) => formik.setFieldValue("photo", f)} />
+
               <div className="mt-2">
                 <div className="my-4">
                   <Input
@@ -134,27 +129,22 @@ const EditProfile = ({
                 </div>
                 <div className=" my-4">
                   <p className="mb-3 flex text-start">بایو</p>
-                  <Textarea
+                  <textarea
+                    style={{ width: "100%" }}
                     placeholder={user ? user?.bio : ""}
                     value={formik.values.bio}
-                    className="h-[88px] p-2 rounded-[10px] bg-[#F3F0EE] border border-[#17494d80] resize-none"
+                    className=" p-2 rounded-[10px] bg-[#F3F0EE] border border-[#17494d80] resize-none"
                     onChange={(e: any) =>
                       formik.setFieldValue("bio", e.target.value)
                     }
                   />
                 </div>
               </div>
-
               <div className="flex justify-end">
                 <button className="mx-6" onClick={onClose}>
                   پشیمون شدم
                 </button>
-                <Button
-                  title={"ثبت تغییرات"}
-                  width={"110px"}
-                  type="submit"
-                  onClick={() => console.log("12")}
-                />
+                <Button title={"ثبت تغییرات"} width={"110px"} type="submit" />
               </div>
             </form>
           </Dialog.Panel>

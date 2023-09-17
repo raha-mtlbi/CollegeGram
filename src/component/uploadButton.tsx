@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 import { FieldArray } from "formik";
 import { imageUrl } from "../api/config";
@@ -25,9 +25,7 @@ export default function UploadButton({ values }: { values: any }) {
               <div key={index}>
                 <img
                   src={
-                    typeof photo === "string"
-                      ? imageUrl + photo
-                      : URL.createObjectURL(photo)
+                    URL.createObjectURL(photo)
                   }
                   alt=""
                   style={{

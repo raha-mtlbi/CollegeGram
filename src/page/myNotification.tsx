@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
-import SideBar from "../component/sidebar";
 import { Link } from "react-router-dom";
-import Button from "../component/button";
-import user from "../assets/icons/person.svg";
 import { get } from "../api";
+
+import Button from "../component/button";
+import SideBar from "../component/sidebar";
+
+import user from "../assets/icons/person.svg";
 
 const data = [
   {
@@ -79,7 +81,9 @@ const NotificationPage = () => {
                 </div>
                 <div className="mx-[25px] w-[300px]">
                   <p className="text text-sm">{item.text}</p>
-                  <p className="time text-[#17494D] text-xs mt-1">{item.time}</p>
+                  <p className="time text-[#17494D] text-xs mt-1">
+                    {item.time}
+                  </p>
                 </div>
                 {(item.type === "2" ||
                   item.type === "3" ||

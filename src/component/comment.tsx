@@ -23,13 +23,13 @@ const Comment = ({ postId }: { postId: string }) => {
   return (
     <div className="w-[85%]">
       <AddComment postId={postId} />
-      <div>
+      <div className="max-h-[300px] overflow-y-auto">
         {comment &&
           comment.result.map((comment) => {
             return (
               <div>
                 {/* comment */}
-                <div className=" my-5">
+                <div className=" my-5 ">
                   <div className=" flex justify-between items-center my-2">
                     <div className="flex">
                       <p className="text-[12px] font-bold text-[#17494D] ">

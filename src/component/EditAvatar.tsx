@@ -1,23 +1,15 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { imageUrl } from "../api/config";
 import { useUser } from "../features/hooks";
-import { EditProfile } from "../api/user";
-import { getCurrentUser } from "../features/userSlice";
-import { useAppDispatch } from "../store";
 
 import camera from "../assets/icons/camera.svg";
 import close from "../assets/icons/close.svg";
 import refresh from "../assets/icons/refresh.svg";
 
-export default function Avatar({
-  value,
-  onChange,
-}: {
-  value?: any;
-  onChange: any;
-}) {
-  const [fileUrl, setFileUrl] = useState();
+export default function Avatar({ onChange }: { onChange: any }) {
   const user = useUser();
+  const fileUploader = useRef<HTMLInputElement | null>(null);
+  const [preview, setPreview] = useState<any>();
 
   return (
     <div>
@@ -26,22 +18,26 @@ export default function Avatar({
           type="file"
           id={"x"}
           className="hidden"
-          name="photo"
-          accept="image/png, application/pdf, image/jpeg, image/jpg"
-          value={value}
-          onChange={onChange}
+          ref={(e) => (fileUploader.current = e)}
+          onChange={(e) => {
+            if (e.target.files && e.target.files?.length > 0) {
+              const file = e.target.files[0];
+              onChange && onChange(file);
+              setPreview(URL.createObjectURL(file));
+            }
+          }}
         />
         <div className="w-[90px] h-[90px] rounded-[50%] border-2 border-[#C19008] flex justify-center items-center ">
           <img
             alt="camera"
-            src={user ? imageUrl + user?.photo : camera}
+            src={preview ? preview : user ? imageUrl + user?.photo : camera}
             className={
               user
                 ? "w-[90px] h-[90px] rounded-[50%] object-fill"
                 : "w-[36px] h-[36px] cursor-pointer"
             }
           />
-          {(fileUrl || user?.photo) && (
+          {user?.photo && (
             <img
               alt="refresh"
               src={refresh}
@@ -55,7 +51,13 @@ export default function Avatar({
         <button
           type="button"
           className="flex justify-center mx-auto mb-7 mt-2  items-center"
-          onClick={() => {}}
+          onClick={() => {
+            if (preview) {
+              setPreview(null);
+            } else {
+              // user.photo === null;
+            }
+          }}
         >
           <img alt="close" src={close} className="w-[12px] h-[12px] mt-1" />
           <p className="text-[#C19008] mr-2 font-bold">حذف تصویر</p>

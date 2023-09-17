@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination } from "swiper/modules";
+import { Navigation, Pagination } from "swiper";
 // import Swiper and modules styles
 import "swiper/css";
 import "swiper/css/navigation";
@@ -28,25 +28,28 @@ export default function InnerFriendsPost() {
     <div>
       <div className="flex mt-32 p-3 ">
         <div className="w-full grid grid-cols-2 gap-4 ">
-          <Swiper
-            // slidesPerView={1}
-            // spaceBetween={1}
-            // pagination={true}
-            // navigation={true}
-            // modules={[Pagination, Navigation]}
-          >
-            {photoDetail?.map((i: any) => {
-              return (
-                <SwiperSlide key={i}>
-                  <img
-                    alt="postImage"
-                    src={imageUrl + photoDetail?.photos}
-                    className="w-[475px] h-[488px]"
-                  />
-                </SwiperSlide>
-              );
-            })}
-          </Swiper>
+          <div>
+            <Swiper
+              slidesPerView={1}
+              pagination={true}
+              navigation={true}
+              width={505}
+              height={488}
+              modules={[Pagination, Navigation]}
+            >
+              {photoDetail?.map((i: any) => {
+                return (
+                  <SwiperSlide key={i}>
+                    <img
+                      alt="postImage"
+                      src={imageUrl + photoDetail?.photos}
+                      className="w-full h-full rounded-r-md"
+                    />
+                  </SwiperSlide>
+                );
+              })}
+            </Swiper>
+          </div>
           <div className="flex flex-col p-2 ">
             <Caption
               likeCount={photoDetail?.likesCount || 0}

@@ -6,7 +6,6 @@ import { useUser } from "../../features/hooks";
 import { AddNewComment } from "../../logic/AddNewComment";
 
 import send from "../../assets/icons/send.svg";
-import profile from "../../assets/icons/picture frame.svg";
 
 export default function AddComment({ postId }: { postId: string }) {
   const user = useUser();
@@ -14,7 +13,7 @@ export default function AddComment({ postId }: { postId: string }) {
   const formik = useFormik({
     initialValues: { content: "", postId: postId },
     enableReinitialize: true,
-    onSubmit: AddNewComment(),
+    onSubmit: AddNewComment({ postId }),
   });
 
   return (
