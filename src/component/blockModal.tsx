@@ -1,9 +1,12 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { Dialog } from "@headlessui/react";
 import Button from "./button";
+import { useUser } from "../features/hooks";
 
-import blockIcon from "../assets/icons/reportGray.svg";
-import tik from "../assets/icons/Verified.svg";
+import blockIcon from "../assets/icons/report.svg";
+import profile from "../assets/icons/Ellipse.svg";
+import tik from "../assets/icons/check-circle.svg";
 
 const BlockModal = ({
   open,
@@ -12,6 +15,9 @@ const BlockModal = ({
   open: boolean;
   onClose: () => void;
 }) => {
+  const user = useUser();
+  const navigate = useNavigate();
+
   return (
     <Dialog as="div" open={open} onClose={onClose} style={{ direction: "rtl" }}>
       <div
@@ -55,12 +61,8 @@ const BlockModal = ({
               <p className="mt-[8px]">
                 اگه بلاکش کنی دیگه نمیتونه بهت پیام بده و
               </p>
-              <p className="mt-2">
-                پست هات رو ببینه.قابلیت لایک کردن و کامنت
-              </p>
-              <p className="mt-2">
-                گذاشتن زیر پست های توهم براش مسدود میشه.
-              </p>
+              <p className="mt-2">پست هات رو ببینه.قابلیت لایک کردن و کامنت</p>
+              <p className="mt-2">گذاشتن زیر پست های توهم براش مسدود میشه.</p>
             </div>
 
             <div className="mt-7">
@@ -70,7 +72,12 @@ const BlockModal = ({
               >
                 نه پشیمونم
               </button>
-              <Button title={"آره، حتما"} width="100px" type="submit" />
+              <Button
+                title={"آره، حتما"}
+                width="100px"
+                type="submit"
+                onClick={() => navigate(`/user/${user?.id}/block`)}
+              />
             </div>
           </Dialog.Panel>
         </div>
