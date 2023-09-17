@@ -31,6 +31,7 @@ const EditProfile = ({
       lastname: "",
       bio: "",
       private: false,
+      photo: undefined,
     },
     enableReinitialize: true,
     // validationSchema: loginValidation,
@@ -52,9 +53,14 @@ const EditProfile = ({
             <p className="text-center text-[20px] font-bold not-italic text-[#17494D] leading-normal my-2 ">
               ویرایش حساب
             </p>
-            <Avatar />
 
             <form onSubmit={formik.handleSubmit}>
+              <Avatar
+                // value={formik.values.photo}
+                onChange={(e: any) =>
+                  formik.setFieldValue("photo", e.target.value)
+                }
+              />
               <div className="mt-2">
                 <div className="my-4">
                   <Input
@@ -120,16 +126,8 @@ const EditProfile = ({
                     </span>
                     <input
                       type="checkbox"
-                      role="switch"
-                      defaultChecked={
-                        user
-                          ? user?.private
-                          : (formik.values.private as boolean)
-                      }
                       className="sr-only peer"
-                      onChange={(e: any) =>
-                        formik.setFieldValue("private", e.target.value)
-                      }
+                      {...formik.getFieldProps("private")}
                     />
                     <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4  dark:peer-focus: rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white  after:rounded-full after:h-5 after:w-5 after:transition-all  peer-checked:bg-gray-800"></div>
                   </label>

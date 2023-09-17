@@ -19,7 +19,7 @@ const CreatePostModal = ({
       caption: "",
       closeFriend: Boolean(false),
       tags: [""],
-      photos: undefined,
+      // photos: undefined,
     },
     enableReinitialize: true,
     validationSchema: AddPostValidation,
@@ -42,7 +42,7 @@ const CreatePostModal = ({
               <p className="text-center text-[20px] font-bold not-italic leading-normal my-2 ">
                 افزودن پست
               </p>
-              {/* <UploadButton values={formik.values.photos} /> */}
+              <UploadButton values={formik?.values} />
               <div className="mb-5">
                 <p className="my-2 text-[#17494D] text-start">توضیحات</p>
                 <textarea
@@ -71,10 +71,8 @@ const CreatePostModal = ({
                   </span>
                   <input
                     type="checkbox"
-                    checked={formik.values.closeFriend || true}
-                    onChange={(e: any) => {
-                      formik.setFieldValue("closeFriend", e.target.values);
-                    }}
+                    // value="closeFriend"
+                    {...formik.getFieldProps("closeFriend")}
                     className="sr-only peer"
                   />
                   <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none  dark:peer-focus: rounded-full peer  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white  after:rounded-full after:h-5 after:w-5 after:transition-all  peer-checked:bg-gray-800"></div>

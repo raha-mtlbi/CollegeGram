@@ -14,6 +14,7 @@ export default function EditProfileSubmit({
     lastname: "";
     bio: "";
     private: boolean;
+    photo?: File;
   }) => {
     try {
       await EditProfile({
@@ -24,13 +25,14 @@ export default function EditProfileSubmit({
         lastname: data.lastname,
         bio: data?.bio,
         private: data.private,
+        photo: data.photo,
       });
 
       toast.success("با موفقیت وارد شدید");
       onClose();
     } catch (error) {
       console.log(error);
-      toast.error("مشکلی پیش آمده");
+      // toast.error("مشکلی پیش آمده");
     }
   };
 
