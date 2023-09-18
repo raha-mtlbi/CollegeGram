@@ -1,23 +1,22 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import { Dialog } from "@headlessui/react";
 import Button from "./button";
-import { useUser } from "../features/hooks";
+import { IUser } from "../api/type/user";
 
 import blockIcon from "../assets/icons/report.svg";
-import profile from "../assets/icons/Ellipse.svg";
-import tik from "../assets/icons/Verified.svg"
+import tik from "../assets/icons/Verified.svg";
 
 const BlockModal = ({
   open,
   onClose,
+  user,
+  onClick,
 }: {
   open: boolean;
   onClose: () => void;
+  user: IUser;
+  onClick: () => void;
 }) => {
-  const user = useUser();
-  const navigate = useNavigate();
-
   return (
     <Dialog as="div" open={open} onClose={onClose} style={{ direction: "rtl" }}>
       <div
@@ -34,8 +33,12 @@ const BlockModal = ({
 
             <div className="flex">
               <div className="mr-[51px] text-right">
-                <p className="text-[13px] font-bold mt-[50px]">متین دهقان</p>
-                <p className="text-[11px] mt-[5px]">170 هزار دنبال‌کننده</p>
+                <p className="text-[13px] font-bold mt-[50px]">
+                  {user !== undefined && user?.name + " " + user?.lastname}
+                </p>
+                <p className="text-[11px] mt-[5px]">
+                  {user?.followers} هزار دنبال‌کننده
+                </p>
               </div>
               <div className="rounded-full w-[80px] h-[80px] mr-[116px] mt-[30px]">
                 <div className="relative w-[80px] h-[80px] overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
@@ -57,7 +60,9 @@ const BlockModal = ({
             </div>
 
             <div className="text-[14px] text-[#17494D] text-right mr-[51px] mt-[50px]">
-              <p className="font-bold">مطمئنی میخوای متین رو بلاک کنی؟</p>
+              <p className="font-bold">
+                مطمئنی میخوای {user?.name} رو بلاک کنی؟
+              </p>
               <p className="mt-[8px]">
                 اگه بلاکش کنی دیگه نمیتونه بهت پیام بده و
               </p>
@@ -76,7 +81,7 @@ const BlockModal = ({
                 title={"آره، حتما"}
                 width="100px"
                 type="submit"
-                onClick={() => navigate(`/user/${user?.id}/block`)}
+                onClick={onClick}
               />
             </div>
           </Dialog.Panel>

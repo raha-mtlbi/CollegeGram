@@ -12,7 +12,7 @@ export default function OtherUsers() {
   const [user, setUser] = useState<{ result: IUser }>();
 
   useEffect(() => {
-    get(`/user/${id}`)
+    get(`/user/${id}/profile`)
       .then((d: any) => setUser(d))
       .catch((e) => console.log(e));
   }, [id]);

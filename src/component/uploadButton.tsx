@@ -24,9 +24,7 @@ export default function UploadButton({ values }: { values: any }) {
             {values?.photos?.map((photo: any, index: any) => (
               <div key={index}>
                 <img
-                  src={
-                    URL.createObjectURL(photo)
-                  }
+                  src={URL.createObjectURL(photo)}
                   alt=""
                   style={{
                     width: 200,

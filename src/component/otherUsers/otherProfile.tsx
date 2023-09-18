@@ -10,15 +10,57 @@ import block from "../../assets/icons/report.svg";
 import comment from "../../assets/icons/speech.svg";
 import star from "../../assets/icons/sparkle.svg";
 import verify from "../../assets/icons/Verified.svg";
+import { follow, unFollow, blockUser } from "../../api/otherUser";
 
 const OtherProfile = ({ user }: { user?: IUser }) => {
   const [openBlockModal, setOpenBlockModal] = useState(false);
+  const [follows, setFollows] = useState(false);
+  const [blocks, setBlocks] = useState(false);
+
+  const handleBlock = () => {
+    try {
+      blockUser(
+        1
+        //user?.id as number
+      );
+      setBlocks(true);
+    } catch (error) {
+      console.log(error);
+      setBlocks(false);
+    }
+  };
+
+  const handleFollow = () => {
+    try {
+      follow(
+        1
+        //user?.id as number
+      );
+      setFollows(true);
+    } catch (error) {
+      console.log(error);
+      setFollows(false);
+    }
+  };
+
+  const handleUnFollow = () => {
+    try {
+      unFollow(
+        1
+        //user?.id as number
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div>
       <BlockModal
         open={openBlockModal}
         onClose={() => setOpenBlockModal(false)}
+        user={user as IUser}
+        onClick={handleBlock}
       />
 
       <div className="w-[350px] h-[473px] bg-[#F1EBE3] border-[#CDCDCD] border flex flex-col justify-center items-center text-center">
@@ -64,34 +106,52 @@ const OtherProfile = ({ user }: { user?: IUser }) => {
             <p className="text-[#17494D] mr-2">{user?.following}</p>
             <p className="text-[#17494D] mr-1"> دنبال‌شونده</p>
           </div>
-          <Button title={"دنبال کردن"} width={"100px"} disabled={user?.block} />
+          {!user?.private && follows ? (
+            <button
+              className=" bg-white border border-[#C38F00] rounded-3xl px-4 py-2 text-[#C38F00]"
+              disabled={blocks}
+              onClick={handleUnFollow}
+            >
+              دنبال شده
+            </button>
+          ) : user?.private && follows ? (
+            <Button
+              title={" لغو درخواست "}
+              width={"100px"}
+              disabled={blocks}
+              onClick={handleUnFollow}
+            />
+          ) : (
+            <Button
+              title={"دنبال کردن"}
+              width={"100px"}
+              disabled={blocks}
+              onClick={handleFollow}
+            />
+          )}
           <div className="flex flex-col items-center my-7">
             <img alt="pin" src={pin} />
             <div className="flex items-center my-3">
-              <p className="text-[#17494D] text-xs">87</p>
+              <p className="text-[#17494D] text-xs">{user?.postsCount}</p>
               <p className="text-[#17494D] mx-1 text-xs">عکس</p>
             </div>
           </div>
           <div className=" bg-[#F3F0EE] p-5 grid grid-cols-3 gap-3 border  border-zinc-300">
             <button
-              disabled={user?.block}
-              className={
-                user?.block ? "w-5 h-5 mx-2 invert-[0.5]" : "w-5 h-5 mx-2"
-              }
+              disabled={blocks}
+              className={blocks ? "w-5 h-5 mx-2 invert-[0.5]" : "w-5 h-5 mx-2"}
             >
               <img className="" alt="satr" src={star} />
             </button>
             <button
-              disabled={user?.block}
-              className={
-                user?.block ? "w-5 h-5 mx-2 invert-[0.5]" : "w-5 h-5 mx-2"
-              }
+              disabled={blocks}
+              className={blocks ? "w-5 h-5 mx-2 invert-[0.5]" : "w-5 h-5 mx-2"}
             >
               <img className="" alt="comment" src={comment} />
             </button>
             <button
-              disabled={user?.block}
-              className={user?.block ? " invert-[0.5]" : "w-5 h-5 mx-2"}
+              disabled={blocks}
+              className={blocks ? " invert-[0.5]" : "w-5 h-5 mx-2"}
               onClick={() => setOpenBlockModal(true)}
             >
               <img className="" alt="block" src={block} />

@@ -1,6 +1,6 @@
 export interface IUser {
   bio: string;
-  id: string;
+  id: number;
   photo: string;
   username: string;
   email: string;

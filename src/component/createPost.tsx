@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Dialog } from "@headlessui/react";
 import Button from "./button";
 import { useFormik } from "formik";
@@ -19,7 +19,7 @@ const CreatePostModal = ({
       caption: "",
       closeFriend: Boolean(false),
       tags: [""],
-      // photos: undefined,
+      photos: undefined,
     },
     enableReinitialize: true,
     validationSchema: AddPostValidation,
@@ -71,9 +71,8 @@ const CreatePostModal = ({
                   </span>
                   <input
                     type="checkbox"
-                    // value="closeFriend"
-                    {...formik.getFieldProps("closeFriend")}
                     className="sr-only peer"
+                    {...formik.getFieldProps("closeFriend")}
                   />
                   <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none  dark:peer-focus: rounded-full peer  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white  after:rounded-full after:h-5 after:w-5 after:transition-all  peer-checked:bg-gray-800"></div>
                 </label>
