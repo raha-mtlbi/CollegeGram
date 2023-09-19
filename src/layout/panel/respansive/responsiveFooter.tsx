@@ -51,19 +51,21 @@ export default function ResponsiveFooter() {
           </a>
         </div>
       ) : (
-        <div className="flex w-80 h-14 bg-[#F8F9F9] border border-[#CDCDCD] rounded-[50px] mx-auto mt-[847px] mb-7">
-          <button>
-            <img src={people} alt="pepole" className="mr-12 my-3 w-6" />
-          </button>
-          <button
-            className="rounded-full bg-[#C38F00] w-14 h-14 mr-14 -m-7"
-            onClick={() => setOpen(true)}
-          >
-            <img alt="" src={add} className="w-3 mx-auto my-5" />
-          </button>
-          <button>
-            <img alt="" src={overView} className="mr-20 my-3 w-6" />
-          </button>
+        <div className="w-80 flex justify-center mx-auto">
+          <div className="fixed bottom-1 flex w-80 h-14 bg-[#F8F9F9] border border-[#CDCDCD] rounded-[50px] mx-auto mb-7">
+            <button>
+              <img src={people} alt="pepole" className="mr-12 my-3 w-6" />
+            </button>
+            <button
+              className="rounded-full bg-[#C38F00] w-14 h-14 mr-14 -m-7"
+              onClick={() => setOpen(true)}
+            >
+              <img alt="" src={add} className="w-3 mx-auto my-5" />
+            </button>
+            <button>
+              <img alt="" src={overView} className="mr-20 my-3 w-6" />
+            </button>
+          </div>
         </div>
       )}
     </>
