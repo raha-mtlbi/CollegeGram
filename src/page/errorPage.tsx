@@ -8,7 +8,7 @@ const ErrorPage = () => {
 
   return (
     <div className="text-center justify-center flex-col flex ">
-      <p className="text-[40px] not-italic font-bold text-center text-[#17494D] mt-[8%]">
+      <p className=" text-[40px] not-italic font-bold text-center text-[#17494D] mt-12">
         وای اینجا چخبره؟!
       </p>
       <p className="text-[#17494D] font-bold text-[25px] text-center not-italic mt-[20px] ">

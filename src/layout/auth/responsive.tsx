@@ -1,5 +1,5 @@
-import ResponsiveHeader from "../panel/responsiveHeader";
-import ResponsiveFooter from "../panel/responsiveFooter";
+import ResponsiveHeader from "../panel/respansive/responsiveHeader";
+import ResponsiveFooter from "../panel/respansive/responsiveFooter";
 
 export default function Responsive() {
   return (

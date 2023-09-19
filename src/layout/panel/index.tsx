@@ -6,6 +6,7 @@ import Navigation from "./navigationPanel";
 import tree from "../../assets/images/loginTree.svg";
 
 export default function PanelLayout() {
+
   return (
     <div className=" px-28 py-10">
       <div className="flex justify-around ">

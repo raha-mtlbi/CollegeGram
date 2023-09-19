@@ -25,6 +25,7 @@ interface ICaption {
   date: any;
   caption: string;
   tag: string[];
+  id?: string;
 }
 
 const Caption = ({
@@ -34,6 +35,7 @@ const Caption = ({
   date,
   caption,
   tag,
+  id,
 }: ICaption) => {
   const [open, setOpen] = useState<boolean>(false);
 
@@ -43,7 +45,7 @@ const Caption = ({
 
   return (
     <div>
-      <EditPostModal open={open} onClose={() => setOpen(false)} />
+      <EditPostModal open={open} onClose={() => setOpen(false)} id={id as string} />
       <div className="mr-[20px] mb-6">
         <div className="w-full flex justify-between">
           <div className="flex">

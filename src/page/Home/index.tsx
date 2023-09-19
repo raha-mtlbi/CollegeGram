@@ -8,7 +8,7 @@ export default function Home() {
   const [imageList, setImageList] = useState<{ result: IImage[] }>();
 
   useEffect(() => {
-    get("/post/explore")
+    get("/timeline")
       .then((d: any) => setImageList(d))
       .catch((e) => console.log(e));
   }, []);

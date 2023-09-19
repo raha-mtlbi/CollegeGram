@@ -4,9 +4,17 @@ import Button from "./button";
 import { useFormik } from "formik";
 
 import { AddPostValidation } from "../utils/validations";
-import { AddNewPost } from "../logic/addNewPost";
+import { EditPost } from "../logic/EditPost";
 
-const EditPostModal = ({ open, onClose }: { open: boolean; onClose: any }) => {
+const EditPostModal = ({
+  open,
+  onClose,
+  id,
+}: {
+  open: boolean;
+  onClose: any;
+  id: string;
+}) => {
   const [closeFriend, setCLoseFriend] = useState<boolean>(false);
 
   const formik = useFormik({
@@ -17,7 +25,7 @@ const EditPostModal = ({ open, onClose }: { open: boolean; onClose: any }) => {
     },
     enableReinitialize: true,
     validationSchema: AddPostValidation,
-    onSubmit: AddNewPost(),
+    onSubmit: EditPost({ id }),
   });
 
   return (
@@ -39,10 +47,7 @@ const EditPostModal = ({ open, onClose }: { open: boolean; onClose: any }) => {
               <div className="mb-5">
                 <p className="my-2 text-[#17494D] text-start">توضیحات</p>
                 <textarea
-                  value={formik.values?.caption}
-                  onChange={(e: any) =>
-                    formik.setFieldValue("caption", e.target.value)
-                  }
+                  {...formik.getFieldProps("caption")}
                   className=" w-full p-2 h-[164px] rounded-[10px] bg-[#F3F0EE]	border border-[#17494d80] resize-none"
                 />
               </div>
