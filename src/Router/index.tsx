@@ -23,7 +23,7 @@ import Message from "../page/messages";
 import OtherUsers from "../page/otherUserPage/[id]";
 import InnerFriendsPost from "../page/friendPost/[id]";
 
-const Home = React.lazy(() => import("../page/home"));
+const Home = React.lazy(() => import("../page/Home"));
 
 export default function Router() {
   const dispatch = useAppDispatch();
