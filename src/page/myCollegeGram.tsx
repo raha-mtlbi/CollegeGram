@@ -25,7 +25,7 @@ export default function MyCollegeGram() {
       ) : (
         <ImageList photoList={photoList?.result || []} />
       )}
-      {/* <SideBar /> */}
+      <SideBar />
     </div>
   );
 }

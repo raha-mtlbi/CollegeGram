@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React from "react";
 import { Dialog } from "@headlessui/react";
 import Button from "./button";
 import { useFormik } from "formik";
@@ -15,8 +15,6 @@ const EditPostModal = ({
   onClose: any;
   id: string;
 }) => {
-  const [closeFriend, setCLoseFriend] = useState<boolean>(false);
-
   const formik = useFormik({
     initialValues: {
       caption: "",
@@ -55,11 +53,8 @@ const EditPostModal = ({
                 <p className="mb-2 text-[#17494D] text-start">تگ‌ها</p>
                 <input
                   className="w-full px-2 h-[40px] rounded-[10px] bg-[#F3F0EE]	border border-[#17494d80] resize-none"
-                  value={formik.values?.tags}
                   type="text"
-                  onChange={(e: any) =>
-                    formik.setFieldValue("tags", e.target.value)
-                  }
+                  {...formik.getFieldProps("tag")}
                 />
               </div>
               <div className="flex justify-start">
@@ -69,10 +64,7 @@ const EditPostModal = ({
                   </span>
                   <input
                     type="checkbox"
-                    checked={closeFriend}
-                    onChange={() => {
-                      setCLoseFriend(!closeFriend);
-                    }}
+                    {...formik.getFieldProps("closeFriend")}
                     className="sr-only peer"
                   />
                   <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none  dark:peer-focus: rounded-full peer  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white  after:rounded-full after:h-5 after:w-5 after:transition-all  peer-checked:bg-gray-800"></div>

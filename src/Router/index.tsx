@@ -22,7 +22,6 @@ import OtherNotification from "../page/otherNotification";
 import Message from "../page/messages";
 import OtherUsers from "../page/otherUserPage/[id]";
 import InnerFriendsPost from "../page/friendPost/[id]";
-import RespansiveLayout from "../layout/panel/respansive";
 
 const Home = React.lazy(() => import("../page/home"));
 
@@ -58,7 +57,7 @@ export default function Router() {
   return (
     <Suspense fallback={<LoadingPage />}>
       <Routes>
-        <Route path="" element={<RespansiveLayout />}>
+        <Route path="" element={<PanelLayout />}>
           <Route path="/" element={<Home />} />
           <Route path="/myCollegeGram" element={<MyCollegeGram />} />
           <Route path="/collegians" element={<Collegians />} />
