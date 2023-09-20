@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
+
 import { get } from "../api";
 import { IComment } from "../api/type/comment";
 import AddComment from "./comment/addComment";
-import { imageUrl } from "../api/config";
+import { LikeComment, UnLikeComment } from "../api/comment";
 import { useUser } from "../features/hooks";
 
 import Like from "../assets/icons/heart.svg";
@@ -10,7 +11,7 @@ import disLike from "../assets/icons/heart-outline.svg";
 import arrow from "../assets/icons/arrow-left-curved.svg";
 
 const Comment = ({ postId }: { postId: string }) => {
-  const [isLike, setIsLike] = useState<boolean>(false);
+  const [like, setLike] = useState<boolean>(false);
   const [comment, setComment] = useState<{ result: IComment[] }>();
   const user = useUser();
 
@@ -19,6 +20,32 @@ const Comment = ({ postId }: { postId: string }) => {
       .then((d: any) => setComment(d))
       .catch((e) => console.log(e));
   }, [postId]);
+
+  const handleLike = (id: number) => {
+    try {
+      LikeComment(
+        // 1
+        id
+      );
+      setLike(true);
+    } catch (error) {
+      console.log(error);
+      setLike(false);
+    }
+  };
+
+  const handleUnLike = (id: number) => {
+    try {
+      UnLikeComment(
+        // 1
+        id
+      );
+      setLike(false);
+    } catch (error) {
+      console.log(error);
+      setLike(true);
+    }
+  };
 
   return (
     <div className="w-[85%]">
@@ -36,18 +63,22 @@ const Comment = ({ postId }: { postId: string }) => {
                         {user?.name + "" + user?.lastname}
                       </p>
                       <p className="mr-[8px] text-[#A5A5A5] text-[10px]">
-                        {/* {user.createdAt} */}
+                        {/* {comment?.createdAt} */}
                       </p>
                     </div>
                     <div className="flex items-center">
                       <p className=" text-[12px] font-black text-[#C38F00]">
-                        2
+                        {comment?.likeCount}
                       </p>
                       <button
-                        onClick={() => setIsLike((isLike) => !isLike)}
+                        onClick={() =>
+                          like
+                            ? handleUnLike(comment?.id)
+                            : handleLike(comment?.id)
+                        }
                         className="mr-[8px]"
                       >
-                        <img src={isLike ? Like : disLike} alt="" />
+                        <img src={like ? Like : disLike} alt="" />
                       </button>
                       <button
                         onClick={() => {}}
