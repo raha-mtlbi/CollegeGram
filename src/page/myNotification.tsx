@@ -137,11 +137,11 @@ const NotificationPage = () => {
                 <div className="mx-[25px] w-[300px]">
                   {/* description */}
                   <p className="text text-sm">
-                    {item.type == "comment"
+                    {item.type === "comment"
                       ? `${item.user.username && item.user.username}comment`
-                      : item.type == "follow"
+                      : item.type === "follow"
                       ? `${item.user.username && item.user.username}follow`
-                      : item.type == "request"
+                      : item.type === "request"
                       ? `${item.user.username && item.user.username}request`
                       : `${item.user.username && item.user.username}like`}
                   </p>

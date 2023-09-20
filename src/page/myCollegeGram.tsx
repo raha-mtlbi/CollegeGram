@@ -11,7 +11,7 @@ export default function MyCollegeGram() {
   const user = useUser();
 
   const [photoList, setPhotoList] = useState<{ result: IImage[] }>();
-  console.log("pe", photoList?.result);
+  
   useEffect(() => {
     get(`/post/user/${user?.id}`)
       .then((d: any) => setPhotoList(d))

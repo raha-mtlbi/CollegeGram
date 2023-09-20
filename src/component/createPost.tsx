@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Dialog } from "@headlessui/react";
 import Button from "./button";
 import { useFormik } from "formik";
@@ -23,7 +23,7 @@ const CreatePostModal = ({
     },
     enableReinitialize: true,
     validationSchema: AddPostValidation,
-    onSubmit: AddNewPost(),
+    onSubmit: AddNewPost({ onClose }),
   });
 
   return (
@@ -42,7 +42,9 @@ const CreatePostModal = ({
               <p className="text-center text-[20px] font-bold not-italic leading-normal my-2 ">
                 افزودن پست
               </p>
-              <UploadButton values={formik.values} />
+              <UploadButton
+                imagesUpload={(f: any) => formik.setFieldValue("photos", f)}
+              />
               <div className="mb-5">
                 <p className="my-2 text-[#17494D] text-start">توضیحات</p>
                 <textarea

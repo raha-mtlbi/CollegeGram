@@ -10,10 +10,14 @@ const EditPostModal = ({
   open,
   onClose,
   id,
+  caption,
+  tag,
 }: {
   open: boolean;
   onClose: any;
   id: string;
+  caption: string;
+  tag: string[];
 }) => {
   const formik = useFormik({
     initialValues: {
@@ -45,7 +49,10 @@ const EditPostModal = ({
               <div className="mb-5">
                 <p className="my-2 text-[#17494D] text-start">توضیحات</p>
                 <textarea
-                  {...formik.getFieldProps("caption")}
+                  value={caption}
+                  onChange={(e: any) =>
+                    formik.setFieldValue("caption", e.target.value)
+                  }
                   className=" w-full p-2 h-[164px] rounded-[10px] bg-[#F3F0EE]	border border-[#17494d80] resize-none"
                 />
               </div>
@@ -54,7 +61,10 @@ const EditPostModal = ({
                 <input
                   className="w-full px-2 h-[40px] rounded-[10px] bg-[#F3F0EE]	border border-[#17494d80] resize-none"
                   type="text"
-                  {...formik.getFieldProps("tag")}
+                  value={tag}
+                  onChange={(e: any) =>
+                    formik.setFieldValue("tag", e.target.value)
+                  }
                 />
               </div>
               <div className="flex justify-start">
@@ -65,6 +75,7 @@ const EditPostModal = ({
                   <input
                     type="checkbox"
                     {...formik.getFieldProps("closeFriend")}
+                    defaultChecked={true}
                     className="sr-only peer"
                   />
                   <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none  dark:peer-focus: rounded-full peer  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white  after:rounded-full after:h-5 after:w-5 after:transition-all  peer-checked:bg-gray-800"></div>

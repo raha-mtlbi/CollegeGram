@@ -12,7 +12,7 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        {/* <Provider store={store}>
+        <Provider store={store}>
           <ToastContainer
             limit={1}
             theme="colored"
@@ -27,7 +27,7 @@ function App() {
             pauseOnHover
           />
           <Router />
-        </Provider> */}
+        </Provider>
         {/* <Responsive /> */}
       </BrowserRouter>
     </div>
