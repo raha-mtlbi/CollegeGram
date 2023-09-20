@@ -8,7 +8,7 @@ export default function Home() {
     <div className="grid grid-cols-1">
       <p className=" font-bold text-[22px] mr-12 ">خانه</p>
       {count ? (
-        <div className="grid grid-cols-3 mr-12  mt-8">
+        <div className="grid grid-cols-3 mr-12 mt-8 w-[95%]">
           <HomeCardList />
           <HomeCardList />
           <HomeCardList />

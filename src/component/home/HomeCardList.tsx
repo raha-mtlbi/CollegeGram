@@ -15,10 +15,10 @@ const HomeCardList = () => {
   const [saved, setsaved] = useState(false)
 
   return (
-    <div className="bg-gray_50 rounded-b-2xl rounded-t-3xl w-fit space-y-5 pb-2 mt-4">
+    <div className="bg-gray_50 rounded-b-2xl rounded-t-3xl w-[90%] space-y-5 pb-2 mt-4">
       <div>
         <img
-          className="rounded-t-3xl aspect-square w-[24rem] cursor-pointer"
+          className="rounded-t-3xl aspect-square w-full cursor-pointer"
           src={image}
           alt="test"
         />
@@ -27,6 +27,7 @@ const HomeCardList = () => {
         <div className="flex items-center text-primary_orange gap-8">
           <div className="flex gap-2 items-center">
             <button
+              className="w-full"
               onClick={() => {
                 setLike(!like)
               }}>
