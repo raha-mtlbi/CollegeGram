@@ -37,22 +37,22 @@ export default function Router() {
   //   return <LoadingPage />;
   // }
 
-  // if (status === "unauthorized") {
-  //   return (
-  //     <Suspense fallback={<LoadingPage />}>
-  //       <Routes>
-  //         <Route index element={<Navigate to="/login" />} />
-  //         <Route path="" element={<AuthenticationLayout />}>
-  //           <Route path="/login" element={<LoginPage />} />
-  //           <Route path="/signup" element={<SignUp />} />
-  //           <Route path="/recoveryPassword" element={<RecoveryPassword />} />
-  //           <Route path="/reset-password" element={<SetPassword />} />
-  //           <Route path="/*" element={<LoginPage />} />
-  //         </Route>
-  //       </Routes>
-  //     </Suspense>
-  //   );
-  // }
+  if (status === "unauthorized") {
+    return (
+      <Suspense fallback={<LoadingPage />}>
+        <Routes>
+          <Route index element={<Navigate to="/login" />} />
+          <Route path="" element={<AuthenticationLayout />}>
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/recoveryPassword" element={<RecoveryPassword />} />
+            <Route path="/reset-password" element={<SetPassword />} />
+            <Route path="/*" element={<LoginPage />} />
+          </Route>
+        </Routes>
+      </Suspense>
+    );
+  }
 
   return (
     <Suspense fallback={<LoadingPage />}>
