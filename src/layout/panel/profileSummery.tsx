@@ -53,10 +53,10 @@ const ProfileSummery = () => {
                   <img src={arrow} className="my-auto mx-[10px]" alt="arrow" />
                 </Button>
               </PopoverHandler>
-              <PopoverContent className="w-[150px] text-right m-3 border-gray-400">
+              <PopoverContent className="w-[150px] text-right mr-3 border-gray-400 rounded-xl ">
                 <ul>
                   <li className=" cursor-pointer mr-2">{user.username}</li>
-                  <li className="  cursor-pointer mr-2 my-2">
+                  <li className="  cursor-pointer mr-2 mt-2">
                     {user.username}
                   </li>
                 </ul>

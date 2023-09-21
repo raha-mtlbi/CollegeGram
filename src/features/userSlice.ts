@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { removeToken, setRefreshToken, setToken } from "../api/token";
+import { removeToken, setToken } from "../api/token";
 import { getMe, login, register } from "../api/user";
 import { IUser } from "../api/type/user";
 
@@ -79,12 +79,12 @@ const userSlice = createSlice({
     token: null,
   } as userSliceType,
   reducers: {
-    logout(state) {
+    logout(state, action) {
       state.status = "unauthorized";
       state.token = null;
       state.user = null;
 
-      removeToken();
+      removeToken(action?.payload?.user?.username);
       // return {
       //   status: "unauthorized",
       // };
@@ -102,8 +102,11 @@ const userSlice = createSlice({
       .addCase(loginThunk.fulfilled, (state, action) => {
         if (action.payload.accessToken) {
           state.status = "authorized";
-          setToken(action.payload.accessToken);
-          setRefreshToken(action.payload.refreshToken as string);
+          setToken(
+            action.payload.user?.username,
+            action.payload.accessToken,
+            action?.payload?.refreshToken as string
+          );
           state.user = action.payload.user;
 
           // return {
@@ -130,8 +133,11 @@ const userSlice = createSlice({
       .addCase(registerThunk.fulfilled, (state, action) => {
         if (action.payload) {
           state.status = "authorized";
-          setToken(action.payload.accessToken);
-          setRefreshToken(action.payload.refreshToken as string);
+          setToken(
+            action.payload.user?.username,
+            action.payload.accessToken,
+            action?.payload?.refreshToken as string
+          );
           state.user = action.payload.user;
           state.token = action.payload.accessToken;
 

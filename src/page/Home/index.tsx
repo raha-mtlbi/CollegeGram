@@ -15,7 +15,7 @@ export default function Home() {
 
   return (
     <div className=" px-12">
-      <p className=" font-bold text-[18px]">خانه</p>
+      <p className=" font-bold text-[18px] mt-3">خانه</p>
       {imageList?.result.length === 0 ? (
         <InnerHome />
       ) : (

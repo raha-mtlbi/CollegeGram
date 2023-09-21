@@ -82,23 +82,23 @@ const NotificationPage = () => {
                   <p className="text text-sm">
                     {item?.relation === "following" && item?.type === "request"
                       ? `${
-                          item?.user?.username && item?.user?.username
+                          item?.actor?.username && item?.actor?.username
                         } درخواست دوستی‌ات رو قبول کرد`
                       : item.type === "comment"
                       ? `${
-                          item?.user?.username && item?.user?.username
+                          item?.actor?.username && item?.actor?.username
                         }برای این عکس کامنت داده`
                       : item.type === "follow"
                       ? `${
-                          item?.user?.username && item?.user?.username
+                          item?.actor?.username && item?.actor?.username
                         }دنبالت کرد`
                       : item.type === "request" &&
                         item?.reverseRelation === "pending"
                       ? `${
-                          item?.user?.username && item?.user?.username
+                          item?.actor?.username && item?.actor?.username
                         }درخواست دوستی داده`
                       : `${
-                          item?.user?.username && item?.user?.username
+                          item?.actor?.username && item?.actor?.username
                         }این عکس رو لایک کرده`}
                   </p>
                   <p className="time text-[#17494D] text-xs mt-1">

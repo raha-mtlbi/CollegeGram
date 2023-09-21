@@ -12,14 +12,14 @@ export default function Collegians() {
   const [imageList, setImageList] = useState<{ result: IImage[] }>();
 
   useEffect(() => {
-    get("/user/explore")
+    get("/post/explore")
       .then((d: any) => setImageList(d))
       .catch((e) => console.log(e));
   }, []);
 
   return (
     <div className="flex flex-col pr-12 ">
-      <p className="font-bold text-[22px] mb-10 mt-3"> کالج‌گرامی‌‌ها</p>
+      <p className="font-bold text-[18px] mb-10 mt-3"> کالج‌گرامی‌‌ها</p>
       {imageList?.result?.map((item, index) => {
         return (
           <div key={index}>
