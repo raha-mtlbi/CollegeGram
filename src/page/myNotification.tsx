@@ -9,7 +9,7 @@ import user from "../assets/icons/person.svg";
 import { acceptRequest, rejectRequest } from "../api/otherUser";
 
 interface data {
-  type: follow | request | like | comment;
+  type: "follow" | "request" | "like" | "comment";
 }
 
 const data: {
