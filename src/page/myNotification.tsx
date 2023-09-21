@@ -8,6 +8,41 @@ import SideBar from "../component/sidebar";
 import user from "../assets/icons/person.svg";
 import { acceptRequest, rejectRequest } from "../api/otherUser";
 
+interface data {
+  type: follow | request | like | comment;
+}
+
+const data: {
+  relation: string;
+  reverseRelation: string;
+  id: number;
+  user: {
+    id: number;
+    username: string;
+    name: string;
+    lastname: string;
+    photo: string;
+  };
+  actor: {
+    id: number;
+    username: string;
+    name: string;
+    lastname: string;
+    photo: string;
+  };
+  type: string;
+  post: string;
+  comment: {
+    id: number;
+    likesCount: number;
+    authorProfile: string;
+    parentId: number;
+    author: number;
+    postId: number;
+    content: string;
+  };
+};
+
 const data = [
   {
     relation: "string",
@@ -138,12 +173,18 @@ const NotificationPage = () => {
                   {/* description */}
                   <p className="text text-sm">
                     {item.type === "comment"
-                      ? `${item.user.username && item.user.username}comment`
+                      ? `${
+                          item.user.username && item.user.username
+                        }برای این عکس کامنت داده`
                       : item.type === "follow"
-                      ? `${item.user.username && item.user.username}follow`
+                      ? `${item.user.username && item.user.username}دنبالت کرد`
                       : item.type === "request"
-                      ? `${item.user.username && item.user.username}request`
-                      : `${item.user.username && item.user.username}like`}
+                      ? `${
+                          item.user.username && item.user.username
+                        }درخواست دوستی داده`
+                      : `${
+                          item.user.username && item.user.username
+                        }این عکس رو لایک کرده`}
                   </p>
                   {/* time */}
                   <p className="time text-[#17494D] text-xs mt-1">3 min</p>

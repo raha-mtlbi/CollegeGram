@@ -1,5 +1,5 @@
 import { toast } from "react-toastify";
-import { createPost } from "../api/image";
+import { createPost } from "../api/post";
 
 export const AddNewPost = ({ onClose }: { onClose: () => void }) => {
   const refresh = () => window.location.reload();

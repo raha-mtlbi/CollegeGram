@@ -1,7 +1,7 @@
 import { toast } from "react-toastify";
-import { UpdatePost } from "../api/image";
+import { UpdatePost } from "../api/post";
 
-export const EditPost = ({ id }: { id: string }) => {
+export const EditPost = ({ id }: { id: number }) => {
   const handleSubmit = async (data: {
     caption: string;
     closeFriend: boolean;

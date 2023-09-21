@@ -8,6 +8,13 @@ import {
 
 import Tag from "./Tag";
 import { useUser } from "../features/hooks";
+import EditPostModal from "./editpostModal";
+import {
+  handleBookmark,
+  handleLike,
+  handleUnBookmark,
+  handleUnLike,
+} from "../logic/likePost";
 
 import Like from "../assets/icons/heart.svg";
 import disLike from "../assets/icons/heart-outline.svg";
@@ -16,7 +23,6 @@ import disSave from "../assets/icons/save-outline.svg";
 import more from "../assets/icons/ellipsis.svg";
 import edit from "../assets/icons/whiteEdit.svg";
 import profile from "../assets/icons/picture frame.svg";
-import EditPostModal from "./editpostModal";
 
 interface ICaption {
   commentsCount: number;
@@ -25,7 +31,7 @@ interface ICaption {
   date: any;
   caption: string;
   tag: string[];
-  id?: string;
+  id?: number;
 }
 
 const Caption = ({
@@ -39,7 +45,7 @@ const Caption = ({
 }: ICaption) => {
   const [open, setOpen] = useState<boolean>(false);
 
-  const [isLike, setIsLike] = useState<boolean>(false);
+  const [like, setLike] = useState<boolean>(false);
   const [isSave, setIsSave] = useState<boolean>(false);
   const user = useUser();
 
@@ -48,16 +54,22 @@ const Caption = ({
       <EditPostModal
         open={open}
         onClose={() => setOpen(false)}
-        id={id as string}
+        id={id as number}
         caption={caption}
         tag={tag}
       />
       <div className="mr-[20px] mb-6">
         <div className="w-full flex justify-between">
           <div className="flex">
-            <button onClick={() => setIsLike((isLike) => !isLike)}>
+            <button
+              onClick={() =>
+                like
+                  ? handleUnLike(id as number, setLike)
+                  : handleLike(id as number, setLike)
+              }
+            >
               <img
-                src={isLike ? Like : disLike}
+                src={like ? Like : disLike}
                 className="w-[24px] h-[24px]"
                 alt="like"
               />
@@ -66,7 +78,11 @@ const Caption = ({
               {likeCount}
             </p>
             <button
-              onClick={() => setIsSave((isSave) => !isSave)}
+              onClick={() =>
+                isSave
+                  ? handleUnBookmark(id as number, setIsSave)
+                  : handleBookmark(id as number, setIsSave)
+              }
               className="mr-[16px]"
             >
               <img

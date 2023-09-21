@@ -15,7 +15,7 @@ const EditPostModal = ({
 }: {
   open: boolean;
   onClose: any;
-  id: string;
+  id: number;
   caption: string;
   tag: string[];
 }) => {

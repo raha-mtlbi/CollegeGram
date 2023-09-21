@@ -32,7 +32,7 @@ export default function InnerPost() {
               caption={photoDetail?.caption as string}
               tag={photoDetail?.tags as string[]}
               commentsCount={photoDetail?.commentsCount || 0}
-              id={id as string}
+              // id={id as string}
             />
             <Comment postId={id as string} />
           </div>
