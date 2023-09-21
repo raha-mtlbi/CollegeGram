@@ -7,6 +7,7 @@ import store from "../src/store";
 
 import Router from "./router";
 import "./App.css";
+import RespansiveLayout from "./layout/panel/respansive";
 
 function App() {
   return (
@@ -26,9 +27,9 @@ function App() {
             draggable
             pauseOnHover
           />
-          <Router />
+          {/* <Router /> */}
+          <RespansiveLayout />
         </Provider>
-        {/* <Responsive /> */}
       </BrowserRouter>
     </div>
   );

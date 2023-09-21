@@ -1,6 +1,5 @@
 import { toast } from "react-toastify";
 import { AddComment } from "../api/comment";
-import { get } from "../api";
 
 export const AddNewComment = ({ postId }: { postId: any }) => {
   const refresh = () => window.location.reload();
