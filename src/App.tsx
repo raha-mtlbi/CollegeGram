@@ -7,13 +7,13 @@ import store from "../src/store";
 import Router from "./Router";
 import "./App.css";
 import React from "react";
-import Responsive from "./layout/auth/responsive";
+// import Responsive from "./layout/auth/responsive";
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        {/* <Provider store={store}>
+        <Provider store={store}>
           <ToastContainer
             limit={1}
             theme="colored"
@@ -28,8 +28,8 @@ function App() {
             pauseOnHover
           />
           <Router />
-        </Provider> */}
-        <Responsive />
+        </Provider>
+        {/* <Responsive /> */}
       </BrowserRouter>
     </div>
   );
