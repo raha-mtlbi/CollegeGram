@@ -19,16 +19,16 @@ const data: {
   user: {
     id: number;
     username: string;
-    name: string;
-    lastname: string;
-    photo: string;
+    name?: string;
+    lastname?: string;
+    photo?: string;
   };
   actor: {
     id: number;
     username: string;
-    name: string;
-    lastname: string;
-    photo: string;
+    name?: string;
+    lastname?: string;
+    photo?: string;
   };
   type: string;
   post: string;
