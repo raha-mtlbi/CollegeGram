@@ -28,7 +28,7 @@ export default function ResponsiveFooter() {
       >
         {open && (
           <div className="absolute bottom-0 left-[-38px] bg-[#F1EBE3] border border-[#CDCDCD] rounded-t-[20px] w-96 h-[440px] flex flex-col text-[#C19008]">
-            <a className="flex mb-8">
+            <a className="flex mb-8 mt-11">
               <img src={pin} className="w-6 mr-8 ml-2" />
               <span>پست ها</span>
             </a>
