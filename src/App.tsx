@@ -1,12 +1,12 @@
+import React from "react";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import store from "../src/store";
 
-import Router from "./Router";
+import Router from "./router";
 import "./App.css";
-import React from "react";
 
 function App() {
   return (
@@ -28,6 +28,7 @@ function App() {
           />
           <Router />
         </Provider>
+        {/* <Responsive /> */}
       </BrowserRouter>
     </div>
   );

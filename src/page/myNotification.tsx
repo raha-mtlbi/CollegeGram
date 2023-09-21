@@ -6,6 +6,7 @@ import Button from "../component/button";
 import SideBar from "../component/sidebar";
 
 import user from "../assets/icons/person.svg";
+import { acceptRequest, rejectRequest } from "../api/otherUser";
 
 const data = [
   {
@@ -84,9 +85,30 @@ const NotificationPage = () => {
   useEffect(() => {
     get("user/me/notification")
       .then((d: any) => setNotification(d))
-      .then((d) => console.log("iiiiiiii", d))
       .catch((e) => console.log(e));
   }, []);
+
+  const handleAccept = () => {
+    try {
+      acceptRequest(
+        1
+        //user?.id as number
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleReject = () => {
+    try {
+      rejectRequest(
+        1
+        //user?.id as number
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className="flex justify-between mt-32 w-full">
@@ -115,11 +137,11 @@ const NotificationPage = () => {
                 <div className="mx-[25px] w-[300px]">
                   {/* description */}
                   <p className="text text-sm">
-                    {item.type == "comment"
+                    {item.type === "comment"
                       ? `${item.user.username && item.user.username}comment`
-                      : item.type == "follow"
+                      : item.type === "follow"
                       ? `${item.user.username && item.user.username}follow`
-                      : item.type == "request"
+                      : item.type === "request"
                       ? `${item.user.username && item.user.username}request`
                       : `${item.user.username && item.user.username}like`}
                   </p>

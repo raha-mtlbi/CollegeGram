@@ -1,43 +1,31 @@
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { IImage } from "../api/type/images";
+import { get } from "../api";
 
 import arrow from "../assets/icons/arrow-back1.svg";
 import user from "../assets/icons/person.svg";
 import dot from "../assets/icons/ellipsis.svg";
-import photo from "../assets/images/sampleHomeCard.svg";
-
-const data = [
-  {
-    name: "یاسین اروسخانی",
-    followers: "10 هزار دنبال‌کننده",
-    profile: "",
-    photoList: [photo, photo, photo, photo],
-  },
-  {
-    name: "متین دهقان",
-    followers: "10 هزار دنبال‌کننده",
-    profile: "",
-    photoList: [photo, photo, photo, photo],
-  },
-  {
-    name: "یاسین",
-    followers: "دقیقه پیش",
-    profile: "",
-    photoList: [photo, photo, photo, photo],
-  },
-];
 
 export default function Collegians() {
   const navigate = useNavigate();
+  const [imageList, setImageList] = useState<{ result: IImage[] }>();
+
+  useEffect(() => {
+    get("/user/explore")
+      .then((d: any) => setImageList(d))
+      .catch((e) => console.log(e));
+  }, []);
 
   return (
     <div className="flex flex-col pr-12 ">
       <p className="font-bold text-[22px] mb-10 mt-3"> کالج‌گرامی‌‌ها</p>
-      {data.map((item, index) => {
+      {imageList?.result?.map((item, index) => {
         return (
           <div key={index}>
             <div className="flex">
               <div className="grid grid-cols-4 gap-4">
-                {item.photoList.map((photo) => {
+                {item.photos.map((photo) => {
                   return (
                     <div className="w-[220px] h-[220px] ml-[24px] ">
                       <img
@@ -61,17 +49,20 @@ export default function Collegians() {
               <div className="bg-white rounded-full w-12 h-12  ml-6">
                 <img
                   alt="profile"
-                  src={item.profile ? item.profile : user}
+                  src={item.user?.photo ? item.user?.photo : user}
                   className="w-8 h-8 mx-auto mt-1"
                 />
               </div>
               <div>
                 <p className="text-[16px] text-[#C38F00] font-bold">
-                  {item.name}
+                  {item?.user.name + " " + item.user.lastname}
                 </p>
-                <p className="text-[#17494D] text-[11px] mt-[9px]">
-                  {item.followers}
-                </p>
+                <div className="flex">
+                  <p className="text-[#17494D] text-[11px] mt-[9px]">
+                    {item?.user.followers}
+                  </p>
+                  <p className="mx-2"> هزار دنبال‌کننده</p>
+                </div>
               </div>
               <button onClick={() => {}}>
                 <img

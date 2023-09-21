@@ -2,11 +2,9 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 import { imageUrl } from "../../api/config";
-import { IImage } from "../../api/type/images";
-import { IUser } from "../../api/type/user";
 
-import sample from "../../assets/images/sampleHomeCard.svg";
 import board from "../../assets/icons/board.svg";
+import { IImage } from "../../api/type/images";
 
 const privateListImage = [
   { id: 1, image: board },
@@ -15,30 +13,17 @@ const privateListImage = [
   { id: 4, image: board },
 ];
 
-const sampleList = [
-  { id: 1, image: sample },
-  { id: 2, image: sample },
-  { id: 3, image: sample },
-  { id: 4, image: sample },
-];
-
-export default function UserImageList({
-  photoList,
-  user,
-}: {
-  photoList: IImage[];
-  user: IUser;
-}) {
+export default function UserImageList({ list }: { list: IImage[] | any }) {
   const navigate = useNavigate();
 
   return (
     <div>
-      {!user?.private ? (
+      {!list?.user?.private ? (
         <div className="grid grid-cols-2 gap-4 mr-12 ml-5">
-          {sampleList.slice(0, 4).map((photo) => (
+          {list?.slice(0, 4).map((photo: any) => (
             <img
               className="cursor-pointer rounded-t-3xl"
-              src={photo.image}
+              src={imageUrl + photo.photo}
               alt="postImage"
               onClick={() => navigate(`/friendPost/${photo.id}`)}
             />

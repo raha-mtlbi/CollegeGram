@@ -97,7 +97,7 @@ const OtherProfile = ({ user }: { user?: IUser }) => {
             {user?.username}
           </p>
           <p className="text-[#C38F00] text-center text-[20px] font-bold  mt-1">
-            {"متین"}
+            {user?.name + " " + user?.lastname}
           </p>
           <div className="flex justify-center mt-3 mb-5 text-[14px]">
             <p className="text-[#17494D] ml-1">{user?.followers}</p>
