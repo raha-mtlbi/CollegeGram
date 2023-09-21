@@ -3,6 +3,11 @@ import { imageUrl } from "../../api/config";
 import { IUser } from "../../api/type/user";
 import Button from "../button";
 import BlockModal from "../blockModal";
+import {
+  handleBlock,
+  handleFollow,
+  handleUnFollow,
+} from "../../logic/followUser";
 
 import arrow from "../../assets/icons/arrow-down.svg";
 import pin from "../../assets/icons/angled-pinG.svg";
@@ -10,49 +15,11 @@ import block from "../../assets/icons/report.svg";
 import comment from "../../assets/icons/speech.svg";
 import star from "../../assets/icons/sparkle.svg";
 import verify from "../../assets/icons/Verified.svg";
-import { follow, unFollow, blockUser } from "../../api/otherUser";
 
 const OtherProfile = ({ user }: { user?: IUser }) => {
   const [openBlockModal, setOpenBlockModal] = useState(false);
-  const [follows, setFollows] = useState(false);
+  const [follows, setFollows] = useState<boolean>(false);
   const [blocks, setBlocks] = useState(false);
-
-  const handleBlock = () => {
-    try {
-      blockUser(
-        1
-        //user?.id as number
-      );
-      setBlocks(true);
-    } catch (error) {
-      console.log(error);
-      setBlocks(false);
-    }
-  };
-
-  const handleFollow = () => {
-    try {
-      follow(
-        1
-        //user?.id as number
-      );
-      setFollows(true);
-    } catch (error) {
-      console.log(error);
-      setFollows(false);
-    }
-  };
-
-  const handleUnFollow = () => {
-    try {
-      unFollow(
-        1
-        //user?.id as number
-      );
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   return (
     <div>
@@ -60,7 +27,7 @@ const OtherProfile = ({ user }: { user?: IUser }) => {
         open={openBlockModal}
         onClose={() => setOpenBlockModal(false)}
         user={user as IUser}
-        onClick={handleBlock}
+        onClick={() => handleBlock(user?.id as number, setBlocks)}
       />
 
       <div className="w-[350px] h-[473px] bg-[#F1EBE3] border-[#CDCDCD] border flex flex-col justify-center items-center text-center">
@@ -110,7 +77,7 @@ const OtherProfile = ({ user }: { user?: IUser }) => {
             <button
               className=" bg-white border border-[#C38F00] rounded-3xl px-4 py-2 text-[#C38F00]"
               disabled={blocks}
-              onClick={handleUnFollow}
+              onClick={() => handleUnFollow(user?.id as number, setFollows)}
             >
               دنبال شده
             </button>
@@ -119,14 +86,14 @@ const OtherProfile = ({ user }: { user?: IUser }) => {
               title={" لغو درخواست "}
               width={"100px"}
               disabled={blocks}
-              onClick={handleUnFollow}
+              onClick={() => handleUnFollow(user?.id, setFollows)}
             />
           ) : (
             <Button
               title={"دنبال کردن"}
               width={"100px"}
               disabled={blocks}
-              onClick={handleFollow}
+              onClick={() => handleFollow(user?.id as number, setFollows)}
             />
           )}
           <div className="flex flex-col items-center my-7">

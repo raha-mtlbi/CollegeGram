@@ -27,8 +27,8 @@ function App() {
             draggable
             pauseOnHover
           />
-          {/* <Router /> */}
-          <RespansiveLayout />
+          <Router />
+          {/* <RespansiveLayout /> */}
         </Provider>
       </BrowserRouter>
     </div>
