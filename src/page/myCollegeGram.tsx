@@ -10,8 +10,11 @@ import SideBar from "../component/sidebar";
 export default function MyCollegeGram() {
   const user = useUser();
 
-  const [photoList, setPhotoList] = useState<{ result: IImage[] }>();
-  
+  const [photoList, setPhotoList] = useState<{
+    result: IImage[];
+    msg: string;
+  }>();
+
   useEffect(() => {
     get(`/post/user/${user?.id}`)
       .then((d: any) => setPhotoList(d))
@@ -20,7 +23,7 @@ export default function MyCollegeGram() {
 
   return (
     <div className="flex mt-32">
-      {photoList?.result.length === 0 ? (
+      {photoList?.msg === "پست مورد نظر یافت نشد" ? (
         <EmptyMyCollage />
       ) : (
         <ImageList photoList={photoList?.result || []} />

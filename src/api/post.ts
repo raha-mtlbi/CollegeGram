@@ -35,9 +35,9 @@ export const UnLikePost = (id: number) => {
 };
 
 export const Bookmark = (id: number) => {
-  return post(`/post/${id}/bookmarked`);
+  return post(`/post/${id}/bookmark`);
 };
 
 export const UnBookmark = (id: number) => {
-  return delete_(`/post/${id}/unbookmarked`);
+  return delete_(`/post/${id}/unbookmark`);
 };

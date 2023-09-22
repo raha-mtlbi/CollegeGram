@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
-import { IImage } from "../../api/type/images";
 import { get } from "../../api";
+import { ITilmeLine } from "../../api/type/timeLine";
 import HomeCardList from "../../component/home/HomeCardList";
 import InnerHome from "../../component/home/innerhome";
 
 export default function Home() {
-  const [imageList, setImageList] = useState<{ result: IImage[] }>();
+  const [imageList, setImageList] = useState<{ result: ITilmeLine[] }>();
 
   useEffect(() => {
-    get("/timeline")
+    get("/post/MyTimeline")
       .then((d: any) => setImageList(d))
       .catch((e) => console.log(e));
   }, []);

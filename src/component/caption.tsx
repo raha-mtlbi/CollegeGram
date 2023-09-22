@@ -69,7 +69,7 @@ const Caption = ({
               }
             >
               <img
-                src={like ? Like : disLike}
+                src={like || likeCount > 0 ? Like : disLike}
                 className="w-[24px] h-[24px]"
                 alt="like"
               />
@@ -86,7 +86,7 @@ const Caption = ({
               className="mr-[16px]"
             >
               <img
-                src={isSave ? Save : disSave}
+                src={isSave || bookmarkCount > 0 ? Save : disSave}
                 className="w-[24px] h-[24px]"
                 alt="save"
               />
