@@ -64,13 +64,13 @@ const OtherProfile = ({ user }: { user?: IUser }) => {
             {user?.username}
           </p>
           <p className="text-[#C38F00] text-center text-[20px] font-bold  mt-1">
-            {user?.name + " " + user?.lastname}
+            {user !== undefined ? user?.name + " " + user?.lastname : "No_Name"}
           </p>
           <div className="flex justify-center mt-3 mb-5 text-[14px]">
-            <p className="text-[#17494D] ml-1">{user?.followers}</p>
+            <p className="text-[#17494D] ml-1">{user?.followers || 0}</p>
             <p className="text-[#17494D] ml-[10px]">دنبال‌کننده </p>
             <p>|</p>
-            <p className="text-[#17494D] mr-2">{user?.following}</p>
+            <p className="text-[#17494D] mr-2">{user?.following || 0}</p>
             <p className="text-[#17494D] mr-1"> دنبال‌شونده</p>
           </div>
           {!user?.private && follows ? (

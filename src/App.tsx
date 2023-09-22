@@ -8,6 +8,7 @@ import store from "../src/store";
 import Router from "./router";
 import "./App.css";
 import RespansiveLayout from "./layout/panel/respansive";
+import OtherUsers from "./page/otherUserPage/[id]";
 
 function App() {
   return (
@@ -28,7 +29,6 @@ function App() {
             pauseOnHover
           />
           <Router />
-          {/* <RespansiveLayout /> */}
         </Provider>
       </BrowserRouter>
     </div>

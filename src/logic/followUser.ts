@@ -26,7 +26,9 @@ export const handleUnFollow = (
 ) => {
   try {
     unFollow(id as number);
+    setFollows(false);
   } catch (error) {
     console.log(error);
+    setFollows(true);
   }
 };
