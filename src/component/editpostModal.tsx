@@ -49,7 +49,7 @@ const EditPostModal = ({
               <div className="mb-5">
                 <p className="my-2 text-[#17494D] text-start">توضیحات</p>
                 <textarea
-                  value={caption}
+                  value={formik?.values?.caption}
                   onChange={(e: any) =>
                     formik.setFieldValue("caption", e.target.value)
                   }

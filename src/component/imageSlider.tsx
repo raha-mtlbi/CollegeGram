@@ -8,6 +8,8 @@ import "swiper/css/pagination";
 import { imageUrl } from "../api/config";
 import { IImage } from "../api/type/images";
 
+import sample from "../assets/images/imageListSampel.svg";
+
 export default function ImageSlider({
   photoDetail,
 }: {
@@ -28,7 +30,7 @@ export default function ImageSlider({
             <SwiperSlide key={i}>
               <img
                 alt="postImage"
-                src={imageUrl + photoDetail?.photos}
+                src={imageUrl + photoDetail?.photos || sample}
                 className="w-full h-full rounded-r-md"
               />
             </SwiperSlide>

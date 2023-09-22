@@ -1,8 +1,8 @@
 import { Bookmark, LikePost, UnBookmark, UnLikePost } from "../api/post";
 
-export const handleLike = (id: number, setLike: (a: boolean) => void) => {
+export const handleLike = async (id: number, setLike: (a: boolean) => void) => {
   try {
-    LikePost(id);
+    await LikePost(id);
     setLike(true);
   } catch (error) {
     console.log(error);
@@ -10,9 +10,12 @@ export const handleLike = (id: number, setLike: (a: boolean) => void) => {
   }
 };
 
-export const handleUnLike = (id: number, setLike: (a: boolean) => void) => {
+export const handleUnLike = async (
+  id: number,
+  setLike: (a: boolean) => void
+) => {
   try {
-    UnLikePost(id);
+    await UnLikePost(id);
     setLike(false);
   } catch (error) {
     console.log(error);
@@ -20,9 +23,12 @@ export const handleUnLike = (id: number, setLike: (a: boolean) => void) => {
   }
 };
 
-export const handleBookmark = (id: number, setIsSave: (a: boolean) => void) => {
+export const handleBookmark = async (
+  id: number,
+  setIsSave: (a: boolean) => void
+) => {
   try {
-    Bookmark(id);
+    await Bookmark(id);
     setIsSave(true);
   } catch (error) {
     console.log(error);
@@ -30,12 +36,12 @@ export const handleBookmark = (id: number, setIsSave: (a: boolean) => void) => {
   }
 };
 
-export const handleUnBookmark = (
+export const handleUnBookmark = async (
   id: number,
   setIsSave: (a: boolean) => void
 ) => {
   try {
-    UnBookmark(id);
+    await UnBookmark(id);
     setIsSave(false);
   } catch (error) {
     console.log(error);

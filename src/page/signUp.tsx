@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import * as Yup from "yup";
-import { Formik, useFormik } from "formik";
+import { Formik } from "formik";
 import Signup from "../logic/signup";
 
 import Button from "../component/button";

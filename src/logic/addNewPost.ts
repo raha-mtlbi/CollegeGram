@@ -19,10 +19,9 @@ export const AddNewPost = ({ onClose }: { onClose: () => void }) => {
       });
       toast.success("پست با موفقیت اضافه شد");
       onClose();
-      refresh();
+      // refresh();
     } catch (error) {
       console.log(error);
-      onClose();
     }
   };
 

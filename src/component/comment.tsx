@@ -9,7 +9,13 @@ import Like from "../assets/icons/heart.svg";
 import disLike from "../assets/icons/heart-outline.svg";
 import arrow from "../assets/icons/arrow-left-curved.svg";
 
-const Comment = ({ postId }: { postId: string }) => {
+const Comment = ({
+  postId,
+  parentId,
+}: {
+  postId?: number;
+  parentId?: number;
+}) => {
   const [like, setLike] = useState<boolean>(false);
   const [comment, setComment] = useState<{ result: any }>();
 
@@ -23,7 +29,6 @@ const Comment = ({ postId }: { postId: string }) => {
     try {
       LikeComment(id);
       setLike(true);
-      window.location.reload();
     } catch (error) {
       console.log(error);
       setLike(false);
@@ -34,7 +39,6 @@ const Comment = ({ postId }: { postId: string }) => {
     try {
       UnLikeComment(id);
       setLike(false);
-      window.location.reload();
     } catch (error) {
       console.log(error);
       setLike(true);
@@ -43,7 +47,7 @@ const Comment = ({ postId }: { postId: string }) => {
 
   return (
     <div className="w-[85%]">
-      <AddComment postId={postId} />
+      <AddComment postId={postId as number} />
       <div className="max-h-[300px] overflow-y-auto">
         {comment &&
           comment.result.map((comment: any) => {

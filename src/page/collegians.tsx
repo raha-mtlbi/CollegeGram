@@ -9,7 +9,7 @@ import { ITilmeLine } from "../api/type/timeLine";
 
 export default function Collegians() {
   const navigate = useNavigate();
-  const [imageList, setImageList] = useState<ITilmeLine[]>();
+  const [imageList, setImageList] = useState<ITilmeLine[] | any>();
 
   useEffect(() => {
     get("/post/explore")
@@ -20,12 +20,12 @@ export default function Collegians() {
   return (
     <div className="flex flex-col pr-12 ">
       <p className="font-bold text-[18px] mb-10 mt-3"> کالج‌گرامی‌‌ها</p>
-      {imageList?.map((item, index) => {
+      {imageList?.map((item: any, index: number) => {
         return (
           <div key={index}>
             <div className="flex">
               <div className="grid grid-cols-4 gap-4">
-                {item?.post?.photos.map((photo) => {
+                {item?.post?.photos.map((photo: any) => {
                   return (
                     <div className="w-[220px] h-[220px] ml-[24px] ">
                       <img
@@ -41,7 +41,7 @@ export default function Collegians() {
                 alt="arrow"
                 src={arrow}
                 className="w-6 h-6 mr-[65px] mt-[105px] cursor-pointer"
-                onClick={() => navigate(`/usersProfile/1`)}
+                onClick={() => navigate(`/usersProfile/${item?.user?.id}`)}
               />
             </div>
             {/* paeen */}
@@ -55,13 +55,15 @@ export default function Collegians() {
               </div>
               <div>
                 <p className="text-[16px] text-[#C38F00] font-bold">
-                  {item?.user.name + " " + item.user.lastname}
+                  {item?.user.name + " " + item.user.lastname || "No_Name"}
                 </p>
-                <div className="flex">
-                  <p className="text-[#17494D] text-[11px] mt-[9px]">
+                <div className="flex items-center mt-[9px]">
+                  <p className="text-[#17494D] text-[11px]">
                     {item?.user.followers}
                   </p>
-                  <p className="mx-2"> هزار دنبال‌کننده</p>
+                  <p className="mx-2 text-[#17494D]  text-[11px]">
+                    هزار دنبال‌کننده
+                  </p>
                 </div>
               </div>
               <button onClick={() => {}}>

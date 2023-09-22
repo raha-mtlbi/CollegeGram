@@ -1,4 +1,4 @@
-import { get, patch, post } from ".";
+import { delete_, get, patch, post } from ".";
 import { IUser } from "./type/user";
 
 export const login = (usernameOrEmail: string, password: string) => {
@@ -25,6 +25,10 @@ export const register = (username: string, email: string, password: string) => {
 
 export const getMe = () => {
   return get<IUser>("/user/me");
+};
+
+export const Logout = (id?: number) => {
+  return delete_<IUser>("/user/logout");
 };
 
 export const recoveryPassword = (data: { usernameOrEmail: string }) => {

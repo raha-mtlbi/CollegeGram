@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Popover,
   PopoverHandler,
@@ -12,11 +13,21 @@ import { useUser } from "../../features/hooks";
 
 import arrow from "../../assets/icons/arrow-down.svg";
 import pen from "../../assets/icons/edit.svg";
+import { Logout } from "../../api/user";
+// import { logout } from "../../features/userSlice";
 
 const ProfileSummery = () => {
   const [open, setOpen] = useState<boolean>(false);
   const user = useUser();
-  console.log("user", user);
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    try {
+      await Logout();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div>
@@ -55,9 +66,17 @@ const ProfileSummery = () => {
               </PopoverHandler>
               <PopoverContent className="w-[150px] text-right mr-3 border-gray-400 rounded-xl ">
                 <ul>
-                  <li className=" cursor-pointer mr-2">{user.username}</li>
                   <li className="  cursor-pointer mr-2 mt-2">
                     {user.username}
+                  </li>
+                  <li
+                    className="  cursor-pointer mr-2 mt-2"
+                    onClick={() => {
+                      handleLogout();
+                      navigate("/login");
+                    }}
+                  >
+                    اضافه کردن اکانت+
                   </li>
                 </ul>
               </PopoverContent>

@@ -1,16 +1,16 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { IUser } from "../../api/type/user";
 import { get } from "../../api";
+import { IImage } from "../../api/type/images";
+import { IOtherUser } from "../../api/type/otherUser";
 
 import OtherProfile from "../../component/otherUsers/otherProfile";
 import UserImageList from "../../component/otherUsers/otherUserImageList";
 import BlockPage from "../blockPage";
-import { IImage } from "../../api/type/images";
 
 export default function OtherUsers() {
   const { id } = useParams();
-  const [user, setUser] = useState<{ result: IUser }>();
+  const [user, setUser] = useState<IOtherUser>();
   const [imageList, setImageList] = useState<{ result: IImage[] }>();
 
   useEffect(() => {
@@ -27,12 +27,15 @@ export default function OtherUsers() {
 
   return (
     <div className="flex justify-between mt-32">
-      {user?.result?.block ? (
+      {user?.reversStatue === "block" ? (
         <BlockPage />
       ) : (
-        <UserImageList list={imageList?.result as IImage[]} />
+        <UserImageList
+          list={imageList?.result as IImage[]}
+          user={user as IOtherUser}
+        />
       )}
-      <OtherProfile user={user?.result as IUser} />
+      <OtherProfile user={user} />
     </div>
   );
 }

@@ -63,7 +63,7 @@ const Caption = ({
           <div className="flex">
             <button
               onClick={() =>
-                like
+                like || likeCount > 0
                   ? handleUnLike(id as number, setLike)
                   : handleLike(id as number, setLike)
               }

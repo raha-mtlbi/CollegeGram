@@ -5,12 +5,14 @@ import { ISave } from "../api/type/save";
 import { useNavigate } from "react-router-dom";
 import SideBar from "../component/sidebar";
 
+import sample from "../assets/images/imageListSampel.svg";
+
 const MySavePage = () => {
   const [imageList, setImageList] = useState<{ result: ISave[] }>();
   const navigate = useNavigate();
 
   useEffect(() => {
-    get("/myBookmarkeds")
+    get("/user/myBookmarkeds")
       .then((d: any) => setImageList(d))
       .catch((e) => console.log(e));
   }, []);
@@ -23,7 +25,7 @@ const MySavePage = () => {
           {imageList?.result?.map((photo) => (
             <img
               className="w-[230px] h-[230px] cursor-pointer rounded-t-3xl"
-              src={imageUrl + photo?.photo}
+              src={photo?.photo ? imageUrl + photo?.photo : sample}
               alt="postImage"
               onClick={() => navigate(`/myCollegeGram/${photo.id}`)}
             />
