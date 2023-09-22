@@ -23,7 +23,7 @@ export default function ImageSlider({
         height={488}
         modules={[Pagination, Navigation]}
       >
-        {photoDetail?.map((i: any) => {
+        {photoDetail?.photos?.map((i: any) => {
           return (
             <SwiperSlide key={i}>
               <img

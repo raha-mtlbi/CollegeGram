@@ -2,10 +2,7 @@ import { Bookmark, LikePost, UnBookmark, UnLikePost } from "../api/post";
 
 export const handleLike = (id: number, setLike: (a: boolean) => void) => {
   try {
-    LikePost(
-      // 1
-      id
-    );
+    LikePost(id);
     setLike(true);
   } catch (error) {
     console.log(error);
@@ -15,10 +12,7 @@ export const handleLike = (id: number, setLike: (a: boolean) => void) => {
 
 export const handleUnLike = (id: number, setLike: (a: boolean) => void) => {
   try {
-    UnLikePost(
-      // 1
-      id
-    );
+    UnLikePost(id);
     setLike(false);
   } catch (error) {
     console.log(error);
@@ -28,10 +22,7 @@ export const handleUnLike = (id: number, setLike: (a: boolean) => void) => {
 
 export const handleBookmark = (id: number, setIsSave: (a: boolean) => void) => {
   try {
-    Bookmark(
-      // 1
-      id
-    );
+    Bookmark(id);
     setIsSave(true);
   } catch (error) {
     console.log(error);
@@ -44,10 +35,7 @@ export const handleUnBookmark = (
   setIsSave: (a: boolean) => void
 ) => {
   try {
-    UnBookmark(
-      // 1
-      id
-    );
+    UnBookmark(id);
     setIsSave(false);
   } catch (error) {
     console.log(error);

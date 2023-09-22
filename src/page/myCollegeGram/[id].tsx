@@ -10,8 +10,9 @@ import SideBar from "../../component/sidebar";
 import ImageSlider from "../../component/imageSlider";
 
 export default function InnerPost() {
-  const { id } = useParams<{ id: string }>();
+  const { id } = useParams<{ id: any }>();
   const [photoDetail, setPhotoDetail] = useState<IImage[] | any>();
+  console.log("photo", photoDetail);
 
   useEffect(() => {
     get(`/post/${id}`)
@@ -26,13 +27,13 @@ export default function InnerPost() {
           <ImageSlider photoDetail={photoDetail} />
           <div className="flex flex-col p-2 ">
             <Caption
-              likeCount={photoDetail?.likesCount || 0}
-              bookmarkCount={0}
+              likeCount={photoDetail?.likeCount || 0}
+              bookmarkCount={photoDetail?.bookmarkCount || 0}
               date={photoDetail?.createdAt}
               caption={photoDetail?.caption as string}
               tag={photoDetail?.tags as string[]}
               commentsCount={photoDetail?.commentsCount || 0}
-              // id={id as string}
+              id={id as number}
             />
             <Comment postId={id as string} />
           </div>

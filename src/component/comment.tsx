@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
+import { format } from "date-fns";
 
 import { get } from "../api";
-import { IComment } from "../api/type/comment";
-import AddComment from "./comment/addComment";
 import { LikeComment, UnLikeComment } from "../api/comment";
-import { useUser } from "../features/hooks";
+import AddComment from "./comment/addComment";
 
 import Like from "../assets/icons/heart.svg";
 import disLike from "../assets/icons/heart-outline.svg";
@@ -12,8 +11,7 @@ import arrow from "../assets/icons/arrow-left-curved.svg";
 
 const Comment = ({ postId }: { postId: string }) => {
   const [like, setLike] = useState<boolean>(false);
-  const [comment, setComment] = useState<{ result: IComment[] }>();
-  const user = useUser();
+  const [comment, setComment] = useState<{ result: any }>();
 
   useEffect(() => {
     get(`/comment/${postId}`)
@@ -23,11 +21,9 @@ const Comment = ({ postId }: { postId: string }) => {
 
   const handleLike = (id: number) => {
     try {
-      LikeComment(
-        // 1
-        id
-      );
+      LikeComment(id);
       setLike(true);
+      window.location.reload();
     } catch (error) {
       console.log(error);
       setLike(false);
@@ -36,11 +32,9 @@ const Comment = ({ postId }: { postId: string }) => {
 
   const handleUnLike = (id: number) => {
     try {
-      UnLikeComment(
-        // 1
-        id
-      );
+      UnLikeComment(id);
       setLike(false);
+      window.location.reload();
     } catch (error) {
       console.log(error);
       setLike(true);
@@ -52,7 +46,7 @@ const Comment = ({ postId }: { postId: string }) => {
       <AddComment postId={postId} />
       <div className="max-h-[300px] overflow-y-auto">
         {comment &&
-          comment.result.map((comment) => {
+          comment.result.map((comment: any) => {
             return (
               <div>
                 {/* comment */}
@@ -60,10 +54,10 @@ const Comment = ({ postId }: { postId: string }) => {
                   <div className=" flex justify-between items-center my-2">
                     <div className="flex">
                       <p className="text-[12px] font-bold text-[#17494D] ">
-                        {user?.name + "" + user?.lastname}
+                        {comment?.author?.name + "" + comment?.author?.lastname}
                       </p>
                       <p className="mr-[8px] text-[#A5A5A5] text-[10px]">
-                        {/* {comment?.createdAt} */}
+                        {format(new Date(comment?.createdAt), "yyyy-MM-dd")}
                       </p>
                     </div>
                     <div className="flex items-center">
@@ -78,7 +72,10 @@ const Comment = ({ postId }: { postId: string }) => {
                         }
                         className="mr-[8px]"
                       >
-                        <img src={like ? Like : disLike} alt="" />
+                        <img
+                          src={like || comment?.likeCount > 0 ? Like : disLike}
+                          alt=""
+                        />
                       </button>
                       <button
                         onClick={() => {}}

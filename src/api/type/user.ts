@@ -12,4 +12,5 @@ export interface IUser {
   private: boolean;
   usernameOrEmail: string;
   block: boolean;
+  createdAt: Date;
 }

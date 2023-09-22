@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { IImage } from "../api/type/images";
 import { get } from "../api";
 
 import arrow from "../assets/icons/arrow-back1.svg";
 import user from "../assets/icons/person.svg";
 import dot from "../assets/icons/ellipsis.svg";
+import { ITilmeLine } from "../api/type/timeLine";
 
 export default function Collegians() {
   const navigate = useNavigate();
-  const [imageList, setImageList] = useState<{ result: IImage[] }>();
+  const [imageList, setImageList] = useState<ITilmeLine[]>();
 
   useEffect(() => {
     get("/post/explore")
@@ -20,12 +20,12 @@ export default function Collegians() {
   return (
     <div className="flex flex-col pr-12 ">
       <p className="font-bold text-[18px] mb-10 mt-3"> کالج‌گرامی‌‌ها</p>
-      {imageList?.result?.map((item, index) => {
+      {imageList?.map((item, index) => {
         return (
           <div key={index}>
             <div className="flex">
               <div className="grid grid-cols-4 gap-4">
-                {item.photos.map((photo) => {
+                {item?.post?.photos.map((photo) => {
                   return (
                     <div className="w-[220px] h-[220px] ml-[24px] ">
                       <img
