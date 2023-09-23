@@ -8,13 +8,15 @@ import "swiper/css/pagination";
 import { imageUrl } from "../api/config";
 import { IImage } from "../api/type/images";
 
+import sample from "../assets/images/imageListSampel.svg";
+
 export default function ImageSlider({
   photoDetail,
 }: {
   photoDetail: IImage[] | any;
 }) {
   return (
-    <div>
+    <div className=" z-0">
       <Swiper
         slidesPerView={1}
         pagination={true}
@@ -28,8 +30,8 @@ export default function ImageSlider({
             <SwiperSlide key={i}>
               <img
                 alt="postImage"
-                src={imageUrl + photoDetail?.photos}
-                className="w-full h-full rounded-r-md"
+                src={imageUrl + photoDetail?.photos || sample}
+                className="w-full h-full rounded-r-md z-0"
               />
             </SwiperSlide>
           );

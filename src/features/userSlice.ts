@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { removeToken, setToken } from "../api/token";
+import { removeToken, setToken, tokenKey } from "../api/token";
 import { getMe, login, register } from "../api/user";
 import { IUser } from "../api/type/user";
 
@@ -80,6 +80,8 @@ const userSlice = createSlice({
   } as userSliceType,
   reducers: {
     logout(state, action) {
+      localStorage.removeItem(tokenKey);
+
       state.status = "unauthorized";
       state.token = null;
       state.user = null;

@@ -1,7 +1,13 @@
 import { toast } from "react-toastify";
 import { UpdatePost } from "../api/post";
 
-export const EditPost = ({ id }: { id: number }) => {
+export const EditPost = ({
+  id,
+  onClose,
+}: {
+  id: number;
+  onClose: () => void;
+}) => {
   const handleSubmit = async (data: {
     caption: string;
     closeFriend: boolean;
@@ -17,8 +23,10 @@ export const EditPost = ({ id }: { id: number }) => {
         id
       );
       toast.success("پست با موفقیت به روزرسانی شد");
+      onClose();
     } catch (error) {
       console.log(error);
+      onClose();
     }
   };
 

@@ -4,12 +4,6 @@ import { imageUrl } from "../../api/config";
 import { ITilmeLine } from "../../api/type/timeLine";
 
 import Tag from "../Tag";
-import {
-  handleBookmark,
-  handleLike,
-  handleUnBookmark,
-  handleUnLike,
-} from "../../logic/likePost";
 
 import likeicon from "../../assets/icons/heart.svg";
 import dislike from "../../assets/icons/heart-outline.svg";
@@ -33,9 +27,9 @@ const HomeCardList = ({ imageList }: { imageList: ITilmeLine[] | any }) => {
         >
           <img
             className="rounded-t-3xl aspect-square w-[24rem] cursor-pointer"
-            src={data?.photos ? imageUrl + data?.post?.photo : sample}
+            src={data?.post?.photos ? imageUrl + data?.post?.photos[0] : sample}
             alt="test"
-            onClick={() => navigate("/friendPost/1")}
+            onClick={() => navigate(`/friendPost/${data?.post?.id}`)}
           />
 
           <div className="px-2 space-y-5">
@@ -82,8 +76,12 @@ const HomeCardList = ({ imageList }: { imageList: ITilmeLine[] | any }) => {
                 </div>
               )}
             </div>
-            <p>{data?.user.name + " " + data?.user?.lastname}</p>
-            <Tag tag={data?.post?.tags} color="#812AE7" width="50px" />
+            <p>{data?.user?.username}</p>
+          </div>
+          <div className="flex flex-wrap">
+            {data?.post?.tags?.map((tag: any, index: number) => (
+              <Tag tag={tag} color="#812AE7" width="50px" />
+            ))}
           </div>
         </div>
       ))}

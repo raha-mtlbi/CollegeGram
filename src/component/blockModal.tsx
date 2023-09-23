@@ -1,7 +1,7 @@
 import React from "react";
 import { Dialog } from "@headlessui/react";
 import Button from "./button";
-import { IUser } from "../api/type/user";
+import { IOtherUser } from "../api/type/otherUser";
 
 import blockIcon from "../assets/icons/report.svg";
 import tik from "../assets/icons/Verified.svg";
@@ -14,7 +14,7 @@ const BlockModal = ({
 }: {
   open: boolean;
   onClose: () => void;
-  user: IUser;
+  user: IOtherUser;
   onClick: () => void;
 }) => {
   return (
@@ -34,10 +34,12 @@ const BlockModal = ({
             <div className="flex">
               <div className="mr-[51px] text-right">
                 <p className="text-[13px] font-bold mt-[50px]">
-                  {user !== undefined && user?.name + " " + user?.lastname}
+                  {user !== undefined
+                    ? user?.user?.name + " " + user?.user?.lastname
+                    : "No_name"}
                 </p>
                 <p className="text-[11px] mt-[5px]">
-                  {user?.followers} هزار دنبال‌کننده
+                  {user?.user?.followers} هزار دنبال‌کننده
                 </p>
               </div>
               <div className="rounded-full w-[80px] h-[80px] mr-[116px] mt-[30px]">
@@ -61,7 +63,7 @@ const BlockModal = ({
 
             <div className="text-[14px] text-[#17494D] text-right mr-[51px] mt-[50px]">
               <p className="font-bold">
-                مطمئنی میخوای {user?.name} رو بلاک کنی؟
+                مطمئنی میخوای {user?.user?.name} رو بلاک کنی؟
               </p>
               <p className="mt-[8px]">
                 اگه بلاکش کنی دیگه نمیتونه بهت پیام بده و

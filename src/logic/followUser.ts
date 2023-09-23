@@ -1,32 +1,42 @@
+import { toast } from "react-toastify";
 import { blockUser, follow, unFollow } from "../api/otherUser";
 
-export const handleBlock = (id: number, setBlocks: (a: boolean) => void) => {
+export const handleBlock = async (
+  id: number,
+  setBlocks: (a: boolean) => void
+) => {
   try {
-    blockUser(id as number);
+    const response = await blockUser(id as number);
     setBlocks(true);
+    toast(response.msg);
   } catch (error) {
     console.log(error);
     setBlocks(false);
   }
 };
 
-export const handleFollow = (id: number, setFollows: (a: boolean) => void) => {
+export const handleFollow = async (
+  id: number,
+  setFollows: (a: boolean) => void
+) => {
   try {
-    follow(id as number);
+    const response = await follow(id as number);
     setFollows(true);
+    toast.success(response.msg);
   } catch (error) {
     console.log(error);
     setFollows(false);
   }
 };
 
-export const handleUnFollow = (
+export const handleUnFollow = async (
   id: number,
   setFollows: (a: boolean) => void
 ) => {
   try {
-    unFollow(id as number);
+    const response = await unFollow(id as number);
     setFollows(false);
+    toast.success(response.msg);
   } catch (error) {
     console.log(error);
     setFollows(true);

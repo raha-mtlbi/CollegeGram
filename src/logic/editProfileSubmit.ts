@@ -30,9 +30,10 @@ export default function EditProfileSubmit({
 
       toast.success("اطلاعات شما با موفقیت به روززسانی شد.");
       onClose();
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
-      // toast.error("مشکلی پیش آمده");
+      toast.error(error.message?.message || "مشکلی پیش آمده");
+      onClose();
     }
   };
 

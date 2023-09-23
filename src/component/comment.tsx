@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { format } from "date-fns";
+import { toast } from "react-toastify";
 
+import { IComment } from "../api/type/comment";
 import { get } from "../api";
 import { LikeComment, UnLikeComment } from "../api/comment";
 import AddComment from "./comment/addComment";
@@ -9,9 +11,9 @@ import Like from "../assets/icons/heart.svg";
 import disLike from "../assets/icons/heart-outline.svg";
 import arrow from "../assets/icons/arrow-left-curved.svg";
 
-const Comment = ({ postId }: { postId: string }) => {
+const Comment = ({ postId }: { postId: number }) => {
   const [like, setLike] = useState<boolean>(false);
-  const [comment, setComment] = useState<{ result: any }>();
+  const [comment, setComment] = useState<{ result: IComment[] }>();
 
   useEffect(() => {
     get(`/comment/${postId}`)
@@ -19,22 +21,22 @@ const Comment = ({ postId }: { postId: string }) => {
       .catch((e) => console.log(e));
   }, [postId]);
 
-  const handleLike = (id: number) => {
+  const handleLike = async (id: number) => {
     try {
-      LikeComment(id);
+      const response = await LikeComment(id);
       setLike(true);
-      window.location.reload();
+      toast(response.msg);
     } catch (error) {
       console.log(error);
       setLike(false);
     }
   };
 
-  const handleUnLike = (id: number) => {
+  const handleUnLike = async (id: number) => {
     try {
-      UnLikeComment(id);
+      const response = await UnLikeComment(id);
       setLike(false);
-      window.location.reload();
+      toast.success(response.msg);
     } catch (error) {
       console.log(error);
       setLike(true);
@@ -43,7 +45,7 @@ const Comment = ({ postId }: { postId: string }) => {
 
   return (
     <div className="w-[85%]">
-      <AddComment postId={postId} />
+      <AddComment postId={postId as number} />
       <div className="max-h-[300px] overflow-y-auto">
         {comment &&
           comment.result.map((comment: any) => {
@@ -54,7 +56,7 @@ const Comment = ({ postId }: { postId: string }) => {
                   <div className=" flex justify-between items-center my-2">
                     <div className="flex">
                       <p className="text-[12px] font-bold text-[#17494D] ">
-                        {comment?.author?.name + "" + comment?.author?.lastname}
+                        {comment?.author?.username}
                       </p>
                       <p className="mr-[8px] text-[#A5A5A5] text-[10px]">
                         {format(new Date(comment?.createdAt), "yyyy-MM-dd")}

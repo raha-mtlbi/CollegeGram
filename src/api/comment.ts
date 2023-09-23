@@ -1,6 +1,10 @@
 import { delete_, post } from ".";
 
-export const AddComment = (data: { content: string; postId: number }) => {
+export const AddComment = (data: {
+  content: string;
+  postId: number;
+  // parentId?: number;
+}) => {
   return post("/comment", data);
 };
 
