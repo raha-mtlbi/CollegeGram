@@ -21,13 +21,13 @@ const EditPostModal = ({
 }) => {
   const formik = useFormik({
     initialValues: {
-      caption: "",
-      closeFriend: false,
-      tags: [""],
+      caption: caption || "",
+      closeFriend: true,
+      tags: tag || [""],
     },
     enableReinitialize: true,
     validationSchema: AddPostValidation,
-    onSubmit: EditPost({ id }),
+    onSubmit: EditPost({ id, onClose }),
   });
 
   return (
@@ -42,17 +42,15 @@ const EditPostModal = ({
 
         <div className="fixed inset-0 overflow-y-auto">
           <div className="flex min-h-full items-center justify-center p-4 text-center ">
-            <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-[#F3F0EE] p-6 text-left align-middle shadow-xl transition-all">
+            <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-[#F3F0EE] p-6 text-left align-middle shadow-xl">
               <p className="text-center text-[20px] font-bold not-italic leading-normal my-2 ">
                 ویرایش پست
               </p>
               <div className="mb-5">
                 <p className="my-2 text-[#17494D] text-start">توضیحات</p>
                 <textarea
-                  value={formik?.values?.caption}
-                  onChange={(e: any) =>
-                    formik.setFieldValue("caption", e.target.value)
-                  }
+                  placeholder={caption}
+                  {...formik.getFieldProps("caption")}
                   className=" w-full p-2 h-[164px] rounded-[10px] bg-[#F3F0EE]	border border-[#17494d80] resize-none"
                 />
               </div>
@@ -61,10 +59,7 @@ const EditPostModal = ({
                 <input
                   className="w-full px-2 h-[40px] rounded-[10px] bg-[#F3F0EE]	border border-[#17494d80] resize-none"
                   type="text"
-                  value={tag}
-                  onChange={(e: any) =>
-                    formik.setFieldValue("tag", e.target.value)
-                  }
+                  {...formik.getFieldProps("tags")}
                 />
               </div>
               <div className="flex justify-start">
@@ -75,7 +70,6 @@ const EditPostModal = ({
                   <input
                     type="checkbox"
                     {...formik.getFieldProps("closeFriend")}
-                    defaultChecked={true}
                     className="sr-only peer"
                   />
                   <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none  dark:peer-focus: rounded-full peer  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white  after:rounded-full after:h-5 after:w-5 after:transition-all  peer-checked:bg-gray-800"></div>

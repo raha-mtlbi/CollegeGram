@@ -8,8 +8,6 @@ import Caption from "../../component/caption";
 import Comment from "../../component/comment";
 import ImageSlider from "../../component/imageSlider";
 
-import sample from "../../assets/images/imageListSampel.svg";
-
 export default function InnerFriendsPost() {
   const { id } = useParams<{ id: any }>();
   const [photoDetail, setPhotoDetail] = useState<IImage[] | any>();
@@ -28,14 +26,15 @@ export default function InnerFriendsPost() {
 
           <div className="flex flex-col p-2 ">
             <Caption
-              likeCount={photoDetail?.likesCount || 0}
-              bookmarkCount={0}
+              likeCount={photoDetail?.likeCount || 0}
+              bookmarkCount={photoDetail?.bookmarkCount || 0}
               date={photoDetail?.createdAt}
               caption={photoDetail?.caption as string}
               tag={photoDetail?.tags as string[]}
               commentsCount={photoDetail?.commentsCount || 0}
+              id={id as number}
             />
-            <Comment parentId={id as number} />
+            <Comment postId={id as number} />
           </div>
         </div>
       </div>

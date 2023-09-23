@@ -12,7 +12,7 @@ export default function Login() {
     password: string;
   }) => {
     try {
-      await dispatch(
+      const response = await dispatch(
         loginThunk({
           password: data.password,
           usernameOrEmail: data.usernameOrEmail,
@@ -20,11 +20,10 @@ export default function Login() {
       ).unwrap();
       dispatch(getCurrentUser());
 
-      toast.success("با موفقیت وارد شدید");
+      toast.success(response?.msg || "با موفقیت وارد شدید");
       navigate("/myCollegeGram");
     } catch (error) {
       console.log(error);
-      toast.error("مشکلی پیش آمده");
     }
   };
 

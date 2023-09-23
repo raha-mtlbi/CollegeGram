@@ -11,9 +11,9 @@ export const createPost = (data: {
   data?.closeFriend && formData.append("closeFriend", data?.closeFriend);
   data?.tags && formData.append("tags", data?.tags);
   if (data.photos && data.photos.length > 0) {
-    data.photos.forEach((p: File) => formData.append("photo", p));
+    data.photos.forEach((p: File) => formData.append("photos", p));
   } else {
-    data.photos && formData.append("photo", data?.photos);
+    data.photos && formData.append("photos", data?.photos);
   }
 
   return post("/post", formData);

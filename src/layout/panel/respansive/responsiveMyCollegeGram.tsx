@@ -9,9 +9,9 @@ import {
   Popover,
   PopoverHandler,
   PopoverContent,
-  Button,
 } from "@material-tailwind/react";
 import EmptyMyCollage from "../../../component/emptyMyCollege";
+import Button from "../../../component/button";
 
 import arrow from "../../../assets/icons/arrow-down.svg";
 import person from "../../../assets/icons/person.svg";
@@ -42,20 +42,20 @@ const ResponsiveCollege = () => {
 
         <div className="mr-5 mt-12">
           <p className="text-[#17494D] text-[16px] font-bold mb-2">
-            {user?.name + "" + user?.lastname || ""}
+            {user?.name + "" + user?.lastname || "No_Name"}
           </p>
 
           <p className="flex text-[#C19008] text-[14px] not-italic">
             {user?.username && (
               <Popover placement="bottom">
                 <PopoverHandler>
-                  <Button>
+                  <button>
                     <img src={arrow} className="mr-4 w-2" alt="arrow" />
-                  </Button>
+                  </button>
                 </PopoverHandler>
                 <PopoverContent className="w-[150px] text-right m-3 border-gray-400">
                   <ul>
-                    <li className=" cursor-pointer mr-2">{user.username}</li>
+                    <li className=" cursor-pointer mr-2">{user?.username}</li>
                     <li className="  cursor-pointer mr-2 my-2">
                       {user.username}
                     </li>
@@ -80,9 +80,9 @@ const ResponsiveCollege = () => {
         <p className="mr-1"> دنبال‌شونده</p>
       </div>
 
-      <button className="text-white bg-[#C19008] rounded-3xl px-3 py-2 items-center text-centesr text-[14px] w-40 font-semibold leading-normal not-italic mr-44 mt-6">
-        ویرایش پروفایل
-      </button>
+      <div className="flex justify-end ml-1">
+        <Button title={"ویرایش پروفایل"} width={"150px"} />
+      </div>
 
       <div className="flex mt-12">
         {photoList?.result.length === 0 ? (

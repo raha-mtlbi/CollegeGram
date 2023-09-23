@@ -17,14 +17,14 @@ function App() {
         <BrowserRouter>
           <Provider store={store}>
             <ToastContainer
-              limit={1}
+              // limit={1}
               theme="colored"
               position="bottom-center"
-              autoClose={5000}
+              autoClose={3000}
               hideProgressBar={false}
               newestOnTop={false}
               closeOnClick
-              rtl={false}
+              rtl={true}
               pauseOnFocusLoss
               draggable
               pauseOnHover

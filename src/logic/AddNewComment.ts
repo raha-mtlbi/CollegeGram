@@ -13,7 +13,6 @@ export const AddNewComment = () => {
       await AddComment({
         content: data.content,
         postId: data.postId,
-        parentId: data.parentId,
       });
       toast.success("نظر شما با موفقیت ثبت شد.");
 

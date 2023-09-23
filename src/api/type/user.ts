@@ -13,4 +13,5 @@ export interface IUser {
   usernameOrEmail: string;
   block: boolean;
   createdAt: Date;
+  removeProfile: boolean;
 }

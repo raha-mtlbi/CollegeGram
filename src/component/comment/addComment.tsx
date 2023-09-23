@@ -11,7 +11,11 @@ export default function AddComment({ postId }: { postId: number }) {
   const user = useUser();
 
   const formik = useFormik({
-    initialValues: { content: "", postId: postId, parentId: postId },
+    initialValues: {
+      content: "",
+      postId: postId,
+      parentId: 0,
+    },
     enableReinitialize: true,
     onSubmit: AddNewComment(),
   });

@@ -10,10 +10,10 @@ import {
 import EditProfile from "../../component/editProfileModal";
 import { imageUrl } from "../../api/config";
 import { useUser } from "../../features/hooks";
+import { Logout } from "../../api/user";
 
 import arrow from "../../assets/icons/arrow-down.svg";
 import pen from "../../assets/icons/edit.svg";
-import { Logout } from "../../api/user";
 // import { logout } from "../../features/userSlice";
 
 const ProfileSummery = () => {
@@ -34,12 +34,12 @@ const ProfileSummery = () => {
       <EditProfile open={open} onClose={() => setOpen(false)} />
 
       <div className="w-[253px] h-[403px] bg-[#F1EBE3] border-[#CDCDCD] border flex flex-col justify-center items-center text-center">
-        <div className="relative w-[120px] h-[120px] overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
+        <div className=" w-[120px] h-[120px] overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
           {user?.photo ? (
             <img
               alt="profile"
               src={imageUrl + user?.photo}
-              className=" w-full h-[85%]"
+              className="w-full h-full"
             />
           ) : (
             <svg
@@ -84,8 +84,8 @@ const ProfileSummery = () => {
           )}
           {user?.username || ""}
         </p>
-        <p className="text-[#17494D] text-center text-[20px] font-bold  mt-1">
-          {user?.name + "" + user?.lastname || ""}
+        <p className="max-w-[200px] text-[#17494D] text-center text-[20px] font-bold  mt-1">
+          {user?.name + " " + user?.lastname || ""}
         </p>
         <div className="flex justify-center mt-[16px] text-[14px]">
           <p className="ml-1">{user?.followers}</p>

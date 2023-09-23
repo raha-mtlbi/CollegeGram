@@ -1,9 +1,12 @@
+import { toast } from "react-toastify";
 import { Bookmark, LikePost, UnBookmark, UnLikePost } from "../api/post";
+import { onError } from "../api/utils";
 
 export const handleLike = async (id: number, setLike: (a: boolean) => void) => {
   try {
-    await LikePost(id);
+    const response = await LikePost(id);
     setLike(true);
+    toast.success(response.msg);
   } catch (error) {
     console.log(error);
     setLike(false);
@@ -15,8 +18,10 @@ export const handleUnLike = async (
   setLike: (a: boolean) => void
 ) => {
   try {
-    await UnLikePost(id);
+    const response = await UnLikePost(id);
     setLike(false);
+    toast.success(response.msg);
+    toast.warning(response.msg);
   } catch (error) {
     console.log(error);
     setLike(true);
@@ -28,8 +33,9 @@ export const handleBookmark = async (
   setIsSave: (a: boolean) => void
 ) => {
   try {
-    await Bookmark(id);
+    const response = await Bookmark(id);
     setIsSave(true);
+    toast.success(response.msg);
   } catch (error) {
     console.log(error);
     setIsSave(false);
@@ -41,8 +47,9 @@ export const handleUnBookmark = async (
   setIsSave: (a: boolean) => void
 ) => {
   try {
-    await UnBookmark(id);
+    const response = await UnBookmark(id);
     setIsSave(false);
+    toast.success(response.msg);
   } catch (error) {
     console.log(error);
     setIsSave(true);

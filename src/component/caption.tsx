@@ -62,11 +62,12 @@ const Caption = ({
         <div className="w-full flex justify-between">
           <div className="flex">
             <button
-              onClick={() =>
+              onClick={() => {
                 like || likeCount > 0
                   ? handleUnLike(id as number, setLike)
-                  : handleLike(id as number, setLike)
-              }
+                  : handleLike(id as number, setLike);
+                // likeCount++ && window.location.reload();
+              }}
             >
               <img
                 src={like || likeCount > 0 ? Like : disLike}

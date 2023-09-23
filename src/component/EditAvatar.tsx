@@ -5,18 +5,15 @@ import { useUser } from "../features/hooks";
 import camera from "../assets/icons/camera.svg";
 import close from "../assets/icons/close.svg";
 import refresh from "../assets/icons/refresh.svg";
-import { EditProfile } from "../api/user";
-import { useAppDispatch } from "../store";
-import { getCurrentUser } from "../features/userSlice";
 
 export default function Avatar({ onChange }: { onChange: any }) {
   const user = useUser();
   const fileUploader = useRef<HTMLInputElement | null>(null);
   const [preview, setPreview] = useState<any>();
-  const dispatch = useAppDispatch();
 
   const deleteImage = () => {
-    EditProfile({ photo: "null" }).then(() => dispatch(getCurrentUser()));
+    const deleteProfile = user?.removeProfile;
+    return deleteProfile === true;
   };
 
   return (

@@ -55,7 +55,7 @@ export default function Collegians() {
               </div>
               <div>
                 <p className="text-[16px] text-[#C38F00] font-bold">
-                  {item?.user.name + " " + item.user.lastname || "No_Name"}
+                  {item?.user?.username}
                 </p>
                 <div className="flex items-center mt-[9px]">
                   <p className="text-[#17494D] text-[11px]">

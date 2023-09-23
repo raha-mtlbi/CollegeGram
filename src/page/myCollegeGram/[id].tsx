@@ -12,7 +12,6 @@ import ImageSlider from "../../component/imageSlider";
 export default function InnerPost() {
   const { id } = useParams<{ id: any }>();
   const [photoDetail, setPhotoDetail] = useState<IImage[] | any>();
-  console.log("photo", photoDetail);
 
   useEffect(() => {
     get(`/post/${id}`)
@@ -25,10 +24,11 @@ export default function InnerPost() {
       <div className="flex mt-32 p-3 ">
         <div className="w-full grid grid-cols-2 gap-4 ">
           <ImageSlider photoDetail={photoDetail} />
+
           <div className="flex flex-col p-2 ">
             <Caption
               likeCount={photoDetail?.likeCount || 0}
-              bookmarkCount={photoDetail?.bookmarkCount || 0}
+              bookmarkCount={photoDetail?.bokmarksCount || 0}
               date={photoDetail?.createdAt}
               caption={photoDetail?.caption as string}
               tag={photoDetail?.tags as string[]}
