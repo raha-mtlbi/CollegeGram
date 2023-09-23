@@ -17,44 +17,12 @@ import saveIcon from "../../assets/icons/saved.svg";
 import unsaved from "../../assets/icons/save-outline.svg";
 import commnet from "../../assets/icons/commentIcon.svg";
 import multiImageIcon from "../../assets/icons/multyimages.svg";
-<<<<<<< HEAD
-import { delete_, post } from "../../api";
-import { handleLike } from "./../../logic/likePost";
-import { UnLikePost } from "../../api/post";
-import { id } from "date-fns/locale";
-
-interface handleLike {
-  id: number;
-  setLike: boolean;
-}
-=======
 import sample from "../../assets/images/sampleHomeCard.svg";
->>>>>>> 9f09d9f1b83c7ab95e539639095a89c698932542
 
 const HomeCardList = ({ imageList }: { imageList: ITilmeLine[] | any }) => {
   const navigate = useNavigate();
   const [like, setLike] = useState(false);
   const [saved, setsaved] = useState(false);
-
-  // const handleLike = () => {
-  //   try {
-  //     post(`/post/${id}/like`){id};
-  //     setLike(true);
-  //   } catch (error) {
-  //     console.log(error);
-  //     setLike(false);
-  //   }
-  // };
-
-  // const handleUnLike = () => {
-  //   try {
-  //     delete_(`/post/${id}/unlike`){id};
-  //     setLike(false);
-  //   } catch (error) {
-  //     console.log(error);
-  //     setLike(true);
-  //   }
-  // };
 
   return (
     <div className="w-full grid grid-cols-3 gap-4">
@@ -73,19 +41,7 @@ const HomeCardList = ({ imageList }: { imageList: ITilmeLine[] | any }) => {
           <div className="px-2 space-y-5">
             <div className="grid grid-cols-4 text-primary_orange gap-8">
               <div className="flex gap-2 items-center">
-                <button
-<<<<<<< HEAD
-                  onClick={() => {
-                    handleLike;
-                  }}
-=======
-                // onClick={() => {
-                //   like
-                //     ? handleLike(imageList?.id, setLike)
-                //     : handleUnLike(imageList?.id, setLike);
-                // }}
->>>>>>> 9f09d9f1b83c7ab95e539639095a89c698932542
-                >
+                <button>
                   <img
                     className="w-5"
                     src={like || data?.post?.likeCount > 0 ? likeicon : dislike}
@@ -97,13 +53,7 @@ const HomeCardList = ({ imageList }: { imageList: ITilmeLine[] | any }) => {
                 </div>
               </div>
               <div className="flex gap-2 items-center">
-                <button
-                // onClick={() => {
-                //   saved
-                //     ? handleBookmark(imageList?.id, setsaved)
-                //     : handleUnBookmark(imageList?.id, setsaved);
-                // }}
-                >
+                <button>
                   <img
                     className="w-5"
                     src={
