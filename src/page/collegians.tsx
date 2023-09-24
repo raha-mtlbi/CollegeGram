@@ -71,6 +71,7 @@ export default function Collegians() {
                   alt="more"
                   src={dot}
                   className="w-[24px] h-[24px] mr-[30px]"
+                  onClick={() => navigate(`/usersProfile/1`)}
                 />
               </button>
             </div>

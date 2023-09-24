@@ -35,13 +35,7 @@ const HomeCardList = ({ imageList }: { imageList: ITilmeLine[] | any }) => {
           <div className="px-2 space-y-5">
             <div className="grid grid-cols-4 text-primary_orange gap-8">
               <div className="flex gap-2 items-center">
-                <button
-                // onClick={() => {
-                //   like
-                //     ? handleLike(imageList?.id, setLike)
-                //     : handleUnLike(imageList?.id, setLike);
-                // }}
-                >
+                <button>
                   <img
                     className="w-5"
                     src={like || data?.post?.likeCount > 0 ? likeicon : dislike}
@@ -53,13 +47,7 @@ const HomeCardList = ({ imageList }: { imageList: ITilmeLine[] | any }) => {
                 </div>
               </div>
               <div className="flex gap-2 items-center">
-                <button
-                // onClick={() => {
-                //   saved
-                //     ? handleBookmark(imageList?.id, setsaved)
-                //     : handleUnBookmark(imageList?.id, setsaved);
-                // }}
-                >
+                <button>
                   <img
                     className="w-5"
                     src={
