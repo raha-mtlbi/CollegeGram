@@ -1,7 +1,3 @@
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { get } from "../../../api/index";
-import { IImage } from "../../../api/type/images";
 import { useUser } from "../../../features/hooks";
 import { imageUrl } from "../../../api/config";
 
@@ -10,31 +6,25 @@ import {
   PopoverHandler,
   PopoverContent,
 } from "@material-tailwind/react";
-import EmptyMyCollage from "../../../component/emptyMyCollege";
 import Button from "../../../component/button";
 
 import arrow from "../../../assets/icons/arrow-down.svg";
 import person from "../../../assets/icons/person.svg";
 import dot from "../../../assets/icons/ellipsis.svg";
 
-const ResponsiveCollege = () => {
+const ResponsiveProfile = () => {
   const user = useUser();
-  const navigate = useNavigate();
-
-  const [photoList, setPhotoList] = useState<{ result: IImage[] }>();
-
-  useEffect(() => {
-    get(`/post/user/${user?.id}`)
-      .then((d: any) => setPhotoList(d))
-      .catch((e) => console.log(e));
-  }, [user?.id]);
 
   return (
     <div>
-      <div className="flex">
-        <div className="rounded-full w-14 h-14 bg-[#F3F0EE] border mt-12 border-[#CDCDCD] mr-7">
+      <div className="flex items-center">
+        <div className="rounded-full w-12 h-12 bg-[#F3F0EE] border mt-12 border-[#CDCDCD] mr-7">
           {user?.photo ? (
-            <img alt="profile" src={imageUrl + user?.photo} />
+            <img
+              alt="profile"
+              src={imageUrl + user?.photo}
+              className="w-12 h-12 object-fill rounded-full"
+            />
           ) : (
             <img src={person} className="w-8 mx-auto mt-2" alt="person" />
           )}
@@ -42,7 +32,7 @@ const ResponsiveCollege = () => {
 
         <div className="mr-5 mt-12">
           <p className="text-[#17494D] text-[16px] font-bold mb-2">
-            {user?.name + "" + user?.lastname || "No_Name"}
+            {user?.name + " " + user?.lastname || "No_Name"}
           </p>
 
           <p className="flex text-[#C19008] text-[14px] not-italic">
@@ -50,7 +40,11 @@ const ResponsiveCollege = () => {
               <Popover placement="bottom">
                 <PopoverHandler>
                   <button>
-                    <img src={arrow} className="mr-4 w-2" alt="arrow" />
+                    <img
+                      src={arrow}
+                      className="sm:ml-4 sm:mr-0 mr-4 w-2"
+                      alt="arrow"
+                    />
                   </button>
                 </PopoverHandler>
                 <PopoverContent className="w-[150px] text-right m-3 border-gray-400">
@@ -67,9 +61,14 @@ const ResponsiveCollege = () => {
           </p>
         </div>
 
-        <button onClick={() => {}}>
-          <img alt="more" src={dot} className="w-6 mr-36 mt-12" />
-        </button>
+        <div className=" fixed left-3">
+          <img
+            alt="more"
+            src={dot}
+            className="w-6 mt-12 cursor-pointer"
+            onClick={() => {}}
+          />
+        </div>
       </div>
 
       <div className="flex text-[14px] text-[#17494D] mr-12 mt-4">
@@ -80,28 +79,11 @@ const ResponsiveCollege = () => {
         <p className="mr-1"> دنبال‌شونده</p>
       </div>
 
-      <div className="flex justify-end ml-1">
+      <div className="w-screen flex justify-end pl-4">
         <Button title={"ویرایش پروفایل"} width={"150px"} />
-      </div>
-
-      <div className="flex mt-12">
-        {photoList?.result.length === 0 ? (
-          <EmptyMyCollage />
-        ) : (
-          <div className="w-full grid grid-cols-2 gap-2 mr-12 ml-5">
-            {photoList?.result.map((photo: any) => (
-              <img
-                className="w-[152px] h-[165px] cursor-pointer rounded-t-3xl"
-                src={imageUrl + photo.photos[0]}
-                alt="postImage"
-                onClick={() => navigate(`/myCollegeGram/${photo.id}`)}
-              />
-            ))}
-          </div>
-        )}
       </div>
     </div>
   );
 };
 
-export default ResponsiveCollege;
+export default ResponsiveProfile;

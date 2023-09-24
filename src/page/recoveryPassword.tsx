@@ -27,8 +27,9 @@ export default function RecoveryPassword() {
         <div className="mt-12 mb-8">
           <Input
             placeholder="ایمیل"
-            imageSrc={gmail}
-            imageAlt="gmail"
+            postfix={
+              <img src={gmail} alt="key" className="absolute mt-3 px-2" />
+            }
             value={formik.values?.usernameOrEmail}
             onChange={(e: any) => formik.setFieldValue("usernameOrEmail", e.target.value)}
             error={Boolean(formik.errors.usernameOrEmail)}

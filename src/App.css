@@ -1,6 +1,6 @@
-body{
-  background-color: #F3F0EE;
-  font-family:"vazirmatn" ;
+body {
+  background-color: #f3f0ee;
+  font-family: "vazirmatn";
 }
 .App {
   direction: rtl;
@@ -8,7 +8,7 @@ body{
 
 @font-face {
   font-family: "vazirmatn";
-  src:url(../node_modules/vazirmatn/Round-Dots/fonts/ttf/Vazirmatn-RD-Regular.ttf)
+  src: url(../node_modules/vazirmatn/Round-Dots/fonts/ttf/Vazirmatn-RD-Regular.ttf);
 }
 
 .App-logo {

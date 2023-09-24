@@ -3,8 +3,9 @@ import Form_Error from "../assets/icons/Form_Error.svg";
 interface IInput {
   placeholder: string;
   postfix?: React.ReactNode;
-  imageSrc: string;
-  imageAlt: string;
+  prefix?: React.ReactNode;
+  imageSrc?: string;
+  imageAlt?: string;
   value?: string;
   onChange?: any;
   type?: string;
@@ -16,6 +17,7 @@ interface IInput {
 
 export default function Input({
   postfix,
+  prefix,
   placeholder,
   imageSrc,
   imageAlt,
@@ -31,7 +33,6 @@ export default function Input({
     <div>
       <div className={"flex "}>
         {postfix}
-        <img src={imageSrc} alt={imageAlt} className="absolute mt-3 px-2" />
 
         <input
           className={
@@ -46,6 +47,7 @@ export default function Input({
           style={{ width: width }}
           {...getFieldprops}
         />
+        <div className=" -mr-8">{prefix}</div>
       </div>
       {error && errorText && (
         <div className="flex items-center my-3">

@@ -9,20 +9,19 @@ interface IInput {
   type?: React.HTMLInputTypeAttribute;
 }
 
-export default function HadiInput({ prefix, placeholder, type, name }: IInput) {
+export default function CustomInput({ prefix, placeholder, type, name }: IInput) {
   const [{ value, onChange }, { error, touched }, { setValue }] =
     useField(name);
 
   return (
     <Input
-      placeholder="ایمیل"
-      imageAlt=""
-      imageSrc=""
+      placeholder={placeholder}
       postfix={prefix}
       value={value}
       onChange={(e: any) => setValue(e.target.value)}
       error={touched && Boolean(error)}
       errorText={error}
+      type={type}
     />
   );
 }

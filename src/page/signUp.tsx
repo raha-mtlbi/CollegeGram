@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import * as Yup from "yup";
 import { Formik } from "formik";
@@ -10,29 +10,18 @@ import Input from "../component/input";
 import gmail from "../assets/icons/gmail1.svg";
 import key from "../assets/icons/key1.svg";
 import person from "../assets/icons/person.svg";
+import eye from "../assets/icons/eye.svg";
+import eyeclosed from "../assets/icons/eye-closed.svg";
 import HadiInput from "../component/hadiInput";
-
-const schema = Yup.object().shape({
-  email: Yup.string()
-    .required("لطفا ایمیل معتبری وارد کنید")
-    .email("لطفا ایمیل معتبری وارد کنید"),
-  password: Yup.string()
-    .trim()
-    .matches(
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/,
-      "رمز عبور شما مناسب نیست"
-    )
-    .required("ورود رمز عبور الزامی است."),
-  repassword: Yup.string()
-    .oneOf([Yup.ref("password")], "رمز عبور شما منطبق نیست")
-    .required("لطفا رمز عبور خود را تایید کنید"),
-});
+import { registerSchema } from "../utils/validations";
 
 const Register = () => {
+  const [show, setShow] = useState(false);
+
   return (
     <div>
       <Formik
-        validationSchema={schema}
+        validationSchema={registerSchema}
         initialValues={{
           username: "",
           email: "",
@@ -55,8 +44,9 @@ const Register = () => {
             <div className="mt-[49px]">
               <Input
                 placeholder="نام کاربری"
-                imageSrc={person}
-                imageAlt="UserName"
+                postfix={
+                  <img src={person} alt="key" className="absolute mt-3 px-2" />
+                }
                 value={formik.values.username}
                 onChange={(e: any) =>
                   formik.setFieldValue("username", e.target.value)
@@ -66,13 +56,13 @@ const Register = () => {
                 )}
                 errorText="نام کاربری باید بیشتر از ۴ کارکتر باشد"
               />
-              {/* <span className="text-[#]">{username && messages.error2}</span> */}
             </div>
             <div className="mt-[32px]">
               <Input
                 placeholder="ایمیل"
-                imageSrc={gmail}
-                imageAlt="gmail"
+                postfix={
+                  <img src={gmail} alt="key" className="absolute mt-3 px-2" />
+                }
                 value={formik.values.email}
                 onChange={(e: any) =>
                   formik.setFieldValue("email", e.target.value)
@@ -94,18 +84,28 @@ const Register = () => {
             <div className="mt-[32px]">
               <Input
                 placeholder="تکرار رمز عبور"
-                imageSrc={key}
-                imageAlt="repeat key"
+                postfix={
+                  <img src={key} alt="key" className="absolute mt-3 px-2" />
+                }
+                prefix={
+                  <button onClick={() => setShow(!show)}>
+                    <img
+                      src={show ? eye : eyeclosed}
+                      alt="key"
+                      className="w-3 h-3 mt-4"
+                    />
+                  </button>
+                }
                 value={formik.values.repassword}
                 onChange={(e: any) =>
                   formik.setFieldValue("repassword", e.target.value)
                 }
-                type="password"
+                type={show ? "text" : "password"}
                 error={Boolean(
                   formik.values.repassword &&
                     formik.values.repassword !== formik.values.password
                 )}
-                errorText="رمز عبور یکسان نیست"
+                // errorText="رمز عبور یکسان نیست"
               />
             </div>
             <div className="flex justify-end my-10">

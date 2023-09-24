@@ -14,7 +14,12 @@ export default function Header() {
       <CreatePostModal open={open} onClose={() => setOpen(false)} />
 
       <div className="w-[65vw] h-[40px] flex justify-between items-center mb-[30px] mr-12">
-        <Input placeholder={"جستجو"} imageSrc={search} imageAlt={"search"} />
+        <Input
+          placeholder={"جستجو"}
+          postfix={
+            <img src={search} alt="key" className="absolute mt-3 px-2" />
+          }
+        />
         <div className="flex justify-around items-center ">
           <Button
             title={"افزودن عکس"}
