@@ -80,7 +80,7 @@ const Caption = ({
             </p>
             <button
               onClick={() =>
-                isSave
+                isSave || bookmarkCount > 0
                   ? handleUnBookmark(id as number, setIsSave)
                   : handleBookmark(id as number, setIsSave)
               }

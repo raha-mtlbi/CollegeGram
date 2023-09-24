@@ -15,12 +15,11 @@ export default function MyCollegeGram() {
     msg: string;
   }>();
 
-  const url = user?.id === undefined ? null : `/post/user/${user?.id}`;
   useEffect(() => {
-    get(url as string)
+    get(`/post/user/${user?.id}`)
       .then((d: any) => setPhotoList(d))
       .catch((e) => console.log(e));
-  }, []);
+  }, [user?.id]);
 
   return (
     <div className="flex mt-32">

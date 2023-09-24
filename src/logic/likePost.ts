@@ -20,7 +20,7 @@ export const handleUnLike = async (
   try {
     const response = await UnLikePost(id);
     setLike(false);
-    toast.success(response.msg);
+    // toast.success(response.msg);
     toast.warning(response.msg);
   } catch (error) {
     console.log(error);
