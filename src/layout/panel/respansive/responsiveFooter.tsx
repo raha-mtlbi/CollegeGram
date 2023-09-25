@@ -25,15 +25,15 @@ export default function ResponsiveFooter() {
             <img alt="" src={pin} className="w-6 mr-8 ml-2" />
             <span>پست ها</span>
           </a>
-          <a className="flex mb-8" href="/mySave">
+          <a className="flex mb-8" href="/saves">
             <img alt="" src={saved} className="w-6 mr-8 ml-2" />
             <span>ذخیره ها</span>
           </a>
-          <a className="flex mb-8" href="/message">
+          <a className="flex mb-8" href="/messages">
             <img alt="" src={speech} className="w-6 mr-8 ml-2" />
             <span>گفتگو ها</span>
           </a>
-          <a className="flex mb-8" href="/myNotification">
+          <a className="flex mb-8" href="/notification">
             <img alt="" src={bell} className="w-6 mr-8 ml-2" />
             <span>اعلانات</span>
           </a>
@@ -45,7 +45,7 @@ export default function ResponsiveFooter() {
             <img alt="" src={clock} className="w-6 mr-8 ml-2" />
             <span>تاریخچه کاربر</span>
           </a>
-          <a className="flex mb-8" href="/">
+          <a className="flex mb-8" href="/myCollegeGram">
             <img alt="" src={person} className="w-6 mr-8 ml-2" />
             <span>پروفایل من</span>
           </a>

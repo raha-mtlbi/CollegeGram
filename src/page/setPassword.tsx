@@ -14,13 +14,15 @@ const ForgetPassword = () => {
         تنظیم رمز عبور جدید
       </p>
       <div className="mt-[49px]">
-        <Input placeholder="رمز عبور" imageSrc={key} imageAlt="key" />
+        <Input
+          placeholder="رمز عبور"
+          postfix={<img src={key} alt="key" className="absolute mt-3 px-2" />}
+        />
       </div>
       <div className="mt-[32px]">
         <Input
           placeholder="تکرار رمز عبور"
-          imageSrc={key}
-          imageAlt="repeat key"
+          postfix={<img src={key} alt="key" className="absolute mt-3 px-2" />}
         />
       </div>
       <div className="flex justify-end my-10">

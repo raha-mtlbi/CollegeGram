@@ -1,13 +1,35 @@
 import * as Yup from "yup";
 
 const psswordRegEx = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/;
-const usernameOremailRegEx = /~/;
+const usernameOremailRegEx = /^/;
+// /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/ ||
+// /^[a-zA-Z][a-zA-Z0-9_]{5,63}$/;
 
 export const loginValidation = Yup.object().shape({
-  usernameOrEmail: Yup.string().required("لطفا ایمیل خود را وارد کنید."),
+  usernameOrEmail: Yup.string()
+    .required("tets")
+    .trim()
+    .matches(usernameOremailRegEx, "test"),
+  password: Yup.string()
+    .required("حداقل 6 کاراکتر، شامل حروف کوچک، بزرگ و اعداد باشد")
+    .trim()
+    .matches(psswordRegEx, "رمز عبور نیست"),
+});
+
+export const registerSchema = Yup.object().shape({
+  email: Yup.string()
+    .required("لطفا ایمیل معتبری وارد کنید")
+    .email("لطفا ایمیل معتبری وارد کنید"),
+  // password: Yup.string().required("حداقل 6 کاراکتر، شامل حروف کوچک، بزرگ و اعداد باشد")
+  // .trim()
+  // .matches(psswordRegEx, "رمز عبور نیست"),
   password: Yup.string()
     .trim()
-    .matches(psswordRegEx, "رمز عبور شما مناسب نیست"),
+    .matches(psswordRegEx, "رمز عبور شما مناسب نیست")
+    .required("حداقل 6 کاراکتر، شامل حروف کوچک، بزرگ و اعداد باشد."),
+  repassword: Yup.string()
+    .oneOf([Yup.ref("password")], "رمز عبور شما منطبق نیست")
+    .required("لطفا رمز عبور خود را تایید کنید"),
 });
 
 export const AddPostValidation = Yup.object().shape({
@@ -16,10 +38,10 @@ export const AddPostValidation = Yup.object().shape({
 });
 
 export const sendEmailValidation = Yup.object().shape({
-  usernameOrEmail:
-    Yup.string().required("لطفا ایمیل خود را وارد کنید.").trim() ||
-    // .matches(usernameOremailRegEx, "")
-    Yup.string().required("لطفا ایمیل خود را وارد کنید.").email(),
+  usernameOrEmail: Yup.string()
+    .required("لطفا ایمیل خود را وارد کنید.")
+    .trim()
+    .matches(usernameOremailRegEx, ""),
 });
 
 export const setPasswordValidation = Yup.object().shape({

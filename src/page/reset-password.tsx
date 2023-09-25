@@ -10,7 +10,7 @@ import { useParams } from "react-router-dom";
 
 const ForgetPassword = () => {
   const { token } = useParams();
-  console.log(token)
+  console.log(token);
 
   const formik = useFormik({
     initialValues: { newPassword: "", token: "" },
@@ -28,8 +28,7 @@ const ForgetPassword = () => {
         <div className="mt-[49px]">
           <Input
             placeholder="رمز عبور"
-            imageSrc={key}
-            imageAlt="key"
+            postfix={<img src={key} alt="key" className="absolute mt-3 px-2" />}
             value={formik.values.newPassword}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               formik.setFieldValue("newPassword", e.target.value)
@@ -39,8 +38,7 @@ const ForgetPassword = () => {
         <div className="mt-[32px]">
           <Input
             placeholder="تکرار رمز عبور"
-            imageSrc={key}
-            imageAlt="repeat key"
+            postfix={<img src={key} alt="key" className="absolute mt-3 px-2" />}
             value={formik.values.token}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               formik.setFieldValue("token", e.target.value)
