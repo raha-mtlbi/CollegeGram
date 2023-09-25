@@ -22,12 +22,16 @@ import OtherNotification from "../page/otherNotification";
 import Message from "../page/messages";
 import OtherUsers from "../page/otherUserPage/[id]";
 import InnerFriendsPost from "../page/friendPost/[id]";
+import useMediaQuery from "../component/useMediaQuery";
+import RespansiveLayout from "../layout/panel/respansive";
 
 const Home = React.lazy(() => import("../page/home"));
 
 export default function Router() {
   const dispatch = useAppDispatch();
   const status = useUserStatus();
+
+  const phone = useMediaQuery("640");
 
   useEffect(() => {
     dispatch(getCurrentUser());
@@ -55,9 +59,12 @@ export default function Router() {
   }
 
   return (
-    <Suspense fallback={<PanelLayout />}>
+    <Suspense fallback={!phone ? <RespansiveLayout /> : <PanelLayout />}>
       <Routes>
-        <Route path="" element={<PanelLayout />}>
+        <Route
+          path=""
+          element={!phone ? <RespansiveLayout /> : <PanelLayout />}
+        >
           <Route path="/" element={<Home />} />
           <Route path="/myCollegeGram" element={<MyCollegeGram />} />
           <Route path="/collegians" element={<Collegians />} />

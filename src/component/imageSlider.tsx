@@ -30,7 +30,7 @@ export default function ImageSlider({
             <SwiperSlide key={i}>
               <img
                 alt="postImage"
-                src={imageUrl + photoDetail?.photos || sample}
+                src={imageUrl + photoDetail?.photos[0] || sample}
                 className="w-full h-full rounded-r-md z-0"
               />
             </SwiperSlide>

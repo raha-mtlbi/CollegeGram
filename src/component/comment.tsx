@@ -68,7 +68,7 @@ const Comment = ({ postId }: { postId: number }) => {
                       </p>
                       <button
                         onClick={() =>
-                          like
+                          like || comment?.likeCount > 0
                             ? handleUnLike(comment?.id)
                             : handleLike(comment?.id)
                         }

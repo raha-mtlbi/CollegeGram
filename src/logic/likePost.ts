@@ -1,6 +1,5 @@
 import { toast } from "react-toastify";
 import { Bookmark, LikePost, UnBookmark, UnLikePost } from "../api/post";
-import { onError } from "../api/utils";
 
 export const handleLike = async (id: number, setLike: (a: boolean) => void) => {
   try {
@@ -20,7 +19,7 @@ export const handleUnLike = async (
   try {
     const response = await UnLikePost(id);
     setLike(false);
-    toast.success(response.msg);
+    // toast.success(response.msg);
     toast.warning(response.msg);
   } catch (error) {
     console.log(error);
