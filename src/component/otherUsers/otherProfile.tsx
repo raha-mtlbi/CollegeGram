@@ -3,6 +3,7 @@ import { imageUrl } from "../../api/config";
 import { IOtherUser } from "../../api/type/otherUser";
 import Button from "../button";
 import BlockModal from "../blockModal";
+
 import {
   handleBlock,
   handleFollow,
@@ -16,9 +17,11 @@ import comment from "../../assets/icons/speech.svg";
 import star from "../../assets/icons/sparkle.svg";
 import verify from "../../assets/icons/Verified.svg";
 import userIcon from "../../assets/icons/person.svg";
+import CloseFriendModal from "../closeFriendModal";
 
 const OtherProfile = ({ user }: { user?: IOtherUser }) => {
   const [openBlockModal, setOpenBlockModal] = useState(false);
+  const [openCloseFriendModal, setOpenCloseFriendModal] = useState(false);
   const [follows, setFollows] = useState<boolean>(false);
   const [blocks, setBlocks] = useState(false);
 
@@ -32,6 +35,15 @@ const OtherProfile = ({ user }: { user?: IOtherUser }) => {
         onClick={() => {
           handleBlock(user?.user?.id as number, setBlocks);
           setOpenBlockModal(false);
+        }}
+      />
+
+      <CloseFriendModal
+        open={openCloseFriendModal}
+        onClose={() => setOpenCloseFriendModal(false)}
+        user={user as IOtherUser}
+        onClick={() => {
+          setOpenCloseFriendModal(false);
         }}
       />
 
@@ -101,6 +113,7 @@ const OtherProfile = ({ user }: { user?: IOtherUser }) => {
             <button
               disabled={blocks}
               className={blocks ? "w-5 h-5 mx-2 invert-[0.5]" : "w-5 h-5 mx-2"}
+              onClick={() => setOpenCloseFriendModal(true)}
             >
               <img className="" alt="satr" src={star} />
             </button>
