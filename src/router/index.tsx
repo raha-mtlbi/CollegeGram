@@ -39,7 +39,7 @@ export default function Router() {
 
   if (status === "unauthorized") {
     return (
-      <Suspense fallback={<LoadingPage />}>
+      <Suspense fallback={<LoginPage />}>
         <Routes>
           <Route index element={<Navigate to="/login" />} />
           <Route path="" element={<AuthenticationLayout />}>
@@ -55,7 +55,7 @@ export default function Router() {
   }
 
   return (
-    <Suspense fallback={<LoadingPage />}>
+    <Suspense fallback={<PanelLayout />}>
       <Routes>
         <Route path="" element={<PanelLayout />}>
           <Route path="/" element={<Home />} />

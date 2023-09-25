@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Popover,
   PopoverHandler,
@@ -9,26 +10,36 @@ import {
 import EditProfile from "../../component/editProfileModal";
 import { imageUrl } from "../../api/config";
 import { useUser } from "../../features/hooks";
+import { Logout } from "../../api/user";
 
 import arrow from "../../assets/icons/arrow-down.svg";
 import pen from "../../assets/icons/edit.svg";
+// import { logout } from "../../features/userSlice";
 
 const ProfileSummery = () => {
   const [open, setOpen] = useState<boolean>(false);
   const user = useUser();
-  console.log("user", user);
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    try {
+      await Logout();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div>
       <EditProfile open={open} onClose={() => setOpen(false)} />
 
       <div className="w-[253px] h-[403px] bg-[#F1EBE3] border-[#CDCDCD] border flex flex-col justify-center items-center text-center">
-        <div className="relative w-[120px] h-[120px] overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
+        <div className=" relative w-[120px] h-[120px] overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
           {user?.photo ? (
             <img
               alt="profile"
               src={imageUrl + user?.photo}
-              className=" w-full h-[85%]"
+              className="w-full h-full"
             />
           ) : (
             <svg
@@ -53,11 +64,19 @@ const ProfileSummery = () => {
                   <img src={arrow} className="my-auto mx-[10px]" alt="arrow" />
                 </Button>
               </PopoverHandler>
-              <PopoverContent className="w-[150px] text-right m-3 border-gray-400">
+              <PopoverContent className="w-[150px] text-right mr-3 border-gray-400 rounded-xl ">
                 <ul>
-                  <li className=" cursor-pointer mr-2">{user.username}</li>
-                  <li className="  cursor-pointer mr-2 my-2">
+                  <li className="  cursor-pointer mr-2 mt-2">
                     {user.username}
+                  </li>
+                  <li
+                    className="  cursor-pointer mr-2 mt-2"
+                    onClick={() => {
+                      handleLogout();
+                      navigate("/login");
+                    }}
+                  >
+                    اضافه کردن اکانت+
                   </li>
                 </ul>
               </PopoverContent>
@@ -65,8 +84,8 @@ const ProfileSummery = () => {
           )}
           {user?.username || ""}
         </p>
-        <p className="text-[#17494D] text-center text-[20px] font-bold  mt-1">
-          {user?.name + "" + user?.lastname || ""}
+        <p className="max-w-[200px] text-[#17494D] text-center text-[20px] font-bold  mt-1">
+          {user?.name + " " + user?.lastname || ""}
         </p>
         <div className="flex justify-center mt-[16px] text-[14px]">
           <p className="ml-1">{user?.followers}</p>

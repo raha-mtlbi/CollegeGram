@@ -1,61 +1,42 @@
 import React, { useState } from "react";
-
+import { useNavigate } from "react-router-dom";
+import { imageUrl } from "../../api/config";
+import { ITilmeLine } from "../../api/type/timeLine";
+import {
+  handleBookmark,
+  handleLike,
+  handleUnBookmark,
+  handleUnLike,
+} from "../../logic/likePost";
 import Tag from "../Tag";
 
-import image from "../../assets/images/sampleHomeCard.svg";
 import likeicon from "../../assets/icons/heart.svg";
 import dislike from "../../assets/icons/heart-outline.svg";
 import saveIcon from "../../assets/icons/saved.svg";
 import unsaved from "../../assets/icons/save-outline.svg";
 import commnet from "../../assets/icons/commentIcon.svg";
 import multiImageIcon from "../../assets/icons/multyimages.svg";
-import { useNavigate } from "react-router-dom";
-import { IImage } from "../../api/type/images";
+import sample from "../../assets/images/sampleHomeCard.svg";
 
-const data = [
-  {
-    image: image,
-    imageCount: 1,
-    likeCount: 14,
-    saveCount: 12,
-    commentCount: 10,
-    name: "ناصر حسین زاده",
-  },
-  {
-    image: image,
-    imageCount: 2,
-    likeCount: 14,
-    saveCount: 12,
-    commentCount: 10,
-    name: "ناصر حسین زاده",
-  },
-  {
-    image: image,
-    imageCount: 2,
-    likeCount: 14,
-    saveCount: 12,
-    commentCount: 10,
-    name: "ناصر حسین زاده",
-  },
-];
-
-const HomeCardList = ({ imageList }: { imageList: IImage[] }) => {
+const HomeCardList = ({ imageList }: { imageList: ITilmeLine[] | any }) => {
   const navigate = useNavigate();
   const [like, setLike] = useState(false);
   const [saved, setsaved] = useState(false);
 
   return (
     <div className="w-full grid grid-cols-3 gap-4">
-      {data.map((data, index) => (
+      {imageList?.map((data: any, index: number) => (
         <div
           key={index}
           className=" bg-white rounded-b-2xl rounded-t-3xl w-fit space-y-5 pb-2 mt-4"
         >
           <img
             className="rounded-t-3xl aspect-square w-[24rem] cursor-pointer"
-            src={data?.image}
+            src={
+              data?.post?.photos[0] ? imageUrl + data?.post?.photos[0] : sample
+            }
             alt="test"
-            onClick={() => navigate("/friendPost/1")}
+            onClick={() => navigate(`/friendPost/${data?.post?.id}`)}
           />
 
           <div className="px-2 space-y-5">
@@ -63,45 +44,63 @@ const HomeCardList = ({ imageList }: { imageList: IImage[] }) => {
               <div className="flex gap-2 items-center">
                 <button
                   onClick={() => {
-                    setLike(!like);
+                    like || data?.post?.likeCount > 0
+                      ? handleUnLike(data?.post?.id, setLike)
+                      : handleLike(data?.post?.id, setLike);
                   }}
                 >
                   <img
                     className="w-5"
-                    src={like ? likeicon : dislike}
+                    src={like || data?.post?.likeCount > 0 ? likeicon : dislike}
                     alt="like"
                   />
                 </button>
-                <div className="font-medium text-sm">{data.likeCount}</div>
+                <div className="font-medium text-sm text-[#C38F00]">
+                  {data?.post.likeCount || 0}
+                </div>
               </div>
               <div className="flex gap-2 items-center">
                 <button
                   onClick={() => {
-                    setsaved(!saved);
+                    saved || data?.post?.bookmarkCount > 0
+                      ? handleUnBookmark(data?.post?.id, setsaved)
+                      : handleBookmark(data?.post?.id, setsaved);
                   }}
                 >
                   <img
                     className="w-5"
-                    src={saved ? saveIcon : unsaved}
+                    src={
+                      saved || data?.post?.bookmarkCount > 0
+                        ? saveIcon
+                        : unsaved
+                    }
                     alt="seve"
                   />
                 </button>
-                <div className="font-medium text-sm">{data.saveCount}</div>
+                <div className="font-medium text-sm text-[#C38F00]">
+                  {data?.post.bookmarkCount || 0}
+                </div>
               </div>
               <div className="flex gap-2 items-center">
                 <button>
                   <img className="w-5" src={commnet} alt="comment" />
                 </button>
-                <div className="font-medium text-sm">{data.commentCount}</div>
+                <div className="font-medium text-sm text-[#C38F00]">
+                  {data?.post.commentsCount || 0}
+                </div>
               </div>
-              {data.imageCount > 1 && (
+              {data.photosCount > 1 && (
                 <div className="w-5 flex flex-row-reverse">
                   <img src={multiImageIcon} alt="multiImages" />
                 </div>
               )}
             </div>
-            <p>{data.name}</p>
-            <Tag tag={"ایتالیا"} color="#812AE7" width="50px" />
+            <p>{data?.user?.username}</p>
+          </div>
+          <div className="flex flex-wrap">
+            {data?.post?.tags?.map((tag: any, index: number) => (
+              <Tag tag={tag} color="#812AE7" />
+            ))}
           </div>
         </div>
       ))}

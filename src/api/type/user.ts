@@ -1,6 +1,6 @@
 export interface IUser {
   bio: string;
-  id: string;
+  id: number;
   photo: string;
   username: string;
   email: string;
@@ -12,4 +12,6 @@ export interface IUser {
   private: boolean;
   usernameOrEmail: string;
   block: boolean;
+  createdAt: Date;
+  removeProfile: boolean;
 }

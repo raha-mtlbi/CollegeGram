@@ -94,6 +94,7 @@ const EditProfile = ({
                 </div>
                 <div className="my-4">
                   <Input
+                    type="password"
                     placeholder="رمز عبور"
                     imageSrc={key}
                     imageAlt="key"
@@ -105,6 +106,7 @@ const EditProfile = ({
                 </div>
                 <div className="my-4">
                   <Input
+                    type="password"
                     placeholder="تکرار رمز عبور"
                     imageSrc={key}
                     imageAlt="repeat key"

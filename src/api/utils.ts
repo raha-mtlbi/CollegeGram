@@ -1,12 +1,29 @@
 import { AxiosResponse } from "axios";
+import { toast } from "react-toastify";
 
-export function onSuccess<T>(response: AxiosResponse<T>) {
-  return response.data;
-}
+export const onSuccess = (response: AxiosResponse<any>) => {
+  if (
+    response.headers &&
+    response.headers["content-type"].indexOf("application/json") !== -1
+  ) {
+    return response.data;
+  }
+  throw new Error(
+    `The response of this API endpoint is not JSON, URL: ${response.config.url}`
+  );
+};
 
-export function onError(error: any) {
-  const errorObject = new Error(error.response || error.message);
-  console.log("Request Failed:", errorObject);
+export const onError = (error: any) => {
+  console.error("Post Request Failed:", error.config);
 
-  return Promise.reject(errorObject);
-}
+  if (error.response) {
+    console.error("Status:", error.response.status);
+    console.error("Data:", error.response.data);
+    toast.error(error.response.data.error);
+    console.error("Headers:", error.response.headers);
+  } else {
+    console.error("Error Message:", error.message);
+  }
+
+  return Promise.reject(error.response || error.message);
+};

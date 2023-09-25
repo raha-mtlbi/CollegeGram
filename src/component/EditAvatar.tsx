@@ -11,6 +11,11 @@ export default function Avatar({ onChange }: { onChange: any }) {
   const fileUploader = useRef<HTMLInputElement | null>(null);
   const [preview, setPreview] = useState<any>();
 
+  const deleteImage = () => {
+    const deleteProfile = user?.removeProfile;
+    return deleteProfile === true;
+  };
+
   return (
     <div>
       <label htmlFor={"x"} className="flex justify-center p-2">
@@ -55,7 +60,7 @@ export default function Avatar({ onChange }: { onChange: any }) {
             if (preview) {
               setPreview(null);
             } else {
-              // user.photo === null;
+              deleteImage();
             }
           }}
         >

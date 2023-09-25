@@ -1,11 +1,14 @@
 import { toast } from "react-toastify";
 import { AddComment } from "../api/comment";
-import { get } from "../api";
 
-export const AddNewComment = ({ postId }: { postId: any }) => {
+export const AddNewComment = () => {
   const refresh = () => window.location.reload();
 
-  const handleSubmit = async (data: { content: any; postId: any }) => {
+  const handleSubmit = async (data: {
+    content: any;
+    postId: any;
+    parentId: number;
+  }) => {
     try {
       await AddComment({
         content: data.content,
@@ -13,7 +16,7 @@ export const AddNewComment = ({ postId }: { postId: any }) => {
       });
       toast.success("نظر شما با موفقیت ثبت شد.");
 
-      refresh();
+      // refresh();
     } catch (error) {
       console.log(error);
     }

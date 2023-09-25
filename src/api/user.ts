@@ -1,4 +1,4 @@
-import { get, patch, post } from ".";
+import { delete_, get, patch, post } from ".";
 import { IUser } from "./type/user";
 
 export const login = (usernameOrEmail: string, password: string) => {
@@ -27,6 +27,10 @@ export const getMe = () => {
   return get<IUser>("/user/me");
 };
 
+export const Logout = (id?: number) => {
+  return delete_<IUser>("/user/logout");
+};
+
 export const recoveryPassword = (data: { usernameOrEmail: string }) => {
   return post<{ usernameOrEmail: string }>("/user/forgetpassword", data);
 };
@@ -40,7 +44,7 @@ export const changePassword = (data: {
 
 export const EditProfile = (data: any) => {
   const formData = new FormData();
-  data.photo && formData.append("photo", data.photo);
+  data.photo && formData.append("profile", data.photo);
   data.email && formData.append("email", data.email);
   data.name && formData.append("name", data.name);
   data.lastname && formData.append("lastname", data.lastname);
