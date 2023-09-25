@@ -25,6 +25,10 @@ import InnerFriendsPost from "../page/friendPost/[id]";
 import useMediaQuery from "../component/useMediaQuery";
 import RespansiveLayout from "../layout/panel/respansive";
 import SearchPage from "../page/searchPage";
+import FollowerPage from "../page/followersPage";
+import FollowingPage from "../page/followingPage";
+import BlackList from "../page/blackListPage";
+import FriendListPage from "../page/friendListPage";
 
 const Home = React.lazy(() => import("../page/home"));
 
@@ -32,7 +36,7 @@ export default function Router() {
   const dispatch = useAppDispatch();
   const status = useUserStatus();
 
-  const phone = useMediaQuery("640");
+  const phone = useMediaQuery("600");
 
   useEffect(() => {
     dispatch(getCurrentUser());
@@ -60,7 +64,7 @@ export default function Router() {
   }
 
   return (
-    <Suspense fallback={phone ? <RespansiveLayout /> : <PanelLayout />}>
+    <Suspense fallback={<PanelLayout />}>
       <Routes>
         <Route path="" element={phone ? <RespansiveLayout /> : <PanelLayout />}>
           <Route path="/" element={<Home />} />
@@ -71,6 +75,10 @@ export default function Router() {
           <Route path="/notification" element={<NotificationPage />} />
           <Route path="/otherNotification" element={<OtherNotification />} />
           <Route path="/messages" element={<Message />} />
+          <Route path="/followerPage" element={<FollowerPage />} />
+          <Route path="/followingPage" element={<FollowingPage />} />
+          <Route path="/blackList" element={<BlackList />} />
+          <Route path="/friendList" element={<FriendListPage />} />
           <Route path="/usersProfile/:id" element={<OtherUsers />} />
           <Route path="/friendPost/:id" element={<InnerFriendsPost />} />
           <Route

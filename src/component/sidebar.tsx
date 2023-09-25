@@ -13,7 +13,7 @@ const icons = [
   { link: "/saves", icon: saved },
   { link: "/messages", icon: message },
   { link: "/notification", icon: bell },
-  { link: "", icon: menu },
+  { link: "/followerPage", icon: menu },
   { link: "", icon: clock },
 ];
 
