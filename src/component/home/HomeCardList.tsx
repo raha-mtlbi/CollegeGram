@@ -2,7 +2,12 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { imageUrl } from "../../api/config";
 import { ITilmeLine } from "../../api/type/timeLine";
-
+import {
+  handleBookmark,
+  handleLike,
+  handleUnBookmark,
+  handleUnLike,
+} from "../../logic/likePost";
 import Tag from "../Tag";
 
 import likeicon from "../../assets/icons/heart.svg";
@@ -12,12 +17,6 @@ import unsaved from "../../assets/icons/save-outline.svg";
 import commnet from "../../assets/icons/commentIcon.svg";
 import multiImageIcon from "../../assets/icons/multyimages.svg";
 import sample from "../../assets/images/sampleHomeCard.svg";
-import {
-  handleBookmark,
-  handleLike,
-  handleUnBookmark,
-  handleUnLike,
-} from "../../logic/likePost";
 
 const HomeCardList = ({ imageList }: { imageList: ITilmeLine[] | any }) => {
   const navigate = useNavigate();

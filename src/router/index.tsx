@@ -59,12 +59,9 @@ export default function Router() {
   }
 
   return (
-    <Suspense fallback={!phone ? <RespansiveLayout /> : <PanelLayout />}>
+    <Suspense fallback={phone ? <RespansiveLayout /> : <PanelLayout />}>
       <Routes>
-        <Route
-          path=""
-          element={!phone ? <RespansiveLayout /> : <PanelLayout />}
-        >
+        <Route path="" element={phone ? <RespansiveLayout /> : <PanelLayout />}>
           <Route path="/" element={<Home />} />
           <Route path="/myCollegeGram" element={<MyCollegeGram />} />
           <Route path="/collegians" element={<Collegians />} />
