@@ -24,6 +24,7 @@ import OtherUsers from "../page/otherUserPage/[id]";
 import InnerFriendsPost from "../page/friendPost/[id]";
 import useMediaQuery from "../component/useMediaQuery";
 import RespansiveLayout from "../layout/panel/respansive";
+import SearchPage from "../page/searchPage";
 
 const Home = React.lazy(() => import("../page/home"));
 
@@ -72,6 +73,10 @@ export default function Router() {
           <Route path="/messages" element={<Message />} />
           <Route path="/usersProfile/:id" element={<OtherUsers />} />
           <Route path="/friendPost/:id" element={<InnerFriendsPost />} />
+          <Route
+            path="/searchPage"
+            element={<SearchPage imageList={undefined} />}
+          />
         </Route>
 
         <Route path="404" element={<ErrorPage />} />
