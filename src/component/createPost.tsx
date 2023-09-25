@@ -19,7 +19,7 @@ const CreatePostModal = ({
       caption: "",
       closeFriend: Boolean(false),
       tags: [""],
-      // photos: undefined,
+      photos: undefined,
     },
     enableReinitialize: true,
     validationSchema: AddPostValidation,
