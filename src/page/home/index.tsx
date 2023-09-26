@@ -8,6 +8,7 @@ export default function Home() {
   const [imageList, setImageList] = useState<{
     result: ITilmeLine[];
     total: number;
+    msg: string;
   }>();
 
   useEffect(() => {
@@ -17,9 +18,9 @@ export default function Home() {
   }, []);
 
   return (
-    <div className=" px-12">
+    <div className="px-12 sm:w-screen">
       <p className=" font-bold text-[18px] mt-3">خانه</p>
-      {imageList?.total === 0 ? (
+      {imageList?.msg === "پست مورد نظر یافت نشد" ? (
         <InnerHome />
       ) : (
         <HomeCardList imageList={imageList?.result || []} />

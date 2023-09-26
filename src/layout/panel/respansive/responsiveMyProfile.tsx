@@ -1,22 +1,37 @@
+import React, { useState } from "react";
 import { useUser } from "../../../features/hooks";
 import { imageUrl } from "../../../api/config";
 
-import {
-  Popover,
-  PopoverHandler,
-  PopoverContent,
-} from "@material-tailwind/react";
 import Button from "../../../component/button";
 
 import arrow from "../../../assets/icons/arrow-down.svg";
-import person from "../../../assets/icons/person.svg";
+import person from "../../../assets/icons/gold-person.svg";
 import dot from "../../../assets/icons/ellipsis.svg";
+import EditProfile from "../../../component/editProfileModal";
 
 const ResponsiveProfile = () => {
+  const [open, setOpen] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
   const user = useUser();
 
   return (
     <div>
+      <EditProfile open={openModal} onClose={() => setOpenModal(false)} />
+      {open && (
+        <div className="fixed z-10 px-3 bottom-0 bg-[#F1EBE3] border border-[#CDCDCD] rounded-t-3xl w-full h-[125px] pt-5 flex flex-col text-[#C19008]">
+          <ul>
+            <div className="flex">
+              <img className="w-5" alt="" src={person} />
+              <li className=" cursor-pointer mr-2 my-2">{user?.username}</li>
+            </div>
+
+            <div className="flex">
+              <img className="w-5" alt="" src={person} />
+              <li className="  cursor-pointer mr-2 mt-1">{user?.username}</li>
+            </div>
+          </ul>
+        </div>
+      )}
       <div className="flex items-center">
         <div className="rounded-full w-12 h-12 bg-[#F3F0EE] border mt-12 border-[#CDCDCD] mr-7">
           {user?.photo ? (
@@ -42,25 +57,7 @@ const ResponsiveProfile = () => {
                   src={arrow}
                   className="sm:ml-4 sm:mr-0 mr-4 w-2"
                   alt="arrow"
-                  onClick={() => (
-                    <div className="fixed bottom-0 bg-[#F1EBE3] border border-[#CDCDCD] rounded-t-3xl w-full h-[155px] pt-5 flex flex-col text-[#C19008]">
-                      <ul>
-                        <div className="flex">
-                          <img src={person} />
-                          <li className=" cursor-pointer mr-2">
-                            {user?.username}
-                          </li>
-                        </div>
-
-                        <div className="flex">
-                          <img src={person} />
-                          <li className="  cursor-pointer mr-2 my-2">
-                            {user?.username}
-                          </li>
-                        </div>
-                      </ul>
-                    </div>
-                  )}
+                  onClick={() => setOpen(true)}
                 />
               </button>
             )}
@@ -88,7 +85,11 @@ const ResponsiveProfile = () => {
       </div>
 
       <div className="w-screen flex justify-end pl-4">
-        <Button title={"ویرایش پروفایل"} width={"150px"} />
+        <Button
+          title={"ویرایش پروفایل"}
+          width={"150px"}
+          onClick={() => setOpenModal(true)}
+        />
       </div>
     </div>
   );

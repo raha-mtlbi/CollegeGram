@@ -24,7 +24,7 @@ const HomeCardList = ({ imageList }: { imageList: ITilmeLine[] | any }) => {
   const [saved, setsaved] = useState(false);
 
   return (
-    <div className="w-full grid grid-cols-3 gap-4">
+    <div className="w-full grid sm:grid-cols-1 grid-cols-3 gap-4">
       {imageList?.map((data: any, index: number) => (
         <div
           key={index}

@@ -1,9 +1,11 @@
 import React from "react";
+import { IUser } from "../api/type/user";
+
 import more from "../assets/icons/more_button.svg";
 import fram from "../assets/icons/picture frame.svg";
 
-export default function FollowerUser() {
-  const userList = [{ id: 1 }, { id: 1 }, { id: 1 }, { id: 1 }];
+export default function FollowerUser({ userList }: { userList: IUser[] }) {
+  // const userList = [{ id: 1 }, { id: 1 }, { id: 1 }, { id: 1 }];
   return (
     <>
       {userList?.map((user: any, index: number) => (

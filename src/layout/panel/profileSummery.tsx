@@ -14,7 +14,7 @@ import { Logout } from "../../api/user";
 
 import arrow from "../../assets/icons/arrow-down.svg";
 import pen from "../../assets/icons/edit.svg";
-// import { logout } from "../../features/userSlice";
+import users from "../../assets/icons/person.svg";
 
 const ProfileSummery = () => {
   const [open, setOpen] = useState<boolean>(false);
@@ -34,28 +34,11 @@ const ProfileSummery = () => {
       <EditProfile open={open} onClose={() => setOpen(false)} />
 
       <div className="w-[253px] h-[403px] bg-[#F1EBE3] border-[#CDCDCD] border flex flex-col justify-center items-center text-center">
-        <div className=" relative w-[120px] h-[120px] overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
-          {user?.photo ? (
-            <img
-              alt="profile"
-              src={imageUrl + user?.photo}
-              className="w-full h-full"
-            />
-          ) : (
-            <svg
-              className="absolute w-[110px] h-[100px] text-center text-gray-400 -left-[-5px]"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-                clip-rule="evenodd"
-              ></path>
-            </svg>
-          )}
-        </div>
+        <img
+          alt="profile"
+          src={user?.photo ? imageUrl + user?.photo : users}
+          className="rounded-full w-[120px] h-[120px] object-fill"
+        />
         <p className="flex text-[#C19008] text-[14px] not-italic mt-[15px] justify-center">
           {user?.username && (
             <Popover placement="bottom">

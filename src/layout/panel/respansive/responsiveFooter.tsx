@@ -37,7 +37,7 @@ export default function ResponsiveFooter() {
             <img alt="" src={bell} className="w-6 mr-8 ml-2" />
             <span>اعلانات</span>
           </a>
-          <a className="flex mb-8" href="/">
+          <a className="flex mb-8" href="/followerPage">
             <img alt="" src={items} className="w-6 mr-8 ml-2" />
             <span>مدیریت دوستان</span>
           </a>
@@ -51,7 +51,7 @@ export default function ResponsiveFooter() {
           </a>
         </div>
       ) : (
-        <div className="w-80 flex justify-center mx-auto">
+        <div className="w-screen flex justify-center mx-auto">
           <div className="fixed bottom-1 flex w-80 h-14 bg-[#F8F9F9] border border-[#CDCDCD] rounded-[50px] mx-auto mb-7">
             <button>
               <img src={people} alt="pepole" className="mr-12 my-3 w-6" />

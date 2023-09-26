@@ -42,7 +42,7 @@ const EditProfile = ({
       as="div"
       open={open}
       onClose={onClose}
-      className="flex justify-center items-center relative z-10 "
+      className="flex justify-center items-center relative z-10 sm:w-screen"
       style={{ direction: "rtl" }}
     >
       <div className="fixed inset-0 bg-black/30" aria-hidden="true" />

@@ -1,8 +1,8 @@
 import Axios from "axios";
 import { getAccessToken, getRefreshToken, removeToken } from "./token";
 
-export const BaseUrl = "https://murphyteam.ir/api/";
-export const imageUrl = "https://murphyteam.ir";
+export const BaseUrl = "https://murphy-back.darkube.app/api/";
+export const imageUrl = "https://murphy-back.darkube.app";
 export const apiAgent = Axios.create({ baseURL: BaseUrl });
 
 apiAgent.interceptors.request.use(
