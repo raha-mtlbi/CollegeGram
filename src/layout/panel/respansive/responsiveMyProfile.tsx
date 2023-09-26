@@ -37,26 +37,34 @@ const ResponsiveProfile = () => {
 
           <p className="flex text-[#C19008] text-[14px] not-italic">
             {user?.username && (
-              <Popover placement="bottom">
-                <PopoverHandler>
-                  <button>
-                    <img
-                      src={arrow}
-                      className="sm:ml-4 sm:mr-0 mr-4 w-2"
-                      alt="arrow"
-                    />
-                  </button>
-                </PopoverHandler>
-                <PopoverContent className="w-[150px] text-right m-3 border-gray-400">
-                  <ul>
-                    <li className=" cursor-pointer mr-2">{user?.username}</li>
-                    <li className="  cursor-pointer mr-2 my-2">
-                      {user.username}
-                    </li>
-                  </ul>
-                </PopoverContent>
-              </Popover>
+              <button>
+                <img
+                  src={arrow}
+                  className="sm:ml-4 sm:mr-0 mr-4 w-2"
+                  alt="arrow"
+                  onClick={() => (
+                    <div className="fixed bottom-0 bg-[#F1EBE3] border border-[#CDCDCD] rounded-t-3xl w-full h-[155px] pt-5 flex flex-col text-[#C19008]">
+                      <ul>
+                        <div className="flex">
+                          <img src={person} />
+                          <li className=" cursor-pointer mr-2">
+                            {user?.username}
+                          </li>
+                        </div>
+
+                        <div className="flex">
+                          <img src={person} />
+                          <li className="  cursor-pointer mr-2 my-2">
+                            {user?.username}
+                          </li>
+                        </div>
+                      </ul>
+                    </div>
+                  )}
+                />
+              </button>
             )}
+
             {user?.username || ""}
           </p>
         </div>
