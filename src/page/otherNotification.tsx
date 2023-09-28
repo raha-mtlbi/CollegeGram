@@ -66,7 +66,7 @@ const OtherNotification = () => {
                 </div>
                 <div className="mx-[25px] w-[300px]">
                   <p className="text text-sm">
-                    {item?.relation === "following" && item?.type === "request"
+                    {item?.relation === "Following" && item?.type === "request"
                       ? `${
                           item?.actor?.username && item?.actor?.username
                         } درخواست دوستی‌ات رو قبول کرد`
@@ -85,16 +85,14 @@ const OtherNotification = () => {
               </div>
               {/* buttons */}
               <div>
-                {item.type === "follow" &&
-                  item?.reverseRelation === "following" &&
-                  item?.relation === "pending" && (
-                    <Button
-                      title="دنبال کردن"
-                      type="button"
-                      width={150}
-                      onClick={() => handleFollow(item?.user?.id, setFollows)}
-                    />
-                  )}
+                {item.type === "Follow" && item?.relation === "Following" && (
+                  <Button
+                    title="دنبال کردن"
+                    type="button"
+                    width={150}
+                    onClick={() => handleFollow(item?.user?.id, setFollows)}
+                  />
+                )}
               </div>
             </div>
           );

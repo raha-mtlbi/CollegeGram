@@ -64,13 +64,13 @@ const NotificationPage = () => {
             return (
               <div className="flex sm:flex-col mb-[24px]">
                 {/* profile */}
-                <div>
+                <div className="flex">
                   <div className="rounded-full w-[64px] h-[64px]">
-                    {item?.type === "like" ? (
+                    {item?.type === "like" || item?.type === "comment" ? (
                       <img
                         alt="profile"
                         src={imageUrl + item?.post?.photo}
-                        className="w-[40px] h-[40px] rounded-full"
+                        className="w-[40px] h-[40px]"
                       />
                     ) : (
                       <img
@@ -78,13 +78,13 @@ const NotificationPage = () => {
                         src={
                           item.user.photo ? imageUrl + item.user.photo : user
                         }
-                        className="w-[40px] h-[40px]"
+                        className="w-[40px] h-[40px]  rounded-full"
                       />
                     )}
                   </div>
                   <div className="mx-[25px] w-[300px]">
                     <p className="text text-sm">
-                      {item?.relation === "following" &&
+                      {item?.relation === "Following" &&
                       item?.type === "request"
                         ? `${
                             item?.actor?.username && item?.actor?.username
@@ -92,20 +92,21 @@ const NotificationPage = () => {
                         : item.type === "comment"
                         ? `${
                             item?.actor?.username && item?.actor?.username
-                          }برای این عکس کامنت داده`
-                        : item.type === "follow" &&
-                          item?.relation === "following"
+                          } برای این عکس کامنت داده`
+                        : item.type === "Follow" &&
+                          item?.relation === "Following"
                         ? `${
                             item?.actor?.username && item?.actor?.username
-                          }دنبالت کرد`
+                          } دنبالت کرد`
                         : item.type === "request" &&
                           item?.reverseRelation === "pending"
                         ? `${
                             item?.actor?.username && item?.actor?.username
-                          }درخواست دوستی داده`
-                        : `${
+                          } درخواست دوستی داده`
+                        : item?.type === "like" &&
+                          `${
                             item?.actor?.username && item?.actor?.username
-                          }این عکس رو لایک کرده`}
+                          } این عکس رو لایک کرده`}
                     </p>
                     <p className="time text-[#17494D] text-xs mt-1">
                       {Number(item?.createdAt)} دقیقه پیش
@@ -131,18 +132,16 @@ const NotificationPage = () => {
                         نه خوشم نمیاد ازش
                       </button>
                     </div>
-                  ) : item.type === "follow" &&
-                    item?.relation === undefined &&
-                    item?.reverseRelation === "following" ? (
+                  ) : item.type === "Follow" &&
+                    item?.relation === "Following" ? (
                     <Button
                       title={"دنبال کردن"}
                       width={"120px"}
                       onClick={() => handleFollow(item.user?.id, setFollows)}
                     />
                   ) : (
-                    item.type === "follow" &&
-                    item?.reverseRelation === "following" &&
-                    item?.relation === "pending" && (
+                    item.type === "Follow" &&
+                    item?.reverseRelation === "Following" && (
                       <button
                         className="text-[#C38F00] border rounded-3xl border-[#C38F00] px-4 py-1 mr-3"
                         onClick={() =>
