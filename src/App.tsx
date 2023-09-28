@@ -17,7 +17,7 @@ function App() {
         <BrowserRouter>
           <Provider store={store}>
             <ToastContainer
-              // limit={1}
+              limit={4}
               theme="colored"
               position="bottom-center"
               autoClose={3000}

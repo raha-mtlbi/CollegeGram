@@ -38,11 +38,10 @@ const MySavePage = () => {
             ))}
           </div>
         </div>
+        {imageList?.msg === "پست مورد نظر یافت نشد" && <EmptyPage />}
 
-        {phone && <SideBar />}
+        {!phone && <SideBar />}
       </div>
-
-      {imageList?.msg === "پست مورد نظر یافت نشد" && <EmptyPage />}
     </>
   );
 };

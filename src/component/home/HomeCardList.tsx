@@ -17,11 +17,15 @@ import unsaved from "../../assets/icons/save-outline.svg";
 import commnet from "../../assets/icons/commentIcon.svg";
 import multiImageIcon from "../../assets/icons/multyimages.svg";
 import sample from "../../assets/images/sampleHomeCard.svg";
+import LoadingPage from "../../page/loading";
 
 const HomeCardList = ({ imageList }: { imageList: ITilmeLine[] | any }) => {
   const navigate = useNavigate();
   const [like, setLike] = useState(false);
   const [saved, setsaved] = useState(false);
+  const [refresh, setRefresh] = useState(false);
+
+  console.log("re", refresh);
 
   return (
     <div className="w-full grid sm:grid-cols-1 grid-cols-3 gap-4">
@@ -42,19 +46,23 @@ const HomeCardList = ({ imageList }: { imageList: ITilmeLine[] | any }) => {
           <div className="px-2 space-y-5">
             <div className="grid grid-cols-4 text-primary_orange gap-8">
               <div className="flex gap-2 items-center">
-                <button
-                  onClick={() => {
-                    like || data?.post?.likeCount > 0
-                      ? handleUnLike(data?.post?.id, setLike)
-                      : handleLike(data?.post?.id, setLike);
-                  }}
-                >
-                  <img
-                    className="w-5"
-                    src={like || data?.post?.likeCount > 0 ? likeicon : dislike}
-                    alt="like"
-                  />
-                </button>
+                {refresh ? (
+                  <LoadingPage />
+                ) : (
+                  <button
+                    onClick={() => {
+                      data?.post?.likeCount > 0
+                        ? handleUnLike(data?.post?.id, setLike)
+                        : handleLike(data?.post?.id, setLike);
+                    }}
+                  >
+                    <img
+                      className="w-5"
+                      src={data?.post?.likeCount > 0 ? likeicon : dislike}
+                      alt="like"
+                    />
+                  </button>
+                )}
                 <div className="font-medium text-sm text-[#C38F00]">
                   {data?.post.likeCount || 0}
                 </div>
@@ -69,11 +77,7 @@ const HomeCardList = ({ imageList }: { imageList: ITilmeLine[] | any }) => {
                 >
                   <img
                     className="w-5"
-                    src={
-                      saved || data?.post?.bookmarkCount > 0
-                        ? saveIcon
-                        : unsaved
-                    }
+                    src={data?.post?.bookmarkCount > 0 ? saveIcon : unsaved}
                     alt="seve"
                   />
                 </button>
@@ -86,7 +90,7 @@ const HomeCardList = ({ imageList }: { imageList: ITilmeLine[] | any }) => {
                   <img className="w-5" src={commnet} alt="comment" />
                 </button>
                 <div className="font-medium text-sm text-[#C38F00]">
-                  {data?.post.commentsCount || 0}
+                  {data?.post.commentCount || 0}
                 </div>
               </div>
               {data.photosCount > 1 && (

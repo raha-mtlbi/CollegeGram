@@ -83,7 +83,7 @@ const CreatePostModal = ({
                 <button className="mx-6" onClick={onClose}>
                   پشیمون شدم
                 </button>
-                <Button title={"ثبت تغییرات"} width={"110px"} type="submit" />
+                <Button title={"ثبت عکس"} width={"110px"} type="submit" />
               </div>
             </Dialog.Panel>
           </div>

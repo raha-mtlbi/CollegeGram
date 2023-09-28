@@ -5,6 +5,7 @@ export const handleLike = async (id: number, setLike: (a: boolean) => void) => {
   try {
     const response = await LikePost(id);
     setLike(true);
+
     toast.success(response.msg);
   } catch (error) {
     console.log(error);
@@ -19,7 +20,7 @@ export const handleUnLike = async (
   try {
     const response = await UnLikePost(id);
     setLike(false);
-    // toast.success(response.msg);
+
     toast.warning(response.msg);
   } catch (error) {
     console.log(error);

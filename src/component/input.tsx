@@ -38,7 +38,7 @@ export default function Input({
           className={
             error
               ? "shadow appearance-none border border-red-600 w-80 rounded-3xl py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline pr-8 "
-              : "shadow appearance-none border w-80 rounded-3xl py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline pr-8 "
+              : " shadow appearance-none border w-80 rounded-3xl py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline pr-8 "
           }
           placeholder={placeholder}
           type={type}
@@ -47,7 +47,7 @@ export default function Input({
           style={{ width: width }}
           {...getFieldprops}
         />
-        <div className=" -mr-8">{prefix}</div>
+        {/* <div className=" -mr-8">{prefix}</div> */}
       </div>
       {error && errorText && (
         <div className="flex items-center my-3">

@@ -15,9 +15,7 @@ import user from "../assets/icons/person.svg";
 const NotificationPage = () => {
   const phone = useMediaQuery("600");
   const [follows, setFollows] = useState(false);
-  const [notification, setNotification] = useState<{
-    result: INotification[];
-  }>();
+  const [notification, setNotification] = useState<INotification[]>();
 
   useEffect(() => {
     get("user/me/notification")
@@ -62,7 +60,7 @@ const NotificationPage = () => {
         </div>
 
         <div className="flex flex-col mt-[66px] h-[500px] overflow-y-autos">
-          {notification?.result?.map((item) => {
+          {notification?.map((item) => {
             return (
               <div className="flex sm:flex-col mb-[24px]">
                 {/* profile */}
@@ -72,7 +70,7 @@ const NotificationPage = () => {
                       <img
                         alt="profile"
                         src={imageUrl + item?.post?.photo}
-                        className="w-[40px] h-[40px] "
+                        className="w-[40px] h-[40px] rounded-full"
                       />
                     ) : (
                       <img
@@ -95,7 +93,8 @@ const NotificationPage = () => {
                         ? `${
                             item?.actor?.username && item?.actor?.username
                           }برای این عکس کامنت داده`
-                        : item.type === "follow"
+                        : item.type === "follow" &&
+                          item?.relation === "following"
                         ? `${
                             item?.actor?.username && item?.actor?.username
                           }دنبالت کرد`
