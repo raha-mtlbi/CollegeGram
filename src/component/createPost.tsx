@@ -83,7 +83,12 @@ const CreatePostModal = ({
                 <button className="mx-6" onClick={onClose}>
                   پشیمون شدم
                 </button>
-                <Button title={"ثبت عکس"} width={"110px"} type="submit" />
+                <Button
+                  disabled={!formik.values?.photos}
+                  title={"ثبت عکس"}
+                  width={"110px"}
+                  type="submit"
+                />
               </div>
             </Dialog.Panel>
           </div>

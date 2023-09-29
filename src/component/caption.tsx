@@ -53,8 +53,7 @@ const Caption = ({
   const [open, setOpen] = useState<boolean>(false);
   const [blockOpen, setBlockOpen] = useState<boolean>(false);
   const [friendOpen, setFriendOpen] = useState<boolean>(false);
-  const [like, setLike] = useState<boolean>(false);
-  const [isSave, setIsSave] = useState<boolean>(false);
+
   const [blocks, setBlocks] = useState(false);
 
   const [otherUser, setOtherUser] = useState<IOtherUser>();
@@ -92,14 +91,13 @@ const Caption = ({
           <div className="flex">
             <button
               onClick={() => {
-                like || likeCount > 0
-                  ? handleUnLike(id as number, setLike)
-                  : handleLike(id as number, setLike);
-                // likeCount++ && window.location.reload();
+                user?.ifLike
+                  ? handleUnLike(id as number)
+                  : handleLike(id as number);
               }}
             >
               <img
-                src={like || likeCount > 0 ? Like : disLike}
+                src={user?.ifLike ? Like : disLike}
                 className="w-[24px] h-[24px]"
                 alt="like"
               />
@@ -109,14 +107,14 @@ const Caption = ({
             </p>
             <button
               onClick={() =>
-                isSave || bookmarkCount > 0
-                  ? handleUnBookmark(id as number, setIsSave)
-                  : handleBookmark(id as number, setIsSave)
+                user?.ifBookmark
+                  ? handleUnBookmark(id as number)
+                  : handleBookmark(id as number)
               }
               className="mr-[16px]"
             >
               <img
-                src={isSave || bookmarkCount > 0 ? Save : disSave}
+                src={user?.ifBookmark ? Save : disSave}
                 className="w-[24px] h-[24px]"
                 alt="save"
               />
@@ -144,8 +142,16 @@ const Caption = ({
                 </PopoverHandler>
                 <PopoverContent className="w-[230px] text-right bg-[#F1EBE3] m-3  rounded-xl border-gray-400">
                   <ul>
-                    <li className=" cursor-pointer mr-2">بلاک کردن کاربر</li>
-                    <li className="  cursor-pointer mr-2 my-2">
+                    <li
+                      className=" cursor-pointer mr-2"
+                      onClick={() => setBlockOpen(true)}
+                    >
+                      بلاک کردن کاربر
+                    </li>
+                    <li
+                      className="  cursor-pointer mr-2 my-2"
+                      onClick={() => setFriendOpen(true)}
+                    >
                       افزودن به دوست نزدیک
                     </li>
                     <li className=" cursor-pointer mr-2">پیام به کاربر</li>
@@ -164,7 +170,7 @@ const Caption = ({
               <img
                 alt="profile"
                 src={otherUser?.user?.photo || userImage}
-                className="w-10 h-10"
+                className="bg-white rounded-full w-10 h-10"
               />
             </div>
           )}

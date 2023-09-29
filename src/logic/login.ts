@@ -18,7 +18,7 @@ export default function Login() {
           usernameOrEmail: data.usernameOrEmail,
         })
       ).unwrap();
-      dispatch(getCurrentUser());
+      // dispatch(getCurrentUser());
 
       toast.success(response?.msg || "با موفقیت وارد شدید");
       navigate("/myCollegeGram");

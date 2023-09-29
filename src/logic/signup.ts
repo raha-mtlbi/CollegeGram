@@ -1,16 +1,16 @@
-import { useNavigate } from "react-router-dom"
-import { toast } from "react-toastify"
-import { useAppDispatch } from "../store"
-import { registerThunk } from "../features/userSlice"
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { useAppDispatch } from "../store";
+import { registerThunk } from "../features/userSlice";
 
 export default function Signup() {
-  const dispatch = useAppDispatch()
-  const navigate = useNavigate()
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const handleSubmit = async (data: {
-    username: string
-    email: string
-    password: string
+    username: string;
+    email: string;
+    password: string;
   }) => {
     try {
       await dispatch(
@@ -19,15 +19,14 @@ export default function Signup() {
           email: data.email,
           password: data.password,
         })
-      ).unwrap()
+      ).unwrap();
 
-      toast.success("با موفقیت وارد شدید")
-      navigate("/myCollegeGram")
+      toast.success("با موفقیت وارد شدید");
+      navigate("/myCollegeGram");
     } catch (error) {
-      console.log(error)
-      toast.error("مشکلی پیش آمده")
+      console.log(error);
     }
-  }
+  };
 
-  return handleSubmit
+  return handleSubmit;
 }

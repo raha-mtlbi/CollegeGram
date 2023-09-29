@@ -7,14 +7,14 @@ export default function EditProfileSubmit({
   onClose: () => void;
 }) {
   const handleSubmit = async (data: {
-    email: "";
-    password: "";
-    repeatPassword: "";
-    name: "";
-    lastname: "";
-    bio: "";
+    email: string;
+    password: string;
+    repeatPassword: string;
+    name: string;
+    lastname: string;
+    bio: string;
     private: boolean;
-    photo?: File;
+    photo?: any;
   }) => {
     try {
       await EditProfile({

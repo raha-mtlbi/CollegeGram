@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import cancel from "../assets/icons/cancel.svg";
-import { imageUrl } from "../api/config";
 import { ITilmeLine } from "../api/type/timeLine";
 import { handleLike, handleUnLike } from "../logic/likePost";
 
@@ -12,7 +11,7 @@ import multiImageIcon from "../assets/icons/multyimages.svg";
 
 const SearchPage = ({ imageList }: { imageList: ITilmeLine[] | any }) => {
   const navigate = useNavigate();
-  const [like, setLike] = useState(false);
+
   return (
     <div>
       <div className="text-[#587052] font-bold text-[22px] mr-12 flex ">
@@ -21,7 +20,7 @@ const SearchPage = ({ imageList }: { imageList: ITilmeLine[] | any }) => {
           <p>دکوراسیون گیاه </p>
         </div>
         <button className="mr-4">
-          <img src={cancel} />
+          <img src={cancel} alt="cancel" />
         </button>
       </div>
 
@@ -33,11 +32,7 @@ const SearchPage = ({ imageList }: { imageList: ITilmeLine[] | any }) => {
           >
             <img
               className="rounded-t-3xl aspect-square w-[360px] cursor-pointer"
-              src={
-                data?.post?.photos[0]
-                  ? imageUrl + data?.post?.photos[0]
-                  : sample
-              }
+              src={data?.post?.photos[0] ? data?.post?.photos[0] : sample}
               alt="test"
               onClick={() => navigate("/")}
             />
@@ -46,14 +41,14 @@ const SearchPage = ({ imageList }: { imageList: ITilmeLine[] | any }) => {
               <div>
                 <button
                   onClick={() => {
-                    like || data?.post?.likeCount > 0
-                      ? handleUnLike(data?.post?.id, setLike)
-                      : handleLike(data?.post?.id, setLike);
+                    data?.user?.ifLike
+                      ? handleUnLike(data?.post?.id)
+                      : handleLike(data?.post?.id);
                   }}
                 >
                   <img
                     className="w-5"
-                    src={like || data?.post?.likeCount > 0 ? likeicon : dislike}
+                    src={data?.user?.ifLike ? likeicon : dislike}
                     alt="like"
                   />
                 </button>

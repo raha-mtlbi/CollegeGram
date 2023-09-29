@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { imageUrl } from "../../api/config";
 import { ITilmeLine } from "../../api/type/timeLine";
 import {
   handleBookmark,
@@ -21,11 +20,8 @@ import LoadingPage from "../../page/loading";
 
 const HomeCardList = ({ imageList }: { imageList: ITilmeLine[] | any }) => {
   const navigate = useNavigate();
-  const [like, setLike] = useState(false);
-  const [saved, setsaved] = useState(false);
-  const [refresh, setRefresh] = useState(false);
 
-  console.log("re", refresh);
+  const [refresh, setRefresh] = useState(false);
 
   return (
     <div className="w-full grid sm:grid-cols-1 grid-cols-3 gap-4">
@@ -36,9 +32,7 @@ const HomeCardList = ({ imageList }: { imageList: ITilmeLine[] | any }) => {
         >
           <img
             className="rounded-t-3xl aspect-square w-[24rem] cursor-pointer"
-            src={
-              data?.post?.photos[0] ? imageUrl + data?.post?.photos[0] : sample
-            }
+            src={data?.post?.photos[0] ? data?.post?.photos[0] : sample}
             alt="test"
             onClick={() => navigate(`/friendPost/${data?.post?.id}`)}
           />
@@ -51,14 +45,14 @@ const HomeCardList = ({ imageList }: { imageList: ITilmeLine[] | any }) => {
                 ) : (
                   <button
                     onClick={() => {
-                      data?.post?.likeCount > 0
-                        ? handleUnLike(data?.post?.id, setLike)
-                        : handleLike(data?.post?.id, setLike);
+                      data?.user?.ifLike
+                        ? handleUnLike(data?.post?.id)
+                        : handleLike(data?.post?.id);
                     }}
                   >
                     <img
                       className="w-5"
-                      src={data?.post?.likeCount > 0 ? likeicon : dislike}
+                      src={data?.user?.ifLike ? likeicon : dislike}
                       alt="like"
                     />
                   </button>
@@ -70,14 +64,14 @@ const HomeCardList = ({ imageList }: { imageList: ITilmeLine[] | any }) => {
               <div className="flex gap-2 items-center">
                 <button
                   onClick={() => {
-                    saved || data?.post?.bookmarkCount > 0
-                      ? handleUnBookmark(data?.post?.id, setsaved)
-                      : handleBookmark(data?.post?.id, setsaved);
+                    data?.user?.ifBookmark
+                      ? handleUnBookmark(data?.post?.id)
+                      : handleBookmark(data?.post?.id);
                   }}
                 >
                   <img
                     className="w-5"
-                    src={data?.post?.bookmarkCount > 0 ? saveIcon : unsaved}
+                    src={data?.user?.ifBookmark ? saveIcon : unsaved}
                     alt="seve"
                   />
                 </button>

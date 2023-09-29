@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { imageUrl } from "../../api/config";
 import { IOtherUser } from "../../api/type/otherUser";
 import Button from "../button";
 import BlockModal from "../blockModal";
@@ -10,7 +9,6 @@ import {
   handleUnFollow,
 } from "../../logic/followUser";
 
-import arrow from "../../assets/icons/arrow-down.svg";
 import pin from "../../assets/icons/angled-pinG.svg";
 import block from "../../assets/icons/report.svg";
 import comment from "../../assets/icons/speech.svg";
@@ -25,7 +23,6 @@ const OtherProfile = ({ user }: { user?: IOtherUser }) => {
   const [follows, setFollows] = useState<boolean>(false);
   const [blocks, setBlocks] = useState(false);
 
-  console.log("u", user);
   return (
     <div>
       <BlockModal
@@ -52,7 +49,7 @@ const OtherProfile = ({ user }: { user?: IOtherUser }) => {
           <div className="relative w-[120px] h-[120px] overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
             <img
               alt="profile"
-              src={user?.user?.photo ? imageUrl + user?.user?.photo : userIcon}
+              src={user?.user?.photo ? user?.user?.photo : userIcon}
               className=" w-full h-[85%]"
             />
           </div>
@@ -60,9 +57,6 @@ const OtherProfile = ({ user }: { user?: IOtherUser }) => {
             <img alt="verify" src={verify} />
           </div>
           <p className="flex text-[#C19008] text-[14px] not-italic mt-[15px] justify-center">
-            {user?.user?.username && (
-              <img src={arrow} className="my-auto mx-[10px]" alt="arrow" />
-            )}
             {user?.user?.username}
           </p>
           <p className="text-[#C38F00] text-center text-[20px] font-bold  mt-1">

@@ -1,19 +1,25 @@
 import React, { useRef, useState } from "react";
-import { imageUrl } from "../api/config";
 import { useUser } from "../features/hooks";
+import { RemoveProfile } from "../api/user";
 
 import camera from "../assets/icons/camera.svg";
 import close from "../assets/icons/close.svg";
 import refresh from "../assets/icons/refresh.svg";
+import { toast } from "react-toastify";
 
 export default function Avatar({ onChange }: { onChange: any }) {
   const user = useUser();
   const fileUploader = useRef<HTMLInputElement | null>(null);
   const [preview, setPreview] = useState<any>();
 
-  const deleteImage = () => {
-    const deleteProfile = user?.removeProfile;
-    return deleteProfile === true;
+  const deleteImage = async () => {
+    try {
+      RemoveProfile({ removeProfiel: true });
+      toast.success("عکس پروفایل شما با موفقیت حذف شد.");
+    } catch (error) {
+      console.log(error);
+      toast.error("حذف عکس موفقیت آمیز نبود.");
+    }
   };
 
   return (
@@ -35,7 +41,7 @@ export default function Avatar({ onChange }: { onChange: any }) {
         <div className="w-[90px] h-[90px] rounded-[50%] border-2 border-[#C19008] flex justify-center items-center ">
           <img
             alt="camera"
-            src={preview ? preview : user ? imageUrl + user?.photo : camera}
+            src={preview ? preview : user?.photo ? user?.photo : camera}
             className={
               user
                 ? "w-[90px] h-[90px] rounded-[50%] object-fill"

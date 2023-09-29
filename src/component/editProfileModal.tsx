@@ -23,14 +23,14 @@ const EditProfile = ({
 
   const formik = useFormik({
     initialValues: {
-      email: "",
+      email: user?.email || "",
       password: "",
       repeatPassword: "",
-      name: "",
-      lastname: "",
-      bio: "",
-      private: false,
-      photo: undefined,
+      name: user?.name || "",
+      lastname: user?.lastname || "",
+      bio: user?.bio || "",
+      private: user?.private || false,
+      photo: user?.photo?.[0] || undefined,
     },
     enableReinitialize: true,
     // validationSchema: loginValidation,
@@ -62,10 +62,7 @@ const EditProfile = ({
                     placeholder={user ? user?.email : "ایمیل"}
                     imageSrc={gmail}
                     imageAlt="gmail"
-                    value={formik.values.email}
-                    onChange={(e: any) =>
-                      formik.setFieldValue("email", e.target.value)
-                    }
+                    {...formik.getFieldProps("email")}
                   />
                 </div>
                 <div className="my-4">
@@ -73,23 +70,18 @@ const EditProfile = ({
                     placeholder={user && user?.name ? user?.name : "نام"}
                     imageSrc={person}
                     imageAlt="name"
-                    value={formik.values.name}
-                    onChange={(e: any) =>
-                      formik.setFieldValue("name", e.target.value)
-                    }
+                    {...formik.getFieldProps("name")}
                   />
                 </div>
                 <div className="my-4">
                   <Input
+                    type="text"
                     placeholder={
                       user && user?.lastname ? user?.lastname : "نام خانوادگی"
                     }
                     imageSrc={person}
                     imageAlt="lastName"
-                    value={formik.values.lastname}
-                    onChange={(e: any) =>
-                      formik.setFieldValue("lastname", e.target.value)
-                    }
+                    {...formik.getFieldProps("lastname")}
                   />
                 </div>
                 <div className="my-4">
@@ -98,10 +90,7 @@ const EditProfile = ({
                     placeholder="رمز عبور"
                     imageSrc={key}
                     imageAlt="key"
-                    value={formik.values.password}
-                    onChange={(e: any) =>
-                      formik.setFieldValue("password", e.target.value)
-                    }
+                    {...formik.getFieldProps("password")}
                   />
                 </div>
                 <div className="my-4">
@@ -110,10 +99,7 @@ const EditProfile = ({
                     placeholder="تکرار رمز عبور"
                     imageSrc={key}
                     imageAlt="repeat key"
-                    value={formik.values.repeatPassword}
-                    onChange={(e: any) =>
-                      formik.setFieldValue("repeatPassword", e.target.value)
-                    }
+                    {...formik.getFieldProps("repeatPassword")}
                   />
                 </div>
                 <div className="flex justify-start">
@@ -133,12 +119,8 @@ const EditProfile = ({
                   <p className="mb-3 flex text-start">بایو</p>
                   <textarea
                     style={{ width: "100%" }}
-                    placeholder={user ? user?.bio : ""}
-                    value={formik.values.bio}
                     className=" p-2 rounded-[10px] bg-[#F3F0EE] border border-[#17494d80] resize-none"
-                    onChange={(e: any) =>
-                      formik.setFieldValue("bio", e.target.value)
-                    }
+                    {...formik.getFieldProps("bio")}
                   />
                 </div>
               </div>

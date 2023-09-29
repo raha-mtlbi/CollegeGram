@@ -20,7 +20,7 @@ export default function OtherUsers() {
   }, [id]);
 
   useEffect(() => {
-    get(`/post/${id}`)
+    get(`/post/user/${id}`)
       .then((d: any) => setImageList(d))
       .catch((e) => console.log(e));
   }, [id]);
