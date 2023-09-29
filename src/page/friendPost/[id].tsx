@@ -33,6 +33,7 @@ export default function InnerFriendsPost() {
               tag={photoDetail?.tags as string[]}
               commentsCount={photoDetail?.commentsCount || 0}
               id={id as number}
+              author={photoDetail?.author || 1}
             />
             <Comment postId={id as number} />
           </div>

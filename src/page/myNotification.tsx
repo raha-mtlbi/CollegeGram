@@ -66,7 +66,7 @@ const NotificationPage = () => {
                 {/* profile */}
                 <div className="flex">
                   <div className="rounded-full w-[64px] h-[64px]">
-                    {item?.type === "like" || item?.type === "comment" ? (
+                    {item?.type === "Like" || item?.type === "Comment" ? (
                       <img
                         alt="profile"
                         src={imageUrl + item?.post?.photo}
@@ -84,12 +84,12 @@ const NotificationPage = () => {
                   </div>
                   <div className="mx-[25px] w-[300px]">
                     <p className="text text-sm">
-                      {item?.relation === "Following" &&
-                      item?.type === "request"
+                      { item?.relation === "Following" &&
+                      item?.type === "Request"
                         ? `${
                             item?.actor?.username && item?.actor?.username
                           } درخواست دوستی‌ات رو قبول کرد`
-                        : item.type === "comment"
+                        : item.type === "Comment"
                         ? `${
                             item?.actor?.username && item?.actor?.username
                           } برای این عکس کامنت داده`
@@ -98,12 +98,12 @@ const NotificationPage = () => {
                         ? `${
                             item?.actor?.username && item?.actor?.username
                           } دنبالت کرد`
-                        : item.type === "request" &&
-                          item?.reverseRelation === "pending"
+                        : item.type === "Request" &&
+                          item?.reverseRelation === "Pending"
                         ? `${
                             item?.actor?.username && item?.actor?.username
                           } درخواست دوستی داده`
-                        : item?.type === "like" &&
+                        : item?.type === "Like" &&
                           `${
                             item?.actor?.username && item?.actor?.username
                           } این عکس رو لایک کرده`}
@@ -115,8 +115,8 @@ const NotificationPage = () => {
                 </div>
                 {/* buttons */}
                 <div>
-                  {item.type === "request" &&
-                  item?.reverseRelation === "pending" ? (
+                  {item.type === "Request" &&
+                  item?.reverseRelation === "Pending" ? (
                     <div className="mx-[25px]">
                       <Button
                         title={"قبولههه"}

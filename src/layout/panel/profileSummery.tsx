@@ -37,7 +37,7 @@ const ProfileSummery = () => {
         <img
           alt="profile"
           src={user?.photo ? imageUrl + user?.photo : users}
-          className="rounded-full w-[120px] h-[120px] object-fill"
+          className="bg-white rounded-full w-[120px] h-[120px] object-fill"
         />
         <p className="flex text-[#C19008] text-[14px] not-italic mt-[15px] justify-center">
           {user?.username && (

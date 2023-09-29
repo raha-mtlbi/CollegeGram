@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Popover,
   PopoverHandler,
@@ -15,6 +15,11 @@ import {
   handleUnBookmark,
   handleUnLike,
 } from "../logic/likePost";
+import { get } from "../api";
+import { IOtherUser } from "../api/type/otherUser";
+import BlockModal from "./blockModal";
+import BestFriendModal from "./closeFriendModal";
+import { handleBlock } from "../logic/followUser";
 
 import Like from "../assets/icons/heart.svg";
 import disLike from "../assets/icons/heart-outline.svg";
@@ -22,7 +27,7 @@ import Save from "../assets/icons/saved.svg";
 import disSave from "../assets/icons/save-outline.svg";
 import more from "../assets/icons/ellipsis.svg";
 import edit from "../assets/icons/whiteEdit.svg";
-import profile from "../assets/icons/picture frame.svg";
+import userImage from "../assets/icons/person.svg";
 
 interface ICaption {
   commentsCount: number;
@@ -32,6 +37,7 @@ interface ICaption {
   caption: string;
   tag: string[];
   id?: number;
+  author: number;
 }
 
 const Caption = ({
@@ -42,12 +48,23 @@ const Caption = ({
   caption,
   tag,
   id,
+  author,
 }: ICaption) => {
   const [open, setOpen] = useState<boolean>(false);
-
+  const [blockOpen, setBlockOpen] = useState<boolean>(false);
+  const [friendOpen, setFriendOpen] = useState<boolean>(false);
   const [like, setLike] = useState<boolean>(false);
   const [isSave, setIsSave] = useState<boolean>(false);
+  const [blocks, setBlocks] = useState(false);
+
+  const [otherUser, setOtherUser] = useState<IOtherUser>();
   const user = useUser();
+
+  useEffect(() => {
+    get(`/user/${author}/profile`)
+      .then((d: any) => setOtherUser(d))
+      .catch((e) => console.log(e));
+  }, [author]);
 
   return (
     <div>
@@ -57,6 +74,18 @@ const Caption = ({
         id={id as number}
         caption={caption}
         tag={tag}
+      />
+      <BlockModal
+        open={blockOpen}
+        onClose={() => setBlockOpen(false)}
+        user={otherUser as IOtherUser}
+        onClick={() => handleBlock(otherUser?.user?.id as number, setBlocks)}
+      />
+      <BestFriendModal
+        open={friendOpen}
+        onClose={() => setFriendOpen(false)}
+        user={otherUser as IOtherUser}
+        onClick={() => {}}
       />
       <div className="mr-[20px] mb-6">
         <div className="w-full flex justify-between">
@@ -97,7 +126,7 @@ const Caption = ({
             </p>
           </div>
 
-          {user ? (
+          {user?.id === author ? (
             <Button
               onClick={() => setOpen(true)}
               className="flex px-4 py-2 m-2 bg-[#C38F00] rounded-2xl"
@@ -125,14 +154,18 @@ const Caption = ({
               </Popover>
 
               <div className="flex flex-col text-center ml-1">
-                <p className="text-[#17494D] font-bold text-[10px]">
-                  متین دهقان
+                <p className="text-[#17494D] font-bold text-[10px] w-16">
+                  {otherUser?.user?.username}
                 </p>
-                <p className="text-[#17494D] text-[9px] ">
-                  170 هزار دنبال‌کننده
+                <p className="text-[#17494D] text-[9px] w-16 ">
+                  {otherUser?.user?.followers} دنبال‌کننده
                 </p>
               </div>
-              <img alt="profile" src={profile} className="w-10 h-10" />
+              <img
+                alt="profile"
+                src={otherUser?.user?.photo || userImage}
+                className="w-10 h-10"
+              />
             </div>
           )}
         </div>

@@ -50,7 +50,7 @@ const OtherNotification = () => {
               {/* profile */}
               <div>
                 <div className="rounded-full w-[64px] h-[64px]">
-                  {item?.type === "like" ? (
+                  {item?.type === "Like" ? (
                     <img
                       alt="profile"
                       src={imageUrl + item?.post?.photo}
@@ -66,11 +66,11 @@ const OtherNotification = () => {
                 </div>
                 <div className="mx-[25px] w-[300px]">
                   <p className="text text-sm">
-                    {item?.relation === "Following" && item?.type === "request"
+                    {item?.relation === "Following" && item?.type === "Request"
                       ? `${
                           item?.actor?.username && item?.actor?.username
                         } درخواست دوستی‌ات رو قبول کرد`
-                      : item.type === "comment"
+                      : item.type === "Comment"
                       ? `${item?.actor?.username && item?.actor?.username} ${
                           item?.comment
                         }:برای این عکس کامنت داده`

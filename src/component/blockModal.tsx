@@ -39,7 +39,7 @@ const BlockModal = ({
                     : "No_name"}
                 </p>
                 <p className="text-[11px] mt-[5px]">
-                  {user?.user?.followers} هزار دنبال‌کننده
+                  {user?.user?.followers}  دنبال‌کننده
                 </p>
               </div>
               <div className="rounded-full w-[80px] h-[80px] mr-[116px] mt-[30px]">

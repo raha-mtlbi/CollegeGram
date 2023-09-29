@@ -6,7 +6,7 @@ import { IOtherUser } from "../api/type/otherUser";
 import closeFriendIcon from "../assets/icons/sparkle1.svg";
 import tik from "../assets/icons/Verified.svg";
 
-const CloseFriendModal = ({
+const BestFriendModal = ({
   open,
   onClose,
   user,
@@ -39,7 +39,7 @@ const CloseFriendModal = ({
                     : "No_name"}
                 </p>
                 <p className="text-[11px] mt-[5px]">
-                  {user?.user?.followers} هزار دنبال‌کننده
+                  {user?.user?.followers} دنبال‌کننده
                 </p>
               </div>
               <div className="rounded-full w-[80px] h-[80px] mr-[116px] mt-[30px]">
@@ -93,4 +93,4 @@ const CloseFriendModal = ({
   );
 };
 
-export default CloseFriendModal;
+export default BestFriendModal;

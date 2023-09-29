@@ -6,9 +6,9 @@ export interface INotification {
   id: number;
   user: IUser;
   actor: IUser;
-  type: "Follow" | "request" | "like" | "comment";
-  relation: "pending" | "blocked" | "Following" | undefined;
-  reverseRelation: "pending" | "blocked" | "Following" | undefined;
+  type: "Follow" | "Request" | "Like" | "Comment";
+  relation: "Pending" | "Blocked" | "Following" | undefined;
+  reverseRelation: "Pending" | "Blocked" | "Following" | undefined;
   post: IImage;
   comment: IComment;
   createdAt: Date;
