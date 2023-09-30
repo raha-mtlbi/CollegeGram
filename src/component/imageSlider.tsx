@@ -5,7 +5,6 @@ import { Navigation, Pagination } from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { imageUrl } from "../api/config";
 import { IImage } from "../api/type/images";
 
 import sample from "../assets/images/imageListSampel.svg";
@@ -30,7 +29,7 @@ export default function ImageSlider({
             <SwiperSlide key={i}>
               <img
                 alt="postImage"
-                src={imageUrl + i || sample}
+                src={i || sample}
                 className="w-full h-[350px] rounded-r-md z-0 object-fill"
               />
             </SwiperSlide>

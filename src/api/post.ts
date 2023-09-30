@@ -4,12 +4,12 @@ export const createPost = (data: {
   caption: string;
   closeFriend: any;
   tags: any;
-  photos?: any;
+  photos: any;
 }) => {
   const formData = new FormData();
-  data?.caption && formData.append("caption", data?.caption);
-  data?.closeFriend && formData.append("closeFriend", data?.closeFriend);
-  data?.tags && formData.append("tags", data?.tags);
+  data.caption && formData.append("caption", data?.caption);
+  data.closeFriend && formData.append("closeFriend", data?.closeFriend);
+  data.tags && formData.append("tags", data?.tags);
   if (data.photos && data.photos.length > 0) {
     data.photos.forEach((p: File) => formData.append("photos", p));
   } else {

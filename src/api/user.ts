@@ -55,3 +55,7 @@ export const EditProfile = (data: any) => {
 
   return patch("/user/me", formData);
 };
+
+export const RemoveProfile = (data: { removeProfiel: boolean }) => {
+  return patch("/user/me", { removeProfile: true });
+};

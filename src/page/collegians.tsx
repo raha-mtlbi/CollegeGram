@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 
 import { get } from "../api";
 import { ICollegians } from "../api/type/collegians";
-import { imageUrl } from "../api/config";
 
 import arrow from "../assets/icons/arrow-back1.svg";
 import user from "../assets/icons/person.svg";
@@ -20,11 +19,6 @@ export default function Collegians() {
       .catch((e) => console.log(e));
   }, []);
 
-  console.log(
-    "i",
-    imageList?.map((i: any) => i?.posts?.map((x: any) => x?.photo))
-  );
-
   return (
     <div className="flex flex-col pr-12 ">
       <p className="font-bold text-[18px] mb-10 mt-3"> کالج‌گرامی‌‌ها</p>
@@ -39,8 +33,8 @@ export default function Collegians() {
                       return (
                         <div className="w-[220px] h-[220px] ml-[24px] ">
                           <img
-                            src={imageUrl + photo || sample}
-                            className="rounded-[24px]"
+                            src={photo || sample}
+                            className="w-[220px] h-[220px] object-fill rounded-[24px]"
                             alt="gallery"
                           />
                         </div>
@@ -82,7 +76,7 @@ export default function Collegians() {
                       alt="more"
                       src={dot}
                       className="w-[24px] h-[24px] mr-[30px]"
-                      onClick={() => navigate(`/`)}
+                      onClick={() => navigate(`/usersProfile/${item?.user?.id}`)}
                     />
                   </button>
                 </div>

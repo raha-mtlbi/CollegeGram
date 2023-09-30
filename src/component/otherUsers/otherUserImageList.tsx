@@ -2,11 +2,9 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { IOtherUser } from "../../api/type/otherUser";
 
-import { imageUrl } from "../../api/config";
 import { IImage } from "../../api/type/images";
 
 import board from "../../assets/icons/board.svg";
-import sample from "../../assets/images/imageListSampel.svg";
 
 const privateListImage = [
   { id: 1, image: board },
@@ -30,8 +28,8 @@ export default function UserImageList({
         <div className="grid grid-cols-2 gap-4 mr-12 ml-5">
           {list?.slice(0, 4).map((photo: any) => (
             <img
-              className="cursor-pointer rounded-t-3xl"
-              src={imageUrl + photo.photo || sample}
+              className="w-[360px] h-[350px] cursor-pointer rounded-t-3xl"
+              src={photo.photos}
               alt="postImage"
               onClick={() => navigate(`/friendPost/${photo.id}`)}
             />

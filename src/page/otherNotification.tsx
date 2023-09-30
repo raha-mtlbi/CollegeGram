@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { handleFollow } from "../logic/followUser";
 import { INotification } from "../api/type/notification";
 import { get } from "../api";
-import { imageUrl } from "../api/config";
 
 import Button from "../component/button";
 import SideBar from "../component/sidebar";
@@ -53,13 +52,13 @@ const OtherNotification = () => {
                   {item?.type === "Like" ? (
                     <img
                       alt="profile"
-                      src={imageUrl + item?.post?.photo}
+                      src={String(item?.post?.photo)}
                       className="w-[60px] h-[60px]"
                     />
                   ) : (
                     <img
                       alt="profile"
-                      src={item.user.photo ? imageUrl + item.user.photo : user}
+                      src={item.user.photo ? item.user.photo : user}
                       className="w-[60px] h-[60px]  rounded-full object-fill"
                     />
                   )}

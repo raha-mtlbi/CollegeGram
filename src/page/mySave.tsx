@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { get } from "../api";
-import { imageUrl } from "../api/config";
 import SideBar from "../component/sidebar";
 
 import { IImage } from "../api/type/images";
@@ -31,7 +30,7 @@ const MySavePage = () => {
             {imageList?.result?.map((photo) => (
               <img
                 className="w-[230px] h-[230px] sm:h-[165px] sm:w-[150px] cursor-pointer rounded-t-3xl"
-                src={imageUrl + photo?.photos[0]}
+                src={photo?.photos[0]}
                 alt="postImage"
                 onClick={() => navigate(`/myCollegeGram/${photo?.id}`)}
               />

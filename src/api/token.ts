@@ -11,7 +11,7 @@ export function setToken(
   setActiveUser(username);
 }
 
-function setActiveUser(username: string) {
+export function setActiveUser(username: string) {
   localStorage.setItem("active-user", username);
 }
 

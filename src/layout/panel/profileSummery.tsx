@@ -7,10 +7,10 @@ import {
   Button,
 } from "@material-tailwind/react";
 
-import EditProfile from "../../component/editProfileModal";
-import { imageUrl } from "../../api/config";
-import { useUser } from "../../features/hooks";
 import { Logout } from "../../api/user";
+import { getActiveUsers, setActiveUser } from "../../api/token";
+import { useUser } from "../../features/hooks";
+import EditProfile from "../../component/editProfileModal";
 
 import arrow from "../../assets/icons/arrow-down.svg";
 import pen from "../../assets/icons/edit.svg";
@@ -19,7 +19,8 @@ import users from "../../assets/icons/person.svg";
 const ProfileSummery = () => {
   const [open, setOpen] = useState<boolean>(false);
   const user = useUser();
-  const navigate = useNavigate();
+
+  const allUsers = getActiveUsers();
 
   const handleLogout = async () => {
     try {
@@ -36,7 +37,7 @@ const ProfileSummery = () => {
       <div className="w-[253px] h-[403px] bg-[#F1EBE3] border-[#CDCDCD] border flex flex-col justify-center items-center text-center">
         <img
           alt="profile"
-          src={user?.photo ? imageUrl + user?.photo : users}
+          src={user?.photo ? user?.photo : users}
           className="bg-white rounded-full w-[120px] h-[120px] object-fill"
         />
         <p className="flex text-[#C19008] text-[14px] not-italic mt-[15px] justify-center">
@@ -49,10 +50,18 @@ const ProfileSummery = () => {
               </PopoverHandler>
               <PopoverContent className="w-[150px] text-right mr-3 border-gray-400 rounded-xl ">
                 <ul>
-                  <li className="  cursor-pointer mr-2 mt-2">
-                    {user.username}
-                  </li>
-                  <li
+                  {allUsers?.map((username: string) => (
+                    <li
+                      className="  cursor-pointer mr-2 mt-2"
+                      onClick={() => {
+                        getActiveUsers();
+                        console.log("12");
+                      }}
+                    >
+                      {username}
+                    </li>
+                  ))}
+                  {/* <li
                     className="  cursor-pointer mr-2 mt-2"
                     onClick={() => {
                       handleLogout();
@@ -60,7 +69,7 @@ const ProfileSummery = () => {
                     }}
                   >
                     اضافه کردن اکانت+
-                  </li>
+                  </li> */}
                 </ul>
               </PopoverContent>
             </Popover>

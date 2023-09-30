@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useUser } from "../../../features/hooks";
-import { imageUrl } from "../../../api/config";
 
 import Button from "../../../component/button";
 
@@ -37,7 +36,7 @@ const ResponsiveProfile = () => {
           {user?.photo ? (
             <img
               alt="profile"
-              src={imageUrl + user?.photo}
+              src={user?.photo}
               className="w-12 h-12 object-fill rounded-full"
             />
           ) : (

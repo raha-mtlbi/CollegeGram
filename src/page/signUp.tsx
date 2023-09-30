@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import * as Yup from "yup";
 import { Formik } from "formik";
 import Signup from "../logic/signup";
 

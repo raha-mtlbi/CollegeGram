@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { format } from "date-fns";
 import { get } from "../api";
-import { acceptRequest, rejectRequest } from "../api/otherUser";
 import { INotification } from "../api/type/notification";
-import { imageUrl } from "../api/config";
-import { handleFollow, handleUnFollow } from "../logic/followUser";
-import useMediaQuery from "../component/useMediaQuery";
+import {
+  handleAccept,
+  handleFollow,
+  handleReject,
+  handleUnFollow,
+} from "../logic/followUser";
 
+import useMediaQuery from "../component/useMediaQuery";
 import Button from "../component/button";
 import SideBar from "../component/sidebar";
 
@@ -22,28 +26,6 @@ const NotificationPage = () => {
       .then((d: any) => setNotification(d))
       .catch((e) => console.log(e));
   }, []);
-
-  const handleAccept = () => {
-    try {
-      acceptRequest(
-        1
-        //user?.id as number
-      );
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const handleReject = () => {
-    try {
-      rejectRequest(
-        1
-        //user?.id as number
-      );
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   return (
     <div className="flex justify-between sm:mt-6 mt-32 w-full">
@@ -69,23 +51,20 @@ const NotificationPage = () => {
                     {item?.type === "Like" || item?.type === "Comment" ? (
                       <img
                         alt="profile"
-                        src={imageUrl + item?.post?.photo}
+                        src={String(item?.post?.photo)}
                         className="w-[40px] h-[40px]"
                       />
                     ) : (
                       <img
                         alt="profile"
-                        src={
-                          item.user.photo ? imageUrl + item.user.photo : user
-                        }
+                        src={item.actor.photo ? item.actor.photo : user}
                         className="w-[40px] h-[40px]  rounded-full"
                       />
                     )}
                   </div>
                   <div className="mx-[25px] w-[300px]">
                     <p className="text text-sm">
-                      { item?.relation === "Following" &&
-                      item?.type === "Request"
+                      {item?.relation === "Pending" && item?.type === "Follow"
                         ? `${
                             item?.actor?.username && item?.actor?.username
                           } درخواست دوستی‌ات رو قبول کرد`
@@ -93,40 +72,50 @@ const NotificationPage = () => {
                         ? `${
                             item?.actor?.username && item?.actor?.username
                           } برای این عکس کامنت داده`
-                        : item.type === "Follow" &&
+                        : (item.type === "Follow" || item.type === "Accept") &&
                           item?.relation === "Following"
                         ? `${
                             item?.actor?.username && item?.actor?.username
                           } دنبالت کرد`
                         : item.type === "Request" &&
-                          item?.reverseRelation === "Pending"
+                          item?.relation === "Pending"
                         ? `${
                             item?.actor?.username && item?.actor?.username
                           } درخواست دوستی داده`
+                        : item.type === "Request" &&
+                          item?.relation === "Following"
+                        ? ` درخواست دوستی توسط شما به
+                        ${
+                          item?.actor?.username && item?.actor?.username
+                        } ارسال شد`
+                        : item.type === "Reject" &&
+                          item?.relation === "Following"
+                        ? `${
+                            item?.actor?.username && item?.actor?.username
+                          }درخواست توسط شما رد شد`
                         : item?.type === "Like" &&
                           `${
                             item?.actor?.username && item?.actor?.username
                           } این عکس رو لایک کرده`}
                     </p>
                     <p className="time text-[#17494D] text-xs mt-1">
-                      {Number(item?.createdAt)} دقیقه پیش
+                      {format(new Date(item?.createdAt), "m")} دقیقه پیش
                     </p>
                   </div>
                 </div>
                 {/* buttons */}
                 <div>
-                  {item.type === "Request" &&
-                  item?.reverseRelation === "Pending" ? (
+                  {item.type === "Request" && item?.relation === "Pending" ? (
                     <div className="mx-[25px]">
                       <Button
                         title={"قبولههه"}
                         width={"120px"}
-                        onClick={() => handleAccept()}
+                        onClick={() => handleAccept(item?.actor?.id)}
                         type="submit"
                       />
                       <button
                         className="text-[#C38F00] border rounded-3xl border-[#C38F00] px-4 py-1 mr-3"
-                        onClick={() => handleReject()}
+                        onClick={() => handleReject(item?.actor?.id)}
                         type="submit"
                       >
                         نه خوشم نمیاد ازش
@@ -137,15 +126,16 @@ const NotificationPage = () => {
                     <Button
                       title={"دنبال کردن"}
                       width={"120px"}
-                      onClick={() => handleFollow(item.user?.id, setFollows)}
+                      onClick={() => handleFollow(item.actor?.id, setFollows)}
                     />
                   ) : (
                     item.type === "Follow" &&
-                    item?.reverseRelation === "Following" && (
+                    item?.relation === "Following" &&
+                    item?.actor?.private && (
                       <button
                         className="text-[#C38F00] border rounded-3xl border-[#C38F00] px-4 py-1 mr-3"
                         onClick={() =>
-                          handleUnFollow(item?.user?.id, setFollows)
+                          handleUnFollow(item?.actor?.id, setFollows)
                         }
                       >
                         لغو درخواست

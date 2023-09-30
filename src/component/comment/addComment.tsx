@@ -1,7 +1,6 @@
 import Input from "../input";
 import { useFormik } from "formik";
 
-import { imageUrl } from "../../api/config";
 import { useUser } from "../../features/hooks";
 import { AddNewComment } from "../../logic/AddNewComment";
 
@@ -26,11 +25,7 @@ export default function AddComment({ postId }: { postId: number }) {
     <div className="flex w-full items-center ">
       <div className="relative w-[40px] h-[40px] overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
         {user?.photo ? (
-          <img
-            alt="profile"
-            src={imageUrl + user?.photo}
-            className=" w-full h-[85%]"
-          />
+          <img alt="profile" src={user?.photo} className=" w-full h-[85%]" />
         ) : (
           <svg
             className="absolute w-[30px] h-[30px] text-center text-gray-400 -left-[-5px]"
