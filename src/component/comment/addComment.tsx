@@ -6,9 +6,11 @@ import { useUser } from "../../features/hooks";
 import { AddNewComment } from "../../logic/AddNewComment";
 
 import send from "../../assets/icons/send.svg";
+import { useState } from "react";
 
 export default function AddComment({ postId }: { postId: number }) {
   const user = useUser();
+  const [reply, setReply] = useState(false);
 
   const formik = useFormik({
     initialValues: {
@@ -56,7 +58,11 @@ export default function AddComment({ postId }: { postId: number }) {
               formik.setFieldValue("content", e.target.value)
             }
           />
-          <button className="mx-2 w-[150px]" type="submit">
+          <button
+            className="mx-2 w-[150px]"
+            type="submit"
+            onClick={(e: any) => setReply(false)}
+          >
             <img alt="send" src={send} className="w-5 h-4" />
           </button>
         </div>
