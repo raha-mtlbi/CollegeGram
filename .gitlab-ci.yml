@@ -13,7 +13,6 @@ frontend-image:
     - mkdir -p ~/.ssh
     - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
     - docker login -u "$registryuser" -p "$registrypass" $registryurl
-    - ssh root@$registryserver "sed 's/IMAGENAME/collegegram\/frontend/g' delete.sh | /bin/sh; docker exec registry bin/registry garbage-collect /etc/docker/registry/config.yml"
     - docker build --tag $registryurl/collegegram/frontend:${CI_COMMIT_SHA:0:8} ./
     - docker tag $registryurl/collegegram/frontend:${CI_COMMIT_SHA:0:8} $registryurl/collegegram/frontend:latest
     - docker push $registryurl/collegegram/frontend:latest
@@ -21,4 +20,4 @@ frontend-image:
   tags:
     - docker
   rules:
-    - if: '$CI_COMMIT_BRANCH == "stage"'
+    - if: '$CI_COMMIT_BRANCH == "stage-murphy"'
