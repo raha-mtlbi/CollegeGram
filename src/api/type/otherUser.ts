@@ -2,6 +2,6 @@ import { IUser } from "./user";
 
 export interface IOtherUser {
   user: IUser;
-  status?: "follow" | "block";
-  reversStatue?: "follow" | "block";
+  status?: "Following" | "Block";
+  reverseStatus?: "Following" | "Block";
 }

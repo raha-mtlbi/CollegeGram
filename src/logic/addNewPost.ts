@@ -1,9 +1,8 @@
+import React from "react";
 import { toast } from "react-toastify";
 import { createPost } from "../api/post";
 
 export const AddNewPost = ({ onClose }: { onClose: () => void }) => {
-  const refresh = () => window.location.reload();
-
   const handleSubmit = async (data: {
     caption: string;
     closeFriend: boolean;
@@ -17,9 +16,10 @@ export const AddNewPost = ({ onClose }: { onClose: () => void }) => {
         tags: data.tags,
         photos: data.photos,
       });
-      toast.success("پست با موفقیت اضافه شد");
       onClose();
-      // refresh();
+      window.location.reload();
+      toast.success("پست با موفقیت اضافه شد");
+
     } catch (error) {
       console.log(error);
     }

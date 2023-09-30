@@ -1,7 +1,6 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import Button from "../component/button";
 import CreatePostModal from "./createPost";
-import React from "react";
 
 const EmptyMyCollage = () => {
   const [open, setOpen] = useState<boolean>(false);

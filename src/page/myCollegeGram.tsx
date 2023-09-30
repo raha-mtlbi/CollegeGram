@@ -19,7 +19,7 @@ export default function MyCollegeGram() {
   }>();
 
   useEffect(() => {
-    get(`/post/user/${user?.id}`)
+    get(user?.id ? `/post/MyPosts` : undefined)
       .then((d: any) => setPhotoList(d))
       .catch((e) => console.log(e));
   }, [user?.id]);

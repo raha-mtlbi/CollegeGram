@@ -34,9 +34,7 @@ const BestFriendModal = ({
             <div className="flex">
               <div className="mr-[51px] text-right">
                 <p className="text-[13px] font-bold mt-[50px]">
-                  {user !== undefined
-                    ? user?.user?.name + " " + user?.user?.lastname
-                    : "No_name"}
+                  {user?.user?.username}
                 </p>
                 <p className="text-[11px] mt-[5px]">
                   {user?.user?.followers} دنبال‌کننده
@@ -63,7 +61,7 @@ const BestFriendModal = ({
 
             <div className="text-[14px] text-[#17494D] text-right mr-[51px] mt-[50px]">
               <p className="font-bold">
-                مطمئنی می‌خوای {user?.user?.name}رو به دوستان نزدیکت
+                مطمئنی می‌خوای {user?.user?.username}رو به دوستان نزدیکت
               </p>
               <p className="font-bold mt-2">اضافه کنی؟</p>
               <p className="mt-[8px]">

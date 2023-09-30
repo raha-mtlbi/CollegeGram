@@ -1,13 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { IOtherUser } from "../../api/type/otherUser";
 import Button from "../button";
 import BlockModal from "../blockModal";
-
-import {
-  handleBlock,
-  handleFollow,
-  handleUnFollow,
-} from "../../logic/followUser";
+import { get } from "../../api";
+import { toast } from "react-toastify";
+import { blockUser, follow, unFollow } from "../../api/otherUser";
 
 import pin from "../../assets/icons/angled-pinG.svg";
 import block from "../../assets/icons/report.svg";
@@ -17,21 +14,63 @@ import verify from "../../assets/icons/Verified.svg";
 import userIcon from "../../assets/icons/person.svg";
 import CloseFriendModal from "../closeFriendModal";
 
-const OtherProfile = ({ user }: { user?: IOtherUser }) => {
+
+const OtherProfile = ({ user, id }: { user?: IOtherUser; id: any }) => {
   const [openBlockModal, setOpenBlockModal] = useState(false);
   const [openCloseFriendModal, setOpenCloseFriendModal] = useState(false);
-  const [follows, setFollows] = useState<boolean>(false);
-  const [blocks, setBlocks] = useState(false);
+  const [userList, setUserList] = useState<IOtherUser>();
+
+  useEffect(() => {
+    get(`/user/${id}/profile`)
+      .then((d: any) => setUserList(d))
+      .catch((e) => console.log(e));
+  }, [id]);
+
+  const handleFollow = async (id: number) => {
+    try {
+      const response = await follow(id as number);
+      const newUser = await get(`/user/${id}/profile`);
+      setUserList(newUser);
+
+      toast.success(response.msg);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleUnFollow = async (id: number) => {
+    try {
+      const response = await unFollow(id as number);
+      const newUser = await get(`/user/${id}/profile`);
+      setUserList(newUser);
+
+      toast.success(response.msg);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleBlock = async (id: number) => {
+    try {
+      const response = await blockUser(id as number);
+      const newUser = await get(`/user/${id}/profile`);
+      setUserList(newUser);
+      setOpenBlockModal(false);
+      toast(response.msg);
+    } catch (error) {
+      console.log(error);
+      setOpenBlockModal(false);
+    }
+  };
 
   return (
     <div>
       <BlockModal
         open={openBlockModal}
         onClose={() => setOpenBlockModal(false)}
-        user={user as IOtherUser}
+        user={userList as IOtherUser}
         onClick={() => {
-          handleBlock(user?.user?.id as number, setBlocks);
-          setOpenBlockModal(false);
+          handleBlock(userList?.user?.id as number);
         }}
       />
 
@@ -50,7 +89,7 @@ const OtherProfile = ({ user }: { user?: IOtherUser }) => {
             <img
               alt="profile"
               src={user?.user?.photo ? user?.user?.photo : userIcon}
-              className=" w-full h-[85%]"
+              className=" w-full h-full object-fill"
             />
           </div>
           <div className=" absolute top-[100px] left-[105px]">
@@ -71,55 +110,72 @@ const OtherProfile = ({ user }: { user?: IOtherUser }) => {
             <p className="text-[#17494D] mr-2">{user?.user?.following || 0}</p>
             <p className="text-[#17494D] mr-1"> دنبال‌شونده</p>
           </div>
-          {!user?.user?.private && follows ? (
-            <button
-              className=" bg-white border border-[#C38F00] rounded-3xl px-4 py-2 text-[#C38F00]"
-              disabled={blocks}
-              onClick={() =>
-                handleUnFollow(user?.user?.id as number, setFollows)
-              }
-            >
-              دنبال شده
-            </button>
-          ) : user?.user?.private && follows ? (
-            <Button
-              title={" لغو درخواست "}
-              width={"100px"}
-              disabled={blocks}
-              onClick={() => handleUnFollow(user?.user?.id, setFollows)}
-            />
-          ) : (
+          {!userList?.user?.private &&
+            userList?.reverseStatus === "Following" &&
+            userList?.status === null && (
+              <button
+                className=" bg-white border border-[#C38F00] rounded-3xl px-4 py-2 text-[#C38F00]"
+                disabled={userList?.status === "Block"}
+              >
+                دنبال شده
+              </button>
+            )}
+
+          {user?.user?.private &&
+            userList?.reverseStatus === "Following" &&
+            userList?.status === null && (
+              <Button
+                title={" لغو درخواست "}
+                width={"100px"}
+                disabled={userList?.status === "Block"}
+                onClick={() => handleUnFollow(user?.user?.id)}
+              />
+            )}
+          {userList?.reverseStatus === null && userList?.status === null && (
             <Button
               title={"دنبال کردن"}
               width={"100px"}
-              disabled={blocks}
-              onClick={() => handleFollow(user?.user?.id as number, setFollows)}
+              disabled={userList?.status === "Block"}
+              onClick={() => handleFollow(userList?.user?.id as number)}
             />
           )}
+
           <div className="flex flex-col items-center my-7">
             <img alt="pin" src={pin} />
             <div className="flex items-center my-3">
-              <p className="text-[#17494D] text-xs">{user?.user?.postsCount}</p>
+              <p className="text-[#17494D] text-xs">
+                {Number(user?.user?.postsCount)}
+              </p>
               <p className="text-[#17494D] mx-1 text-xs">عکس</p>
             </div>
           </div>
           <div className=" bg-[#F3F0EE] p-5 grid grid-cols-3 gap-3 border  border-zinc-300">
             <button
-              disabled={blocks}
-              className={blocks ? "w-5 h-5 mx-2 invert-[0.5]" : "w-5 h-5 mx-2"}
+              disabled={userList?.status === "Block"}
+              className={
+                userList?.status === "Block"
+                  ? "w-5 h-5 mx-2 invert-[0.5]"
+                  : "w-5 h-5 mx-2"
+              }
               onClick={() => setOpenCloseFriendModal(true)}
             >
               <img className="" alt="satr" src={star} />
             </button>
             <button
-              disabled={blocks}
-              className={blocks ? "w-5 h-5 mx-2 invert-[0.5]" : "w-5 h-5 mx-2"}
+              disabled={userList?.status === "Block"}
+              className={
+                userList?.status === "Block"
+                  ? "w-5 h-5 mx-2 invert-[0.5]"
+                  : "w-5 h-5 mx-2"
+              }
             >
               <img className="" alt="comment" src={comment} />
             </button>
             <button
-              disabled={blocks}
-              className={blocks ? " invert-[0.5]" : "w-5 h-5 mx-2"}
+              disabled={userList?.status === "Block"}
+              className={
+                userList?.status === "Block" ? " invert-[0.5]" : "w-5 h-5 mx-2"
+              }
               onClick={() => setOpenBlockModal(true)}
             >
               <img className="" alt="block" src={block} />

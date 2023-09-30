@@ -74,7 +74,7 @@ export type userSliceType = {
 const userSlice = createSlice({
   name: "user",
   initialState: {
-    status: "idle",
+    status: "unauthorized",
     user: null,
     token: null,
   } as userSliceType,

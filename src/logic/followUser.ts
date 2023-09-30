@@ -7,10 +7,7 @@ import {
   unFollow,
 } from "../api/otherUser";
 
-export const handleBlock = async (
-  id: number,
-  setBlocks: (a: boolean) => void
-) => {
+export const handleBlock = async (id: number, setBlocks: any) => {
   try {
     const response = await blockUser(id as number);
     setBlocks(true);
@@ -21,10 +18,7 @@ export const handleBlock = async (
   }
 };
 
-export const handleFollow = async (
-  id: number,
-  setFollows: (a: boolean) => void
-) => {
+export const handleFollow = async (id: number, setFollows?: any) => {
   try {
     const response = await follow(id as number);
     setFollows(true);
@@ -35,10 +29,7 @@ export const handleFollow = async (
   }
 };
 
-export const handleUnFollow = async (
-  id: number,
-  setFollows: (a: boolean) => void
-) => {
+export const handleUnFollow = async (id: number, setFollows?: any) => {
   try {
     const response = await unFollow(id as number);
     setFollows(false);

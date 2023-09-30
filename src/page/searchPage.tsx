@@ -34,7 +34,7 @@ const SearchPage = ({ imageList }: { imageList: ITilmeLine[] | any }) => {
               className="rounded-t-3xl aspect-square w-[360px] cursor-pointer"
               src={data?.post?.photos[0] ? data?.post?.photos[0] : sample}
               alt="test"
-              onClick={() => navigate("/")}
+              onClick={() => navigate("/home")}
             />
 
             <div className="flex">

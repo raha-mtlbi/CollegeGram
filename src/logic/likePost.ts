@@ -15,7 +15,7 @@ export const handleUnLike = async (id: number) => {
   try {
     const response = await UnLikePost(id);
 
-    toast.warning(response.msg);
+    toast.success(response.msg);
   } catch (error) {
     console.log(error);
   }

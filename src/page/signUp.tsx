@@ -51,9 +51,9 @@ const Register = () => {
                   formik.setFieldValue("username", e.target.value)
                 }
                 error={Boolean(
-                  formik.values.username && formik.values.username.length < 4
+                  formik.values.username && formik.values.username.length < 6
                 )}
-                errorText="نام کاربری باید بیشتر از ۴ کارکتر باشد"
+                errorText="نام کاربری باید بیشتر از 6 کارکتر باشد"
               />
             </div>
             <div className="mt-[32px]">
@@ -104,7 +104,7 @@ const Register = () => {
                   formik.values.repassword &&
                     formik.values.repassword !== formik.values.password
                 )}
-                // errorText="رمز عبور یکسان نیست"
+                errorText="رمز عبور یکسان نیست"
               />
             </div>
             <div className="flex justify-end my-10">

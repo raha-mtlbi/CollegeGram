@@ -6,7 +6,6 @@ import { getCurrentUser } from "../features/userSlice";
 import { useAppDispatch } from "../store";
 
 import AuthenticationLayout from "../layout/auth";
-import LoadingPage from "../page/loading";
 import LoginPage from "../page/login";
 import ErrorPage from "../page/errorPage";
 import RecoveryPassword from "../page/recoveryPassword";
@@ -29,8 +28,7 @@ import FollowerPage from "../page/followersPage";
 import FollowingPage from "../page/followingPage";
 import BlackList from "../page/blackListPage";
 import FriendListPage from "../page/friendListPage";
-
-const Home = React.lazy(() => import("../page/home"));
+import Home from "../page/home";
 
 export default function Router() {
   const dispatch = useAppDispatch();
@@ -67,7 +65,7 @@ export default function Router() {
     <Suspense fallback={<PanelLayout />}>
       <Routes>
         <Route path="" element={phone ? <RespansiveLayout /> : <PanelLayout />}>
-          <Route path="/" element={<Home />} />
+          <Route path="/home" element={<Home />} />
           <Route path="/myCollegeGram" element={<MyCollegeGram />} />
           <Route path="/collegians" element={<Collegians />} />
           <Route path="/myCollegeGram/:id" element={<InnerPost />} />

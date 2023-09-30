@@ -17,13 +17,13 @@ const EditPostModal = ({
   onClose: any;
   id: number;
   caption: string;
-  tag: string[];
+  tag: any;
 }) => {
   const formik = useFormik({
     initialValues: {
       caption: caption || "",
       closeFriend: true,
-      tags: tag || [""],
+      tags: tag?.join(" ") || [""],
     },
     enableReinitialize: true,
     validationSchema: AddPostValidation,

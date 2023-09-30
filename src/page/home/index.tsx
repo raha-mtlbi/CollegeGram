@@ -23,7 +23,7 @@ export default function Home() {
       {imageList?.msg === "پست مورد نظر یافت نشد" ? (
         <InnerHome />
       ) : (
-        <HomeCardList imageList={imageList?.result || []} />
+        <HomeCardList />
       )}
     </div>
   );

@@ -12,43 +12,42 @@ import disLike from "../assets/icons/heart-outline.svg";
 import arrow from "../assets/icons/arrow-left-curved.svg";
 
 const Comment = ({ postId }: { postId: number }) => {
-  const [like, setLike] = useState<boolean>(false);
-  const [comment, setComment] = useState<{ result: IComment[] }>();
+  const [comments, setComments] = useState<{ result: IComment[] }>();
 
   useEffect(() => {
     get(`/comment/${postId}`)
-      .then((d: any) => setComment(d))
+      .then((d: any) => setComments(d))
       .catch((e) => console.log(e));
   }, [postId]);
 
   const handleLike = async (id: number) => {
     try {
       const response = await LikeComment(id);
-      setLike(true);
-      toast(response.msg);
+      const newComments = await get(`/comment/${postId}`);
+      setComments(newComments);
+      toast.success(response.msg);
     } catch (error) {
       console.log(error);
-      setLike(false);
     }
   };
 
   const handleUnLike = async (id: number) => {
     try {
       const response = await UnLikeComment(id);
-      setLike(false);
+      const newComments = await get(`/comment/${postId}`);
+      setComments(newComments);
       toast.success(response.msg);
     } catch (error) {
       console.log(error);
-      setLike(true);
     }
   };
 
   return (
     <div className="w-[85%]">
-      <AddComment postId={postId as number} />
+      <AddComment postId={postId as number} setComment={setComments} />
       <div className="max-h-[300px] overflow-y-auto">
-        {comment &&
-          comment.result.map((comment: any) => {
+        {comments &&
+          comments.result.map((comment: any) => {
             return (
               <div>
                 {/* comment */}
@@ -67,17 +66,14 @@ const Comment = ({ postId }: { postId: number }) => {
                         {comment?.likeCount}
                       </p>
                       <button
-                        onClick={() =>
-                          like || comment?.likeCount > 0
+                        onClick={() => {
+                          comment.ifLiked
                             ? handleUnLike(comment?.id)
-                            : handleLike(comment?.id)
-                        }
+                            : handleLike(comment?.id);
+                        }}
                         className="mr-[8px]"
                       >
-                        <img
-                          src={like || comment?.likeCount > 0 ? Like : disLike}
-                          alt=""
-                        />
+                        <img src={comment?.ifLiked ? Like : disLike} alt="" />
                       </button>
                       <button
                         onClick={() => {}}

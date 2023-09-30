@@ -1,11 +1,14 @@
 import { toast } from "react-toastify";
 import { EditProfile } from "../api/user";
+import { useAppDispatch } from "../store";
+import { getCurrentUser } from "../features/userSlice";
 
 export default function EditProfileSubmit({
   onClose,
 }: {
   onClose: () => void;
 }) {
+  const dispatch = useAppDispatch();
   const handleSubmit = async (data: {
     email: string;
     password: string;
@@ -30,6 +33,7 @@ export default function EditProfileSubmit({
 
       toast.success("اطلاعات شما با موفقیت به روززسانی شد.");
       onClose();
+      dispatch(getCurrentUser());
     } catch (error: any) {
       console.log(error);
       toast.error(error.message?.message || "مشکلی پیش آمده");

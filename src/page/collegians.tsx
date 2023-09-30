@@ -19,21 +19,25 @@ export default function Collegians() {
       .catch((e) => console.log(e));
   }, []);
 
+  console.log(
+    "ex",
+    imageList?.map((item: any, index: number) => item?.posts)
+  );
   return (
     <div className="flex flex-col pr-12 ">
       <p className="font-bold text-[18px] mb-10 mt-3"> کالج‌گرامی‌‌ها</p>
       {imageList?.map((item: any, index: number) => {
         return (
           <div>
-            {item?.posts?.[0]?.photos.length >= 1 && (
+            {item?.posts  && (
               <div key={index}>
                 <div className="flex">
                   <div className="grid grid-cols-4 gap-4">
-                    {item?.posts?.[0]?.photos?.slice(0, 4).map((photo: any) => {
+                    {item?.posts?.slice(0, 4).map((photo: any) => {
                       return (
                         <div className="w-[220px] h-[220px] ml-[24px] ">
                           <img
-                            src={photo || sample}
+                            src={photo?.photos[0] || sample}
                             className="w-[220px] h-[220px] object-fill rounded-[24px]"
                             alt="gallery"
                           />
@@ -76,7 +80,9 @@ export default function Collegians() {
                       alt="more"
                       src={dot}
                       className="w-[24px] h-[24px] mr-[30px]"
-                      onClick={() => navigate(`/usersProfile/${item?.user?.id}`)}
+                      onClick={() =>
+                        navigate(`/usersProfile/${item?.user?.id}`)
+                      }
                     />
                   </button>
                 </div>

@@ -26,8 +26,6 @@ export default function InnerFriendsPost() {
 
           <div className="flex flex-col p-2 ">
             <Caption
-              likeCount={photoDetail?.likeCount || 0}
-              bookmarkCount={photoDetail?.bookmarkCount || 0}
               date={photoDetail?.createdAt}
               caption={photoDetail?.caption as string}
               tag={photoDetail?.tags as string[]}

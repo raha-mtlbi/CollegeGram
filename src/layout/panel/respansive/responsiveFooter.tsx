@@ -21,7 +21,7 @@ export default function ResponsiveFooter() {
           className="fixed bottom-0 bg-[#F1EBE3] border border-[#CDCDCD] rounded-t-3xl w-full h-[400px] pt-5 flex flex-col text-[#C19008]"
           onClick={() => setOpen(true)}
         >
-          <a className="flex mb-8" href="/">
+          <a className="flex mb-8" href="/home">
             <img alt="" src={pin} className="w-6 mr-8 ml-2" />
             <span>پست ها</span>
           </a>
@@ -41,7 +41,7 @@ export default function ResponsiveFooter() {
             <img alt="" src={items} className="w-6 mr-8 ml-2" />
             <span>مدیریت دوستان</span>
           </a>
-          <a className="flex mb-8" href="/">
+          <a className="flex mb-8" href="/home">
             <img alt="" src={clock} className="w-6 mr-8 ml-2" />
             <span>تاریخچه کاربر</span>
           </a>

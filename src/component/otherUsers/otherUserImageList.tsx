@@ -29,7 +29,7 @@ export default function UserImageList({
           {list?.slice(0, 4).map((photo: any) => (
             <img
               className="w-[360px] h-[350px] cursor-pointer rounded-t-3xl"
-              src={photo.photos}
+              src={photo.photos[0]}
               alt="postImage"
               onClick={() => navigate(`/friendPost/${photo.id}`)}
             />

@@ -1,12 +1,18 @@
-import Input from "../input";
 import { useFormik } from "formik";
 
 import { useUser } from "../../features/hooks";
 import { AddNewComment } from "../../logic/AddNewComment";
 
 import send from "../../assets/icons/send.svg";
+import person from "../../assets/icons/person.svg";
 
-export default function AddComment({ postId }: { postId: number }) {
+export default function AddComment({
+  postId,
+  setComment,
+}: {
+  postId: number;
+  setComment: any;
+}) {
   const user = useUser();
 
   const formik = useFormik({
@@ -16,40 +22,24 @@ export default function AddComment({ postId }: { postId: number }) {
       parentId: 0,
     },
     enableReinitialize: true,
-    onSubmit: AddNewComment(),
+    onSubmit: AddNewComment({ setComment, postId }),
   });
 
   return (
     <div className="flex w-full items-center ">
       <div className="relative w-[40px] h-[40px] overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
-        {user?.photo ? (
-          <img alt="profile" src={user?.photo} className=" w-full h-[85%]" />
-        ) : (
-          <svg
-            className="absolute w-[30px] h-[30px] text-center text-gray-400 -left-[-5px]"
-            fill="currentColor"
-            viewBox="0 0 20 20"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-              clip-rule="evenodd"
-            ></path>
-          </svg>
-        )}
+        <img
+          alt="profile"
+          src={user?.photo ? user?.photo : person}
+          className=" w-full h-[85%]"
+        />
       </div>
       <form onSubmit={formik.handleSubmit}>
         <div className="flex w-[90%]">
-          {/* <input /> */}
-          <Input
+          <input
             placeholder={"نظر خود را بنویسید..."}
-            imageSrc={""}
-            imageAlt={""}
-            value={formik.values?.content}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              formik.setFieldValue("content", e.target.value)
-            }
+            className="shadow appearance-none border w-80 rounded-3xl py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline pr-8 "
+            {...formik.getFieldProps("content")}
           />
           <button className="mx-2 w-[150px]" type="submit">
             <img alt="send" src={send} className="w-5 h-4" />

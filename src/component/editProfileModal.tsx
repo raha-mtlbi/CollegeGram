@@ -59,29 +59,36 @@ const EditProfile = ({
               <div className="mt-2">
                 <div className="my-4">
                   <Input
-                    placeholder={user ? user?.email : "ایمیل"}
+                    placeholder={"ایمیل"}
                     imageSrc={gmail}
                     imageAlt="gmail"
-                    {...formik.getFieldProps("email")}
+                    value={formik.values.email}
+                    onChange={(e: any) =>
+                      formik.setFieldValue("email", e.target.value)
+                    }
                   />
                 </div>
                 <div className="my-4">
                   <Input
-                    placeholder={user && user?.name ? user?.name : "نام"}
+                    placeholder={"نام"}
                     imageSrc={person}
                     imageAlt="name"
-                    {...formik.getFieldProps("name")}
+                    value={formik.values.name}
+                    onChange={(e: any) =>
+                      formik.setFieldValue("name", e.target.value)
+                    }
                   />
                 </div>
                 <div className="my-4">
                   <Input
                     type="text"
-                    placeholder={
-                      user && user?.lastname ? user?.lastname : "نام خانوادگی"
-                    }
+                    placeholder={"نام خانوادگی"}
                     imageSrc={person}
                     imageAlt="lastName"
-                    {...formik.getFieldProps("lastname")}
+                    value={formik.values.lastname}
+                    onChange={(e: any) =>
+                      formik.setFieldValue("lastname", e.target.value)
+                    }
                   />
                 </div>
                 <div className="my-4">
@@ -90,7 +97,10 @@ const EditProfile = ({
                     placeholder="رمز عبور"
                     imageSrc={key}
                     imageAlt="key"
-                    {...formik.getFieldProps("password")}
+                    value={formik.values.password}
+                    onChange={(e: any) =>
+                      formik.setFieldValue("password", e.target.value)
+                    }
                   />
                 </div>
                 <div className="my-4">
@@ -99,7 +109,10 @@ const EditProfile = ({
                     placeholder="تکرار رمز عبور"
                     imageSrc={key}
                     imageAlt="repeat key"
-                    {...formik.getFieldProps("repeatPassword")}
+                    value={formik.values.repeatPassword}
+                    onChange={(e: any) =>
+                      formik.setFieldValue("repeatPassword", e.target.value)
+                    }
                   />
                 </div>
                 <div className="flex justify-start">
@@ -112,7 +125,7 @@ const EditProfile = ({
                       className="sr-only peer"
                       {...formik.getFieldProps("private")}
                     />
-                    <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4  dark:peer-focus: rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white  after:rounded-full after:h-5 after:w-5 after:transition-all  peer-checked:bg-gray-800"></div>
+                    <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none  dark:peer-focus: rounded-full peer  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white  after:rounded-full after:h-5 after:w-5 after:transition-all  peer-checked:bg-gray-800"></div>
                   </label>
                 </div>
                 <div className=" my-4">

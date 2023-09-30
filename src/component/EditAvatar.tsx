@@ -1,20 +1,26 @@
 import React, { useRef, useState } from "react";
 import { useUser } from "../features/hooks";
 import { RemoveProfile } from "../api/user";
+import { toast } from "react-toastify";
+import { useAppDispatch } from "../store";
+import { getCurrentUser } from "../features/userSlice";
 
 import camera from "../assets/icons/camera.svg";
 import close from "../assets/icons/close.svg";
 import refresh from "../assets/icons/refresh.svg";
-import { toast } from "react-toastify";
 
 export default function Avatar({ onChange }: { onChange: any }) {
   const user = useUser();
+  const dispatch = useAppDispatch();
   const fileUploader = useRef<HTMLInputElement | null>(null);
   const [preview, setPreview] = useState<any>();
 
   const deleteImage = async () => {
     try {
       RemoveProfile({ removeProfiel: true });
+      // window.location.reload();
+      dispatch(getCurrentUser());
+
       toast.success("عکس پروفایل شما با موفقیت حذف شد.");
     } catch (error) {
       console.log(error);
@@ -48,7 +54,7 @@ export default function Avatar({ onChange }: { onChange: any }) {
                 : "w-[36px] h-[36px] cursor-pointer"
             }
           />
-          {user?.photo && (
+          {(user?.photo || preview) && (
             <img
               alt="refresh"
               src={refresh}

@@ -5,16 +5,14 @@ import {
   PopoverContent,
   Button,
 } from "@material-tailwind/react";
+import { Bookmark, LikePost, UnBookmark, UnLikePost } from "../api/post";
+import { toast } from "react-toastify";
+import { IImage } from "../api/type/images";
 
 import Tag from "./Tag";
 import { useUser } from "../features/hooks";
 import EditPostModal from "./editpostModal";
-import {
-  handleBookmark,
-  handleLike,
-  handleUnBookmark,
-  handleUnLike,
-} from "../logic/likePost";
+
 import { get } from "../api";
 import { IOtherUser } from "../api/type/otherUser";
 import BlockModal from "./blockModal";
@@ -31,8 +29,6 @@ import userImage from "../assets/icons/person.svg";
 
 interface ICaption {
   commentsCount: number;
-  likeCount: number;
-  bookmarkCount: number;
   date: any;
   caption: string;
   tag: string[];
@@ -42,22 +38,71 @@ interface ICaption {
 
 const Caption = ({
   commentsCount,
-  likeCount,
-  bookmarkCount,
   date,
   caption,
   tag,
   id,
   author,
 }: ICaption) => {
+  const user = useUser();
+
+  const [otherUser, setOtherUser] = useState<IOtherUser>();
   const [open, setOpen] = useState<boolean>(false);
   const [blockOpen, setBlockOpen] = useState<boolean>(false);
   const [friendOpen, setFriendOpen] = useState<boolean>(false);
-
   const [blocks, setBlocks] = useState(false);
 
-  const [otherUser, setOtherUser] = useState<IOtherUser>();
-  const user = useUser();
+  const [photoDetail, setPhotoDetail] = useState<IImage[] | any>();
+
+  useEffect(() => {
+    get(`/post/${id}`)
+      .then((d: any) => setPhotoDetail(d))
+      .catch((e) => console.log(e));
+  }, [id]);
+
+  const handleLike = async (id: number) => {
+    try {
+      const response = await LikePost(id);
+      const data = await get(`/post/${id}`);
+      setPhotoDetail(data);
+      toast.success(response.msg);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleUnLike = async (id: number) => {
+    try {
+      const response = await UnLikePost(id);
+      const data = await get(`/post/${id}`);
+      setPhotoDetail(data);
+      toast.success(response.msg);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleBookmark = async (id: number) => {
+    try {
+      const response = await Bookmark(id);
+      const data = await get(`/post/${id}`);
+      setPhotoDetail(data);
+      toast.success(response.msg);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleUnBookmark = async (id: number) => {
+    try {
+      const response = await UnBookmark(id);
+      const data = await get(`/post/${id}`);
+      setPhotoDetail(data);
+      toast.success(response.msg);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     get(`/user/${author}/profile`)
@@ -91,36 +136,36 @@ const Caption = ({
           <div className="flex">
             <button
               onClick={() => {
-                user?.ifLike
+                photoDetail?.ifLiked
                   ? handleUnLike(id as number)
                   : handleLike(id as number);
               }}
             >
               <img
-                src={user?.ifLike ? Like : disLike}
+                src={photoDetail?.ifLiked ? Like : disLike}
                 className="w-[24px] h-[24px]"
                 alt="like"
               />
             </button>
             <p className="mr-[8px] text-[14px] font-medium text-[#C38F00] my-auto">
-              {likeCount}
+              {photoDetail?.likeCount}
             </p>
             <button
               onClick={() =>
-                user?.ifBookmark
+                photoDetail?.ifBookmarked
                   ? handleUnBookmark(id as number)
                   : handleBookmark(id as number)
               }
               className="mr-[16px]"
             >
               <img
-                src={user?.ifBookmark ? Save : disSave}
+                src={photoDetail?.ifBookmarked ? Save : disSave}
                 className="w-[24px] h-[24px]"
                 alt="save"
               />
             </button>
             <p className="mr-[8px] text-[14px] font-medium text-[#C38F00] my-auto">
-              {bookmarkCount}
+              {photoDetail?.bookmarkCount}
             </p>
           </div>
 

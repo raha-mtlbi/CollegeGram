@@ -22,6 +22,7 @@ export const EditPost = ({
         },
         id
       );
+      window.location.reload();
       toast.success("پست با موفقیت به روزرسانی شد");
       onClose();
     } catch (error) {
