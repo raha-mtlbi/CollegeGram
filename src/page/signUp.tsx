@@ -1,21 +1,21 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { Formik } from "formik";
-import Signup from "../logic/signup";
+import React, { useState } from "react"
+import { Link } from "react-router-dom"
+import { Formik } from "formik"
+import Signup from "../logic/signup"
 
-import Button from "../component/button";
-import Input from "../component/input";
+import Button from "../component/button"
+import Input from "../component/input"
 
-import gmail from "../assets/icons/gmail1.svg";
-import key from "../assets/icons/key1.svg";
-import person from "../assets/icons/person.svg";
-import eye from "../assets/icons/eye.svg";
-import eyeclosed from "../assets/icons/eye-closed.svg";
-import HadiInput from "../component/hadiInput";
-import { registerSchema } from "../utils/validations";
+import gmail from "../assets/icons/gmail1.svg"
+import key from "../assets/icons/key1.svg"
+import person from "../assets/icons/person.svg"
+import eye from "../assets/icons/eye.svg"
+import eyeclosed from "../assets/icons/eye-closed.svg"
+import HadiInput from "../component/hadiInput"
+import { registerSchema } from "../utils/validations"
 
 const Register = () => {
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(false)
 
   return (
     <div>
@@ -27,8 +27,7 @@ const Register = () => {
           password: "",
           repassword: "",
         }}
-        onSubmit={Signup()}
-      >
+        onSubmit={Signup()}>
         {(formik) => (
           <form onSubmit={formik.handleSubmit}>
             <div className="flex mt-8 mb-2 text-center justify-center ">
@@ -71,14 +70,38 @@ const Register = () => {
               />
             </div>
             <div className="mt-[32px]">
-              <HadiInput
+              <Input
+                placeholder="رمز عبور"
+                postfix={
+                  <img src={key} alt="key" className="absolute mt-3 px-2" />
+                }
+                prefix={
+                  <button onClick={() => setShow(!show)}>
+                    <img
+                      src={show ? eye : eyeclosed}
+                      alt="key"
+                      className="w-3 h-3 mt-4"
+                    />
+                  </button>
+                }
+                value={formik.values.password}
+                onChange={(e: any) =>
+                  formik.setFieldValue("password", e.target.value)
+                }
+                type={show ? "text" : "password"}
+                error={Boolean(
+                  formik.values.password && formik.errors?.password
+                )}
+                errorText="رمز عبور باید شامل حرف کوچک و حرف بزرگ و عدد باشد"
+              />
+              {/* <HadiInput
                 prefix={
                   <img src={key} alt="key" className="absolute mt-3 px-2" />
                 }
                 placeholder="رمز عبور"
                 name="password"
                 type="password"
-              />
+              /> */}
             </div>
             <div className="mt-[32px]">
               <Input
@@ -114,7 +137,7 @@ const Register = () => {
         )}
       </Formik>
     </div>
-  );
-};
+  )
+}
 
-export default Register;
+export default Register
