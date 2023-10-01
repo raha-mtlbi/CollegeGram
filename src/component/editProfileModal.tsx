@@ -59,6 +59,7 @@ const EditProfile = ({
               <div className="mt-2">
                 <div className="my-4">
                   <Input
+                    type="email"
                     placeholder={"ایمیل"}
                     imageSrc={gmail}
                     imageAlt="gmail"

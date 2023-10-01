@@ -32,6 +32,7 @@ export default function InnerFriendsPost() {
               commentsCount={photoDetail?.commentsCount || 0}
               id={id as number}
               author={photoDetail?.author || 1}
+              closeFriend={photoDetail?.closeFriend}
             />
             <Comment postId={id as number} />
           </div>

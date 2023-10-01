@@ -12,7 +12,7 @@ const FriendListPage = () => {
   const [userList, setUserList] = useState<{ result: IUser[] }>();
 
   useEffect(() => {
-    get(``)
+    get(`/user/closefriend`)
       .then((d: any) => setUserList(d))
       .catch((e) => console.log(e));
   }, []);

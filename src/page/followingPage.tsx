@@ -12,7 +12,7 @@ const FollowingPage = () => {
   const [userList, setUserList] = useState<{ result: IUser[] }>();
 
   useEffect(() => {
-    get(``)
+    get(`/user/following`)
       .then((d: any) => setUserList(d))
       .catch((e) => console.log(e));
   }, []);

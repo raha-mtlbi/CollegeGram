@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Dialog } from "@headlessui/react";
 import Button from "./button";
 import { useFormik } from "formik";
 
 import { AddPostValidation } from "../utils/validations";
 import { EditPost } from "../logic/EditPost";
+import { IImage } from "../api/type/images";
+import { get } from "../api";
+import { UpdatePost } from "../api/post";
+import { toast } from "react-toastify";
 
 const EditPostModal = ({
   open,
@@ -12,22 +16,55 @@ const EditPostModal = ({
   id,
   caption,
   tag,
+  closeFriend,
 }: {
   open: boolean;
   onClose: any;
   id: number;
   caption: string;
   tag: any;
+  closeFriend: boolean;
 }) => {
+  const [photoDetail, setPhotoDetail] = useState<IImage[] | any>();
+
+  useEffect(() => {
+    get(`/post/${id}`)
+      .then((d: any) => setPhotoDetail(d))
+      .catch((e) => console.log(e));
+  }, [id]);
+
   const formik = useFormik({
     initialValues: {
       caption: caption || "",
-      closeFriend: true,
+      closeFriend: closeFriend,
       tags: tag?.join(" ") || [""],
     },
     enableReinitialize: true,
     validationSchema: AddPostValidation,
-    onSubmit: EditPost({ id, onClose }),
+    // onSubmit: EditPost({ id, onClose }),
+    async onSubmit(data: {
+      caption: string;
+      closeFriend: boolean;
+      tags: string[];
+    }) {
+      try {
+        await UpdatePost(
+          {
+            caption: data.caption,
+            closeFriend: data.closeFriend,
+            tags: data.tags,
+          },
+          id
+        );
+        const newData = await get(`/post/${id}`);
+        setPhotoDetail(newData);
+        toast.success("پست با موفقیت به روزرسانی شد");
+        onClose();
+      } catch (error) {
+        console.log(error);
+        onClose();
+      }
+    },
   });
 
   return (

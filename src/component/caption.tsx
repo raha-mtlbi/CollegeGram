@@ -26,6 +26,7 @@ import disSave from "../assets/icons/save-outline.svg";
 import more from "../assets/icons/ellipsis.svg";
 import edit from "../assets/icons/whiteEdit.svg";
 import userImage from "../assets/icons/person.svg";
+import { blockUser } from "../api/otherUser";
 
 interface ICaption {
   commentsCount: number;
@@ -34,6 +35,7 @@ interface ICaption {
   tag: string[];
   id?: number;
   author: number;
+  closeFriend: boolean;
 }
 
 const Caption = ({
@@ -43,6 +45,7 @@ const Caption = ({
   tag,
   id,
   author,
+  closeFriend,
 }: ICaption) => {
   const user = useUser();
 
@@ -50,10 +53,10 @@ const Caption = ({
   const [open, setOpen] = useState<boolean>(false);
   const [blockOpen, setBlockOpen] = useState<boolean>(false);
   const [friendOpen, setFriendOpen] = useState<boolean>(false);
-  const [blocks, setBlocks] = useState(false);
 
   const [photoDetail, setPhotoDetail] = useState<IImage[] | any>();
 
+  console.log("t", otherUser?.user?.id);
   useEffect(() => {
     get(`/post/${id}`)
       .then((d: any) => setPhotoDetail(d))
@@ -118,12 +121,13 @@ const Caption = ({
         id={id as number}
         caption={caption}
         tag={tag}
+        closeFriend={closeFriend}
       />
       <BlockModal
         open={blockOpen}
         onClose={() => setBlockOpen(false)}
         user={otherUser as IOtherUser}
-        onClick={() => handleBlock(otherUser?.user?.id as number, setBlocks)}
+        // onClick={() => handleBlock(otherUser?.user?.id as number)}
       />
       <BestFriendModal
         open={friendOpen}

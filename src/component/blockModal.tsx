@@ -6,6 +6,8 @@ import { IOtherUser } from "../api/type/otherUser";
 import blockIcon from "../assets/icons/report.svg";
 import tik from "../assets/icons/Verified.svg";
 import person from "../assets/icons/person.svg";
+import { blockUser } from "../api/otherUser";
+import { toast } from "react-toastify";
 
 const BlockModal = ({
   open,
@@ -16,10 +18,21 @@ const BlockModal = ({
   open: boolean;
   onClose: () => void;
   user: IOtherUser;
-  onClick: () => void;
+  onClick?: () => void;
 }) => {
   console.log("user", user);
-
+  const handleBlock = async () => {
+    try {
+      const response = await blockUser(user?.user?.id as number);
+      // const newData = await get(`/post/${id}`);
+      // setPhotoDetail(newData);
+      toast.success(response.msg);
+      onClose();
+    } catch (error) {
+      console.log(error);
+      onClose();
+    }
+  };
   return (
     <Dialog as="div" open={open} onClose={onClose} style={{ direction: "rtl" }}>
       <div
@@ -71,7 +84,7 @@ const BlockModal = ({
                 title={"آره، حتما"}
                 width="100px"
                 type="submit"
-                onClick={onClick}
+                onClick={() => handleBlock()}
               />
             </div>
           </Dialog.Panel>

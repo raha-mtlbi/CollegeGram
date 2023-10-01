@@ -13,7 +13,7 @@ export const loginValidation = Yup.object().shape({
   password: Yup.string()
     .required("حداقل 6 کاراکتر، شامل حروف کوچک، بزرگ و اعداد باشد")
     .trim()
-    .matches(psswordRegEx, "رمز عبور نیست"),
+    .matches(psswordRegEx, "رمز عبور صحیح نیست"),
 });
 
 export const registerSchema = Yup.object().shape({
@@ -23,12 +23,10 @@ export const registerSchema = Yup.object().shape({
   username: Yup.string()
     .required("نام کاربری باید بیشتر از 6 کارکتر باشد")
     .matches(usernameOremailRegEx, "نام کاربری باید بیشتر از 6 کارکتر باشد"),
-  // password: Yup.string().required("حداقل 6 کاراکتر، شامل حروف کوچک، بزرگ و اعداد باشد")
-  // .trim()
-  // .matches(psswordRegEx, "رمز عبور نیست"),
+
   password: Yup.string()
     .trim()
-    .matches(psswordRegEx, "رمز عبور شما مناسب نیست")
+    .matches(psswordRegEx, "حداقل 6 کاراکتر، شامل حروف کوچک، بزرگ و اعداد باشد")
     .required("حداقل 6 کاراکتر، شامل حروف کوچک، بزرگ و اعداد باشد."),
   repassword: Yup.string()
     .oneOf([Yup.ref("password")], "رمز عبور شما منطبق نیست")
