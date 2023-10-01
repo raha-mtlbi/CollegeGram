@@ -1,7 +1,10 @@
 import { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
+import peopleGreen from "../../../assets/icons/personG.svg";
 import people from "../../../assets/icons/people.svg";
 import overView from "../../../assets/icons/overview.svg";
+import overViewGreen from "../../../assets/icons/overviewG.svg";
 import add from "../../../assets/icons/add.svg";
 import pin from "../../../assets/icons/angled-pin.svg";
 import saved from "../../../assets/icons/saved.svg";
@@ -13,6 +16,8 @@ import person from "../../../assets/icons/person1.svg";
 
 export default function ResponsiveFooter() {
   const [open, setOpen] = useState<boolean>(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   return (
     <>
@@ -53,8 +58,12 @@ export default function ResponsiveFooter() {
       ) : (
         <div className="w-screen flex justify-center mx-auto">
           <div className="fixed bottom-1 flex w-80 h-14 bg-[#F8F9F9] border border-[#CDCDCD] rounded-[50px] mx-auto mb-7">
-            <button>
-              <img src={people} alt="pepole" className="mr-12 my-3 w-6" />
+            <button onClick={() => navigate("/collegians")}>
+              <img
+                src={location.pathname === "/collegians" ? peopleGreen : people}
+                alt="pepole"
+                className="mr-12 my-3 w-6"
+              />
             </button>
             <button
               className="rounded-full bg-[#C38F00] w-14 h-14 mr-14 -m-7"
@@ -62,8 +71,12 @@ export default function ResponsiveFooter() {
             >
               <img alt="" src={add} className="w-3 mx-auto my-5" />
             </button>
-            <button>
-              <img alt="" src={overView} className="mr-20 my-3 w-6" />
+            <button onClick={() => navigate("/home")}>
+              <img
+                alt=""
+                src={location.pathname === "/home" ? overViewGreen : overView}
+                className="mr-20 my-3 w-6"
+              />
             </button>
           </div>
         </div>

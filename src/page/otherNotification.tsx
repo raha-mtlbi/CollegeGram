@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useMediaQuery } from "@uidotdev/usehooks";
 import { handleFollow } from "../logic/followUser";
 import { INotification } from "../api/type/notification";
 import { get } from "../api";
@@ -8,10 +9,9 @@ import Button from "../component/button";
 import SideBar from "../component/sidebar";
 
 import user from "../assets/icons/person.svg";
-import useMediaQuery from "../component/useMediaQuery";
 
 const OtherNotification = () => {
-  const phone = useMediaQuery("600");
+  const phone = useMediaQuery("only screen and (max-width : 600px)");
   const [follows, setFollows] = useState(false);
 
   const [notification, setNotification] = useState<{
@@ -88,7 +88,6 @@ const OtherNotification = () => {
                   <Button
                     title="دنبال کردن"
                     type="button"
-                    width={150}
                     onClick={() => handleFollow(item?.user?.id, setFollows)}
                   />
                 )}

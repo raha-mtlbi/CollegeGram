@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useMediaQuery } from "@uidotdev/usehooks";
 import { get } from "../api";
 import SideBar from "../component/sidebar";
 
 import { IImage } from "../api/type/images";
-import useMediaQuery from "../component/useMediaQuery";
 import EmptyPage from "./emptyPage";
 
 const MySavePage = () => {
-  const phone = useMediaQuery("600");
+  const phone = useMediaQuery("only screen and (max-width : 600px)");
   const [imageList, setImageList] = useState<{
     result: IImage[];
     msg: string;

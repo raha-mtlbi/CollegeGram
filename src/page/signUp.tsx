@@ -106,7 +106,7 @@ const Register = () => {
               />
             </div>
             <div className="flex justify-end my-10">
-              <Button title={"ثبت نام"} width="100px" type="submit" />
+              <Button title={"ثبت نام"} type="submit" />
             </div>
           </form>
         )}

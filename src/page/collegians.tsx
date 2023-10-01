@@ -31,7 +31,7 @@ export default function Collegians() {
                   <div className="flex flex-wrap ">
                     {item?.posts?.slice(0, 4).map((photo: any) => {
                       return (
-                        <div className="w-[220px] h-[220px] ml-[24px] ">
+                        <div className="w-[220px] h-[220px] ml-[24px] md:mb-3 ">
                           <img
                             src={photo?.photos[0] || sample}
                             className="w-[220px] h-[220px] object-fill rounded-[24px]"

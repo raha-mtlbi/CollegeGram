@@ -41,8 +41,7 @@ export const AddPostValidation = Yup.object().shape({
 export const sendEmailValidation = Yup.object().shape({
   usernameOrEmail: Yup.string()
     .required("لطفا ایمیل خود را وارد کنید.")
-    .trim()
-    .matches(usernameOremailRegEx, ""),
+    .email("لطفا ایمیل معتبری وارد کنید"),
 });
 
 export const setPasswordValidation = Yup.object().shape({

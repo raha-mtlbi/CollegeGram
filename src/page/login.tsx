@@ -78,7 +78,7 @@ export default function LoginPage() {
           </label>
         </div>
         <div className="flex justify-end my-3">
-          <Button type="submit" title={"ورود"} width="100px" />
+          <Button type="submit" title={"ورود"} />
         </div>
         <button
           className="flex items-center mt-10 mb-2"

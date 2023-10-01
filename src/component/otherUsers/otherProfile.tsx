@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { Tooltip } from "@material-tailwind/react";
+import CloseFriendModal from "../closeFriendModal";
+
 import { IOtherUser } from "../../api/type/otherUser";
 import Button from "../button";
 import BlockModal from "../blockModal";
@@ -12,8 +15,6 @@ import comment from "../../assets/icons/speech.svg";
 import star from "../../assets/icons/sparkle.svg";
 import verify from "../../assets/icons/Verified.svg";
 import userIcon from "../../assets/icons/person.svg";
-import CloseFriendModal from "../closeFriendModal";
-
 
 const OtherProfile = ({ user, id }: { user?: IOtherUser; id: any }) => {
   const [openBlockModal, setOpenBlockModal] = useState(false);
@@ -78,9 +79,6 @@ const OtherProfile = ({ user, id }: { user?: IOtherUser; id: any }) => {
         open={openCloseFriendModal}
         onClose={() => setOpenCloseFriendModal(false)}
         user={user as IOtherUser}
-        onClick={() => {
-          setOpenCloseFriendModal(false);
-        }}
       />
 
       <div className="w-[350px] h-[473px] bg-[#F1EBE3] border-[#CDCDCD] border flex flex-col justify-center items-center text-center">
@@ -98,7 +96,10 @@ const OtherProfile = ({ user, id }: { user?: IOtherUser; id: any }) => {
           <p className="flex text-[#C19008] text-[14px] not-italic mt-[15px] justify-center">
             {user?.user?.username}
           </p>
-          <p className="text-[#C38F00] text-center text-[20px] font-bold  mt-1">
+          <p
+            style={{ direction: "ltr" }}
+            className="text-[#C38F00] text-center text-[20px] font-bold  mt-1"
+          >
             {user !== undefined
               ? user?.user?.name + " " + user?.user?.lastname
               : "No_Name"}
@@ -116,6 +117,7 @@ const OtherProfile = ({ user, id }: { user?: IOtherUser; id: any }) => {
               <button
                 className=" bg-white border border-[#C38F00] rounded-3xl px-4 py-2 text-[#C38F00]"
                 disabled={userList?.status === "Block"}
+                onClick={() => handleUnFollow(user?.user?.id as number)}
               >
                 دنبال شده
               </button>
@@ -126,7 +128,6 @@ const OtherProfile = ({ user, id }: { user?: IOtherUser; id: any }) => {
             userList?.status === null && (
               <Button
                 title={" لغو درخواست "}
-                width={"100px"}
                 disabled={userList?.status === "Block"}
                 onClick={() => handleUnFollow(user?.user?.id)}
               />
@@ -134,7 +135,6 @@ const OtherProfile = ({ user, id }: { user?: IOtherUser; id: any }) => {
           {userList?.reverseStatus === null && userList?.status === null && (
             <Button
               title={"دنبال کردن"}
-              width={"100px"}
               disabled={userList?.status === "Block"}
               onClick={() => handleFollow(userList?.user?.id as number)}
             />
@@ -150,36 +150,56 @@ const OtherProfile = ({ user, id }: { user?: IOtherUser; id: any }) => {
             </div>
           </div>
           <div className=" bg-[#F3F0EE] p-5 grid grid-cols-3 gap-3 border  border-zinc-300">
-            <button
-              disabled={userList?.status === "Block"}
-              className={
-                userList?.status === "Block"
-                  ? "w-5 h-5 mx-2 invert-[0.5]"
-                  : "w-5 h-5 mx-2"
-              }
-              onClick={() => setOpenCloseFriendModal(true)}
+            <Tooltip
+              placement="bottom"
+              className="text-gray-600 bg-white p-3 rounded-2xl"
+              content="دوستان نزدیک"
             >
-              <img className="" alt="satr" src={star} />
-            </button>
-            <button
-              disabled={userList?.status === "Block"}
-              className={
-                userList?.status === "Block"
-                  ? "w-5 h-5 mx-2 invert-[0.5]"
-                  : "w-5 h-5 mx-2"
-              }
+              <button
+                disabled={userList?.status === "Block"}
+                className={
+                  userList?.status === "Block"
+                    ? "w-5 h-5 mx-2 invert-[0.5]"
+                    : "w-5 h-5 mx-2"
+                }
+                onClick={() => setOpenCloseFriendModal(true)}
+              >
+                <img className="" alt="satr" src={star} />
+              </button>
+            </Tooltip>
+            <Tooltip
+              placement="bottom"
+              className="text-gray-600 bg-white p-3 rounded-2xl"
+              content="چت"
             >
-              <img className="" alt="comment" src={comment} />
-            </button>
-            <button
-              disabled={userList?.status === "Block"}
-              className={
-                userList?.status === "Block" ? " invert-[0.5]" : "w-5 h-5 mx-2"
-              }
-              onClick={() => setOpenBlockModal(true)}
+              <button
+                disabled={userList?.status === "Block"}
+                className={
+                  userList?.status === "Block"
+                    ? "w-5 h-5 mx-2 invert-[0.5]"
+                    : "w-5 h-5 mx-2"
+                }
+              >
+                <img className="" alt="comment" src={comment} />
+              </button>
+            </Tooltip>
+            <Tooltip
+              placement="bottom"
+              className="text-gray-600 bg-white p-3 rounded-2xl"
+              content="بلاک "
             >
-              <img className="" alt="block" src={block} />
-            </button>
+              <button
+                disabled={userList?.status === "Block"}
+                className={
+                  userList?.status === "Block"
+                    ? " invert-[0.5]"
+                    : "w-5 h-5 mx-2"
+                }
+                onClick={() => setOpenBlockModal(true)}
+              >
+                <img className="" alt="block" src={block} />
+              </button>
+            </Tooltip>
           </div>
         </div>
       </div>

@@ -26,7 +26,7 @@ export default function OtherUsers() {
   }, [id]);
 
   return (
-    <div className="flex justify-between mt-32">
+    <div className="flex md:flex-col-reverse md:w-screen md:items-center justify-between mt-32">
       {user?.reverseStatus === "Block" ? (
         <BlockPage />
       ) : (

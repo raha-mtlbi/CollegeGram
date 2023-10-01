@@ -21,7 +21,6 @@ export default function InnerHome() {
           <Button
             title=" رفتن به صفحه کالج‌گرامی‌ها "
             onClick={() => navigate("/collegians")}
-            width={250}
           />
         </div>
 

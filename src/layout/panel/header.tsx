@@ -23,7 +23,6 @@ export default function Header() {
         <div className="flex justify-around items-center ">
           <Button
             title={"افزودن عکس"}
-            width={"100px"}
             onClick={() => setOpen(true)}
           />
           <img alt="logo" src={logo} className="w-[60px] mr-[30px]" />

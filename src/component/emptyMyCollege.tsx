@@ -22,7 +22,6 @@ const EmptyMyCollage = () => {
         <Button
           title="افزودن اولین پست"
           onClick={() => setOpen(true)}
-          width={139}
         />
       </div>
     </div>

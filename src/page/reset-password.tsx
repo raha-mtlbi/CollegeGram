@@ -46,7 +46,7 @@ const ForgetPassword = () => {
           />
         </div>
         <div className="flex justify-end my-10">
-          <Button title={"ثبت رمز عبور جدید"} width="139px" type="submit" />
+          <Button title={"ثبت رمز عبور جدید"}  type="submit" />
         </div>
       </form>
     </div>

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { useMediaQuery } from "@uidotdev/usehooks";
 
 import { get } from "../../api";
 import { IImage } from "../../api/type/images";
@@ -11,6 +12,8 @@ import ImageSlider from "../../component/imageSlider";
 
 export default function InnerPost() {
   const { id } = useParams<{ id: any }>();
+  const phone = useMediaQuery("only screen and (max-width : 600px)");
+
   const [photoDetail, setPhotoDetail] = useState<IImage[] | any>();
 
   useEffect(() => {
@@ -21,11 +24,11 @@ export default function InnerPost() {
 
   return (
     <div>
-      <div className="flex mt-32 p-3 ">
-        <div className="w-full grid grid-cols-2 gap-4 ">
+      <div className="flex md:mt-0 mt-32 p-3 ">
+        <div className="w-full md:grid-cols-1 grid grid-cols-2 gap-4 ">
           <ImageSlider photoDetail={photoDetail} />
 
-          <div className="flex flex-col p-2 ">
+          <div className="flex flex-col p-2 md:w-screen ">
             <Caption
               date={photoDetail?.createdAt}
               caption={photoDetail?.caption as string}
@@ -38,7 +41,7 @@ export default function InnerPost() {
             <Comment postId={id as number} />
           </div>
         </div>
-        <SideBar />
+        {!phone && <SideBar />}
       </div>
     </div>
   );

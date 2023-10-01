@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import useMediaQuery from "./useMediaQuery";
+import { useMediaQuery } from "@uidotdev/usehooks";
 
 import down from "../assets/icons/down.svg";
 
 export default function FollowerRoute() {
   const [open, setOpen] = useState(false);
   const location = useLocation();
-  const phone = useMediaQuery("600");
+  const phone = useMediaQuery("only screen and (max-width : 600px)");
 
   const link = [
     { href: "/followerPage", name: "دنبال کننده‌ها" },

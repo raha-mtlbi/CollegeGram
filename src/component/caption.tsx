@@ -56,7 +56,6 @@ const Caption = ({
 
   const [photoDetail, setPhotoDetail] = useState<IImage[] | any>();
 
-  console.log("t", otherUser?.user?.id);
   useEffect(() => {
     get(`/post/${id}`)
       .then((d: any) => setPhotoDetail(d))
@@ -133,7 +132,6 @@ const Caption = ({
         open={friendOpen}
         onClose={() => setFriendOpen(false)}
         user={otherUser as IOtherUser}
-        onClick={() => {}}
       />
       <div className="mr-[20px] mb-6">
         <div className="w-full flex justify-between">

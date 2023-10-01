@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { IUser } from "../api/type/user";
+import { useMediaQuery } from "@uidotdev/usehooks";
 
+import { IUser } from "../api/type/user";
+import { get } from "../api";
 import SideBar from "../component/sidebar";
 import FollowerRoute from "../component/followerRoute";
-import useMediaQuery from "../component/useMediaQuery";
 import FollowerUser from "../component/followerUsers";
-import { get } from "../api";
 
 const FriendListPage = () => {
-  const phone = useMediaQuery("600");
+  const phone = useMediaQuery("only screen and (max-width : 600px)");
   const [userList, setUserList] = useState<{ result: IUser[] }>();
 
   useEffect(() => {

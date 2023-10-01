@@ -86,7 +86,6 @@ const ResponsiveProfile = () => {
       <div className="w-screen flex justify-end pl-4">
         <Button
           title={"ویرایش پروفایل"}
-          width={"150px"}
           onClick={() => setOpenModal(true)}
         />
       </div>

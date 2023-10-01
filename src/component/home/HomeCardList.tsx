@@ -79,7 +79,7 @@ const HomeCardList = () => {
   };
 
   return (
-    <div className="w-full grid sm:grid-cols-1 grid-cols-3 gap-4">
+    <div className="w-full grid sm:grid-cols-1 grid-cols-3 gap-4 md:pb-10">
       {imageData?.result?.map((data: any, index: number) => (
         <div
           key={index}

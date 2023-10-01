@@ -21,7 +21,6 @@ import OtherNotification from "../page/otherNotification";
 import Message from "../page/messages";
 import OtherUsers from "../page/otherUserPage/[id]";
 import InnerFriendsPost from "../page/friendPost/[id]";
-import useMediaQuery from "../component/useMediaQuery";
 import RespansiveLayout from "../layout/panel/respansive";
 import SearchPage from "../page/searchPage";
 import FollowerPage from "../page/followersPage";
@@ -30,11 +29,13 @@ import BlackList from "../page/blackListPage";
 import FriendListPage from "../page/friendListPage";
 import Home from "../page/home";
 
+import { useMediaQuery } from "@uidotdev/usehooks";
+
 export default function Router() {
   const dispatch = useAppDispatch();
   const status = useUserStatus();
 
-  const phone = useMediaQuery("600");
+  const phone = useMediaQuery("only screen and (max-width : 600px)");
 
   useEffect(() => {
     dispatch(getCurrentUser());

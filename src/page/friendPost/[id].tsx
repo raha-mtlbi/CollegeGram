@@ -20,11 +20,11 @@ export default function InnerFriendsPost() {
 
   return (
     <div>
-      <div className="flex mt-32 p-3 ">
-        <div className="w-full grid grid-cols-2 gap-4 ">
+      <div className="flex md:mt-0 mt-32 p-3 ">
+        <div className="w-full md:grid-cols-1 grid grid-cols-2 gap-4 ">
           <ImageSlider photoDetail={photoDetail} />
 
-          <div className="flex flex-col p-2 ">
+          <div className="md:w-screen flex flex-col p-2 ">
             <Caption
               date={photoDetail?.createdAt}
               caption={photoDetail?.caption as string}

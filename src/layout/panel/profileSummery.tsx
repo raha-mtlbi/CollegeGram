@@ -76,7 +76,10 @@ const ProfileSummery = () => {
           )}
           {user?.username || ""}
         </p>
-        <p className="max-w-[200px] whitespace-nowrap overflow-hidden text-ellipsis text-[#17494D] text-center text-[20px] font-bold  mt-1">
+        <p
+          style={{ direction: "ltr" }}
+          className="max-w-[200px] whitespace-nowrap overflow-hidden text-ellipsis text-[#17494D] text-center text-[20px] font-bold  mt-1"
+        >
           {user?.name + " " + user?.lastname || ""}
         </p>
         <div className="flex justify-center mt-[16px] text-[14px]">
