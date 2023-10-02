@@ -24,7 +24,7 @@ export default function ResponsiveFooter() {
       {open ? (
         <div
           className="fixed bottom-0 bg-[#F1EBE3] border border-[#CDCDCD] rounded-t-3xl w-full h-[400px] pt-5 flex flex-col text-[#C19008]"
-          onClick={() => setOpen(true)}
+          onClick={() => setOpen(false)}
         >
           <a className="flex mb-8" href="/home">
             <img alt="" src={pin} className="w-6 mr-8 ml-2" />

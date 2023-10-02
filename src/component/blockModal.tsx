@@ -22,7 +22,7 @@ const BlockModal = ({
   onClick?: () => void;
 }) => {
   const [loading, setLoading] = useState<boolean>(false);
-  
+
   const handleBlock = async () => {
     try {
       setLoading(true);
@@ -41,7 +41,7 @@ const BlockModal = ({
   };
   return (
     <MyModal open={open} onClose={onClose}>
-      <div className="items-center justify-center text-center">
+      <div className=" items-center justify-center text-center">
         <img alt="iamge" src={blockIcon} className="mx-auto mt-[25px]" />
         <p className="text-[22px] font-normal mt-[3px]">بلاک</p>
       </div>

@@ -2,7 +2,7 @@ import React from "react";
 import { IUser } from "../api/type/user";
 
 import more from "../assets/icons/more_button.svg";
-import fram from "../assets/icons/picture frame.svg";
+import userIcon from "../assets/icons/person.svg";
 
 export default function FollowerUser({ userList }: { userList: IUser[] }) {
   return (
@@ -12,7 +12,7 @@ export default function FollowerUser({ userList }: { userList: IUser[] }) {
           <div className="flex items-center">
             <img
               alt="user"
-              src={fram}
+              src={user?.photo || userIcon}
               className="w-[65px] h-[70px] rounded-xl ml-2"
             />
             <div className="min-w-[200px]">

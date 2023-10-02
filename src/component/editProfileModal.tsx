@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import { useFormik } from "formik";
 import EditProfileSubmit from "../logic/editProfileSubmit";
 import { useUser } from "../features/hooks";
+import LoadingPage from "../page/loading";
+import { useMediaQuery } from "@uidotdev/usehooks";
 import Input from "./input";
 import Button from "./button";
 import Avatar from "./EditAvatar";
@@ -11,7 +13,6 @@ import MyModal from "./Modal";
 import gmail from "../assets/icons/gmail1.svg";
 import key from "../assets/icons/key1.svg";
 import person from "../assets/icons/person.svg";
-import LoadingPage from "../page/loading";
 
 const EditProfile = ({
   open,
@@ -22,6 +23,7 @@ const EditProfile = ({
 }) => {
   const user = useUser();
   const [loading, setLoading] = useState<boolean>(false);
+  const phone = useMediaQuery("only screen and (max-width : 600px)");
 
   const formik = useFormik({
     initialValues: {
@@ -45,7 +47,10 @@ const EditProfile = ({
         ویرایش حساب
       </p>
 
-      <form onSubmit={formik.handleSubmit}>
+      <form
+        onSubmit={formik.handleSubmit}
+        style={{ width: phone ? "100%" : "350px" }}
+      >
         <Avatar onChange={(f: any) => formik.setFieldValue("photo", f)} />
 
         <div className="mt-2">

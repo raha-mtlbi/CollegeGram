@@ -1,17 +1,20 @@
 import React, { useState } from "react";
 import { useUser } from "../../../features/hooks";
+import { getActiveUsers } from "../../../api/token";
 
 import Button from "../../../component/button";
+import EditProfile from "../../../component/editProfileModal";
 
 import arrow from "../../../assets/icons/arrow-down.svg";
 import person from "../../../assets/icons/gold-person.svg";
 import dot from "../../../assets/icons/ellipsis.svg";
-import EditProfile from "../../../component/editProfileModal";
 
 const ResponsiveProfile = () => {
   const [open, setOpen] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const user = useUser();
+
+  const allUsers = getActiveUsers();
 
   return (
     <div>
@@ -84,10 +87,7 @@ const ResponsiveProfile = () => {
       </div>
 
       <div className="w-screen flex justify-end pl-4">
-        <Button
-          title={"ویرایش پروفایل"}
-          onClick={() => setOpenModal(true)}
-        />
+        <Button title={"ویرایش پروفایل"} onClick={() => setOpenModal(true)} />
       </div>
     </div>
   );

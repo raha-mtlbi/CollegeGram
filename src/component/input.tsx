@@ -39,8 +39,8 @@ export default function Input({
         <input
           className={
             error
-              ? "shadow appearance-none border border-red-600 w-80 rounded-3xl py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline pr-8 "
-              : " shadow appearance-none border w-80 rounded-3xl py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline pr-8 "
+              ? "shadow appearance-none border border-red-600 w-full rounded-3xl py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline pr-8 "
+              : " shadow appearance-none border w-full rounded-3xl py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline pr-8 "
           }
           placeholder={placeholder}
           type={type}
