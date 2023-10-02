@@ -9,7 +9,7 @@ import FollowerUser from "../component/followerUsers";
 
 const FriendListPage = () => {
   const phone = useMediaQuery("only screen and (max-width : 600px)");
-  const [userList, setUserList] = useState<{ result: IUser[] }>();
+  const [userList, setUserList] = useState<IUser[]>();
 
   useEffect(() => {
     get(`/user/closefriend`)
@@ -22,7 +22,7 @@ const FriendListPage = () => {
       <div className="mr-20 sm:mr-6">
         <FollowerRoute />
         <div className="grid grid-cols-2 sm:grid-cols-1 mt-6">
-          <FollowerUser userList={userList?.result as IUser[]} />
+          <FollowerUser userList={userList as IUser[]} />
         </div>
       </div>
       <div>{!phone && <SideBar />}</div>

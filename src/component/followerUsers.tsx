@@ -5,7 +5,6 @@ import more from "../assets/icons/more_button.svg";
 import fram from "../assets/icons/picture frame.svg";
 
 export default function FollowerUser({ userList }: { userList: IUser[] }) {
-  // const userList = [{ id: 1 }, { id: 1 }, { id: 1 }, { id: 1 }];
   return (
     <>
       {userList?.map((user: any, index: number) => (
@@ -17,8 +16,10 @@ export default function FollowerUser({ userList }: { userList: IUser[] }) {
               className="w-[65px] h-[70px] rounded-xl ml-2"
             />
             <div className="min-w-[200px]">
-              <p className="text-[#17494D]">outlaw</p>
-              <p className="text-[#17494D]">محسن سرباز</p>
+              <p className="text-[#17494D]">{user?.username}</p>
+              <p className="text-[#17494D]">
+                {user?.name + " " + user?.lastname}
+              </p>
             </div>
           </div>
           <img alt="more" src={more} className=" cursor-pointer" />
