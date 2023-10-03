@@ -70,7 +70,7 @@ const Register = () => {
             <div className="mt-[32px]">
               <Input
                 type="password"
-                placeholder="پسورد"
+                placeholder="رمز عبور"
                 postfix={
                   <img src={key} alt="key" className="absolute mt-3 px-2" />
                 }
