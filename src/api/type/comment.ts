@@ -10,4 +10,5 @@ export interface IComment {
   authorProfile: string;
   author: IUser;
   likeCount: number;
+  ifLiked: boolean;
 }

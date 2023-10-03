@@ -1,4 +1,3 @@
-import Input from "../input";
 import { useFormik } from "formik";
 
 import { useUser } from "../../features/hooks";
@@ -22,7 +21,7 @@ export default function AddComment(
       parentId: 0,
     },
     enableReinitialize: true,
-    onSubmit: AddNewComment(),
+    onSubmit: AddNewComment({ setComment, postId }),
   });
 
   const handleClick = () => {
@@ -33,27 +32,15 @@ export default function AddComment(
   return (
     <div className="flex w-full items-center ">
       <div className="relative w-[40px] h-[40px] overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
-        {user?.photo ? (
-          <img alt="profile" src={user?.photo} className=" w-full h-[85%]" />
-        ) : (
-          <svg
-            className="absolute w-[30px] h-[30px] text-center text-gray-400 -left-[-5px]"
-            fill="currentColor"
-            viewBox="0 0 20 20"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-              clip-rule="evenodd"
-            ></path>
-          </svg>
-        )}
+        <img
+          alt="profile"
+          src={user?.photo ? user?.photo : person}
+          className=" w-full h-[85%]"
+        />
       </div>
       <form onSubmit={formik.handleSubmit}>
         <div className="flex w-[90%]">
-          {/* <input /> */}
-          <Input
+          <input
             placeholder={"نظر خود را بنویسید..."}
             imageSrc={""}
             imageAlt={""}

@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { useMediaQuery } from "@uidotdev/usehooks";
+
 import { IImage } from "../api/type/images";
 import { get } from "../api";
 import { useUser } from "../features/hooks";
@@ -7,10 +9,9 @@ import ResponsiveProfile from "../layout/panel/respansive/responsiveMyProfile";
 import ImageList from "../component/collegians/imageList";
 import EmptyMyCollage from "../component/emptyMyCollege";
 import SideBar from "../component/sidebar";
-import useMediaQuery from "../component/useMediaQuery";
 
 export default function MyCollegeGram() {
-  const phone = useMediaQuery("640px");
+  const phone = useMediaQuery("only screen and (max-width : 600px)");
   const user = useUser();
 
   const [photoList, setPhotoList] = useState<{
@@ -19,7 +20,7 @@ export default function MyCollegeGram() {
   }>();
 
   useEffect(() => {
-    get(`/post/user/${user?.id}`)
+    get(user?.id ? `/post/MyPosts` : undefined)
       .then((d: any) => setPhotoList(d))
       .catch((e) => console.log(e));
   }, [user?.id]);

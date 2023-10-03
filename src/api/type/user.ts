@@ -14,6 +14,6 @@ export interface IUser {
   block: boolean;
   createdAt: Date;
   removeProfile: boolean;
-  ifLike: boolean;
-  ifBookmark: boolean;
+  ifLiked: boolean;
+  ifBookmarked: boolean;
 }

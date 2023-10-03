@@ -11,15 +11,15 @@ export default function Navigation() {
 
   return (
     <div className="mt-[20px] mb-[30px]">
-      <Link to={"/"} className="flex">
-        {location?.pathname === "/" ? (
+      <Link to={"/home"} className="flex">
+        {location?.pathname === "/home" ? (
           <img src={homeGreen} alt="home" />
         ) : (
           <img src={home} alt="home" />
         )}
         <p
           className={
-            location?.pathname === "/"
+            location?.pathname === "/home"
               ? "text-[#587052] mr-4"
               : "text-[#C19008] mr-4"
           }

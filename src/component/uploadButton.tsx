@@ -28,7 +28,7 @@ export default function UploadButton({
   };
 
   return (
-    <div className="text-right">
+    <div className="text-right w-[320px]">
       <label
         htmlFor="fileInput"
         className="flex flex-row gap-8 cursor-pointer text-base	font-bold text-[#C19008] px-4 py-2 leading-4 "

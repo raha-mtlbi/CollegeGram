@@ -26,8 +26,8 @@ export default function OtherUsers() {
   }, [id]);
 
   return (
-    <div className="flex justify-between mt-32">
-      {user?.reversStatue === "block" ? (
+    <div className="flex md:flex-col-reverse md:w-screen md:items-center justify-between mt-32">
+      {user?.reverseStatus === "Block" ? (
         <BlockPage />
       ) : (
         <UserImageList
@@ -35,7 +35,7 @@ export default function OtherUsers() {
           user={user as IOtherUser}
         />
       )}
-      <OtherProfile user={user} />
+      <OtherProfile user={user} id={id} />
     </div>
   );
 }

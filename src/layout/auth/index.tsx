@@ -4,7 +4,7 @@ import { Outlet } from "react-router-dom";
 
 export default function AuthenticationLayout() {
   return (
-    <div className="bg-gray-50 h-screen">
+    <div className="bg-gray-50">
       <div className="flex flex-col w-screen mx-auto justify-center items-center pt-10">
         <img src={logo} alt="logo" className="w-20" />
         <Outlet />

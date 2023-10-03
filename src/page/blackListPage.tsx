@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from "react";
+import { useMediaQuery } from "@uidotdev/usehooks";
 import { IUser } from "../api/type/user";
 import { get } from "../api";
 
 import SideBar from "../component/sidebar";
 import FollowerRoute from "../component/followerRoute";
-import useMediaQuery from "../component/useMediaQuery";
 import FollowerUser from "../component/followerUsers";
 
 const BlackList = () => {
-  const phone = useMediaQuery("600");
-  const [userList, setUserList] = useState<{ result: IUser[] }>();
+  const phone = useMediaQuery("only screen and (max-width : 600px)");
+  const [userList, setUserList] = useState<IUser[]>();
 
   useEffect(() => {
-    get(``)
+    get(`/user/blocked`)
       .then((d: any) => setUserList(d))
       .catch((e) => console.log(e));
   }, []);
@@ -22,7 +22,7 @@ const BlackList = () => {
       <div className="mr-20 sm:mr-6">
         <FollowerRoute />
         <div className="grid grid-cols-2 sm:grid-cols-1 mt-6">
-          <FollowerUser userList={userList?.result || []} />
+          <FollowerUser userList={userList || []} />
         </div>
       </div>
       <div>{!phone && <SideBar />}</div>

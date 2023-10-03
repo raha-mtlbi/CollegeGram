@@ -21,8 +21,7 @@ const ErrorPage = () => {
       <div className="mt-[20px]">
         <Button
           title="بازگشت به صفحه قبلی"
-          onClick={() => navigate("/")}
-          width={200}
+          onClick={() => navigate("/home")}
         />
       </div>
 

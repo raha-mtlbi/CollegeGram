@@ -8,7 +8,7 @@ import {
 } from "@material-tailwind/react";
 
 import { Logout } from "../../api/user";
-import { getActiveUsers, setActiveUser } from "../../api/token";
+import { getActiveUsers } from "../../api/token";
 import { useUser } from "../../features/hooks";
 import EditProfile from "../../component/editProfileModal";
 
@@ -40,7 +40,7 @@ const ProfileSummery = () => {
           src={user?.photo ? user?.photo : users}
           className="bg-white rounded-full w-[120px] h-[120px] object-fill"
         />
-        <p className="flex text-[#C19008] text-[14px] not-italic mt-[15px] justify-center">
+        <p className="flex max-w-[200px] whitespace-nowrap overflow-hidden text-ellipsis text-[#C19008] text-[14px] not-italic mt-[15px] justify-center">
           {user?.username && (
             <Popover placement="bottom">
               <PopoverHandler>
@@ -76,7 +76,10 @@ const ProfileSummery = () => {
           )}
           {user?.username || ""}
         </p>
-        <p className="max-w-[200px] text-[#17494D] text-center text-[20px] font-bold  mt-1">
+        <p
+          style={{ direction: "ltr" }}
+          className="max-w-[200px] whitespace-nowrap overflow-hidden text-ellipsis text-[#17494D] text-center text-[20px] font-bold  mt-1"
+        >
           {user?.name + " " + user?.lastname || ""}
         </p>
         <div className="flex justify-center mt-[16px] text-[14px]">

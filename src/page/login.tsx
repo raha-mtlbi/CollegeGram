@@ -47,22 +47,26 @@ export default function LoginPage() {
             onChange={(e: any) =>
               formik.setFieldValue("usernameOrEmail", e.target.value)
             }
+            onBlur={formik.handleBlur}
             error={Boolean(
-              formik.values.usernameOrEmail && formik.errors?.usernameOrEmail
+              formik.errors?.usernameOrEmail && formik.touched?.usernameOrEmail
             )}
-            errorText=" نام کاربری یا ایمیل اشتباه است."
+            errorText={
+              formik.touched.usernameOrEmail && formik.errors?.usernameOrEmail
+            }
           />
         </div>
         <Input
+          type="password"
           placeholder="رمز عبور"
           postfix={<img src={key} alt="key" className="absolute mt-3 px-2" />}
           value={formik.values.password}
           onChange={(e: any) =>
             formik.setFieldValue("password", e.target.value)
           }
-          type="password"
-          error={Boolean(formik.values.password && formik.errors?.password)}
-          errorText="رمز عبور اشتباه است."
+          onBlur={formik.handleBlur}
+          error={Boolean(formik.errors?.password && formik.touched?.password)}
+          errorText={formik.touched.password && formik.errors?.password}
         />
         <div className="flex items-center my-5 mr-2">
           <input
@@ -74,7 +78,7 @@ export default function LoginPage() {
           </label>
         </div>
         <div className="flex justify-end my-3">
-          <Button type="submit" title={"ورود"} width="100px" />
+          <Button type="submit" title={"ورود"} />
         </div>
         <button
           className="flex items-center mt-10 mb-2"

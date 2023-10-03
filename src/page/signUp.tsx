@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { Formik } from "formik";
 import Signup from "../logic/signup";
+import { registerSchema } from "../utils/validations";
 
 import Button from "../component/button";
 import Input from "../component/input";
@@ -9,14 +10,8 @@ import Input from "../component/input";
 import gmail from "../assets/icons/gmail1.svg";
 import key from "../assets/icons/key1.svg";
 import person from "../assets/icons/person.svg";
-import eye from "../assets/icons/eye.svg";
-import eyeclosed from "../assets/icons/eye-closed.svg";
-import HadiInput from "../component/hadiInput";
-import { registerSchema } from "../utils/validations";
 
 const Register = () => {
-  const [show, setShow] = useState(false);
-
   return (
     <div>
       <Formik
@@ -50,10 +45,11 @@ const Register = () => {
                 onChange={(e: any) =>
                   formik.setFieldValue("username", e.target.value)
                 }
+                onBlur={formik.handleBlur}
                 error={Boolean(
-                  formik.values.username && formik.values.username.length < 4
+                  formik.errors?.username && formik.touched?.username
                 )}
-                errorText="نام کاربری باید بیشتر از ۴ کارکتر باشد"
+                errorText={formik.touched.username && formik.errors?.username}
               />
             </div>
             <div className="mt-[32px]">
@@ -66,49 +62,51 @@ const Register = () => {
                 onChange={(e: any) =>
                   formik.setFieldValue("email", e.target.value)
                 }
-                error={Boolean(formik.values.email && formik.errors?.email)}
-                errorText="لطفا ایمیل را به صورت صحیح وارد کنید"
-              />
-            </div>
-            <div className="mt-[32px]">
-              <HadiInput
-                prefix={
-                  <img src={key} alt="key" className="absolute mt-3 px-2" />
-                }
-                placeholder="رمز عبور"
-                name="password"
-                type="password"
+                onBlur={formik.handleBlur}
+                error={Boolean(formik.errors?.email && formik.touched?.email)}
+                errorText={formik.touched.email && formik.errors?.email}
               />
             </div>
             <div className="mt-[32px]">
               <Input
-                placeholder="تکرار رمز عبور"
+                type="password"
+                placeholder="پسورد"
                 postfix={
                   <img src={key} alt="key" className="absolute mt-3 px-2" />
                 }
-                prefix={
-                  <button onClick={() => setShow(!show)}>
-                    <img
-                      src={show ? eye : eyeclosed}
-                      alt="key"
-                      className="w-3 h-3 mt-4"
-                    />
-                  </button>
+                value={formik.values.password}
+                onChange={(e: any) =>
+                  formik.setFieldValue("password", e.target.value)
+                }
+                onBlur={formik.handleBlur}
+                error={Boolean(
+                  formik.errors?.password && formik.touched?.password
+                )}
+                errorText={formik.touched.password && formik.errors?.password}
+              />
+            </div>
+            <div className="mt-[32px]">
+              <Input
+                type="password"
+                placeholder="تکرار رمز عبور"
+                postfix={
+                  <img src={key} alt="key" className="absolute mt-3 px-2" />
                 }
                 value={formik.values.repassword}
                 onChange={(e: any) =>
                   formik.setFieldValue("repassword", e.target.value)
                 }
-                type={show ? "text" : "password"}
+                onBlur={formik.handleBlur}
                 error={Boolean(
-                  formik.values.repassword &&
-                    formik.values.repassword !== formik.values.password
+                  formik.errors?.repassword && formik.touched?.repassword
                 )}
-                // errorText="رمز عبور یکسان نیست"
+                errorText={
+                  formik.touched.repassword && formik.errors?.repassword
+                }
               />
             </div>
             <div className="flex justify-end my-10">
-              <Button title={"ثبت نام"} width="100px" type="submit" />
+              <Button title={"ثبت نام"} type="submit" />
             </div>
           </form>
         )}

@@ -15,7 +15,7 @@ export default function ImageSlider({
   photoDetail: IImage[] | any;
 }) {
   return (
-    <div className=" z-0">
+    <div className="md:w-screen z-0">
       <Swiper
         slidesPerView={1}
         pagination={true}
@@ -30,7 +30,7 @@ export default function ImageSlider({
               <img
                 alt="postImage"
                 src={i || sample}
-                className="w-full h-[350px] rounded-r-md z-0 object-fill"
+                className="w-screen h-[350px] rounded-r-md z-0 object-fill"
               />
             </SwiperSlide>
           );

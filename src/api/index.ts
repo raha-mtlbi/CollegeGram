@@ -2,9 +2,9 @@ import { AxiosRequestConfig } from "axios";
 import { apiAgent } from "./config";
 import { onSuccess, onError } from "./utils";
 
-export async function get<T>(path: string, config?: AxiosRequestConfig) {
+export async function get<T>(path?: string, config?: AxiosRequestConfig) {
   try {
-    const response = await apiAgent.get<T>(path, config);
+    const response = await apiAgent.get<T>(path as string, config);
     return onSuccess(response);
   } catch (error) {
     return onError(error);

@@ -31,9 +31,16 @@ export default function RecoveryPassword() {
               <img src={gmail} alt="key" className="absolute mt-3 px-2" />
             }
             value={formik.values?.usernameOrEmail}
-            onChange={(e: any) => formik.setFieldValue("usernameOrEmail", e.target.value)}
-            error={Boolean(formik.errors.usernameOrEmail)}
-            errorText="لطفا ایمیل معتبری وارد کنید"
+            onChange={(e: any) =>
+              formik.setFieldValue("usernameOrEmail", e.target.value)
+            }
+            onBlur={formik.handleBlur}
+            error={Boolean(
+              formik.errors?.usernameOrEmail && formik.touched?.usernameOrEmail
+            )}
+            errorText={
+              formik.touched.usernameOrEmail && formik.errors?.usernameOrEmail
+            }
           />
         </div>
 
@@ -43,7 +50,6 @@ export default function RecoveryPassword() {
           </button>
           <Button
             title={"ارسال لینک بازیابی رمز عبور"}
-            width="200px"
             type="submit"
           />
         </div>
