@@ -13,6 +13,7 @@ interface IInput {
   errorText?: string;
   width?: number | string;
   getFieldprops?: any;
+  ref?: any;
 }
 
 export default function Input({
@@ -28,6 +29,7 @@ export default function Input({
   errorText,
   width,
   getFieldprops,
+  ref,
 }: IInput) {
   return (
     <div>
@@ -46,6 +48,7 @@ export default function Input({
           onChange={onChange}
           style={{ width: width }}
           {...getFieldprops}
+          ref={ref}
         />
         {/* <div className=" -mr-8">{prefix}</div> */}
       </div>

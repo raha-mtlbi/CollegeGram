@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { format } from "date-fns";
 import { toast } from "react-toastify";
 
@@ -14,6 +14,7 @@ import arrow from "../assets/icons/arrow-left-curved.svg";
 const Comment = ({ postId }: { postId: number }) => {
   const [like, setLike] = useState<boolean>(false);
   const [comment, setComment] = useState<{ result: IComment[] }>();
+  const [reply, setReply] = useState<boolean>(false);
 
   useEffect(() => {
     get(`/comment/${postId}`)
@@ -43,9 +44,20 @@ const Comment = ({ postId }: { postId: number }) => {
     }
   };
 
+  const ref = useRef(null);
+
+  const handleClick = () => {
+    setReply(true);
+  };
+
   return (
     <div className="w-[85%]">
-      <AddComment postId={postId as number} />
+      {/* <AddComment
+        postId={postId as number}
+        ref={ref as any}
+        reply={reply as boolean}
+        setReply={setReply as React.Dispatch<React.SetStateAction<boolean>>}
+      /> */}
       <div className="max-h-[300px] overflow-y-auto">
         {comment &&
           comment.result.map((comment: any) => {
@@ -80,7 +92,7 @@ const Comment = ({ postId }: { postId: number }) => {
                         />
                       </button>
                       <button
-                        onClick={() => {}}
+                        onClick={handleClick}
                         className="mr-[28px] text-[12px] font-black text-[#C38F00]"
                       >
                         {<img src={arrow} className="mr-[6px]" alt="" />}پاسخ

@@ -5,11 +5,15 @@ import { useUser } from "../../features/hooks";
 import { AddNewComment } from "../../logic/AddNewComment";
 
 import send from "../../assets/icons/send.svg";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
-export default function AddComment({ postId }: { postId: number }) {
+export default function AddComment(
+  { postId }: { postId: number },
+  { ref }: { ref: any },
+  { reply }: { reply: boolean },
+  { setReply }: { setReply: React.Dispatch<React.SetStateAction<boolean>> }
+) {
   const user = useUser();
-  const [reply, setReply] = useState(false);
 
   const formik = useFormik({
     initialValues: {
@@ -20,6 +24,11 @@ export default function AddComment({ postId }: { postId: number }) {
     enableReinitialize: true,
     onSubmit: AddNewComment(),
   });
+
+  const handleClick = () => {
+    ref.current.focus();
+    setReply(false);
+  };
 
   return (
     <div className="flex w-full items-center ">
@@ -52,11 +61,13 @@ export default function AddComment({ postId }: { postId: number }) {
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               formik.setFieldValue("content", e.target.value)
             }
+            ref={ref}
           />
           <button
             className="mx-2 w-[150px]"
             type="submit"
-            onClick={(e: any) => setReply(false)}
+            // onClick={(e: any) => setReply(false)}
+            onClick={handleClick}
           >
             <img alt="send" src={send} className="w-5 h-4" />
           </button>
