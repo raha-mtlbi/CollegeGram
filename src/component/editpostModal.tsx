@@ -1,8 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useFormik } from "formik";
-
-import { IImage } from "../api/type/images";
-import { get } from "../api";
 
 import { AddPostValidation } from "../utils/validations";
 import Button from "./button";
@@ -30,7 +27,7 @@ const EditPostModal = ({
   const formik = useFormik({
     initialValues: {
       caption: caption || "",
-      closeFriend: closeFriend || false,
+      closeFriend: closeFriend,
       tags: tag?.join(" ") || [""],
     },
     enableReinitialize: true,
@@ -67,6 +64,7 @@ const EditPostModal = ({
             </span>
             <input
               type="checkbox"
+              checked={formik.values.closeFriend}
               {...formik.getFieldProps("closeFriend")}
               className="sr-only peer"
             />

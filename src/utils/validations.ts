@@ -34,7 +34,7 @@ export const registerSchema = Yup.object().shape({
 });
 
 export const AddPostValidation = Yup.object().shape({
-  description: Yup.string(),
+  caption: Yup.string().required("وارد کردن توضیحات الزامی است."),
   tag: Yup.string(),
 });
 

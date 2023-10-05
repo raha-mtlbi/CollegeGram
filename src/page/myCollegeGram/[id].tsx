@@ -21,6 +21,7 @@ export default function InnerPost() {
       .then((d: any) => setPhotoDetail(d))
       .catch((e) => console.log(e));
   }, [id]);
+  console.log("close", photoDetail?.closeFriend);
 
   return (
     <div>

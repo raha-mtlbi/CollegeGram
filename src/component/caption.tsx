@@ -1,32 +1,31 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Popover,
   PopoverHandler,
   PopoverContent,
   Button,
 } from "@material-tailwind/react";
-import { Bookmark, LikePost, UnBookmark, UnLikePost } from "../api/post";
 import { toast } from "react-toastify";
+import moment from "jalali-moment";
+import { Bookmark, LikePost, UnBookmark, UnLikePost } from "../api/post";
+import { get } from "../api";
+import { IOtherUser } from "../api/type/otherUser";
 import { IImage } from "../api/type/images";
 
 import Tag from "./Tag";
 import { useUser } from "../features/hooks";
 import EditPostModal from "./editpostModal";
-
-import { get } from "../api";
-import { IOtherUser } from "../api/type/otherUser";
 import BlockModal from "./blockModal";
 import BestFriendModal from "./closeFriendModal";
-import { handleBlock } from "../logic/followUser";
 
 import Like from "../assets/icons/heart.svg";
 import disLike from "../assets/icons/heart-outline.svg";
 import Save from "../assets/icons/saved.svg";
 import disSave from "../assets/icons/save-outline.svg";
-import more from "../assets/icons/ellipsis.svg";
+import more from "../assets/icons/goldMore.svg";
 import edit from "../assets/icons/whiteEdit.svg";
 import userImage from "../assets/icons/person.svg";
-import { blockUser } from "../api/otherUser";
 
 interface ICaption {
   commentsCount: number;
@@ -34,7 +33,7 @@ interface ICaption {
   caption: string;
   tag: string[];
   id?: number;
-  author: number;
+  author?: number;
   closeFriend: boolean;
 }
 
@@ -48,14 +47,14 @@ const Caption = ({
   closeFriend,
 }: ICaption) => {
   const user = useUser();
-
+  const navigate = useNavigate();
   const [otherUser, setOtherUser] = useState<IOtherUser>();
   const [open, setOpen] = useState<boolean>(false);
   const [blockOpen, setBlockOpen] = useState<boolean>(false);
   const [friendOpen, setFriendOpen] = useState<boolean>(false);
 
   const [photoDetail, setPhotoDetail] = useState<IImage[] | any>();
-
+  console.log("author", author);
   useEffect(() => {
     get(`/post/${id}`)
       .then((d: any) => setPhotoDetail(d))
@@ -107,9 +106,10 @@ const Caption = ({
   };
 
   useEffect(() => {
-    get(`/user/${author}/profile`)
-      .then((d: any) => setOtherUser(d))
-      .catch((e) => console.log(e));
+    author &&
+      get(`/user/${author}/profile`)
+        .then((d: any) => setOtherUser(d))
+        .catch((e) => console.log(e));
   }, [author]);
 
   return (
@@ -183,8 +183,8 @@ const Caption = ({
             <div className="grid grid-cols-3 gap-1 text-center items-center">
               <Popover placement="bottom">
                 <PopoverHandler>
-                  <Button className=" relative -left-8 w-4 h-4 ">
-                    <img alt="more" src={more} className="w-4 h-4 " />
+                  <Button className=" relative -left-4 ">
+                    <img alt="more" src={more} className="" />
                   </Button>
                 </PopoverHandler>
                 <PopoverContent className="w-[230px] text-right bg-[#F1EBE3] m-3  rounded-xl border-gray-400">
@@ -206,7 +206,10 @@ const Caption = ({
                 </PopoverContent>
               </Popover>
 
-              <div className="flex flex-col text-center ml-1">
+              <div
+                className="flex flex-col text-center ml-1 cursor-pointer"
+                onClick={() => navigate(`/usersProfile/${otherUser?.user?.id}`)}
+              >
                 <p className="text-[#17494D] font-bold text-[10px] w-16">
                   {otherUser?.user?.username}
                 </p>
@@ -217,13 +220,14 @@ const Caption = ({
               <img
                 alt="profile"
                 src={otherUser?.user?.photo || userImage}
-                className="bg-white rounded-full w-10 h-10"
+                className="bg-white rounded-full w-10 h-10 cursor-pointer"
+                onClick={() => navigate(`/usersProfile/${otherUser?.user?.id}`)}
               />
             </div>
           )}
         </div>
         <p className="mt-[25px] text-[#17494D] font-normal text-[11px]">
-          {date}
+          {/* {moment(date, "YYYY/MM/DD").locale("fa").format("YYYY/MM/DD")} */}
         </p>
         <p className="w-[450px] h-[135px] text-[14px] text-[#17494D] font-normal mt-[8px]">
           {caption}

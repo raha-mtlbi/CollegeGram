@@ -30,7 +30,7 @@ export function removeToken(username?: string) {
   }
 }
 
-function getActiveUser() {
+export function getActiveUser() {
   return localStorage.getItem("active-user") || null;
 }
 

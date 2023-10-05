@@ -39,51 +39,53 @@ const BestFriendModal = ({
 
   return (
     <MyModal open={open} onClose={onClose}>
-      <div className="flex items-center justify-center text-center mt-2 ">
-        <img alt="iamge" src={closeFriendIcon} className=" mt-[25px]" />
-        <p className="text-[22px] font-normal mr-3 mt-6">دوست نزدیک</p>
-      </div>
-      <div className="flex">
-        <div className="mr-[51px] text-right">
-          <p className="text-[13px] font-bold mt-[50px]">
-            {user?.user?.username}
-          </p>
-          <p className="text-[11px] mt-[5px]">
-            {user?.user?.followers} دنبال‌کننده
-          </p>
+      <div className="flex flex-col items-center justify-center text-center p-2">
+        <div className="flex items-center justify-center text-center mt-2 ">
+          <img alt="iamge" src={closeFriendIcon} className=" mt-[25px]" />
+          <p className="text-[22px] font-normal mr-3 mt-6">دوست نزدیک</p>
         </div>
-        <div className="rounded-full w-[80px] h-[80px] mr-[116px] mt-[30px]">
-          <div className="relative w-[80px] h-[80px] overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
-            <img
-              alt="user"
-              src={user?.user?.photo || person}
-              className="h-full"
-            />
+        <div className="flex">
+          <div className="text-right">
+            <p className="text-[13px] font-bold mt-[50px]">
+              {user?.user?.username}
+            </p>
+            <p className="text-[11px] mt-[5px]">
+              {user?.user?.followers} دنبال‌کننده
+            </p>
           </div>
-          <img alt="iamge" src={tik} className=" absolute -mt-5" />
+          <div className="rounded-full w-[80px] h-[80px] mr-[116px] mt-[30px]">
+            <div className="relative w-[80px] h-[80px] overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
+              <img
+                alt="user"
+                src={user?.user?.photo || person}
+                className="h-full"
+              />
+            </div>
+            <img alt="iamge" src={tik} className=" absolute -mt-5" />
+          </div>
         </div>
-      </div>
-      <div className="text-[14px] text-[#17494D] text-right mr-[51px] mt-[50px]">
-        <p className="font-bold">
-          مطمئنی می‌خوای {user?.user?.username} رو به دوستان نزدیکت
-        </p>
-        <p className="font-bold mt-2">اضافه کنی؟</p>
-        <p className="mt-[8px]">در این صورت اون می‌تونه محتواهایی که برای</p>
-        <p className="mt-2">دوستان نزدیکت به اشتراک گذاشتی رو ببینه.</p>
-      </div>
-      <div className="mt-10">
-        <button onClick={onClose} className="w-[104px] ml-[8px] mr-[100px]">
-          نه پشیمونم
-        </button>
-        {loading ? (
-          <LoadingPage />
-        ) : (
-          <Button
-            title={"آره، حتما"}
-            type="submit"
-            onClick={() => handleCloseFriend()}
-          />
-        )}
+        <div className="text-[14px] text-[#17494D] text-right  mt-[50px]">
+          <p className="font-bold">
+            مطمئنی می‌خوای {user?.user?.username} رو به دوستان نزدیکت
+          </p>
+          <p className="font-bold mt-2">اضافه کنی؟</p>
+          <p className="mt-[8px]">در این صورت اون می‌تونه محتواهایی که برای</p>
+          <p className="mt-2">دوستان نزدیکت به اشتراک گذاشتی رو ببینه.</p>
+        </div>
+        <div className="mt-10">
+          <button onClick={onClose} className="w-[104px] ml-[8px] mr-[100px]">
+            نه پشیمونم
+          </button>
+          {loading ? (
+            <LoadingPage />
+          ) : (
+            <Button
+              title={"آره، حتما"}
+              type="submit"
+              onClick={() => handleCloseFriend()}
+            />
+          )}
+        </div>
       </div>
     </MyModal>
   );

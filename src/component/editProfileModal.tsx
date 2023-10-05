@@ -33,7 +33,7 @@ const EditProfile = ({
       name: user?.name || "",
       lastname: user?.lastname || "",
       bio: user?.bio || "",
-      private: user?.private || false,
+      private: true,
       photo: user?.photo?.[0] || undefined,
     },
     enableReinitialize: true,
@@ -122,6 +122,7 @@ const EditProfile = ({
                 type="checkbox"
                 className="sr-only peer"
                 {...formik.getFieldProps("private")}
+                checked={formik.values.private}
               />
               <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none  dark:peer-focus: rounded-full peer  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white  after:rounded-full after:h-5 after:w-5 after:transition-all  peer-checked:bg-gray-800"></div>
             </label>

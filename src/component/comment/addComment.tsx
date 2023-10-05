@@ -35,10 +35,10 @@ export default function AddComment({
         />
       </div>
       <form onSubmit={formik.handleSubmit}>
-        <div className="flex w-[90%]">
+        <div className="flex ">
           <input
             placeholder={"نظر خود را بنویسید..."}
-            className="shadow appearance-none border w-80 rounded-3xl py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline pr-8 "
+            className="shadow appearance-none border w-full mr-2 rounded-3xl py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline pr-8 "
             {...formik.getFieldProps("content")}
           />
           <button className="mx-2 w-[150px]" type="submit">

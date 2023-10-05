@@ -26,7 +26,7 @@ const CreatePostModal = ({
     },
     enableReinitialize: true,
     validationSchema: AddPostValidation,
-    onSubmit: AddNewPost({ onClose,setLoading }),
+    onSubmit: AddNewPost({ onClose, setLoading }),
   });
 
   return (

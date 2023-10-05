@@ -51,7 +51,7 @@ export const EditProfile = (data: any) => {
   data.lastname && formData.append("lastname", data.lastname);
   data.username && formData.append("username", data.username);
   data.password && formData.append("password", data.password);
-  data.private && formData.append("private", data.private);
+  formData.append("private", data.private);
   data.bio && formData.append("bio", data.bio);
 
   return patch("/user/me", formData);

@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import {
   Popover,
   PopoverHandler,
@@ -8,18 +7,20 @@ import {
 } from "@material-tailwind/react";
 
 import { Logout } from "../../api/user";
-import { getActiveUsers } from "../../api/token";
+import { getActiveUsers, setActiveUser } from "../../api/token";
 import { useUser } from "../../features/hooks";
 import EditProfile from "../../component/editProfileModal";
 
 import arrow from "../../assets/icons/arrow-down.svg";
 import pen from "../../assets/icons/edit.svg";
 import users from "../../assets/icons/person.svg";
+import { useNavigate } from "react-router-dom";
 
 const ProfileSummery = () => {
   const [open, setOpen] = useState<boolean>(false);
   const user = useUser();
 
+  const navigate = useNavigate();
   const allUsers = getActiveUsers();
 
   const handleLogout = async () => {
@@ -48,14 +49,14 @@ const ProfileSummery = () => {
                   <img src={arrow} className="my-auto mx-[10px]" alt="arrow" />
                 </Button>
               </PopoverHandler>
-              <PopoverContent className="w-[150px] text-right mr-3 border-gray-400 rounded-xl ">
+              <PopoverContent className=" text-right mr-3 border-gray-400 rounded-xl ">
                 <ul>
                   {allUsers?.map((username: string) => (
                     <li
-                      className="  cursor-pointer mr-2 mt-2"
+                      className="  cursor-pointer px-2 mr-2 mb-2"
                       onClick={() => {
-                        getActiveUsers();
-                        console.log("12");
+                        setActiveUser(username);
+                        window.location.reload();
                       }}
                     >
                       {username}
@@ -69,6 +70,14 @@ const ProfileSummery = () => {
                     }}
                   >
                     اضافه کردن اکانت+
+                  </li>
+                  <li
+                    className="  cursor-pointer mr-2 mt-2"
+                    onClick={() => {
+                      handleLogout();
+                    }}
+                  >
+                    خروج از حساب کاربری
                   </li> */}
                 </ul>
               </PopoverContent>
