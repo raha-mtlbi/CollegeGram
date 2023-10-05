@@ -13,6 +13,7 @@ interface IInput {
   errorText?: any;
   width?: number | string;
   getFieldprops?: any;
+  ref?: any;
   onBlur?: any;
 }
 
@@ -29,6 +30,7 @@ export default function Input({
   errorText,
   width,
   getFieldprops,
+  ref,
   onBlur,
 }: IInput) {
   return (
@@ -49,10 +51,11 @@ export default function Input({
           onBlur={onBlur}
           style={{ width: width }}
           {...getFieldprops}
+          ref={ref}
         />
         {/* <div className=" -mr-8">{prefix}</div> */}
       </div>
-      {error  && (
+      {error && (
         <div className="flex items-center my-3">
           <img alt="error" src={Form_Error} className="w-3 h-3" />
           <p className=" text-red-600 mx-2 text-[12px]">{errorText}</p>

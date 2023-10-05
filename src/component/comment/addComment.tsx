@@ -8,12 +8,14 @@ import person from "../../assets/icons/person.svg";
 
 export default function AddComment({
   postId,
+  InputRef,
+  parentId,
   setComment,
-  reply,
 }: {
   postId: number;
+  InputRef: any;
+  parentId: number | null;
   setComment: any;
-  reply?: boolean;
 }) {
   const user = useUser();
 
@@ -21,10 +23,10 @@ export default function AddComment({
     initialValues: {
       content: "",
       postId: postId,
-      parentId: 0,
+      parentId: parentId,
     },
     enableReinitialize: true,
-    onSubmit: AddNewComment({ setComment, postId }),
+    onSubmit: AddNewComment({ setComment, postId, parentId }),
   });
 
   return (
@@ -40,8 +42,11 @@ export default function AddComment({
         <div className="flex ">
           <input
             placeholder={"نظر خود را بنویسید..."}
-            className=" focus:required:border-red-600 shadow appearance-none border w-full mr-2 rounded-3xl py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline pr-8 "
-            {...formik.getFieldProps("content")}
+            value={formik.values?.content}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              formik.setFieldValue("content", e.target.value)
+            }
+            ref={InputRef}
           />
           <button className="mx-2 w-[150px]" type="submit">
             <img alt="send" src={send} className="w-5 h-4" />
