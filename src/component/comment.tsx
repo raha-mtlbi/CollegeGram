@@ -13,6 +13,8 @@ import arrow from "../assets/icons/arrow-left-curved.svg";
 
 const Comment = ({ postId }: { postId: number }) => {
   const [comments, setComments] = useState<{ result: IComment[] }>();
+  const [reply, setReply] = useState(false);
+  const handleReply = () => {};
 
   useEffect(() => {
     get(`/comment/${postId}`)
@@ -42,9 +44,14 @@ const Comment = ({ postId }: { postId: number }) => {
     }
   };
 
+  console.log("rep", reply);
   return (
     <div className="w-[85%]">
-      <AddComment postId={postId as number} setComment={setComments} />
+      <AddComment
+        postId={postId as number}
+        setComment={setComments}
+        reply={reply}
+      />
       <div className="max-h-[300px] overflow-y-auto">
         {comments &&
           comments.result.map((comment: any) => {
@@ -75,10 +82,7 @@ const Comment = ({ postId }: { postId: number }) => {
                       >
                         <img src={comment?.ifLiked ? Like : disLike} alt="" />
                       </button>
-                      <button
-                        onClick={() => {}}
-                        className="mr-[28px] text-[12px] font-black text-[#C38F00]"
-                      >
+                      <button className="mr-[28px] text-[12px] font-black text-[#C38F00]">
                         {<img src={arrow} className="mr-[6px]" alt="" />}پاسخ
                       </button>
                     </div>
@@ -86,35 +90,34 @@ const Comment = ({ postId }: { postId: number }) => {
                   <p>{comment.content}</p>
                 </div>
 
-                {/* {item.reply && (
-                  <div className="my-5 mr-[32px]">
-                    <div className="flex justify-between">
-                      <div className="flex items-center">
-                        <p className="text-[12px] font-bold text-[#17494D] ">
-                          {item.reply.name}
-                        </p>
-                        <p className="mr-[8px] text-[#A5A5A5] text-[10px]">
-                          {item.reply.time}
-                        </p>
-                      </div>
-                      <div className="flex items-center">
-                        <p className="text-[12px] font-black text-[#C38F00]">
-                          2
-                        </p>
-                        <button onClick={handleLike} className="mr-[8px]">
-                          <img src={isLike ? Like : disLike} alt="" />
-                        </button>
-                        <button
-                          onClick={handleReply}
-                          className="mr-[28px] text-[12px] font-black text-[#C38F00]"
-                        >
-                          {<img src={arrow} className="mr-[6px]" alt="" />}پاسخ
-                        </button>
-                      </div>
+                <div className="my-5 mr-[32px]">
+                  <div className="flex justify-between">
+                    <div className="flex items-center">
+                      <p className="text-[12px] font-bold text-[#17494D] ">
+                        {/* {item.reply.name} */}test
+                      </p>
+                      <p className="mr-[8px] text-[#A5A5A5] text-[10px]">
+                        {/* {item.reply.time} */}10
+                      </p>
                     </div>
-                    <p>{item.reply.text}</p>
+                    <div className="flex items-center">
+                      <p className="text-[12px] font-black text-[#C38F00]">2</p>
+                      <button onClick={() => {}} className="mr-[8px]">
+                        <img src={disLike} alt="" />
+                      </button>
+                      <button
+                        onClick={() => setReply(true)}
+                        className="mr-[28px] text-[12px] font-black text-[#C38F00]"
+                      >
+                        {<img src={arrow} className="mr-[6px]" alt="" />}پاسخ
+                      </button>
+                    </div>
                   </div>
-                )} */}
+                  <p>
+                    {/* {item.reply.text} */}
+                    text
+                  </p>
+                </div>
               </div>
             );
           })}

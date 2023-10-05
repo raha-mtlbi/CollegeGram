@@ -12,12 +12,13 @@ export const AddNewComment = ({
   const handleSubmit = async (data: {
     content: any;
     postId: any;
-    parentId: number;
+    parentId: any;
   }) => {
     try {
       const response = await AddComment({
-        content: data.content,
+        content: data.content || "",
         postId: data.postId,
+        parentId: data?.parentId,
       });
       const newData = await get(`/comment/${postId}`);
       setComment(newData);

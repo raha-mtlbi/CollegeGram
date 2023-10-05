@@ -9,9 +9,11 @@ import person from "../../assets/icons/person.svg";
 export default function AddComment({
   postId,
   setComment,
+  reply,
 }: {
   postId: number;
   setComment: any;
+  reply?: boolean;
 }) {
   const user = useUser();
 
@@ -38,7 +40,7 @@ export default function AddComment({
         <div className="flex ">
           <input
             placeholder={"نظر خود را بنویسید..."}
-            className="shadow appearance-none border w-full mr-2 rounded-3xl py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline pr-8 "
+            className=" focus:required:border-red-600 shadow appearance-none border w-full mr-2 rounded-3xl py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline pr-8 "
             {...formik.getFieldProps("content")}
           />
           <button className="mx-2 w-[150px]" type="submit">

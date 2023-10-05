@@ -1,3 +1,4 @@
+import { useParams } from "react-router-dom";
 import { useFormik } from "formik";
 import SetPassword from "../logic/setPassword";
 import { setPasswordValidation } from "../utils/validations";
@@ -6,7 +7,6 @@ import Button from "../component/button";
 import Input from "../component/input";
 
 import key from "../assets/icons/key1.svg";
-import { useParams } from "react-router-dom";
 
 const ForgetPassword = () => {
   const { token } = useParams();
@@ -46,7 +46,7 @@ const ForgetPassword = () => {
           />
         </div>
         <div className="flex justify-end my-10">
-          <Button title={"ثبت رمز عبور جدید"}  type="submit" />
+          <Button title={"ثبت رمز عبور جدید"} type="submit" />
         </div>
       </form>
     </div>
