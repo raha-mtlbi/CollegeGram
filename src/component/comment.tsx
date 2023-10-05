@@ -12,13 +12,15 @@ import disLike from "../assets/icons/heart-outline.svg";
 import arrow from "../assets/icons/arrow-left-curved.svg";
 
 const Comment = ({ postId }: { postId: number }) => {
-  const [like, setLike] = useState<boolean>(false);
   const [comment, setComment] = useState<{ result: IComment[] }>();
-  const [reply, setReply] = useState<boolean>(false);
+  const [parentId, setParentId] = useState<number | null>(null);
 
   useEffect(() => {
     get(`/comment/${postId}`)
-      .then((d: any) => setComments(d))
+      .then((d: any) => {
+        setComment(d);
+        console.log(d);
+      })
       .catch((e) => console.log(e));
   }, [postId]);
 
@@ -26,7 +28,7 @@ const Comment = ({ postId }: { postId: number }) => {
     try {
       const response = await LikeComment(id);
       const newComments = await get(`/comment/${postId}`);
-      setComments(newComments);
+      setComment(newComments);
       toast.success(response.msg);
     } catch (error) {
       console.log(error);
@@ -37,97 +39,111 @@ const Comment = ({ postId }: { postId: number }) => {
     try {
       const response = await UnLikeComment(id);
       const newComments = await get(`/comment/${postId}`);
-      setComments(newComments);
+      setComment(newComments);
       toast.success(response.msg);
     } catch (error) {
       console.log(error);
     }
   };
 
-  const ref = useRef(null);
+  const InputRef = useRef<any>();
 
-  const handleClick = () => {
-    setReply(true);
+  const handleClick = (id: number) => {
+    setParentId(id);
+    InputRef.current.focus();
   };
 
   return (
     <div className="w-[85%]">
-      {/* <AddComment
+      <AddComment
         postId={postId as number}
-        ref={ref as any}
-        reply={reply as boolean}
-        setReply={setReply as React.Dispatch<React.SetStateAction<boolean>>}
-      /> */}
+        InputRef={InputRef as any}
+        parentId={parentId as number | null}
+        setParentId={
+          setParentId as React.Dispatch<React.SetStateAction<number | null>>
+        }
+        setComment={setComment as any}
+      />
       <div className="max-h-[300px] overflow-y-auto">
-        {comments &&
-          comments.result.map((comment: any) => {
+        {comment &&
+          comment.result.map((comment: any, index) => {
             return (
-              <div>
+              <div key={index}>
                 {/* comment */}
-                <div className=" my-5 ">
-                  <div className=" flex justify-between items-center my-2">
-                    <div className="flex">
-                      <p className="text-[12px] font-bold text-[#17494D] ">
-                        {comment?.author?.username}
-                      </p>
-                      <p className="mr-[8px] text-[#A5A5A5] text-[10px]">
-                        {format(new Date(comment?.createdAt), "yyyy-MM-dd")}
-                      </p>
-                    </div>
-                    <div className="flex items-center">
-                      <p className=" text-[12px] font-black text-[#C38F00]">
-                        {comment?.likeCount}
-                      </p>
-                      <button
-                        onClick={() => {
-                          comment.ifLiked
-                            ? handleUnLike(comment?.id)
-                            : handleLike(comment?.id);
-                        }}
-                        className="mr-[8px]"
-                      >
-                        <img src={comment?.ifLiked ? Like : disLike} alt="" />
-                      </button>
-                      <button
-                        onClick={handleClick}
-                        className="mr-[28px] text-[12px] font-black text-[#C38F00]"
-                      >
-                        {<img src={arrow} className="mr-[6px]" alt="" />}پاسخ
-                      </button>
-                    </div>
-                  </div>
-                  <p>{comment.content}</p>
-                </div>
-
-                {/* {item.reply && (
-                  <div className="my-5 mr-[32px]">
-                    <div className="flex justify-between">
-                      <div className="flex items-center">
+                {!comment?.parentId ? (
+                  <div className=" my-5 ">
+                    <div className=" flex justify-between items-center my-2">
+                      <div className="flex">
                         <p className="text-[12px] font-bold text-[#17494D] ">
-                          {item.reply.name}
+                          {comment?.author?.username}
                         </p>
                         <p className="mr-[8px] text-[#A5A5A5] text-[10px]">
-                          {item.reply.time}
+                          {format(new Date(comment?.createdAt), "yyyy-MM-dd")}
                         </p>
                       </div>
                       <div className="flex items-center">
-                        <p className="text-[12px] font-black text-[#C38F00]">
-                          2
+                        <p className=" text-[12px] font-black text-[#C38F00]">
+                          {comment?.likeCount}
                         </p>
-                        <button onClick={handleLike} className="mr-[8px]">
-                          <img src={isLike ? Like : disLike} alt="" />
+                        <button
+                          onClick={() => {
+                            comment.ifLiked
+                              ? handleUnLike(comment?.id)
+                              : handleLike(comment?.id);
+                          }}
+                          className="mr-[8px]"
+                        >
+                          <img src={comment?.ifLiked ? Like : disLike} alt="" />
                         </button>
                         <button
-                          onClick={handleReply}
+                          id={comment?.id}
+                          onClick={() => handleClick(comment?.id as number)}
                           className="mr-[28px] text-[12px] font-black text-[#C38F00]"
                         >
                           {<img src={arrow} className="mr-[6px]" alt="" />}پاسخ
                         </button>
                       </div>
                     </div>
-                    <p>{item.reply.text}</p>
+                    <p>{comment.content}</p>
                   </div>
-                )} */}
+                ) : (
+                  // reply
+                  <div className="my-5 mr-[32px]">
+                    <div className="flex justify-between">
+                      <div className="flex items-center">
+                        <p className="text-[12px] font-bold text-[#17494D] ">
+                          {comment?.author?.username}
+                        </p>
+                        <p className="mr-[8px] text-[#A5A5A5] text-[10px]">
+                          {format(new Date(comment?.createdAt), "yyyy-MM-dd")}
+                        </p>
+                      </div>
+                      <div className="flex items-center">
+                        <p className="text-[12px] font-black text-[#C38F00]">
+                          {comment?.likeCount}
+                        </p>
+                        <button
+                          onClick={() => {
+                            comment.ifLiked
+                              ? handleUnLike(comment?.id)
+                              : handleLike(comment?.id);
+                          }}
+                          className="mr-[8px]"
+                        >
+                          <img src={comment?.ifLiked ? Like : disLike} alt="" />
+                        </button>
+                        <button
+                          id={comment?.id}
+                          onClick={() => handleClick(comment?.id as number)}
+                          className="mr-[28px] text-[12px] font-black text-[#C38F00]"
+                        >
+                          {<img src={arrow} className="mr-[6px]" alt="" />}پاسخ
+                        </button>
+                      </div>
+                    </div>
+                    <p>{comment.content}</p>
+                  </div>
+                )}
               </div>
             );
           })}

@@ -5,19 +5,23 @@ import { get } from "../api";
 export const AddNewComment = ({
   setComment,
   postId,
+  parentId,
 }: {
   setComment: any;
   postId: any;
+  parentId?: number | null;
 }) => {
   const handleSubmit = async (data: {
     content: any;
     postId: any;
-    parentId: number;
+    parentId?: number | null;
   }) => {
     try {
+      console.log("request", data);
       const response = await AddComment({
         content: data.content,
         postId: data.postId,
+        parentId: data.parentId,
       });
       const newData = await get(`/comment/${postId}`);
       setComment(newData);

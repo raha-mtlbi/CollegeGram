@@ -3,7 +3,7 @@ import { delete_, post } from ".";
 export const AddComment = (data: {
   content: string;
   postId: number;
-  // parentId?: number;
+  parentId?: number | null;
 }) => {
   return post("/comment", data);
 };

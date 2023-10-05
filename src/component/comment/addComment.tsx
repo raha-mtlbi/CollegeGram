@@ -4,29 +4,36 @@ import { useUser } from "../../features/hooks";
 import { AddNewComment } from "../../logic/AddNewComment";
 
 import send from "../../assets/icons/send.svg";
-import { useRef, useState } from "react";
+import person from "../../assets/icons/person.svg";
 
-export default function AddComment(
-  { postId }: { postId: number },
-  { ref }: { ref: any },
-  { reply }: { reply: boolean },
-  { setReply }: { setReply: React.Dispatch<React.SetStateAction<boolean>> }
-) {
+export default function AddComment({
+  postId,
+  InputRef,
+  parentId,
+  setParentId,
+  setComment,
+}: {
+  postId: number;
+  InputRef: any;
+  parentId: number | null;
+  setParentId: React.Dispatch<React.SetStateAction<number | null>>;
+  setComment: any;
+}) {
   const user = useUser();
 
   const formik = useFormik({
     initialValues: {
       content: "",
       postId: postId,
-      parentId: 0,
+      parentId: parentId,
     },
     enableReinitialize: true,
-    onSubmit: AddNewComment({ setComment, postId }),
+    onSubmit: AddNewComment({ setComment, postId, parentId }),
   });
 
   const handleClick = () => {
-    ref.current.focus();
-    setReply(false);
+    formik.setFieldValue("content", "");
+    setParentId(null);
   };
 
   return (
@@ -42,19 +49,18 @@ export default function AddComment(
         <div className="flex w-[90%]">
           <input
             placeholder={"نظر خود را بنویسید..."}
-            imageSrc={""}
-            imageAlt={""}
+            // imageSrc={""}
+            // imageAlt={""}
             value={formik.values?.content}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               formik.setFieldValue("content", e.target.value)
             }
-            ref={ref}
+            ref={InputRef}
           />
           <button
             className="mx-2 w-[150px]"
             type="submit"
-            // onClick={(e: any) => setReply(false)}
-            onClick={handleClick}
+            // onClick={handleClick}
           >
             <img alt="send" src={send} className="w-5 h-4" />
           </button>
