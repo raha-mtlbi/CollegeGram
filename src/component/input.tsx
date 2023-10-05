@@ -13,8 +13,8 @@ interface IInput {
   errorText?: any;
   width?: number | string;
   getFieldprops?: any;
-  ref?: any;
   onBlur?: any;
+  onClick?: any;
 }
 
 export default function Input({
@@ -30,8 +30,8 @@ export default function Input({
   errorText,
   width,
   getFieldprops,
-  ref,
   onBlur,
+  onClick,
 }: IInput) {
   return (
     <div>
@@ -49,11 +49,11 @@ export default function Input({
           value={value}
           onChange={onChange}
           onBlur={onBlur}
+          onClick={onClick}
           style={{ width: width }}
           {...getFieldprops}
-          ref={ref}
         />
-        {/* <div className=" -mr-8">{prefix}</div> */}
+        <div className="flex-end -mr-9">{prefix}</div>
       </div>
       {error && (
         <div className="flex items-center my-3">

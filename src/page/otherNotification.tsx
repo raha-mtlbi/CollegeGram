@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useMediaQuery } from "@uidotdev/usehooks";
-import { handleFollow } from "../logic/followUser";
 import { INotification } from "../api/type/notification";
 import { get } from "../api";
+import { follow } from "../api/otherUser";
+import { toast } from "react-toastify";
 
 import Button from "../component/button";
 import SideBar from "../component/sidebar";
@@ -12,17 +13,23 @@ import user from "../assets/icons/person.svg";
 
 const OtherNotification = () => {
   const phone = useMediaQuery("only screen and (max-width : 600px)");
-  const [follows, setFollows] = useState(false);
 
-  const [notification, setNotification] = useState<{
-    result: INotification[];
-  }>();
+  const [notification, setNotification] = useState<INotification[]>();
 
   useEffect(() => {
-    get("user/me/notification")
+    get("/user/friends/notification")
       .then((d: any) => setNotification(d))
       .catch((e) => console.log(e));
   }, []);
+
+  const handleFollow = async (id: number, setFollows?: any) => {
+    try {
+      const response = await follow(id as number);
+      toast.success(response.msg);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className="flex justify-between sm:mt-6 mt-32 w-full">
@@ -43,7 +50,7 @@ const OtherNotification = () => {
         </div>
       </div>
       <div className="flex flex-col mt-[66px] h-[500px] overflow-y-autos">
-        {notification?.result?.map((item) => {
+        {notification?.map((item) => {
           return (
             <div className="flex sm:flex-col mb-[24px]">
               {/* profile */}
@@ -88,7 +95,7 @@ const OtherNotification = () => {
                   <Button
                     title="دنبال کردن"
                     type="button"
-                    onClick={() => handleFollow(item?.user?.id, setFollows)}
+                    onClick={() => handleFollow(item?.user?.id)}
                   />
                 )}
               </div>

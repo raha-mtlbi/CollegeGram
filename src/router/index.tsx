@@ -22,7 +22,7 @@ import Message from "../page/messages";
 import OtherUsers from "../page/otherUserPage/[id]";
 import InnerFriendsPost from "../page/friendPost/[id]";
 import RespansiveLayout from "../layout/panel/respansive";
-import SearchPage from "../page/searchPage";
+import SearchPage from "../page/searchPage/[tag]";
 import FollowerPage from "../page/followersPage";
 import FollowingPage from "../page/followingPage";
 import BlackList from "../page/blackListPage";
@@ -80,10 +80,7 @@ export default function Router() {
           <Route path="/friendList" element={<FriendListPage />} />
           <Route path="/usersProfile/:id" element={<OtherUsers />} />
           <Route path="/friendPost/:id" element={<InnerFriendsPost />} />
-          <Route
-            path="/searchPage"
-            element={<SearchPage imageList={undefined} />}
-          />
+          <Route path="/searchPage/:tag" element={<SearchPage />} />
         </Route>
 
         <Route path="404" element={<ErrorPage />} />

@@ -49,11 +49,11 @@ const ProfileSummery = () => {
                   <img src={arrow} className="my-auto mx-[10px]" alt="arrow" />
                 </Button>
               </PopoverHandler>
-              <PopoverContent className=" text-right mr-3 border-gray-400 rounded-xl ">
+              <PopoverContent className=" text-right w-40 border-gray-400 rounded-xl ">
                 <ul>
                   {allUsers?.map((username: string) => (
                     <li
-                      className="  cursor-pointer px-2 mr-2 mb-2"
+                      className="  cursor-pointer mb-1 px-2"
                       onClick={() => {
                         setActiveUser(username);
                         window.location.reload();
