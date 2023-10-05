@@ -10,11 +10,13 @@ export default function AddComment({
   postId,
   InputRef,
   parentId,
+  setParentId,
   setComment,
 }: {
   postId: number;
   InputRef: any;
   parentId: number | null;
+  setParentId: React.Dispatch<React.SetStateAction<number | null>>;
   setComment: any;
 }) {
   const user = useUser();
