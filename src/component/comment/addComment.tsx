@@ -51,7 +51,7 @@ export default function AddComment({
             }
             ref={InputRef}
           />
-          <button className="mx-2" type="submit">
+          <button disabled={!formik.values?.content} className="mx-2" type="submit">
             <img alt="send" src={send} className="w-5 h-4" />
           </button>
         </div>

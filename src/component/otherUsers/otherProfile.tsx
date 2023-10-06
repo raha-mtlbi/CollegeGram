@@ -7,7 +7,7 @@ import Button from "../button";
 import BlockModal from "../blockModal";
 import { get } from "../../api";
 import { toast } from "react-toastify";
-import { blockUser, follow, unFollow } from "../../api/otherUser";
+import { blockUser, follow, unBlockUser, unFollow } from "../../api/otherUser";
 
 import pin from "../../assets/icons/angled-pinG.svg";
 import block from "../../assets/icons/report.svg";
@@ -57,7 +57,19 @@ const OtherProfile = ({ user, id }: { user?: IOtherUser; id: any }) => {
       const newUser = await get(`/user/${id}/profile`);
       setUserList(newUser);
       setOpenBlockModal(false);
-      toast(response.msg);
+      toast.success(response.msg);
+    } catch (error) {
+      console.log(error);
+      setOpenBlockModal(false);
+    }
+  };
+  const handleUnBlock = async (id: number) => {
+    try {
+      const response = await unBlockUser(id as number);
+      const newUser = await get(`/user/${id}/profile`);
+      setUserList(newUser);
+      setOpenBlockModal(false);
+      toast.success(response.msg);
     } catch (error) {
       console.log(error);
       setOpenBlockModal(false);
@@ -105,10 +117,14 @@ const OtherProfile = ({ user, id }: { user?: IOtherUser; id: any }) => {
               : "No_Name"}
           </p>
           <div className="flex justify-center mt-3 mb-5 text-[14px]">
-            <p className="text-[#17494D] ml-1">{user?.user?.followers || 0}</p>
+            <p className="text-[#17494D] ml-1">
+              {userList?.user?.followers || 0}
+            </p>
             <p className="text-[#17494D] ml-[10px]">دنبال‌کننده </p>
             <p>|</p>
-            <p className="text-[#17494D] mr-2">{user?.user?.following || 0}</p>
+            <p className="text-[#17494D] mr-2">
+              {userList?.user?.following || 0}
+            </p>
             <p className="text-[#17494D] mr-1"> دنبال‌شونده</p>
           </div>
           {!userList?.user?.private &&
@@ -122,23 +138,41 @@ const OtherProfile = ({ user, id }: { user?: IOtherUser; id: any }) => {
                 دنبال شده
               </button>
             )}
+          {!userList?.user?.private &&
+            userList?.reverseStatus === null &&
+            userList?.status === "Following" && (
+              <button
+                className=" bg-white border border-[#C38F00] rounded-3xl px-4 py-2 text-[#C38F00]"
+                onClick={() => handleUnFollow(user?.user?.id as number)}
+              >
+                دنبال شده
+              </button>
+            )}
 
           {user?.user?.private &&
             userList?.reverseStatus === "Following" &&
             userList?.status === null && (
               <Button
                 title={" لغو درخواست "}
-                disabled={userList?.status === "Block"}
+                disabled={userList?.status === "Blocked"}
                 onClick={() => handleUnFollow(user?.user?.id)}
               />
             )}
           {userList?.reverseStatus === null && userList?.status === null && (
             <Button
               title={"دنبال کردن"}
-              disabled={userList?.status === "Block"}
+              disabled={userList?.status === "Blocked"}
               onClick={() => handleFollow(userList?.user?.id as number)}
             />
           )}
+          {userList?.reverseStatus === "Blocked" &&
+            userList?.status === null && (
+              <Button
+                title={" خروج از بلاک "}
+                disabled={userList?.status === "Blocked"}
+                onClick={() => handleUnBlock(userList?.user?.id as number)}
+              />
+            )}
 
           <div className="flex flex-col items-center my-7">
             <img alt="pin" src={pin} />
@@ -156,9 +190,13 @@ const OtherProfile = ({ user, id }: { user?: IOtherUser; id: any }) => {
               content="دوستان نزدیک"
             >
               <button
-                disabled={userList?.status === "Block"}
+                disabled={
+                  userList?.status === "Blocked" ||
+                  userList?.reverseStatus === "Blocked"
+                }
                 className={
-                  userList?.status === "Block"
+                  userList?.status === "Blocked" ||
+                  userList?.reverseStatus === "Blocked"
                     ? "w-5 h-5 mx-2 invert-[0.5]"
                     : "w-5 h-5 mx-2"
                 }
@@ -173,9 +211,13 @@ const OtherProfile = ({ user, id }: { user?: IOtherUser; id: any }) => {
               content="چت"
             >
               <button
-                disabled={userList?.status === "Block"}
+                disabled={
+                  userList?.status === "Blocked" ||
+                  userList?.reverseStatus === "Blocked"
+                }
                 className={
-                  userList?.status === "Block"
+                  userList?.status === "Blocked" ||
+                  userList?.reverseStatus === "Blocked"
                     ? "w-5 h-5 mx-2 invert-[0.5]"
                     : "w-5 h-5 mx-2"
                 }
@@ -189,9 +231,13 @@ const OtherProfile = ({ user, id }: { user?: IOtherUser; id: any }) => {
               content="بلاک "
             >
               <button
-                disabled={userList?.status === "Block"}
+                disabled={
+                  userList?.status === "Blocked" ||
+                  userList?.reverseStatus === "Blocked"
+                }
                 className={
-                  userList?.status === "Block"
+                  userList?.status === "Blocked" ||
+                  userList?.reverseStatus === "Blocked"
                     ? " invert-[0.5]"
                     : "w-5 h-5 mx-2"
                 }

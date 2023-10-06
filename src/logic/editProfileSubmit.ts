@@ -34,7 +34,7 @@ export default function EditProfileSubmit({
         photo: data.photo,
       });
 
-      toast.success("اطلاعات شما با موفقیت به روززسانی شد.");
+      toast.success("اطلاعات شما با موفقیت به روزرسانی شد.");
       onClose();
       dispatch(getCurrentUser());
       setLoading(false);

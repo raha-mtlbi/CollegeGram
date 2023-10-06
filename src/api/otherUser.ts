@@ -11,6 +11,10 @@ export const blockUser = (id: number) => {
   return post(`/user/${id}/block`);
 };
 
+export const unBlockUser = (id: number) => {
+  return post(`/user/${id}/unblock`);
+};
+
 export const CloseFriendUser = (id: number) => {
   return post(`/user/${id}/closefriend`);
 };
