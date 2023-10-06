@@ -19,10 +19,7 @@ const ErrorPage = () => {
         تلاش کن
       </p>
       <div className="mt-[20px]">
-        <Button
-          title="بازگشت به صفحه قبلی"
-          onClick={() => navigate("/home")}
-        />
+        <Button title="بازگشت به صفحه قبلی" onClick={() => navigate(-1)} />
       </div>
 
       <div className="flex items-center justify-center">

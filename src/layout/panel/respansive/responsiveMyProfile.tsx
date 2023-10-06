@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useUser } from "../../../features/hooks";
-import { getActiveUsers } from "../../../api/token";
+import { getActiveUsers, setActiveUser } from "../../../api/token";
 
 import Button from "../../../component/button";
 import EditProfile from "../../../component/editProfileModal";
@@ -22,15 +22,17 @@ const ResponsiveProfile = () => {
       {open && (
         <div className="fixed z-10 px-3 bottom-0 bg-[#F1EBE3] border border-[#CDCDCD] rounded-t-3xl w-full h-[125px] pt-5 flex flex-col text-[#C19008]">
           <ul>
-            <div className="flex">
-              <img className="w-5" alt="" src={person} />
-              <li className=" cursor-pointer mr-2 my-2">{user?.username}</li>
-            </div>
-
-            <div className="flex">
-              <img className="w-5" alt="" src={person} />
-              <li className="  cursor-pointer mr-2 mt-1">{user?.username}</li>
-            </div>
+            {allUsers?.map((username: string) => (
+              <li
+                className="  cursor-pointer mb-1 px-2"
+                onClick={() => {
+                  setActiveUser(username);
+                  window.location.reload();
+                }}
+              >
+                {username}
+              </li>
+            ))}
           </ul>
         </div>
       )}

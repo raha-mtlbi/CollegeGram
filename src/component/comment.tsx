@@ -54,7 +54,7 @@ const Comment = ({ postId }: { postId: number }) => {
   };
 
   return (
-    <div className="w-[85%]">
+    <div className="w-[85%] md:pb-24">
       <AddComment
         postId={postId as number}
         InputRef={InputRef as any}

@@ -6,17 +6,16 @@ import { changePassword } from "../api/user";
 export default function SetPassword({ token }: { token: string }) {
   const navigate = useNavigate();
 
-  const handleSubmit = async (data: { newPassword: string; token: string }) => {
+  const handleSubmit = async (data: { newPassword: string }) => {
     try {
-      await changePassword({
+      const resp = await changePassword({
         newPassword: data.newPassword,
         token: token,
       });
-      toast.success("");
+      toast.success(resp.msg);
       navigate("/login");
     } catch (error) {
       console.log(error);
-      toast.error("");
     } finally {
     }
   };

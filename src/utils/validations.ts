@@ -45,5 +45,11 @@ export const sendEmailValidation = Yup.object().shape({
 });
 
 export const setPasswordValidation = Yup.object().shape({
-  password: Yup.string().trim().matches(psswordRegEx, ""),
+  newPassword: Yup.string()
+    .trim()
+    .matches(psswordRegEx, "حداقل 6 کاراکتر، شامل حروف کوچک، بزرگ و اعداد باشد")
+    .required("حداقل 6 کاراکتر، شامل حروف کوچک، بزرگ و اعداد باشد."),
+  repassword: Yup.string()
+    .oneOf([Yup.ref("newPassword")], "رمز عبور شما منطبق نیست")
+    .required("لطفا رمز عبور خود را تایید کنید"),
 });

@@ -127,8 +127,7 @@ const OtherProfile = ({ user, id }: { user?: IOtherUser; id: any }) => {
             </p>
             <p className="text-[#17494D] mr-1"> دنبال‌شونده</p>
           </div>
-          {!userList?.user?.private &&
-            userList?.reverseStatus === "Following" &&
+          {userList?.reverseStatus === "Following" &&
             userList?.status === null && (
               <button
                 className=" bg-white border border-[#C38F00] rounded-3xl px-4 py-2 text-[#C38F00]"
@@ -138,26 +137,21 @@ const OtherProfile = ({ user, id }: { user?: IOtherUser; id: any }) => {
                 دنبال شده
               </button>
             )}
-          {!userList?.user?.private &&
-            userList?.reverseStatus === null &&
+          {userList?.reverseStatus === null &&
             userList?.status === "Following" && (
-              <button
-                className=" bg-white border border-[#C38F00] rounded-3xl px-4 py-2 text-[#C38F00]"
-                onClick={() => handleUnFollow(user?.user?.id as number)}
-              >
-                دنبال شده
-              </button>
-            )}
-
-          {user?.user?.private &&
-            userList?.reverseStatus === "Following" &&
-            userList?.status === null && (
               <Button
-                title={" لغو درخواست "}
-                disabled={userList?.status === "Blocked"}
-                onClick={() => handleUnFollow(user?.user?.id)}
+                title={"دنبال کردن"}
+                onClick={() => handleFollow(userList?.user?.id as number)}
               />
             )}
+
+          {userList?.reverseStatus === "Pending" && (
+            <Button
+              title={" لغو درخواست "}
+              // disabled={userList?.status === "Blocked"}
+              onClick={() => handleUnFollow(user?.user?.id as number)}
+            />
+          )}
           {userList?.reverseStatus === null && userList?.status === null && (
             <Button
               title={"دنبال کردن"}
@@ -165,13 +159,15 @@ const OtherProfile = ({ user, id }: { user?: IOtherUser; id: any }) => {
               onClick={() => handleFollow(userList?.user?.id as number)}
             />
           )}
-          {userList?.reverseStatus === "Blocked" &&
-            userList?.status === null && (
-              <Button
-                title={" خروج از بلاک "}
-                disabled={userList?.status === "Blocked"}
-                onClick={() => handleUnBlock(userList?.user?.id as number)}
-              />
+
+          {userList?.reverseStatus === "Following" &&
+            userList?.status === "Following" && (
+              <button
+                className=" bg-white border border-[#C38F00] rounded-3xl px-4 py-2 text-[#C38F00]"
+                onClick={() => handleUnFollow(user?.user?.id as number)}
+              >
+                دنبال شده
+              </button>
             )}
 
           <div className="flex flex-col items-center my-7">

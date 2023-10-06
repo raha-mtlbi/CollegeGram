@@ -1,3 +1,4 @@
+import React from "react";
 import { useParams } from "react-router-dom";
 import { useFormik } from "formik";
 import SetPassword from "../logic/setPassword";
@@ -10,10 +11,13 @@ import key from "../assets/icons/key1.svg";
 
 const ForgetPassword = () => {
   const { token } = useParams();
-  console.log(token);
 
   const formik = useFormik({
-    initialValues: { newPassword: "", token: "" },
+    initialValues: {
+      newPassword: "",
+      repassword: "",
+      token: token,
+    },
     enableReinitialize: true,
     validationSchema: setPasswordValidation,
     onSubmit: SetPassword({ token: token as string }),
@@ -27,22 +31,34 @@ const ForgetPassword = () => {
       <form onSubmit={formik.handleSubmit}>
         <div className="mt-[49px]">
           <Input
+            type="password"
             placeholder="رمز عبور"
             postfix={<img src={key} alt="key" className="absolute mt-3 px-2" />}
             value={formik.values.newPassword}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               formik.setFieldValue("newPassword", e.target.value)
             }
+            onBlur={formik.handleBlur}
+            error={Boolean(
+              formik.errors?.newPassword && formik.touched?.newPassword
+            )}
+            errorText={formik.touched.newPassword && formik.errors?.newPassword}
           />
         </div>
-        <div className="mt-[32px]">
+        <div className="w-[320px] mt-[32px]">
           <Input
+            type="password"
             placeholder="تکرار رمز عبور"
             postfix={<img src={key} alt="key" className="absolute mt-3 px-2" />}
-            value={formik.values.token}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              formik.setFieldValue("token", e.target.value)
+            value={formik.values.repassword}
+            onChange={(e: any) =>
+              formik.setFieldValue("repassword", e.target.value)
             }
+            onBlur={formik.handleBlur}
+            error={Boolean(
+              formik.errors?.repassword && formik.touched?.repassword
+            )}
+            errorText={formik.touched.repassword && formik.errors?.repassword}
           />
         </div>
         <div className="flex justify-end my-10">

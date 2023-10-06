@@ -176,7 +176,8 @@ const NotificationPage = () => {
                       </button>
                     </div>
                   ) : item.type === "Follow" &&
-                    item?.relation === "Following" ? (
+                    item?.relation === "Following" &&
+                    item?.reverseRelation !== "Following" ? (
                     <Button
                       title={"دنبال کردن"}
                       onClick={() => handleFollow(item.actor?.id)}

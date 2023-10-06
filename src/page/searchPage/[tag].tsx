@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { handleLike, handleUnLike } from "../../logic/likePost";
+import { toast } from "react-toastify";
 import { get } from "../../api";
+import { LikePost, UnLikePost } from "../../api/post";
 
 import likeicon from "../../assets/icons/heart.svg";
 import dislike from "../../assets/icons/heart-outline.svg";
@@ -19,6 +20,28 @@ const SearchPage = () => {
       .then((d: any) => setSearchList(d))
       .catch((e) => console.log(e));
   }, [tag]);
+
+  const handleLike = async (id: number) => {
+    try {
+      const response = await LikePost(id);
+      const data = await get(`/post/search/${tag}`);
+      setSearchList(data);
+      toast.success(response.msg);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleUnLike = async (id: number) => {
+    try {
+      const response = await UnLikePost(id);
+      const data = await get(`/post/search/${tag}`);
+      setSearchList(data);
+      toast.success(response.msg);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div>

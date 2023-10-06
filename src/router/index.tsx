@@ -9,7 +9,6 @@ import AuthenticationLayout from "../layout/auth";
 import LoginPage from "../page/login";
 import ErrorPage from "../page/errorPage";
 import RecoveryPassword from "../page/recoveryPassword";
-import SetPassword from "../page/reset-password";
 import SignUp from "../page/signUp";
 import MyCollegeGram from "../page/myCollegeGram";
 import Collegians from "../page/collegians";
@@ -30,6 +29,7 @@ import FriendListPage from "../page/friendListPage";
 import Home from "../page/home";
 
 import { useMediaQuery } from "@uidotdev/usehooks";
+import ForgetPassword from "../page/set-password";
 
 export default function Router() {
   const dispatch = useAppDispatch();
@@ -44,21 +44,19 @@ export default function Router() {
   // if (status === "loading" || status === "idle") {
   //   return <LoadingPage />;
   // }
-
   if (status === "unauthorized") {
     return (
-      <Suspense fallback={<LoginPage />}>
+      // <Suspense fallback={<LoginPage />}>
         <Routes>
           <Route index element={<Navigate to="/login" />} />
           <Route path="" element={<AuthenticationLayout />}>
             <Route path="/login" element={<LoginPage />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/recoveryPassword" element={<RecoveryPassword />} />
-            <Route path="/reset-password" element={<SetPassword />} />
-            <Route path="/*" element={<LoginPage />} />
+            <Route path="/reset-password" element={<ForgetPassword />} />
           </Route>
         </Routes>
-      </Suspense>
+      // </Suspense>
     );
   }
 
@@ -81,10 +79,9 @@ export default function Router() {
           <Route path="/usersProfile/:id" element={<OtherUsers />} />
           <Route path="/friendPost/:id" element={<InnerFriendsPost />} />
           <Route path="/searchPage/:tag" element={<SearchPage />} />
+          {/* <Route path="404" element={<ErrorPage />} />
+          <Route path="*" element={<Navigate to="/404" />} /> */}
         </Route>
-
-        <Route path="404" element={<ErrorPage />} />
-        <Route path="*" element={<Navigate to="/404" />} />
       </Routes>
     </Suspense>
   );

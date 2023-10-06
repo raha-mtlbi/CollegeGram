@@ -33,7 +33,7 @@ const EditProfile = ({
       name: user?.name || "",
       lastname: user?.lastname || "",
       bio: user?.bio || "",
-      private: true,
+      private: user?.private as boolean,
       photo: user?.photo?.[0] || undefined,
     },
     enableReinitialize: true,
