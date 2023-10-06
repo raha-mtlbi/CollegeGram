@@ -47,7 +47,7 @@ export const getCurrentUser = createAsyncThunk("user/getMeThunk", () => {
 });
 
 export type userSliceType = {
-  status: "idle" | "authorized" | "unauthorized" | "loading";
+  status: "idle" | "authorized" | "Unauthorized" | "loading";
   user: IUser | null;
   token: string | null;
 };
@@ -74,7 +74,7 @@ export type userSliceType = {
 const userSlice = createSlice({
   name: "user",
   initialState: {
-    status: "unauthorized",
+    status: "Unauthorized",
     user: null,
     token: null,
   } as userSliceType,
@@ -82,13 +82,13 @@ const userSlice = createSlice({
     logout(state, action) {
       localStorage.removeItem(tokenKey);
 
-      state.status = "unauthorized";
+      state.status = "Unauthorized";
       state.token = null;
       state.user = null;
 
       removeToken(action?.payload?.user?.username);
       // return {
-      //   status: "unauthorized",
+      //   status: "Unauthorized",
       // };
     },
   },
@@ -119,10 +119,10 @@ const userSlice = createSlice({
         }
       })
       .addCase(loginThunk.rejected, (state) => {
-        state.status = "unauthorized";
+        state.status = "Unauthorized";
 
         // return {
-        //   status: "unauthorized",
+        //   status: "Unauthorized",
         // };
       });
     builder
@@ -149,15 +149,15 @@ const userSlice = createSlice({
           //   token: action.payload.accessToken,
           // };
         } else {
-          state.status = "unauthorized";
+          state.status = "Unauthorized";
           // return {
-          //   status: "unauthorized",
+          //   status: "Unauthorized",
           // };
         }
       })
       .addCase(registerThunk.rejected, (state) => {
-        state.status = "unauthorized";
-        // return { status: "unauthorized" };
+        state.status = "Unauthorized";
+        // return { status: "Unauthorized" };
       });
 
     builder
@@ -180,9 +180,9 @@ const userSlice = createSlice({
         }
       })
       .addCase(getCurrentUser.rejected, (state, action) => {
-        state.status = "unauthorized";
+        state.status = "Unauthorized";
         // return {
-        //   status: "unauthorized",
+        //   status: "Unauthorized",
         // };
       });
   },
