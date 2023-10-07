@@ -30,6 +30,7 @@ import Home from "../page/home";
 
 import { useMediaQuery } from "@uidotdev/usehooks";
 import ForgetPassword from "../page/set-password";
+import LoadingPage from "../page/loading";
 
 export default function Router() {
   const dispatch = useAppDispatch();
@@ -41,12 +42,13 @@ export default function Router() {
     dispatch(getCurrentUser());
   }, [dispatch]);
 
-  // if (status === "loading" || status === "idle") {
-  //   return <LoadingPage />;
-  // }
-  if (status === "unauthorized") {
+  if (status === "loading" || status === "idle") {
+    return <LoadingPage />;
+  }
+
+  if (status === "Unauthorized") {
     return (
-      // <Suspense fallback={<LoginPage />}>
+      <Suspense fallback={<LoadingPage />}>
         <Routes>
           <Route index element={<Navigate to="/login" />} />
           <Route path="" element={<AuthenticationLayout />}>
@@ -54,9 +56,10 @@ export default function Router() {
             <Route path="/signup" element={<SignUp />} />
             <Route path="/recoveryPassword" element={<RecoveryPassword />} />
             <Route path="/reset-password" element={<ForgetPassword />} />
+            <Route path="/*" element={<LoginPage />} />
           </Route>
         </Routes>
-      // </Suspense>
+      </Suspense>
     );
   }
 
@@ -79,9 +82,8 @@ export default function Router() {
           <Route path="/usersProfile/:id" element={<OtherUsers />} />
           <Route path="/friendPost/:id" element={<InnerFriendsPost />} />
           <Route path="/searchPage/:tag" element={<SearchPage />} />
-          {/* <Route path="404" element={<ErrorPage />} />
-          <Route path="*" element={<Navigate to="/404" />} /> */}
         </Route>
+        <Route path="/*" element={<ErrorPage />} />
       </Routes>
     </Suspense>
   );
