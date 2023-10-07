@@ -100,7 +100,7 @@ const NotificationPage = () => {
                     {item?.type === "Like" || item?.type === "Comment" ? (
                       <img
                         alt="profile"
-                        src={String(item?.post?.photo)}
+                        src={item?.post?.photos[0]}
                         className="w-[40px] h-[40px]"
                       />
                     ) : (
