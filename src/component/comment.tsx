@@ -49,6 +49,7 @@ const Comment = ({ postId }: { postId: number }) => {
   const InputRef = useRef<any>();
 
   const handleClick = (id: number) => {
+    console.log(`messageId: ${id}`);
     setParentId(id);
     InputRef.current.focus();
   };
@@ -56,7 +57,7 @@ const Comment = ({ postId }: { postId: number }) => {
   return (
     <div className="w-[85%]">
       <AddComment
-        postId={postId as number}
+        postId={postId}
         InputRef={InputRef as any}
         parentId={parentId as number | null}
         setParentId={
