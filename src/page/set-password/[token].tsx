@@ -1,13 +1,13 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { useFormik } from "formik";
-import SetPassword from "../logic/setPassword";
-import { setPasswordValidation } from "../utils/validations";
+import SetPassword from "../../logic/setPassword";
+import { setPasswordValidation } from "../../utils/validations";
 
-import Button from "../component/button";
-import Input from "../component/input";
+import Button from "../../component/button";
+import Input from "../../component/input";
 
-import key from "../assets/icons/key1.svg";
+import key from "../../assets/icons/key1.svg";
 
 const ForgetPassword = () => {
   const { token } = useParams();

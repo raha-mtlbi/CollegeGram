@@ -64,52 +64,51 @@ const Comment = ({ postId }: { postId: number }) => {
         }
         setComment={setComment as any}
       />
-      <div className="max-h-[300px] overflow-y-auto">
+      <div className="max-h-[300px] overflow-y-auto m-2">
         {comment &&
           comment.result.map((comment: any, index) => {
             return (
               <div key={index}>
                 {/* comment */}
-                {!comment?.parentId ? (
-                  <div className=" my-5 mr-2">
-                    <div className=" flex justify-between items-center my-2">
-                      <div className="flex">
-                        <p className="text-[12px] font-bold text-[#17494D] ">
-                          {comment?.author?.username}
-                        </p>
-                        <p className="mr-[8px] text-[#A5A5A5] text-[10px]">
-                          {moment(comment.createdAt, "YYYY/MM/DD")
-                            .locale("fa")
-                            .format("YYYY/MM/DD")}
-                        </p>
-                      </div>
-                      <div className="flex items-center">
-                        <p className=" text-[12px] font-black text-[#C38F00]">
-                          {comment?.likeCount}
-                        </p>
-                        <button
-                          onClick={() => {
-                            comment.ifLiked
-                              ? handleUnLike(comment?.id)
-                              : handleLike(comment?.id);
-                          }}
-                          className="mr-[8px]"
-                        >
-                          <img src={comment?.ifLiked ? Like : disLike} alt="" />
-                        </button>
-                        <button
-                          id={comment?.id}
-                          onClick={() => handleClick(comment?.id as number)}
-                          className="mr-[28px] text-[12px] font-black text-[#C38F00]"
-                        >
-                          {<img src={arrow} className="mr-[6px]" alt="" />}پاسخ
-                        </button>
-                      </div>
+
+                <div className=" my-5 mr-2">
+                  <div className=" flex justify-between items-center my-2">
+                    <div className="flex">
+                      <p className="text-[12px] font-bold text-[#17494D] ">
+                        {comment?.author?.username}
+                      </p>
+                      <p className="mr-[8px] text-[#A5A5A5] text-[10px]">
+                        {moment(comment.createdAt, "YYYY/MM/DD")
+                          .locale("fa")
+                          .format("YYYY/MM/DD")}
+                      </p>
                     </div>
-                    <p className="text-[14px]">{comment.content}</p>
+                    <div className="flex items-center">
+                      <p className=" text-[12px] font-black text-[#C38F00]">
+                        {comment?.likeCount}
+                      </p>
+                      <button
+                        onClick={() => {
+                          comment.ifLiked
+                            ? handleUnLike(comment?.id)
+                            : handleLike(comment?.id);
+                        }}
+                        className="mr-[8px]"
+                      >
+                        <img src={comment?.ifLiked ? Like : disLike} alt="" />
+                      </button>
+                      <button
+                        id={comment?.id}
+                        onClick={() => handleClick(comment?.id as number)}
+                        className="mr-[28px] text-[12px] font-black text-[#C38F00]"
+                      >
+                        {<img src={arrow} className="mr-[6px]" alt="" />}پاسخ
+                      </button>
+                    </div>
                   </div>
-                ) : (
-                  // reply
+                  <p className="text-[14px]">{comment.content}</p>
+                </div>
+                {comment?.parentId !== 0 && (
                   <div className="my-5 mr-12">
                     <div className="flex justify-between">
                       <div className="flex items-center">

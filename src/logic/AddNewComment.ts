@@ -17,7 +17,6 @@ export const AddNewComment = ({
     parentId?: number | null;
   }) => {
     try {
-      console.log("request", data);
       const response = await AddComment({
         content: data.content || "",
         postId: data.postId,
