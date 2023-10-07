@@ -184,6 +184,15 @@ const NotificationPage = () => {
                     />
                   ) : item.type === "Follow" &&
                     item?.relation === "Following" &&
+                    item?.reverseRelation === "Following" ? (
+                    <button
+                      className="text-[#C38F00] border rounded-3xl border-[#C38F00] px-4 py-1 mr-3"
+                      onClick={() => handleUnFollow(item?.actor?.id)}
+                    >
+                      دنبال شده
+                    </button>
+                  ) : item.type === "Follow" &&
+                    item?.relation === "Following" &&
                     item?.actor?.private ? (
                     <button
                       className="text-[#C38F00] border rounded-3xl border-[#C38F00] px-4 py-1 mr-3"
