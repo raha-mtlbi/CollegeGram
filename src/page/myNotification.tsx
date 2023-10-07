@@ -114,7 +114,7 @@ const NotificationPage = () => {
                   </div>
                   <div className="mx-[25px] w-[300px]">
                     <p className="text text-sm">
-                      {item?.relation === "Pending" && item?.type === "Follow"
+                      {item?.relation === "Pending" && item?.type === "Accept"
                         ? `${
                             item?.actor?.username && item?.actor?.username
                           } درخواست دوستی‌ات رو قبول کرد`
