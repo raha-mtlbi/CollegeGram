@@ -98,8 +98,10 @@ const NotificationPage = () => {
                       <img
                         alt="post"
                         src={item?.post?.photos[0]}
-                        className="w-[40px] h-[40px]"
-                        onClick={() => navigate(`friendPost/${item?.post?.id}`)}
+                        className="w-[40px] h-[40px] rounded-xl"
+                        onClick={() =>
+                          navigate(`/friendPost/${item?.post?.id}`)
+                        }
                       />
                     ) : (
                       <img
@@ -114,7 +116,7 @@ const NotificationPage = () => {
                   </div>
                   <div className="mx-[25px] w-[300px]">
                     <p className="text text-sm">
-                      {item?.relation === "Pending" && item?.type === "Accept"
+                      {item?.relation === "Following" && item?.type === "Accept"
                         ? `${
                             item?.actor?.username && item?.actor?.username
                           } درخواست دوستی‌ات رو قبول کرد`
@@ -140,13 +142,7 @@ const NotificationPage = () => {
                           item?.relation === "Following"
                         ? `${
                             item?.actor?.username && item?.actor?.username
-                          } درخواست دوستی   
-                         داده `
-                        : item?.relation === "Following"
-                        ? // item.type === "Accept"
-                          `${
-                            item?.actor?.username && item?.actor?.username
-                          }درخواست توسط شما رد شد`
+                          } دنبالت کرد. `
                         : item?.type === "Like" &&
                           `${
                             item?.actor?.username && item?.actor?.username

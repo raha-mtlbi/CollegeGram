@@ -60,8 +60,8 @@ const OtherNotification = () => {
                       <img
                         alt="profile"
                         src={item?.post?.photos[0]}
-                        className="w-[40px] h-[40px]"
-                        onClick={() => navigate(`friendPost/${item?.post?.id}`)}
+                        className="w-[40px] h-[40px] rounded-xl"
+                        onClick={() => navigate(`/friendPost/${item?.post?.id}`)}
                       />
                     ) : (
                       <img
