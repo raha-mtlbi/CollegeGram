@@ -96,8 +96,8 @@ const NotificationPage = () => {
                   <div className="rounded-full w-[64px] h-[64px] cursor-pointer">
                     {item?.type === "Like" || item?.type === "Comment" ? (
                       <img
-                        alt="profile"
-                        src={item?.post?.photo ? item?.post?.photos[0] : ""}
+                        alt="post"
+                        src={item?.post?.photos[0]}
                         className="w-[40px] h-[40px]"
                         onClick={() => navigate(`friendPost/${item?.post?.id}`)}
                       />
@@ -142,9 +142,9 @@ const NotificationPage = () => {
                             item?.actor?.username && item?.actor?.username
                           } درخواست دوستی   
                          داده `
-                        : item.type === "Reject" &&
-                          item?.relation === "Following"
-                        ? `${
+                        : item?.relation === "Following"
+                        ? // item.type === "Accept"
+                          `${
                             item?.actor?.username && item?.actor?.username
                           }درخواست توسط شما رد شد`
                         : item?.type === "Like" &&
