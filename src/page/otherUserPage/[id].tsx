@@ -27,8 +27,8 @@ export default function OtherUsers() {
 
   return (
     <div className="flex md:flex-col-reverse md:w-screen md:items-center justify-between mt-32">
-      {user?.reverseStatus === "Blocked" ? (
-        <BlockPage name={user?.user?.username } />
+      {user?.status === "Blocked" && user?.reverseStatus === null ? (
+        <BlockPage name={user?.user?.username} />
       ) : (
         <UserImageList
           list={imageList?.result as IImage[]}

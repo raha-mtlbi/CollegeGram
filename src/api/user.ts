@@ -1,7 +1,6 @@
 import { delete_, get, patch, post } from ".";
 import { IUser } from "./type/user";
 
-
 export const login = (usernameOrEmail: string, password: string) => {
   return post<{
     accessToken: string;

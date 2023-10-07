@@ -24,10 +24,18 @@ export default function UserImageList({
 
   return (
     <div>
-      {!user?.user?.private ||
-      (user?.user?.private &&
-        user?.reverseStatus === "Following" &&
-        user?.status === "Following") ? (
+      {(user?.user?.private && user?.reverseStatus !== "Following") ||
+      user?.status === "Blocked" ? (
+        <div className="flex flex-wrap gap-4 mr-12 ml-5">
+          {privateListImage.slice(0, 4).map((photo) => (
+            <img
+              className="w-[300px] h-[330px] object-fill cursor-pointer rounded-t-3xl"
+              src={photo.image}
+              alt="postImage"
+            />
+          ))}
+        </div>
+      ) : (
         <div className="flex flex-wrap gap-4 mr-12 ml-5 md:mt-2 md:pb-5">
           {list?.map((photo: any) => (
             <img
@@ -35,16 +43,6 @@ export default function UserImageList({
               src={photo.photos[0]}
               alt="postImage"
               onClick={() => navigate(`/friendPost/${photo.id}`)}
-            />
-          ))}
-        </div>
-      ) : (
-        <div className="flex flex-wrap gap-4 mr-12 ml-5">
-          {privateListImage.slice(0, 4).map((photo) => (
-            <img
-              className="w-[300px] h-[330px] object-fill cursor-pointer rounded-t-3xl"
-              src={photo.image}
-              alt="postImage"
             />
           ))}
         </div>

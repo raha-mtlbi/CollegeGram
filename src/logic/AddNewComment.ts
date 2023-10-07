@@ -12,7 +12,7 @@ export const AddNewComment = ({
   parentId?: number | null;
 }) => {
   const handleSubmit = async (data: {
-    content: any;
+    content: string;
     postId: any;
     parentId?: number | null;
   }) => {
@@ -24,7 +24,7 @@ export const AddNewComment = ({
       });
       const newData = await get(`/comment/${postId}`);
       setComment(newData);
-
+    
       toast.success(response.data);
     } catch (error) {
       console.log(error);

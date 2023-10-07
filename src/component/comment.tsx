@@ -49,7 +49,6 @@ const Comment = ({ postId }: { postId: number }) => {
   const InputRef = useRef<any>();
 
   const handleClick = (id: number) => {
-    console.log(`messageId: ${id}`);
     setParentId(id);
     InputRef.current.focus();
   };

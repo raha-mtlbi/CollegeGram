@@ -28,11 +28,11 @@ const BlockModal = ({
       setLoading(true);
 
       const response = await blockUser(user?.user?.id as number);
-      // const newData = await get(`/post/${id}`);
-      // setPhotoDetail(newData);
+
       toast.success(response.msg);
       onClose();
       setLoading(false);
+      window.location.reload();
     } catch (error) {
       console.log(error);
       onClose();

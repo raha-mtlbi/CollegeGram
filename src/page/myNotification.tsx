@@ -125,7 +125,7 @@ const NotificationPage = () => {
                           item?.relation === "Following"
                         ? `${
                             item?.actor?.username && item?.actor?.username
-                          } دنبالت کرد`
+                          } درخواست شما رو قبول کرد.`
                         : item.type === "Follow" || item.type === "Accept"
                         ? `${
                             item?.actor?.username && item?.actor?.username
@@ -137,10 +137,10 @@ const NotificationPage = () => {
                           } درخواست دوستی داده`
                         : item.type === "Request" &&
                           item?.relation === "Following"
-                        ? ` درخواست دوستی توسط شما به
+                        ? `
                         ${
                           item?.actor?.username && item?.actor?.username
-                        } ارسال شد`
+                        }  دنبالت کرد`
                         : item.type === "Reject" &&
                           item?.relation === "Following"
                         ? `${
