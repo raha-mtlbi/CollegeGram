@@ -65,7 +65,7 @@ const ProfileSummery = () => {
                       navigate("/login");
                     }}
                   >
-                    اضافه کردن اکانت+
+                    اضافه کردن اکانت +
                   </li>
                   <li
                     className="  cursor-pointer mr-2 mt-2"
@@ -73,7 +73,7 @@ const ProfileSummery = () => {
                       handleLogout();
                     }}
                   >
-                    خروج از حساب کاربری
+                    خروج از حساب
                   </li>
                 </ul>
               </PopoverContent>

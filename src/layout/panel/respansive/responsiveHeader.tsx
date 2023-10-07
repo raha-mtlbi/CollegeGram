@@ -1,7 +1,6 @@
-import Input from "../../../component/input";
 import { useUser } from "../../../features/hooks";
+import Search from "../../../component/search";
 
-import search from "../../../assets/icons/search.svg";
 import profile from "../../../assets/icons/person.svg";
 
 export default function ResponsiveHeader() {
@@ -16,11 +15,7 @@ export default function ResponsiveHeader() {
           className="w-12 h-12 mx-auto mt-1 object-fill rounded-full "
         />
       </div>
-      <Input
-        placeholder={"جستجو"}
-        postfix={<img src={search} alt="key" className="absolute mt-3 px-2" />}
-        width="248px"
-      />
+      <Search />
     </div>
   );
 }

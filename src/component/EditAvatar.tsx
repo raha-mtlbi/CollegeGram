@@ -44,13 +44,13 @@ export default function Avatar({ onChange }: { onChange: any }) {
             }
           }}
         />
-        <div className="w-[90px] h-[90px] rounded-[50%] border-2 border-[#C19008] flex justify-center items-center ">
+        <div className="w-[90px] h-[90px] rounded-full border-2 border-[#C19008] flex justify-center items-center ">
           <img
             alt="camera"
             src={preview ? preview : user?.photo ? user?.photo : camera}
             className={
               user
-                ? "w-[90px] h-[90px] rounded-[50%] object-fill"
+                ? "w-[90px] h-[90px] rounded-full object-fill"
                 : "w-[36px] h-[36px] cursor-pointer"
             }
           />
@@ -58,7 +58,7 @@ export default function Avatar({ onChange }: { onChange: any }) {
             <img
               alt="refresh"
               src={refresh}
-              className=" absolute p-1 bg-white rounded-[50%] cursor-pointer"
+              className=" absolute p-1 bg-white rounded-full cursor-pointer"
             />
           )}
         </div>

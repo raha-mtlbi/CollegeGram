@@ -56,7 +56,7 @@ export default function ResponsiveFooter() {
           </a>
         </div>
       ) : (
-        <div className="w-screen flex justify-center mx-auto">
+        <div className="w-screen flex justify-center mx-auto pt-20">
           <div className="fixed bottom-1 flex w-80 h-14 bg-[#F8F9F9] border border-[#CDCDCD] rounded-[50px] mx-auto mb-7">
             <button onClick={() => navigate("/collegians")}>
               <img

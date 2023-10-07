@@ -70,7 +70,7 @@ const ResponsiveProfile = () => {
           </p>
         </div>
 
-        <div className=" fixed left-3">
+        <div className=" absolute left-3">
           <img
             alt="more"
             src={dot}

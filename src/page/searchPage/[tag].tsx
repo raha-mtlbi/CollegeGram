@@ -45,7 +45,7 @@ const SearchPage = () => {
 
   return (
     <div>
-      <div className="text-[#587052] font-bold text-lg mr-12 flex ">
+      <div className="text-[#587052] font-bold text-lg mr-12 flex md:mt-4 ">
         <div className="flex items-center">
           <p>نتیجه جستجو برای: </p>
           <p className="mx-2">{tag} </p>
@@ -55,7 +55,7 @@ const SearchPage = () => {
         </button>
       </div>
 
-      <div className="w-full grid grid-cols-3 gap-4 mr-12">
+      <div className="w-full grid grid-cols-3 md:grid-cols-1 gap-4 mr-12">
         {searchList?.slice(0, 3)?.map((data: any, index: number) => (
           <div
             key={index}
@@ -97,7 +97,7 @@ const SearchPage = () => {
           </div>
         ))}
       </div>
-      <div className="w-full grid grid-cols-4 gap-4 mr-12">
+      <div className="w-full grid grid-cols-4  md:grid-cols-1 gap-4 mr-12">
         {searchList?.slice(3, 7)?.map((data: any, index: number) => (
           <div
             key={index}

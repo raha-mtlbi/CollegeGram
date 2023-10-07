@@ -15,18 +15,15 @@ export default function ImageSlider({
   photoDetail: IImage[] | any;
 }) {
   return (
-    <div className="md:w-full z-0">
-      <div
-        className="swiper-container "
-        // style={{ height: "0", paddingBottom: "100%" }} // Create a square aspect ratio of 1:1
-      >
+    <div className="md:w-screen md:-mr-2 z-0">
+      <div className="swiper-container ">
         <Swiper
           slidesPerView={1}
           pagination={true}
           navigation={true}
-          
           height={300}
-          modules={[Pagination, Navigation]}>
+          modules={[Pagination, Navigation]}
+        >
           {photoDetail?.photos?.map((i: any, index: number) => {
             return (
               <SwiperSlide key={index}>

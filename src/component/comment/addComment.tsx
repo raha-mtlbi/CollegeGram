@@ -39,7 +39,7 @@ export default function AddComment({
             <img
               alt="profile"
               src={user?.photo ? user?.photo : person}
-              className=" w-full h-[85%] object-fill"
+              className=" w-full h-full rounded-full object-fill"
             />
           </div>
           <input
