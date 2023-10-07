@@ -46,7 +46,7 @@ const ProfileSummery = () => {
             <Popover placement="bottom">
               <PopoverHandler>
                 <Button>
-                  <img src={arrow} className="my-auto mx-[10px]" alt="arrow" />
+                  <img src={arrow} className="my-auto" alt="arrow" />
                 </Button>
               </PopoverHandler>
               <PopoverContent className=" text-right w-40 border-gray-400 rounded-xl ">

@@ -49,7 +49,7 @@ const OtherNotification = () => {
             اعلانات دوستان من
           </Link>
         </div>
-        <div className="flex flex-col mt-[66px] h-[500px] overflow-y-autos">
+        <div className="flex flex-col mt-[66px] md:pb-10 h-[500px] overflow-y-autos">
           {notification?.map((item) => {
             return (
               <div className="flex sm:flex-col mb-[24px]">
@@ -59,7 +59,7 @@ const OtherNotification = () => {
                     {item?.type === "Like" ? (
                       <img
                         alt="profile"
-                        src={String(item?.post?.photo)}
+                        src={item?.post?.photo ? item?.post?.photos[0] : ""}
                         className="w-[40px] h-[40px]"
                       />
                     ) : (

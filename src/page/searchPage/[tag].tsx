@@ -55,7 +55,7 @@ const SearchPage = () => {
         </button>
       </div>
 
-      <div className="w-full flex flex-wrap gap-4 mr-12">
+      <div className="w-full grid grid-cols-3 gap-4 mr-12">
         {searchList?.slice(0, 3)?.map((data: any, index: number) => (
           <div
             key={index}
@@ -96,6 +96,8 @@ const SearchPage = () => {
             </div>
           </div>
         ))}
+      </div>
+      <div className="w-full grid grid-cols-4 gap-4 mr-12">
         {searchList?.slice(3, 7)?.map((data: any, index: number) => (
           <div
             key={index}

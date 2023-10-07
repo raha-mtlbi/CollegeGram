@@ -100,7 +100,7 @@ const NotificationPage = () => {
                     {item?.type === "Like" || item?.type === "Comment" ? (
                       <img
                         alt="profile"
-                        src={String(item?.post?.photo)}
+                        src={item?.post?.photo ? item?.post?.photos[0] : ""}
                         className="w-[40px] h-[40px]"
                       />
                     ) : (
@@ -137,10 +137,10 @@ const NotificationPage = () => {
                           } درخواست دوستی داده`
                         : item.type === "Request" &&
                           item?.relation === "Following"
-                        ? ` درخواست دوستی توسط شما به
-                        ${
-                          item?.actor?.username && item?.actor?.username
-                        } ارسال شد`
+                        ? `${
+                            item?.actor?.username && item?.actor?.username
+                          } درخواست دوستی   
+                         داده `
                         : item.type === "Reject" &&
                           item?.relation === "Following"
                         ? `${
@@ -182,10 +182,17 @@ const NotificationPage = () => {
                       title={"دنبال کردن"}
                       onClick={() => handleFollow(item.actor?.id)}
                     />
+                  ) : item?.relation === "Following" &&
+                    item?.reverseRelation === "Following" &&
+                    item?.type === "Follow" ? (
+                    <button
+                      className="text-[#C38F00] border rounded-3xl border-[#C38F00] px-4 py-1 mr-3"
+                      onClick={() => handleUnFollow(item?.actor?.id)}
+                    >
+                      دنبال شده
+                    </button>
                   ) : (
-                    item.type === "Follow" &&
-                    item?.relation === "Following" &&
-                    item?.actor?.private && (
+                    item?.relation === "Pending" && (
                       <button
                         className="text-[#C38F00] border rounded-3xl border-[#C38F00] px-4 py-1 mr-3"
                         onClick={() => handleUnFollow(item?.actor?.id)}
