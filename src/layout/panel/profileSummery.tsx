@@ -3,10 +3,9 @@ import {
   Popover,
   PopoverHandler,
   PopoverContent,
-  Button,
 } from "@material-tailwind/react";
+import { useNavigate } from "react-router-dom";
 
-import { Logout } from "../../api/user";
 import { getActiveUsers, removeToken, setActiveUser } from "../../api/token";
 import { useUser } from "../../features/hooks";
 import EditProfile from "../../component/editProfileModal";
@@ -14,7 +13,6 @@ import EditProfile from "../../component/editProfileModal";
 import arrow from "../../assets/icons/arrow-down.svg";
 import pen from "../../assets/icons/edit.svg";
 import users from "../../assets/icons/person.svg";
-import { useNavigate } from "react-router-dom";
 
 const ProfileSummery = () => {
   const [open, setOpen] = useState<boolean>(false);
@@ -25,6 +23,7 @@ const ProfileSummery = () => {
 
   const handleLogout = () => {
     removeToken(user?.username);
+    navigate("/login");
   };
 
   return (
@@ -41,9 +40,11 @@ const ProfileSummery = () => {
           {user?.username && (
             <Popover placement="bottom">
               <PopoverHandler>
-                <Button>
-                  <img src={arrow} className="my-auto" alt="arrow" />
-                </Button>
+                <img
+                  src={arrow}
+                  className="my-auto mx-2 cursor-pointer"
+                  alt="arrow"
+                />
               </PopoverHandler>
               <PopoverContent className=" text-right w-40 border-gray-400 rounded-xl ">
                 <ul>
@@ -61,8 +62,7 @@ const ProfileSummery = () => {
                   <li
                     className="  cursor-pointer mr-2 mt-2"
                     onClick={() => {
-                      handleLogout();
-                      window.location.reload();
+                      navigate("/login");
                     }}
                   >
                     اضافه کردن اکانت+
@@ -71,7 +71,6 @@ const ProfileSummery = () => {
                     className="  cursor-pointer mr-2 mt-2"
                     onClick={() => {
                       handleLogout();
-                      window.location.reload();
                     }}
                   >
                     خروج از حساب کاربری

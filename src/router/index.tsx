@@ -68,6 +68,8 @@ export default function Router() {
       <Routes>
         <Route path="" element={phone ? <RespansiveLayout /> : <PanelLayout />}>
           <Route path="/home" element={<Home />} />
+          <Route path="/login" element={<LoginPage />} />
+
           <Route path="/myCollegeGram" element={<MyCollegeGram />} />
           <Route path="/collegians" element={<Collegians />} />
           <Route path="/myCollegeGram/:id" element={<InnerPost />} />
