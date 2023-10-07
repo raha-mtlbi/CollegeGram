@@ -7,7 +7,7 @@ import {
 } from "@material-tailwind/react";
 
 import { Logout } from "../../api/user";
-import { getActiveUsers, setActiveUser } from "../../api/token";
+import { getActiveUsers, removeToken, setActiveUser } from "../../api/token";
 import { useUser } from "../../features/hooks";
 import EditProfile from "../../component/editProfileModal";
 
@@ -19,16 +19,13 @@ import { useNavigate } from "react-router-dom";
 const ProfileSummery = () => {
   const [open, setOpen] = useState<boolean>(false);
   const user = useUser();
+  console.log("aaa", user?.username);
 
   const navigate = useNavigate();
   const allUsers = getActiveUsers();
 
   const handleLogout = async () => {
-    try {
-      await Logout();
-    } catch (error) {
-      console.log(error);
-    }
+    await removeToken(user?.username);
   };
 
   return (
@@ -57,8 +54,7 @@ const ProfileSummery = () => {
                       onClick={() => {
                         setActiveUser(username);
                         window.location.reload();
-                      }}
-                    >
+                      }}>
                       {username}
                     </li>
                   ))}
@@ -66,17 +62,16 @@ const ProfileSummery = () => {
                     className="  cursor-pointer mr-2 mt-2"
                     onClick={() => {
                       handleLogout();
-                      navigate("/login");
-                    }}
-                  >
+                      window.location.reload();
+                    }}>
                     اضافه کردن اکانت+
                   </li>
                   <li
                     className="  cursor-pointer mr-2 mt-2"
                     onClick={() => {
                       handleLogout();
-                    }}
-                  >
+                      window.location.reload();
+                    }}>
                     خروج از حساب کاربری
                   </li>
                 </ul>
@@ -87,8 +82,7 @@ const ProfileSummery = () => {
         </p>
         <p
           style={{ direction: "ltr" }}
-          className="max-w-[200px] whitespace-nowrap overflow-hidden text-ellipsis text-[#17494D] text-center text-[20px] font-bold  mt-1"
-        >
+          className="max-w-[200px] whitespace-nowrap overflow-hidden text-ellipsis text-[#17494D] text-center text-[20px] font-bold  mt-1">
           {user?.name + " " + user?.lastname || ""}
         </p>
         <div className="flex justify-center mt-[16px] text-[14px]">
@@ -105,8 +99,7 @@ const ProfileSummery = () => {
           <img
             className=" mx-auto mt-[20px]"
             src={pen}
-            alt="ProfilePhoto"
-          ></img>
+            alt="ProfilePhoto"></img>
         </button>
       </div>
     </div>
