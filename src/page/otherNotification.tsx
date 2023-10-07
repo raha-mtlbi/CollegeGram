@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useMediaQuery } from "@uidotdev/usehooks";
 import { INotification } from "../api/type/notification";
 import { get } from "../api";
 import { follow } from "../api/otherUser";
 import { toast } from "react-toastify";
+import moment from "jalali-moment";
 
 import Button from "../component/button";
 import SideBar from "../component/sidebar";
 
 import user from "../assets/icons/person.svg";
-import moment from "jalali-moment";
 
 const OtherNotification = () => {
   const phone = useMediaQuery("only screen and (max-width : 600px)");
-
+  const navigate = useNavigate();
   const [notification, setNotification] = useState<INotification[]>();
 
   useEffect(() => {
@@ -56,17 +56,21 @@ const OtherNotification = () => {
                 {/* profile */}
                 <div className="flex ">
                   <div className="rounded-full w-[64px] h-[64px] cursor-pointer">
-                    {item?.type === "Like" ? (
+                    {item?.type === "Like" || item.type === "Comment" ? (
                       <img
                         alt="profile"
-                        src={item?.post?.photo ? item?.post?.photos[0] : ""}
+                        src={item?.post?.photos[0]}
                         className="w-[40px] h-[40px]"
+                        onClick={() => navigate(`friendPost/${item?.post?.id}`)}
                       />
                     ) : (
                       <img
                         alt="profile"
                         src={item.actor.photo ? item.actor.photo : user}
                         className="w-[40px] h-[40px]  rounded-full"
+                        onClick={() =>
+                          navigate(`/usersProfile/${item?.actor?.id}`)
+                        }
                       />
                     )}
                   </div>

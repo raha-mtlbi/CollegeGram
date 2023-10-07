@@ -29,7 +29,7 @@ import FriendListPage from "../page/friendListPage";
 import Home from "../page/home";
 
 import { useMediaQuery } from "@uidotdev/usehooks";
-import ForgetPassword from "../page/set-password/[token]";
+import ForgetPassword from "../page/set-password";
 import LoadingPage from "../page/loading";
 
 export default function Router() {
@@ -55,7 +55,7 @@ export default function Router() {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/recoveryPassword" element={<RecoveryPassword />} />
-            <Route path="/reset-password:token" element={<ForgetPassword />} />
+            <Route path="/reset-password" element={<ForgetPassword />} />
             <Route path="/*" element={<LoginPage />} />
           </Route>
         </Routes>

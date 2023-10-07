@@ -93,21 +93,22 @@ const NotificationPage = () => {
               <div className="flex sm:flex-col mb-[24px]">
                 {/* profile */}
                 <div className="flex">
-                  <div
-                    className="rounded-full w-[64px] h-[64px] cursor-pointer"
-                    onClick={() => navigate(`/usersProfile/${item?.actor?.id}`)}
-                  >
+                  <div className="rounded-full w-[64px] h-[64px] cursor-pointer">
                     {item?.type === "Like" || item?.type === "Comment" ? (
                       <img
                         alt="profile"
                         src={item?.post?.photo ? item?.post?.photos[0] : ""}
                         className="w-[40px] h-[40px]"
+                        onClick={() => navigate(`friendPost/${item?.post?.id}`)}
                       />
                     ) : (
                       <img
                         alt="profile"
                         src={item.actor.photo ? item.actor.photo : user}
                         className="w-[40px] h-[40px]  rounded-full"
+                        onClick={() =>
+                          navigate(`/usersProfile/${item?.actor?.id}`)
+                        }
                       />
                     )}
                   </div>
