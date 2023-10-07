@@ -15,27 +15,30 @@ export default function ImageSlider({
   photoDetail: IImage[] | any;
 }) {
   return (
-    <div className="md:w-screen z-0">
-      <Swiper
-        slidesPerView={1}
-        pagination={true}
-        navigation={true}
-        width={505}
-        height={488}
-        modules={[Pagination, Navigation]}
-      >
-        {photoDetail?.photos?.map((i: any) => {
-          return (
-            <SwiperSlide key={i}>
-              <img
-                alt="postImage"
-                src={i || sample}
-                className="w-screen h-[350px] rounded-r-md z-0 object-fill"
-              />
-            </SwiperSlide>
-          );
-        })}
-      </Swiper>
+    <div className="md:w-full z-0">
+      <div
+        className="swiper-container "
+        style={{ height: "0", paddingBottom: "100%" }}>
+        <Swiper
+          slidesPerView={1}
+          pagination={true}
+          navigation={true}
+          spaceBetween={0}
+          modules={[Pagination, Navigation]}>
+          {photoDetail?.photos?.map((i: any, index: number) => {
+            return (
+              <SwiperSlide key={index}>
+                <img
+                  style={{ height: "500px" }}
+                  alt="postImage"
+                  src={i || sample}
+                  className="w-full h-full z-0 object-cover rounded-t-3xl"
+                />
+              </SwiperSlide>
+            );
+          })}
+        </Swiper>
+      </div>
     </div>
   );
 }

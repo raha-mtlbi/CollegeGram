@@ -16,10 +16,7 @@ export default function MyModal({
   return (
     <>
       {phone && open ? (
-        <div
-          className="fixed bottom-0 z-10 md:p-3 bg-[#F1EBE3] border border-[#CDCDCD] rounded-t-3xl w-full top-28 right-0 pt-5 flex flex-col text-[#C19008]"
-          onClick={onClose}
-        >
+        <div className="fixed bottom-0 z-10 md:p-3 bg-[#F1EBE3] border border-[#CDCDCD] rounded-t-3xl w-full top-28 right-0 pt-5 flex flex-col text-[#C19008]">
           {children}
         </div>
       ) : (
