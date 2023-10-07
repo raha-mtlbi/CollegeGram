@@ -65,20 +65,14 @@ const Comment = ({ postId }: { postId: number }) => {
         }
         setComment={setComment as any}
       />
-      <div className="max-h-[300px] overflow-y-auto m-2">
+      <div className="max-h-[300px] overflow-y-auto">
         {comment &&
           comment.result.map((comment: any, index) => {
             return (
               <div key={index}>
                 {/* comment */}
-<<<<<<< HEAD
                 {!comment?.parentId ? (
                   <div className=" my-5 ">
-=======
-
-                {comment?.parentId === 0 && (
-                  <div className=" my-5 mr-2">
->>>>>>> 5d447fc4ab6cb5e4685d1f49a581b94ae5db2575
                     <div className=" flex justify-between items-center my-2">
                       <div className="flex">
                         <p className="text-[12px] font-bold text-[#17494D] ">
@@ -113,16 +107,9 @@ const Comment = ({ postId }: { postId: number }) => {
                     </div>
                     <p>{comment.content}</p>
                   </div>
-<<<<<<< HEAD
                 ) : (
                   // reply
                   <div className="my-5 mr-[32px]">
-=======
-                )}
-                {(comment?.parentId !== 0 ||
-                  comment?.parentId === comment?.id) && (
-                  <div className="my-5 mr-12">
->>>>>>> 5d447fc4ab6cb5e4685d1f49a581b94ae5db2575
                     <div className="flex justify-between">
                       <div className="flex items-center">
                         <p className="text-[12px] font-bold text-[#17494D] ">
@@ -151,8 +138,7 @@ const Comment = ({ postId }: { postId: number }) => {
                           onClick={() => handleClick(comment?.id as number)}
                           className="mr-[28px] text-[12px] font-black text-[#C38F00]"
                         >
-                          {<img src={arrow} className="mr-[6px]" alt="" />}
-                          پاسخ
+                          {<img src={arrow} className="mr-[6px]" alt="" />}پاسخ
                         </button>
                       </div>
                     </div>
