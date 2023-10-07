@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
+import { format } from "date-fns";
 import { toast } from "react-toastify";
-import moment from "jalali-moment";
 
 import { IComment } from "../api/type/comment";
 import { get } from "../api";
@@ -54,7 +54,7 @@ const Comment = ({ postId }: { postId: number }) => {
   };
 
   return (
-    <div className="w-[85%] md:pb-24">
+    <div className="w-[85%]">
       <AddComment
         postId={postId as number}
         InputRef={InputRef as any}
@@ -71,16 +71,14 @@ const Comment = ({ postId }: { postId: number }) => {
               <div key={index}>
                 {/* comment */}
                 {!comment?.parentId ? (
-                  <div className=" my-5 mr-2">
+                  <div className=" my-5 ">
                     <div className=" flex justify-between items-center my-2">
                       <div className="flex">
                         <p className="text-[12px] font-bold text-[#17494D] ">
                           {comment?.author?.username}
                         </p>
                         <p className="mr-[8px] text-[#A5A5A5] text-[10px]">
-                          {moment(comment.createdAt, "YYYY/MM/DD")
-                            .locale("fa")
-                            .format("YYYY/MM/DD")}
+                          {format(new Date(comment?.createdAt), "yyyy-MM-dd")}
                         </p>
                       </div>
                       <div className="flex items-center">
@@ -106,20 +104,18 @@ const Comment = ({ postId }: { postId: number }) => {
                         </button>
                       </div>
                     </div>
-                    <p className="text-[14px]">{comment.content}</p>
+                    <p>{comment.content}</p>
                   </div>
                 ) : (
                   // reply
-                  <div className="my-5 mr-12">
+                  <div className="my-5 mr-[32px]">
                     <div className="flex justify-between">
                       <div className="flex items-center">
                         <p className="text-[12px] font-bold text-[#17494D] ">
                           {comment?.author?.username}
                         </p>
                         <p className="mr-[8px] text-[#A5A5A5] text-[10px]">
-                          {moment(comment.createdAt, "YYYY/MM/DD")
-                            .locale("fa")
-                            .format("YYYY/MM/DD")}
+                          {format(new Date(comment?.createdAt), "yyyy-MM-dd")}
                         </p>
                       </div>
                       <div className="flex items-center">
@@ -145,7 +141,7 @@ const Comment = ({ postId }: { postId: number }) => {
                         </button>
                       </div>
                     </div>
-                    <p className="text-[14px]">{comment.content}</p>
+                    <p>{comment.content}</p>
                   </div>
                 )}
               </div>
