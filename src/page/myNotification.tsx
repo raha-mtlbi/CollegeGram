@@ -93,30 +93,27 @@ const NotificationPage = () => {
               <div className="flex sm:flex-col mb-[24px]">
                 {/* profile */}
                 <div className="flex">
-                  <div className="rounded-full w-[64px] h-[64px] cursor-pointer">
+                  <div
+                    className="rounded-full w-[64px] h-[64px] cursor-pointer"
+                    onClick={() => navigate(`/usersProfile/${item?.actor?.id}`)}
+                  >
                     {item?.type === "Like" || item?.type === "Comment" ? (
                       <img
-                        alt="post"
-                        src={item?.post?.photos[0]}
-                        className="w-[40px] h-[40px] rounded-xl"
-                        onClick={() =>
-                          navigate(`/friendPost/${item?.post?.id}`)
-                        }
+                        alt="profile"
+                        src={String(item?.post?.photo)}
+                        className="w-[40px] h-[40px]"
                       />
                     ) : (
                       <img
                         alt="profile"
                         src={item.actor.photo ? item.actor.photo : user}
                         className="w-[40px] h-[40px]  rounded-full"
-                        onClick={() =>
-                          navigate(`/usersProfile/${item?.actor?.id}`)
-                        }
                       />
                     )}
                   </div>
                   <div className="mx-[25px] w-[300px]">
                     <p className="text text-sm">
-                      {item?.relation === "Following" && item?.type === "Accept"
+                      {item?.relation === "Pending" && item?.type === "Follow"
                         ? `${
                             item?.actor?.username && item?.actor?.username
                           } درخواست دوستی‌ات رو قبول کرد`
@@ -140,9 +137,15 @@ const NotificationPage = () => {
                           } درخواست دوستی داده`
                         : item.type === "Request" &&
                           item?.relation === "Following"
+                        ? ` درخواست دوستی توسط شما به
+                        ${
+                          item?.actor?.username && item?.actor?.username
+                        } ارسال شد`
+                        : item.type === "Reject" &&
+                          item?.relation === "Following"
                         ? `${
                             item?.actor?.username && item?.actor?.username
-                          } دنبالت کرد. `
+                          }درخواست توسط شما رد شد`
                         : item?.type === "Like" &&
                           `${
                             item?.actor?.username && item?.actor?.username
@@ -179,24 +182,19 @@ const NotificationPage = () => {
                       title={"دنبال کردن"}
                       onClick={() => handleFollow(item.actor?.id)}
                     />
-                  ) : item?.relation === "Following" &&
-                    item?.reverseRelation === "Following" &&
-                    item?.type === "Follow" ? (
+                  ) : item.type === "Follow" &&
+                    item?.relation === "Following" &&
+                    item?.actor?.private ? (
                     <button
                       className="text-[#C38F00] border rounded-3xl border-[#C38F00] px-4 py-1 mr-3"
                       onClick={() => handleUnFollow(item?.actor?.id)}
                     >
-                      دنبال شده
+                      لغو درخواست
                     </button>
+                  ) : item.type === "Like" && item.relation === "Pending" ? (
+                    ""
                   ) : (
-                    item?.relation === "Pending" && (
-                      <button
-                        className="text-[#C38F00] border rounded-3xl border-[#C38F00] px-4 py-1 mr-3"
-                        onClick={() => handleUnFollow(item?.actor?.id)}
-                      >
-                        لغو درخواست
-                      </button>
-                    )
+                    ""
                   )}
                 </div>
               </div>

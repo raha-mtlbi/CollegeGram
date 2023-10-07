@@ -32,7 +32,7 @@ export default function AddComment({
   });
 
   return (
-    <div className="flex mt-7 items-center ">
+    <div className="flex mt-7 items-center">
       <form onSubmit={formik.handleSubmit}>
         <div className="flex  items-center">
           <div className="relative w-[40px] h-[40px] mx-2 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
@@ -51,7 +51,11 @@ export default function AddComment({
             }
             ref={InputRef}
           />
-          <button disabled={!formik.values?.content} className="mx-2" type="submit">
+          <button
+            disabled={!formik.values?.content}
+            className="mx-2"
+            type="submit"
+          >
             <img alt="send" src={send} className="w-5 h-4" />
           </button>
         </div>
