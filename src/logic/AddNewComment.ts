@@ -24,6 +24,7 @@ export const AddNewComment = ({
       });
       const newData = await get(`/comment/${postId}`);
       setComment(newData);
+
       toast.success(response.data);
     } catch (error) {
       console.log(error);
