@@ -32,7 +32,7 @@ export default function ImageSlider({
                 <img
                   alt="postImage"
                   src={i || sample}
-                  className="w-full h-full rounded-r-md z-0 object-cover"
+                  className="w-full h-full z-0 object-cover rounded-t-3xl"
                 />
               </SwiperSlide>
             )
