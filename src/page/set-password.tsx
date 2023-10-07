@@ -1,17 +1,20 @@
-import React from "react";
-import { useParams } from "react-router-dom";
-import { useFormik } from "formik";
-import SetPassword from "../logic/setPassword";
-import { setPasswordValidation } from "../utils/validations";
+import React from "react"
+import { useParams } from "react-router-dom"
+import { useFormik } from "formik"
+import SetPassword from "../logic/setPassword"
+import { setPasswordValidation } from "../utils/validations"
 
-import Button from "../component/button";
-import Input from "../component/input";
+import Button from "../component/button"
+import Input from "../component/input"
 
-import key from "../assets/icons/key1.svg";
+import key from "../assets/icons/key1.svg"
 
 const ForgetPassword = () => {
-  const { token } = useParams();
-  console.log("token", token);
+  const queryString = window.location.search
+
+  const queryParams = new URLSearchParams(queryString)
+
+  const token = queryParams.get("token")
 
   const formik = useFormik({
     initialValues: {
@@ -22,7 +25,7 @@ const ForgetPassword = () => {
     enableReinitialize: true,
     validationSchema: setPasswordValidation,
     onSubmit: SetPassword({ token: token as string }),
-  });
+  })
 
   return (
     <div className="min-h-[350px]">
@@ -67,7 +70,7 @@ const ForgetPassword = () => {
         </div>
       </form>
     </div>
-  );
-};
+  )
+}
 
-export default ForgetPassword;
+export default ForgetPassword
