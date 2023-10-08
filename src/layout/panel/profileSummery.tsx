@@ -23,7 +23,7 @@ const ProfileSummery = () => {
 
   const handleLogout = () => {
     removeToken(user?.username);
-    navigate("/login");
+    window.location.reload();
   };
 
   return (
@@ -62,7 +62,7 @@ const ProfileSummery = () => {
                   <li
                     className="  cursor-pointer mr-2 mt-2"
                     onClick={() => {
-                      navigate("/login");
+                      navigate("/login-auth");
                     }}
                   >
                     اضافه کردن اکانت +

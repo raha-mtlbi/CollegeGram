@@ -200,6 +200,12 @@ const NotificationPage = () => {
                     >
                       لغو درخواست
                     </button>
+                  ) : item?.type === "Request" &&
+                    item.relation === "Following" ? (
+                    <Button
+                      title={"دنبال کردن"}
+                      onClick={() => handleFollow(item.actor?.id)}
+                    />
                   ) : item.type === "Like" && item.relation === "Pending" ? (
                     ""
                   ) : (

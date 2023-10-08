@@ -66,10 +66,11 @@ export default function Router() {
   return (
     <Suspense fallback={<PanelLayout />}>
       <Routes>
+        <Route path="" element={<AuthenticationLayout />}>
+          <Route path="/login-auth" element={<LoginPage />} />
+        </Route>
         <Route path="" element={phone ? <RespansiveLayout /> : <PanelLayout />}>
           <Route path="/home" element={<Home />} />
-          <Route path="/login" element={<LoginPage />} />
-
           <Route path="/myCollegeGram" element={<MyCollegeGram />} />
           <Route path="/collegians" element={<Collegians />} />
           <Route path="/myCollegeGram/:id" element={<InnerPost />} />
