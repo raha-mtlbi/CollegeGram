@@ -67,7 +67,8 @@ export default function Router() {
     <Suspense fallback={<PanelLayout />}>
       <Routes>
         <Route path="" element={<AuthenticationLayout />}>
-          <Route path="/login-auth" element={<LoginPage />} />
+          <Route path="/login-switch" element={<LoginPage />} />
+          <Route path="/signup-switch" element={<SignUp />} />
         </Route>
         <Route path="" element={phone ? <RespansiveLayout /> : <PanelLayout />}>
           <Route path="/home" element={<Home />} />

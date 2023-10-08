@@ -62,7 +62,7 @@ const ProfileSummery = () => {
                   <li
                     className="  cursor-pointer mr-2 mt-2"
                     onClick={() => {
-                      navigate("/login-auth");
+                      navigate("/login-switch");
                     }}
                   >
                     اضافه کردن اکانت +
