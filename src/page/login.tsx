@@ -11,10 +11,11 @@ import Input from "../component/input";
 import gmail from "../assets/icons/gmail.svg";
 import key from "../assets/icons/key.svg";
 import back from "../assets/icons/arrow-back.svg";
+import { useUser } from "../features/hooks";
 
 export default function LoginPage() {
   const navigate = useNavigate();
-
+  const user = useUser();
   const formik = useFormik({
     initialValues: {
       usernameOrEmail: "",
@@ -29,11 +30,17 @@ export default function LoginPage() {
     <div className="flex column mt-6 justify-center text-center">
       <form onSubmit={formik.handleSubmit}>
         <div className="flex my-3 text-center justify-center">
-          <Link to="/login" className={"mx-2 text-gray-700"}>
+          <Link
+            to={user ? "/login-switch" : "/login"}
+            className={"mx-2 text-gray-700"}
+          >
             ورود به کالج گرام
           </Link>
           <span className="mx-4 text-gray-400 "> |</span>
-          <Link className={" mx-2 text-gray-400 "} to={"/signup"}>
+          <Link
+            className={" mx-2 text-gray-400 "}
+            to={!user ? "/signup" : "/signup-switch"}
+          >
             ثبت نام در کالج گرام
           </Link>
         </div>

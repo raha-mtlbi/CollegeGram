@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useUser } from "../../../features/hooks";
-import { getActiveUsers, setActiveUser } from "../../../api/token";
+import { getActiveUsers, removeToken, setActiveUser } from "../../../api/token";
 
 import Button from "../../../component/button";
 import EditProfile from "../../../component/editProfileModal";
@@ -13,8 +14,14 @@ const ResponsiveProfile = () => {
   const [open, setOpen] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const user = useUser();
+  const navigate = useNavigate();
 
   const allUsers = getActiveUsers();
+
+  const handleLogout = () => {
+    removeToken(user?.username);
+    window.location.reload();
+  };
 
   return (
     <div>
@@ -33,6 +40,22 @@ const ResponsiveProfile = () => {
                 {username}
               </li>
             ))}
+            <li
+              className="  cursor-pointer mr-2 mt-2"
+              onClick={() => {
+                navigate("/login-switch");
+              }}
+            >
+              اضافه کردن اکانت +
+            </li>
+            <li
+              className="  cursor-pointer mr-2 mt-2"
+              onClick={() => {
+                handleLogout();
+              }}
+            >
+              خروج از حساب
+            </li>
           </ul>
         </div>
       )}
