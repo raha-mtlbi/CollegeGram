@@ -28,7 +28,13 @@ export default function AddComment({
       parentId: parentId,
     },
     enableReinitialize: true,
-    onSubmit: AddNewComment({ setComment, postId, parentId }),
+    onSubmit: async () => {
+      await AddNewComment({ setComment, postId, parentId });
+      formik.setValues((prevState) => ({
+        ...prevState,
+        content: "",
+      }));
+    },
   });
 
   return (
@@ -45,7 +51,7 @@ export default function AddComment({
           <input
             className="shadow appearance-none md:w-full w-[350px] border rounded-3xl py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline pr-8 "
             placeholder={"نظر خود را بنویسید..."}
-            value={formik.values?.content || ""}
+            value={formik.values?.content}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               formik.setFieldValue("content", e.target.value)
             }
