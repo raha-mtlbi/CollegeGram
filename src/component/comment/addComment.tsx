@@ -28,8 +28,13 @@ export default function AddComment({
       parentId: parentId,
     },
     enableReinitialize: true,
-    onSubmit: async () => {
-      await AddNewComment({ setComment, postId, parentId });
+    onSubmit: async (data) => {
+      const submitHandler = await AddNewComment({
+        setComment,
+        postId,
+        parentId,
+      });
+      submitHandler(data);
       formik.setValues((prevState) => ({
         ...prevState,
         content: "",
