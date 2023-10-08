@@ -28,7 +28,13 @@ export default function AddComment({
       parentId: parentId,
     },
     enableReinitialize: true,
-    onSubmit: AddNewComment({ setComment, postId, parentId }),
+    onSubmit: async () => {
+      await AddNewComment({ setComment, postId, parentId });
+      formik.setValues((prevState) => ({
+        ...prevState,
+        content: "",
+      }));
+    },
   });
 
   return (
